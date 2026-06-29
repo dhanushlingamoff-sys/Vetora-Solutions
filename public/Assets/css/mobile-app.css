@@ -2445,8 +2445,10 @@
 }
 
 /* ── Left spacer ── */
+/* Sized so the FIRST step starts centred in the viewport (like the reference),
+   mirroring the right tail. Step is 660px wide, so half = 330px. */
 .hww2__spacer {
-    flex: 0 0 420px;
+    flex: 0 0 max(80px, calc(50vw - 330px));
     flex-shrink: 0;
     pointer-events: none;
 }
