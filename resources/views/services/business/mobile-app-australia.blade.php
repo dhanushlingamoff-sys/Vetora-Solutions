@@ -1938,6 +1938,17 @@
                 textEls.forEach(function (el) { el.style.transition = ''; });
             };
         });
+
+        /* The pin's start position is measured against the page height. If web
+           fonts (Oswald/Manrope) or images above the section finish loading
+           AFTER that measurement, the section ends up taller/shorter than
+           assumed and the pin engages against a stale start  the section
+           overshoots the top then snaps back. Re-measure once everything has
+           settled so engagement is seamless. */
+        function wdmRefresh() { ScrollTrigger.refresh(); }
+        if (document.readyState === 'complete') { wdmRefresh(); }
+        else { window.addEventListener('load', wdmRefresh, { once: true }); }
+        if (document.fonts && document.fonts.ready) { document.fonts.ready.then(wdmRefresh); }
     })();
 
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
