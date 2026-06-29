@@ -213,7 +213,12 @@
 
     {{-- ============================================================
          2. WHY DESIGN MATTERS / ABOUT
+         The section sticks (CSS position:sticky) inside .wdm-pin while the
+         video expands  native stickiness has no engage-lag, so there is no
+         scroll jump (unlike a JS pin). .wdm-pin's extra height is the scrub
+         track. On mobile both collapse to normal flow (see CSS).
          ============================================================ --}}
+    <div class="wdm-pin">
     <section class="wdm" id="wdm">
         <div class="wdm__inner">
 
@@ -324,6 +329,7 @@
         </div>{{-- /.wdm__inner --}}
 
     </section>{{-- /.wdm --}}
+    </div>{{-- /.wdm-pin --}}
 
 
 
@@ -1880,18 +1886,19 @@
             function smooth(t) { return t <= 0 ? 0 : (t >= 1 ? 1 : t * t * (3 - 2 * t)); }
 
             /* Scrub budget, in viewport-heights: GROW = scroll spent expanding,
-               HOLD = scroll the finished video stays put before the pin lets go
-               and the page flows into the next section. */
-            var GROW = 1.2, HOLD = 0.7;
+               HOLD = scroll the finished video stays put before it releases.
+               Their sum drives the .wdm-pin track height in CSS:
+               .wdm-pin height = (1 + GROW + HOLD) * 100vh = 280vh. Keep in sync. */
+            var GROW = 1.2, HOLD = 0.6;
 
+            /* No JS pin  the section is held by native CSS position:sticky, which
+               the browser keeps perfectly in step with scrolling (no engage-lag,
+               so no jump). We only SCRUB the animation across the .wdm-pin track. */
             var st = ScrollTrigger.create({
-                trigger:             section,
+                trigger:             '.wdm-pin',
                 start:               'top top',
-                end:                 function () { return '+=' + Math.round(window.innerHeight * (GROW + HOLD)); },
-                pin:                 true,
-                pinSpacing:          true,
+                end:                 'bottom bottom',
                 scrub:               1,
-                fastScrollEnd:       true,
                 invalidateOnRefresh: true,
                 onRefreshInit:       measure,
                 onUpdate: function (self) {
