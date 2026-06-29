@@ -1869,10 +1869,15 @@
             function targetH() { return Math.round(window.innerHeight * 0.82); }  /* ~82vh */
             function smooth(t) { return t <= 0 ? 0 : (t >= 1 ? 1 : t * t * (3 - 2 * t)); }
 
+            /* Scrub budget, in viewport-heights: GROW = scroll spent expanding,
+               HOLD = scroll the finished video stays put before the pin lets go
+               and the page flows into the next section. */
+            var GROW = 1.2, HOLD = 0.7;
+
             var st = ScrollTrigger.create({
                 trigger:             section,
                 start:               'top top',
-                end:                 function () { return '+=' + Math.round(window.innerHeight * 1.2); },
+                end:                 function () { return '+=' + Math.round(window.innerHeight * (GROW + HOLD)); },
                 pin:                 true,
                 pinSpacing:          true,
                 anticipatePin:       1,
@@ -1880,38 +1885,44 @@
                 invalidateOnRefresh: true,
                 onRefreshInit:       measure,
                 onUpdate: function (self) {
-                    var p  = self.progress;
-                    var W  = vwidth();
-                    var H  = window.innerHeight;
+                    var W = vwidth();
+                    var H = window.innerHeight;
+                    /* growth progress: reaches 1 at the end of GROW, then holds
+                       at 1 through the HOLD window. */
+                    var g  = clamp(self.progress * (GROW + HOLD) / GROW, 0, 1);
+                    var tw = targetW();
+                    var th = targetH();
                     var pillCx = base.left + base.w / 2;
-                    var pillCy = base.top  + base.h / 2;
 
                     /* Width & height grow linearly together (matches the measured
-                       stage sizes). The box centres HORIZONTALLY early (~40% of
-                       the scrub) and VERTICALLY gradually, so it drifts from the
-                       pill's spot to a centred rounded video card. */
-                    var w   = lerp(base.w, targetW(), p);
-                    var h   = lerp(base.h, targetH(), p);
-                    var cxP = smooth(clamp(p / 0.42, 0, 1));
-                    var cyP = p;
+                       stage sizes); horizontal centring happens early. */
+                    var w   = lerp(base.w, tw, g);
+                    var h   = lerp(base.h, th, g);
+                    var cxP = smooth(clamp(g / 0.42, 0, 1));
                     var cx  = lerp(pillCx, W / 2, cxP);
-                    var cy  = lerp(pillCy, H / 2, cyP);
-                    var r   = lerp(999, 36, clamp(p * 2.2, 0, 1));
+                    var r   = lerp(999, 36, clamp(g * 2.2, 0, 1));
+
+                    /* Vertical: the box is TOP-anchored, so growing the height
+                       extends it DOWNWARD. Its top is lifted only in lockstep
+                       with the copy scrolling away (same `shift`), so it never
+                       rises into the text above. The shift is sized so the
+                       finished card lands vertically centred. */
+                    var D     = Math.max(0, base.top - (H - th) / 2);
+                    var shift = smooth(g) * D;
 
                     gsap.set(morph, {
                         width:        w,
                         height:       h,
                         x:            (cx - w / 2) - base.left,
-                        y:            (cy - h / 2) - base.top,
+                        y:            -shift,
                         borderRadius: r,
                         force3D:      true
                     });
 
-                    /* button fades out fast; copy scrolls up to clear the way */
-                    if (ctaRow) gsap.set(ctaRow, { autoAlpha: clamp(1 - p / 0.12, 0, 1) });
-                    var tp = smooth(clamp((p - 0.08) / 0.82, 0, 1));
-                    gsap.set(textEls, { y: -tp * H * 0.95 });
-                    if (video) gsap.set(video, { scale: lerp(1.18, 1, p) });
+                    /* button fades out fast; copy scrolls up by the same shift */
+                    if (ctaRow) gsap.set(ctaRow, { autoAlpha: clamp(1 - g / 0.12, 0, 1) });
+                    gsap.set(textEls, { y: -shift });
+                    if (video) gsap.set(video, { scale: lerp(1.18, 1, g) });
                 }
             });
 
