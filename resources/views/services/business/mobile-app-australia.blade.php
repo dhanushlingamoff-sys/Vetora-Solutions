@@ -1831,12 +1831,14 @@
         var mm = gsap.matchMedia();
 
         /* DESKTOP / TABLET (>= 769px): the section PINS (freezes) when its top
-           reaches the top of the viewport. While pinned, scrolling scrubs the
-           small video pill as it grows in place into a centred, full-bleed
-           (100vw) rounded video and the "Know More" button fades out. Once the
-           growth completes the pin releases and the page continues to the next
-           section. Reverses smoothly on scroll-up. Mobile gets a static CSS
-           banner instead. */
+           reaches the top of the viewport. While pinned, scrolling scrubs a
+           two-stage growth that mirrors the reference:
+             stage 1  the pill widens in place (button fades out),
+             stage 2  it balloons into a centred, full-bleed video (~78vh) while
+                      the heading + stats scroll up past it.
+           When the growth completes the pin releases and the page continues to
+           the next section. Reverses smoothly on scroll-up. Mobile gets a
+           static CSS banner instead. */
         mm.add('(min-width: 769px)', function () {
             /* Pill metrics, captured with transforms cleared and refreshed on
                resize. base.left is horizontal-only and base.top is the offset
@@ -1844,8 +1846,16 @@
                while pinned at top:0 base.top equals the pill's on-screen top. */
             var base = { left: 0, top: 0, w: 0, h: 0 };
 
+            /* The copy that scrolls up out of the way while the video grows. */
+            var textEls = [
+                section.querySelector('.wdm__left'),
+                section.querySelector('.wdm__pill'),
+                section.querySelector('.wdm__headline')
+            ].filter(Boolean);
+
             function measure() {
                 gsap.set(morph, { clearProps: 'width,height,borderRadius,x,y' });
+                gsap.set(textEls, { clearProps: 'y' });
                 var m = morph.getBoundingClientRect();
                 var s = section.getBoundingClientRect();
                 base.left = m.left;
@@ -1854,13 +1864,17 @@
                 base.h    = m.height;
             }
 
-            /* Final video size  full-bleed width, near-full-height. */
-            function targetH() { return Math.min(Math.round(window.innerHeight * 0.86), window.innerHeight - 40); }
+            function vwidth()  { return document.documentElement.clientWidth; } /* excludes scrollbar */
+            function targetH() { return Math.round(window.innerHeight * 0.78); }
+            function midW()    { return Math.min(360, Math.round(vwidth() * 0.32)); }
+            function smooth(t) { return t <= 0 ? 0 : (t >= 1 ? 1 : t * t * (3 - 2 * t)); }
+
+            var STAGE1 = 0.2; /* fraction of the scrub spent widening the pill */
 
             var st = ScrollTrigger.create({
                 trigger:             section,
                 start:               'top top',
-                end:                 function () { return '+=' + Math.round(window.innerHeight); },
+                end:                 function () { return '+=' + Math.round(window.innerHeight * 1.15); },
                 pin:                 true,
                 pinSpacing:          true,
                 anticipatePin:       1,
@@ -1869,31 +1883,49 @@
                 onRefreshInit:       measure,
                 onUpdate: function (self) {
                     var p  = self.progress;
-                    var vw = document.documentElement.clientWidth; /* excludes scrollbar */
-                    var vh = window.innerHeight;
-                    var w  = lerp(base.w, vw, p);
-                    var h  = lerp(base.h, targetH(), p);
-                    /* interpolate the box CENTRE from the pill centre to the
-                       viewport centre, so it grows from its real position out
-                       to a centred full-bleed video (no jump at progress 0). */
-                    var cx = lerp(base.left + base.w / 2, vw / 2, p);
-                    var cy = lerp(base.top  + base.h / 2, vh / 2, p);
+                    var W  = vwidth();
+                    var H  = window.innerHeight;
+                    var pillCx = base.left + base.w / 2;
+                    var pillCy = base.top  + base.h / 2;
+                    var s1 = smooth(clamp(p / STAGE1, 0, 1));
+                    var s2 = smooth(clamp((p - STAGE1) / (1 - STAGE1), 0, 1));
+
+                    var w, h, cx, cy, r;
+                    if (p <= STAGE1) {
+                        /* stage 1: widen the pill in place, still pill-shaped */
+                        w = lerp(base.w, midW(), s1);
+                        h = base.h;
+                        cx = pillCx; cy = pillCy;
+                        r = 999;
+                    } else {
+                        /* stage 2: balloon out to a centred full-bleed video */
+                        w  = lerp(midW(), W, s2);
+                        h  = lerp(base.h, targetH(), s2);
+                        cx = lerp(pillCx, W / 2, s2);
+                        cy = lerp(pillCy, H / 2, s2);
+                        r  = lerp(999, 24, clamp(s2 * 1.5, 0, 1));
+                    }
+
                     gsap.set(morph, {
                         width:        w,
                         height:       h,
                         x:            (cx - w / 2) - base.left,
                         y:            (cy - h / 2) - base.top,
-                        borderRadius: lerp(999, 18, clamp(p * 2, 0, 1)),
+                        borderRadius: r,
                         force3D:      true
                     });
-                    if (ctaRow) gsap.set(ctaRow, { autoAlpha: clamp(1 - p * 4, 0, 1) });
-                    if (video)  gsap.set(video,  { scale: lerp(1.18, 1, p) });
+
+                    /* button fades during stage 1; copy scrolls up during stage 2 */
+                    if (ctaRow) gsap.set(ctaRow, { autoAlpha: 1 - s1 });
+                    gsap.set(textEls, { y: -s2 * H * 0.95 });
+                    if (video) gsap.set(video, { scale: lerp(1.18, 1, p) });
                 }
             });
 
             return function () {
                 st.kill();
                 gsap.set([morph, ctaRow, video].filter(Boolean), { clearProps: 'all' });
+                gsap.set(textEls, { clearProps: 'all' });
             };
         });
     })();
