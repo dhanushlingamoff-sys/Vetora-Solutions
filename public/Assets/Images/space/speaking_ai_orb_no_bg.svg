@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  <defs>
+    <radialGradient id="orbCore" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="20%" stop-color="#a8d8ff" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#3b8fff" stop-opacity="0.7"/>
+      <stop offset="80%" stop-color="#1a3aff" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#0a0055" stop-opacity="0.9"/>
+    </radialGradient>
+    <radialGradient id="outerGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="60%" stop-color="#0033ff" stop-opacity="0"/>
+      <stop offset="80%" stop-color="#3366ff" stop-opacity="0.3"/>
+      <stop offset="90%" stop-color="#6699ff" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#aabbff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="haloGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="55%" stop-color="#1144ff" stop-opacity="0"/>
+      <stop offset="70%" stop-color="#4477ff" stop-opacity="0.4"/>
+      <stop offset="85%" stop-color="#88aaff" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#bbccff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="wave1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00ccff" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#00aaff" stop-opacity="0.9"/>
+      <stop offset="60%" stop-color="#aa66ff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#ff44cc" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="wave2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff44aa" stop-opacity="0"/>
+      <stop offset="25%" stop-color="#cc44ff" stop-opacity="0.8"/>
+      <stop offset="55%" stop-color="#44aaff" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#00ccff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="wave3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00ffcc" stop-opacity="0"/>
+      <stop offset="35%" stop-color="#00ddff" stop-opacity="0.7"/>
+      <stop offset="65%" stop-color="#6655ff" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#aa00ff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="wave4" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#5500ff" stop-opacity="0"/>
+      <stop offset="40%" stop-color="#2277ff" stop-opacity="0.85"/>
+      <stop offset="70%" stop-color="#00ccff" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#00ffee" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="wave5" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff00aa" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#aa00ff" stop-opacity="0.75"/>
+      <stop offset="60%" stop-color="#0077ff" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#00ffcc" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="orbClip"><circle cx="400" cy="400" r="195"/></clipPath>
+    <filter id="blurSm" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3"/></filter>
+    <filter id="blurMd" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="7"/></filter>
+    <filter id="blurLg" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="18"/></filter>
+    <style>
+      @keyframes pulseRing1{0%{r:220;opacity:.35}50%{r:240;opacity:.15}100%{r:220;opacity:.35}}
+      @keyframes pulseRing2{0%{r:255;opacity:.2}50%{r:280;opacity:.07}100%{r:255;opacity:.2}}
+      @keyframes pulseRing3{0%{r:295;opacity:.12}50%{r:325;opacity:.03}100%{r:295;opacity:.12}}
+      @keyframes r1{0%{d:path("M205,370 C260,340 320,310 400,360 C480,410 540,370 595,350")}50%{d:path("M205,390 C270,355 340,295 400,350 C460,405 530,350 595,330")}100%{d:path("M205,370 C260,340 320,310 400,360 C480,410 540,370 595,350")}}
+      @keyframes r2{0%{d:path("M205,400 C270,365 340,335 400,390 C460,445 530,400 595,380")}50%{d:path("M205,400 C265,360 335,320 400,380 C465,440 535,390 595,365")}100%{d:path("M205,400 C270,365 340,335 400,390 C460,445 530,400 595,380")}}
+      @keyframes r3{0%{d:path("M205,430 C270,400 340,370 400,420 C460,470 530,435 595,415")}50%{d:path("M205,435 C268,405 338,375 400,425 C462,475 533,440 595,420")}100%{d:path("M205,430 C270,400 340,370 400,420 C460,470 530,435 595,415")}}
+      @keyframes r4{0%{d:path("M205,345 C265,315 335,285 400,335 C465,385 535,345 595,325")}50%{d:path("M205,350 C268,318 338,288 400,338 C462,388 532,348 595,328")}100%{d:path("M205,345 C265,315 335,285 400,335 C465,385 535,345 595,325")}}
+      @keyframes r5{0%{d:path("M205,460 C270,430 340,400 400,450 C460,500 530,460 595,445")}50%{d:path("M205,450 C272,418 342,388 400,438 C458,488 528,448 595,432")}100%{d:path("M205,460 C270,430 340,400 400,450 C460,500 530,460 595,445")}}
+      .rg1{animation:pulseRing1 3.2s ease-in-out infinite}
+      .rg2{animation:pulseRing2 3.8s ease-in-out infinite}
+      .rg3{animation:pulseRing3 4.5s ease-in-out infinite}
+      .rb1{animation:r1 5s ease-in-out infinite}
+      .rb2{animation:r2 4.5s ease-in-out infinite .4s}
+      .rb3{animation:r3 6s ease-in-out infinite .8s}
+      .rb4{animation:r4 4.8s ease-in-out infinite .2s}
+      .rb5{animation:r5 5.5s ease-in-out infinite 1s}
+    </style>
+  </defs>
+  <circle class="rg3" cx="400" cy="400" r="295" fill="none" stroke="#3355ff" stroke-width="1.5" opacity="0.12" filter="url(#blurLg)"/>
+  <circle class="rg2" cx="400" cy="400" r="255" fill="none" stroke="#4477ff" stroke-width="2" opacity="0.2" filter="url(#blurMd)"/>
+  <circle class="rg1" cx="400" cy="400" r="220" fill="none" stroke="#5599ff" stroke-width="3" opacity="0.35" filter="url(#blurSm)"/>
+  <circle cx="400" cy="400" r="280" fill="url(#haloGlow)" filter="url(#blurLg)"/>
+  <circle cx="400" cy="400" r="240" fill="url(#outerGlow)" filter="url(#blurMd)"/>
+  <circle cx="400" cy="400" r="205" fill="#1133ff" opacity="0.3" filter="url(#blurLg)"/>
+  <circle cx="400" cy="400" r="195" fill="url(#orbCore)"/>
+  <g clip-path="url(#orbClip)">
+    <path class="rb4" d="M205,345 C265,315 335,285 400,335 C465,385 535,345 595,325" fill="none" stroke="url(#wave4)" stroke-width="6" opacity="0.5" filter="url(#blurSm)"/>
+    <path class="rb1" d="M205,370 C260,340 320,310 400,360 C480,410 540,370 595,350" fill="none" stroke="url(#wave1)" stroke-width="5" opacity="0.5" filter="url(#blurSm)"/>
+    <path class="rb2" d="M205,400 C270,365 340,335 400,390 C460,445 530,400 595,380" fill="none" stroke="url(#wave2)" stroke-width="7" opacity="0.5" filter="url(#blurSm)"/>
+    <path class="rb3" d="M205,430 C270,400 340,370 400,420 C460,470 530,435 595,415" fill="none" stroke="url(#wave3)" stroke-width="5" opacity="0.5" filter="url(#blurSm)"/>
+    <path class="rb5" d="M205,460 C270,430 340,400 400,450 C460,500 530,460 595,445" fill="none" stroke="url(#wave5)" stroke-width="4" opacity="0.4" filter="url(#blurSm)"/>
+    <path class="rb4" d="M205,345 C265,315 335,285 400,335 C465,385 535,345 595,325" fill="none" stroke="url(#wave4)" stroke-width="2.5" opacity="0.95"/>
+    <path class="rb1" d="M205,370 C260,340 320,310 400,360 C480,410 540,370 595,350" fill="none" stroke="url(#wave1)" stroke-width="2" opacity="0.9"/>
+    <path class="rb2" d="M205,400 C270,365 340,335 400,390 C460,445 530,400 595,380" fill="none" stroke="url(#wave2)" stroke-width="3" opacity="0.95"/>
+    <path class="rb3" d="M205,430 C270,400 340,370 400,420 C460,470 530,435 595,415" fill="none" stroke="url(#wave3)" stroke-width="2" opacity="0.9"/>
+    <path class="rb5" d="M205,460 C270,430 340,400 400,450 C460,500 530,460 595,445" fill="none" stroke="url(#wave5)" stroke-width="1.8" opacity="0.8"/>
+    <ellipse cx="360" cy="330" rx="65" ry="38" fill="white" opacity="0.18" transform="rotate(-25 360 330)"/>
+    <ellipse cx="348" cy="322" rx="30" ry="16" fill="white" opacity="0.25" transform="rotate(-20 348 322)"/>
+  </g>
+  <circle cx="400" cy="400" r="195" fill="none" stroke="#4499ff" stroke-width="1.5" opacity="0.6"/>
+  <circle cx="400" cy="400" r="195" fill="none" stroke="#aaddff" stroke-width="0.5" opacity="0.3"/>
+</svg>

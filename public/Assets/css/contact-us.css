@@ -1,0 +1,303 @@
+/* ============================================================
+   CONTACT PAGE — LIGHT THEME (HOMEPAGE-MATCHING)
+   ============================================================ */
+
+/* ---- §2  Quick Contact Cards ---- */
+.ct-qcard {
+    background: var(--bg-section);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 32px 26px;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.35s cubic-bezier(.4,0,.2,1),
+                box-shadow 0.35s cubic-bezier(.4,0,.2,1),
+                border-color 0.35s ease;
+}
+.ct-qcard::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: transparent;
+    border-radius: 18px 18px 0 0;
+    transition: background 0.35s ease;
+}
+.ct-qcard:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 20px 48px rgba(95,10,135,.1), 0 4px 14px rgba(0,0,0,.05);
+    border-color: rgba(95,10,135,.14);
+}
+.ct-qcard:hover::before {
+    background: linear-gradient(90deg, var(--accent), var(--secondary), var(--primary));
+}
+.ct-qcard-icon {
+    width: 54px; height: 54px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; margin-bottom: 20px;
+    transition: box-shadow 0.3s ease;
+}
+.ic-teal   { background: rgba(0,194,168,.09);  border: 1px solid rgba(0,194,168,.18);  color: var(--accent); }
+.ic-purple { background: rgba(95,10,135,.07);  border: 1px solid rgba(95,10,135,.14);  color: var(--primary); }
+.ic-blue   { background: rgba(44,115,210,.07); border: 1px solid rgba(44,115,210,.14); color: var(--secondary); }
+.ct-qcard:hover .ic-teal   { box-shadow: 0 0 18px rgba(0,194,168,.22); }
+.ct-qcard:hover .ic-purple { box-shadow: 0 0 18px rgba(95,10,135,.18); }
+.ct-qcard:hover .ic-blue   { box-shadow: 0 0 18px rgba(44,115,210,.18); }
+.ct-qcard-title {
+    font-family: 'Lexend', sans-serif;
+    font-size: 1.05rem; font-weight: 700;
+    color: var(--text-primary); margin-bottom: 10px;
+}
+.ct-qcard-desc {
+    font-size: .875rem; color: var(--text-muted);
+    line-height: 1.7; margin-bottom: 20px;
+}
+.ct-qcard-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11.5px; font-weight: 700;
+    letter-spacing: .05em; text-transform: uppercase;
+    color: var(--accent-dark); text-decoration: none;
+    transition: gap .25s ease;
+}
+.ct-qcard:hover .ct-qcard-link { gap: 10px; }
+
+/* ---- §3+4  Form + Services ---- */
+.ct-split-sec { background: var(--bg-body); padding: 100px 0; }
+
+/* Services panel */
+.ct-svc-panel {
+    background: var(--bg-section);
+    border: 1px solid var(--border-color);
+    border-radius: 20px; padding: 36px 30px;
+    height: 100%; box-shadow: var(--shadow-sm);
+    position: relative; overflow: hidden;
+}
+.ct-svc-panel::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--secondary), var(--primary));
+    border-radius: 20px 20px 0 0;
+}
+.ct-svc-h3 {
+    font-family: 'Lexend', sans-serif;
+    font-size: 1.22rem; font-weight: 700; color: var(--text-primary); margin-bottom: 7px;
+}
+.ct-svc-desc { font-size: .875rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 22px; }
+
+.ct-chips { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 20px; }
+.ct-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 14px; border-radius: 8px;
+    background: var(--bg-body); border: 1px solid var(--border-color);
+    color: var(--text-secondary); font-size: 12px; font-weight: 500;
+    cursor: pointer; user-select: none;
+    transition: all .22s ease;
+}
+.ct-chip i { font-size: 12px; color: var(--text-light); transition: color .22s ease; }
+.ct-chip:hover { background: var(--primary-soft); border-color: rgba(95,10,135,.22); color: var(--primary); }
+.ct-chip:hover i { color: var(--primary); }
+.ct-chip.on {
+    background: var(--primary-soft); border-color: rgba(95,10,135,.3);
+    color: var(--primary); box-shadow: 0 2px 8px rgba(95,10,135,.1);
+}
+.ct-chip.on i { color: var(--primary); }
+
+.ct-chip-prev {
+    padding: 12px 14px; border-radius: 10px; margin-bottom: 18px; display: none;
+    background: var(--primary-soft); border: 1px solid rgba(95,10,135,.14);
+}
+.ct-chip-prev.vis { display: block; }
+.ct-chip-prev .cp-lbl {
+    font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    color: rgba(95,10,135,.5); display: block; margin-bottom: 4px;
+}
+.ct-chip-prev p { font-size: 12px; color: var(--primary); line-height: 1.6; margin: 0; }
+
+.ct-svc-note {
+    padding-top: 18px; border-top: 1px solid var(--border-light);
+    display: flex; align-items: flex-start; gap: 10px;
+}
+.ct-svc-note .sn-ico {
+    width: 32px; height: 32px; min-width: 32px; border-radius: 8px;
+    background: var(--secondary-soft); border: 1px solid rgba(44,115,210,.18);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--secondary); font-size: 13px;
+}
+.ct-svc-note p { font-size: 12px; color: var(--text-muted); line-height: 1.55; margin: 0; }
+.ct-svc-note p strong { color: var(--text-primary); display: block; font-size: 12.5px; font-weight: 600; margin-bottom: 1px; }
+
+/* Form card */
+.ct-form-card {
+    background: var(--bg-section);
+    border: 1px solid var(--border-color);
+    border-radius: 20px; padding: 44px 40px;
+    box-shadow: var(--shadow-md);
+    position: relative; overflow: hidden;
+}
+.ct-form-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--gradient-primary);
+    border-radius: 20px 20px 0 0;
+}
+.ct-form-head { margin-bottom: 24px; position: relative; z-index: 1; }
+.ct-form-head h3 {
+    font-family: 'Lexend', sans-serif;
+    font-size: 1.32rem; font-weight: 700; color: var(--text-primary); margin-bottom: 5px;
+}
+.ct-form-head p { font-size: .875rem; color: var(--text-muted); margin: 0; }
+.ct-resp {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: var(--accent-soft); border: 1px solid rgba(0,194,168,.22);
+    border-radius: 5px; padding: 2px 8px;
+    font-size: 10px; font-weight: 600; color: var(--accent-dark);
+}
+
+.ct-form-card .Contact-Form button {
+    background: var(--gradient-primary) !important;
+    border-radius: 50px !important;
+    padding: 13px 32px !important;
+    font-family: 'Lexend', sans-serif !important;
+    font-size: .92rem !important;
+    font-weight: 700 !important;
+    letter-spacing: .03em !important;
+    box-shadow: var(--shadow-primary) !important;
+    transition: transform .3s ease, box-shadow .3s ease !important;
+}
+.ct-form-card .Contact-Form button:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 14px 36px rgba(95,10,135,.32) !important;
+    background: var(--gradient-primary) !important;
+}
+
+/* ---- §5  Office Image ---- */
+.ct-office-img-wrap {
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-lg);
+    height: 100%;
+}
+.ct-office-img {
+    width: 100%;
+    height: 100%;
+    max-height: 350px;
+    object-fit: cover;
+    display: block;
+}
+
+/* ---- §5  Office Card ---- */
+.ct-ocard {
+    background: var(--bg-section);
+    border: 1px solid var(--border-color);
+    border-radius: 18px; padding: 32px 26px;
+    height: 100%; position: relative; overflow: hidden;
+    transition: transform .35s cubic-bezier(.4,0,.2,1),
+                box-shadow .35s cubic-bezier(.4,0,.2,1),
+                border-color .35s ease;
+}
+.ct-ocard::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: transparent; border-radius: 18px 18px 0 0;
+    transition: background .35s ease;
+}
+.ct-ocard.feat { border-color: rgba(0,194,168,.28); }
+.ct-ocard.feat::before { background: linear-gradient(90deg, var(--accent), var(--secondary)); }
+.ct-ocard:not(.feat):hover::before { background: linear-gradient(90deg, var(--secondary), var(--primary)); }
+.ct-ocard:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: #d1d5db; }
+.ct-ocard.feat:hover { border-color: rgba(0,194,168,.44); box-shadow: 0 20px 48px rgba(0,194,168,.1); }
+.ct-obadge {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 5px 12px; border-radius: 999px;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase;
+    margin-bottom: 18px;
+}
+.b-t  { background: var(--accent-soft);     border: 1px solid rgba(0,194,168,.22);  color: var(--accent-dark); }
+.b-bl { background: var(--secondary-soft);  border: 1px solid rgba(44,115,210,.2);  color: var(--secondary-dark); }
+.b-p  { background: var(--primary-soft);    border: 1px solid rgba(95,10,135,.18);  color: var(--primary); }
+.ct-ocity {
+    font-family: 'Lexend', sans-serif;
+    font-size: 1.4rem; font-weight: 800;
+    color: var(--text-primary); letter-spacing: -.02em; margin-bottom: 2px;
+}
+.ct-ocountry {
+    font-size: 10.5px; font-weight: 600;
+    color: var(--text-light); letter-spacing: .08em;
+    text-transform: uppercase; margin-bottom: 18px;
+}
+.ct-olist { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 11px; }
+.ct-olist li { display: flex; align-items: flex-start; gap: 10px; font-size: .875rem; color: var(--text-secondary); line-height: 1.5; }
+.ct-olist li i { font-size: 13px; margin-top: 1px; flex-shrink: 0; }
+.ct-ocard.feat  .ct-olist li i { color: var(--accent); }
+.ct-ocard:not(.feat) .ct-olist li i { color: var(--secondary); }
+
+/* ---- §6  Business Hours ---- */
+.ct-hcard {
+    background: var(--bg-section);
+    border: 1px solid var(--border-color);
+    border-radius: 20px; padding: 44px 40px;
+    position: relative; overflow: hidden;
+    max-width: 720px; margin: 0 auto;
+    box-shadow: var(--shadow-sm);
+}
+.ct-hcard::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--gradient-primary);
+    border-radius: 20px 20px 0 0;
+}
+.ct-hcard-top {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 28px; flex-wrap: wrap; gap: 12px;
+}
+.ct-hcard-top h3 {
+    font-family: 'Lexend', sans-serif;
+    font-size: 1.28rem; font-weight: 700; color: var(--text-primary); margin: 0;
+}
+.ct-hcard-top h3 span { font-weight: 400; color: var(--text-light); font-size: .88rem; }
+
+.ct-status {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 6px 14px; border-radius: 999px;
+    font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+}
+.ct-status.open   { background: var(--success-bg);  border: 1px solid rgba(22,163,74,.22); color: var(--success); }
+.ct-status.closed { background: var(--danger-bg);   border: 1px solid rgba(220,38,38,.2);  color: var(--danger); }
+.ct-status .sd { width: 7px; height: 7px; border-radius: 50%; }
+.ct-status.open   .sd { background: var(--success); animation: ctDot 2s ease-in-out infinite; }
+.ct-status.closed .sd { background: var(--danger); }
+@keyframes ctDot { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.3;transform:scale(.7);} }
+
+.ct-htbl { width: 100%; border-collapse: collapse; }
+.ct-htbl tr { border-bottom: 1px solid var(--border-light); }
+.ct-htbl tr:last-child { border-bottom: none; }
+.ct-htbl td { padding: 13px 4px; font-size: .9rem; }
+.ct-htbl .hd { color: var(--text-secondary); font-weight: 500; width: 50%; }
+.ct-htbl .ht { color: var(--text-primary); font-weight: 600; text-align: right; }
+.ct-htbl .hc { color: var(--text-light); font-style: italic; text-align: right; }
+.ct-htbl tr.cur .hd { color: var(--primary); font-weight: 700; }
+.ct-htbl tr.cur .ht, .ct-htbl tr.cur .hc { color: var(--primary); }
+.ct-htbl tr.cur td {
+    background: var(--primary-soft);
+    padding-left: 12px; padding-right: 12px; border-radius: 8px;
+}
+.ct-hfooter {
+    margin-top: 22px; padding-top: 16px;
+    border-top: 1px solid var(--border-light);
+    display: flex; align-items: flex-start; gap: 10px;
+}
+.ct-hfooter i { color: var(--secondary); font-size: 14px; margin-top: 1px; flex-shrink: 0; }
+.ct-hfooter p { font-size: 12.5px; color: var(--text-muted); line-height: 1.6; margin: 0; }
+.ct-hfooter p strong { color: var(--text-primary); }
+
+/* ---- Responsive ---- */
+@media (max-width: 991px) {
+    .ct-split-sec  { padding: 60px 0; }
+    .ct-form-card  { padding: 28px 22px; }
+    .ct-svc-panel  { padding: 26px 20px; margin-bottom: 24px; }
+    .ct-hcard      { padding: 30px 22px; }
+}
+@media (max-width: 767px) {
+    .ct-form-card { padding: 22px 16px; border-radius: 14px; }
+}

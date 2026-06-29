@@ -1,0 +1,941 @@
+/* ===================================================================
+   AI AGENCY LANDING PAGE — Premium Dark Theme
+   Self-contained design tokens (prefixed --aia-) so this page does not
+   collide with the site-wide tokens defined in style.css.
+   Prefix for all classes: aia-
+=================================================================== */
+
+.aia-page {
+    --aia-primary: #2563EB;
+    --aia-secondary: #7C3AED;
+    --aia-accent: #06B6D4;
+    --aia-dark: #081028;
+    --aia-bg: #0B1120;
+    --aia-card: rgba(255, 255, 255, 0.06);
+    --aia-border: rgba(255, 255, 255, 0.08);
+    --aia-text: #FFFFFF;
+    --aia-text-secondary: #A1A1AA;
+    --aia-gradient-1: linear-gradient(135deg, var(--aia-primary) 0%, var(--aia-secondary) 100%);
+    --aia-gradient-2: linear-gradient(135deg, var(--aia-secondary) 0%, var(--aia-accent) 100%);
+    --aia-gradient-text: linear-gradient(120deg, #60a5fa 0%, #a78bfa 50%, #22d3ee 100%);
+    --aia-font: "Lexend", sans-serif;
+    --aia-font-body: "Livvic", sans-serif;
+
+    position: relative;
+    background: var(--aia-bg);
+    color: var(--aia-text);
+    overflow: hidden;
+    isolation: isolate;
+    font-family: var(--aia-font-body);
+}
+
+.aia-page * { box-sizing: border-box; }
+.aia-page img { max-width: 100%; }
+.aia-page a { text-decoration: none; }
+.aia-page .aia-section { position: relative; padding: 110px 0; }
+.aia-page ::selection { background: var(--aia-secondary); color: #fff; }
+
+/* ===================================================================
+   GLOBAL FX — cursor glow / particles / scroll progress
+=================================================================== */
+.aia-scroll-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    width: 0%;
+    z-index: 9999;
+    background: var(--aia-gradient-1);
+    box-shadow: 0 0 12px rgba(124, 58, 237, 0.7);
+    transition: width 0.1s ease-out;
+}
+
+.aia-cursor-glow {
+    position: fixed;
+    top: 0; left: 0;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.18), rgba(124, 58, 237, 0.08) 45%, transparent 70%);
+    transform: translate(-50%, -50%);
+    will-change: transform;
+    mix-blend-mode: screen;
+    display: none;
+}
+@media (min-width: 992px) {
+    .aia-cursor-glow { display: block; }
+}
+
+.aia-particles {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* ===================================================================
+   SHARED — orbs / grid backdrop / headings / buttons
+=================================================================== */
+.aia-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(circle at 50% 30%, rgba(0,0,0,0.9), transparent 75%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.aia-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+    animation: aiaOrbFloat 13s ease-in-out infinite;
+}
+.aia-orb-primary { background: var(--aia-primary); }
+.aia-orb-secondary { background: var(--aia-secondary); }
+.aia-orb-accent { background: var(--aia-accent); }
+
+@keyframes aiaOrbFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(22px, -28px) scale(1.1); }
+}
+
+.aia-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: var(--aia-card);
+    border: 1px solid var(--aia-border);
+    backdrop-filter: blur(8px);
+    font-size: 13px;
+    font-weight: 600;
+    color: #93c5fd;
+    margin-bottom: 18px;
+}
+.aia-eyebrow i { color: var(--aia-accent); }
+
+.aia-heading {
+    font-family: var(--aia-font);
+    font-weight: 900;
+    line-height: 1.18;
+    color: var(--aia-text);
+    margin-bottom: 18px;
+}
+.aia-heading span {
+    background: var(--aia-gradient-text);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: aiaGradientMove 7s ease infinite;
+}
+@keyframes aiaGradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.aia-section-head { text-align: center; max-width: 680px; margin: 0 auto 60px; position: relative; z-index: 2; }
+.aia-section-head .aia-heading { font-size: clamp(28px, 3.6vw, 42px); }
+.aia-section-desc { color: var(--aia-text-secondary); font-size: 16px; line-height: 1.8; }
+
+.aia-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 1rem 1.9rem;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.35s cubic-bezier(.2,.8,.2,1), box-shadow 0.35s ease, background 0.35s ease;
+    position: relative;
+}
+.aia-btn-primary {
+    background: var(--aia-gradient-1);
+    color: #fff;
+    box-shadow: 0 14px 34px rgba(37, 99, 235, 0.35);
+}
+.aia-btn-primary:hover { transform: translateY(-3px); box-shadow: 0 20px 44px rgba(124, 58, 237, 0.45); color: #fff; }
+.aia-btn-outline {
+    border: 1px solid var(--aia-border);
+    background: rgba(255,255,255,0.03);
+    color: #fff;
+}
+.aia-btn-outline:hover { border-color: rgba(255,255,255,0.45); background: rgba(255,255,255,0.08); transform: translateY(-3px); color: #fff; }
+
+/* ===================================================================
+   1. HERO
+=================================================================== */
+.aia-hero {
+    position: relative;
+    padding: 180px 0 130px;
+    background: radial-gradient(circle at 15% 20%, rgba(37,99,235,0.18), transparent 45%),
+                radial-gradient(circle at 85% 75%, rgba(124,58,237,0.16), transparent 45%),
+                var(--aia-bg);
+    overflow: hidden;
+}
+.aia-hero .aia-orb-primary { width: 500px; height: 500px; top: -160px; left: -130px; }
+.aia-hero .aia-orb-secondary { width: 440px; height: 440px; bottom: -150px; right: -110px; animation-delay: 2s; }
+.aia-hero .aia-orb-accent { width: 280px; height: 280px; top: 38%; right: 16%; animation-delay: 4s; opacity: 0.32; }
+
+.aia-hero-inner {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.aia-hero-badge-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--aia-accent);
+    display: inline-block;
+    box-shadow: 0 0 0 0 rgba(6,182,212,0.6);
+    animation: aiaPulseDot 1.8s infinite;
+}
+@keyframes aiaPulseDot {
+    0% { box-shadow: 0 0 0 0 rgba(6,182,212,0.55); }
+    70% { box-shadow: 0 0 0 9px rgba(6,182,212,0); }
+    100% { box-shadow: 0 0 0 0 rgba(6,182,212,0); }
+}
+
+.aia-hero h1 {
+    font-family: var(--aia-font);
+    font-size: clamp(36px, 5.2vw, 64px);
+    font-weight: 900;
+    line-height: 1.12;
+    margin-bottom: 24px;
+    color: var(--aia-text);
+}
+.aia-hero h1 .aia-word {
+    display: inline-block;
+    overflow: hidden;
+}
+.aia-hero h1 span.aia-grad {
+    background: var(--aia-gradient-text);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: aiaGradientMove 6s ease infinite;
+}
+
+.aia-hero-desc {
+    font-size: 17px;
+    line-height: 1.85;
+    color: var(--aia-text-secondary);
+    max-width: 540px;
+    margin-bottom: 36px;
+}
+
+.aia-hero-actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-bottom: 50px; }
+
+.aia-hero-stats { display: flex; gap: 38px; flex-wrap: wrap; }
+.aia-hero-stat h3 {
+    font-family: var(--aia-font);
+    font-size: 32px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #fff, var(--aia-accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    margin-bottom: 2px;
+}
+.aia-hero-stat p { font-size: 13px; color: var(--aia-text-secondary); margin: 0; }
+
+/* ---- Hero Visual ---- */
+.aia-hero-visual { position: relative; height: 480px; }
+.aia-hero-core {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px; height: 250px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(37,99,235,0.4), rgba(124,58,237,0.22) 55%, transparent 75%);
+    display: flex; align-items: center; justify-content: center;
+}
+.aia-hero-core .aia-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.14);
+    animation: aiaRingSpin 18s linear infinite;
+}
+.aia-hero-core .aia-ring-1 { width: 330px; height: 330px; }
+.aia-hero-core .aia-ring-2 { width: 410px; height: 410px; animation-direction: reverse; animation-duration: 26s; }
+.aia-hero-core .aia-ring-3 { width: 490px; height: 490px; animation-duration: 34s; border-style: dashed; opacity: 0.6; }
+@keyframes aiaRingSpin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+.aia-hero-core .aia-ring { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.aia-hero-core img {
+    width: 130px;
+    filter: drop-shadow(0 0 34px rgba(124,58,237,0.55));
+    animation: aiaFloatY 5s ease-in-out infinite;
+    position: relative;
+    z-index: 2;
+}
+
+.aia-float-card {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border-radius: 16px;
+    background: var(--aia-card);
+    border: 1px solid var(--aia-border);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    animation: aiaFloatY 6s ease-in-out infinite;
+}
+.aia-float-card i { font-size: 20px; color: var(--aia-accent); }
+.aia-float-card h4 { font-size: 13px; margin: 0; color: #fff; font-family: var(--aia-font); }
+.aia-float-card p { font-size: 11px; margin: 0; color: var(--aia-text-secondary); }
+
+.aia-float-1 { top: 4%; left: -2%; animation-delay: 0s; }
+.aia-float-2 { top: 16%; right: 0%; animation-delay: 1.2s; }
+.aia-float-3 { bottom: 12%; left: 2%; animation-delay: 2.4s; }
+.aia-float-4 { bottom: 2%; right: 8%; animation-delay: 3.6s; }
+
+@keyframes aiaFloatY {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+}
+
+@media (max-width: 991px) {
+    .aia-hero-inner { grid-template-columns: 1fr; }
+    .aia-hero-visual { height: 380px; margin-top: 30px; }
+    .aia-hero-desc { max-width: 100%; }
+}
+
+/* ===================================================================
+   2. TRUSTED BY — LOGO MARQUEE
+=================================================================== */
+.aia-marquee-section { padding: 60px 0; border-top: 1px solid var(--aia-border); border-bottom: 1px solid var(--aia-border); position: relative; z-index: 2; }
+.aia-marquee-label { text-align: center; font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--aia-text-secondary); margin-bottom: 28px; }
+.aia-marquee { position: relative; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.aia-marquee-track {
+    display: flex;
+    align-items: center;
+    gap: 70px;
+    width: max-content;
+    animation: aiaMarqueeScroll 28s linear infinite;
+}
+.aia-marquee:hover .aia-marquee-track { animation-play-state: paused; }
+@keyframes aiaMarqueeScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+.aia-marquee-item {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    color: var(--aia-text-secondary);
+    filter: grayscale(1);
+    opacity: 0.6;
+    transition: all 0.35s ease;
+    white-space: nowrap;
+    gap: 10px;
+}
+.aia-marquee-item span { font-family: var(--aia-font); font-weight: 700; font-size: 18px; }
+.aia-marquee-item:hover { filter: grayscale(0); opacity: 1; color: var(--aia-accent); transform: scale(1.08); }
+
+/* ===================================================================
+   3. AI SERVICES — PREMIUM CARD GRID
+=================================================================== */
+.aia-services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+.aia-svc-card {
+    position: relative;
+    padding: 36px 30px;
+    border-radius: 22px;
+    background: var(--aia-card);
+    border: 1px solid var(--aia-border);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(.2,.8,.2,1), box-shadow 0.4s ease;
+}
+.aia-svc-card::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 22px;
+    background: var(--aia-gradient-1);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.4s ease;
+}
+.aia-svc-card::after {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    border-radius: 21px;
+    background: var(--aia-bg);
+    z-index: -1;
+}
+.aia-svc-card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(37,99,235,0.25); }
+.aia-svc-card:hover::before { opacity: 1; }
+.aia-svc-icon {
+    width: 62px; height: 62px;
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, rgba(37,99,235,0.18), rgba(124,58,237,0.16));
+    color: var(--aia-accent);
+    font-size: 26px;
+    margin-bottom: 22px;
+    transition: transform 0.45s cubic-bezier(.2,.8,.2,1), background 0.4s ease, color 0.4s ease;
+}
+.aia-svc-card:hover .aia-svc-icon { transform: rotate(-10deg) scale(1.1); background: var(--aia-gradient-1); color: #fff; }
+.aia-svc-card h3 { font-family: var(--aia-font); font-size: 19px; font-weight: 800; color: #fff; margin-bottom: 10px; }
+.aia-svc-card p { font-size: 14px; color: var(--aia-text-secondary); line-height: 1.75; margin: 0; }
+
+@media (max-width: 991px) { .aia-services-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 575px) { .aia-services-grid { grid-template-columns: 1fr; } }
+
+/* ===================================================================
+   4. ABOUT — SPLIT + FLOATING STAT CARDS
+=================================================================== */
+.aia-about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.aia-about-img-wrap {
+    position: relative;
+    border-radius: 26px;
+    overflow: hidden;
+    border: 1px solid var(--aia-border);
+    box-shadow: 0 30px 70px rgba(0,0,0,0.5);
+}
+.aia-about-img-wrap img { width: 100%; display: block; }
+.aia-about-img-wrap::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(160deg, rgba(37,99,235,0.25), rgba(124,58,237,0.14));
+    mix-blend-mode: overlay;
+}
+.aia-about-float {
+    position: absolute;
+    padding: 18px 22px;
+    border-radius: 18px;
+    background: rgba(8,16,40,0.85);
+    border: 1px solid var(--aia-border);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 20px 45px rgba(0,0,0,0.45);
+    z-index: 3;
+}
+.aia-about-float-1 { bottom: -22px; right: -26px; }
+.aia-about-float-2 { top: -22px; left: -26px; }
+.aia-about-float h3 {
+    font-family: var(--aia-font);
+    font-size: 28px; font-weight: 900;
+    background: linear-gradient(135deg, #fff, var(--aia-accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    margin-bottom: 0;
+}
+.aia-about-float p { font-size: 12px; color: var(--aia-text-secondary); margin: 0; }
+
+.aia-about-text { font-size: 15.5px; line-height: 1.9; color: var(--aia-text-secondary); margin-bottom: 16px; }
+.aia-about-features { list-style: none; padding: 0; margin: 26px 0 32px; display: grid; gap: 14px; }
+.aia-about-features li { display: flex; align-items: center; gap: 12px; font-size: 14.5px; color: #e5e7eb; }
+.aia-about-features li i {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--aia-gradient-1);
+    color: #fff;
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+@media (max-width: 991px) {
+    .aia-about-grid { grid-template-columns: 1fr; }
+    .aia-about-float { right: 8px; }
+    .aia-about-float-2 { top: -16px; left: 8px; }
+}
+
+/* ===================================================================
+   5. AI TECHNOLOGY SHOWCASE — TABS + DIAGRAM
+=================================================================== */
+.aia-tech-wrap { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 50px; align-items: start; position: relative; z-index: 2; }
+.aia-tech-tabs { display: flex; flex-direction: column; gap: 12px; }
+.aia-tech-tab {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 22px;
+    border-radius: 16px;
+    background: var(--aia-card);
+    border: 1px solid var(--aia-border);
+    cursor: pointer;
+    transition: all 0.35s ease;
+}
+.aia-tech-tab i { font-size: 22px; color: var(--aia-text-secondary); transition: all 0.35s ease; }
+.aia-tech-tab h4 { font-size: 15.5px; font-weight: 700; color: #fff; margin: 0 0 3px; font-family: var(--aia-font); }
+.aia-tech-tab p { font-size: 12.5px; color: var(--aia-text-secondary); margin: 0; }
+.aia-tech-tab.active {
+    border-color: rgba(124,58,237,0.5);
+    background: linear-gradient(135deg, rgba(37,99,235,0.16), rgba(124,58,237,0.1));
+    transform: translateX(6px);
+}
+.aia-tech-tab.active i { color: var(--aia-accent); }
+
+.aia-tech-panel-wrap {
+    position: relative;
+    min-height: 420px;
+    border-radius: 24px;
+    background: var(--aia-card);
+    border: 1px solid var(--aia-border);
+    padding: 40px;
+    overflow: hidden;
+}
+.aia-tech-panel { display: none; }
+.aia-tech-panel.active { display: block; }
+.aia-tech-panel h3 { font-family: var(--aia-font); font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 14px; }
+.aia-tech-panel p { font-size: 15px; color: var(--aia-text-secondary); line-height: 1.85; margin-bottom: 26px; max-width: 520px; }
+
+.aia-diagram { position: relative; height: 220px; display: flex; align-items: center; justify-content: space-between; }
+.aia-diagram-node {
+    width: 86px; height: 86px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, rgba(37,99,235,0.2), rgba(124,58,237,0.18));
+    border: 1px solid var(--aia-border);
+    font-size: 28px;
+    color: var(--aia-accent);
+    position: relative;
+    z-index: 2;
+    animation: aiaFloatY 4.5s ease-in-out infinite;
+}
+.aia-diagram-node.aia-core {
+    width: 110px; height: 110px;
+    background: var(--aia-gradient-1);
+    color: #fff;
+    box-shadow: 0 0 50px rgba(124,58,237,0.5);
+    font-size: 34px;
+}
+.aia-diagram-line {
+    position: absolute;
+    top: 50%; left: 13%; right: 13%;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(37,99,235,0.5), rgba(124,58,237,0.7), rgba(6,182,212,0.5));
+    z-index: 1;
+    transform-origin: left center;
+}
+.aia-diagram-line::before, .aia-diagram-line::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 8px var(--aia-accent);
+    animation: aiaDiagramPulse 2.6s linear infinite;
+}
+.aia-diagram-line::after { animation-delay: 1.3s; }
+@keyframes aiaDiagramPulse {
+    0% { left: 0%; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { left: 100%; opacity: 0; }
+}
+
+@media (max-width: 991px) {
+    .aia-tech-wrap { grid-template-columns: 1fr; }
+    .aia-tech-panel-wrap { padding: 28px; }
+    .aia-diagram { flex-wrap: wrap; gap: 20px; justify-content: center; height: auto; }
+    .aia-diagram-line { display: none; }
+}
+
+/* ===================================================================
+   6. PROCESS — PREMIUM TIMELINE
+=================================================================== */
+.aia-timeline { position: relative; max-width: 940px; margin: 0 auto; }
+.aia-tl-line-bg {
+    position: absolute;
+    left: 35px; top: 0; bottom: 0;
+    width: 2px;
+    background: rgba(255,255,255,0.08);
+}
+.aia-tl-line-fill {
+    position: absolute;
+    left: 35px; top: 0;
+    width: 2px;
+    height: 0%;
+    background: linear-gradient(180deg, var(--aia-primary), var(--aia-secondary), var(--aia-accent));
+    box-shadow: 0 0 12px rgba(124,58,237,0.6);
+}
+.aia-tl-item { position: relative; display: flex; gap: 26px; padding-bottom: 50px; }
+.aia-tl-item:last-child { padding-bottom: 0; }
+.aia-tl-num {
+    flex-shrink: 0;
+    width: 70px; height: 70px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--aia-dark);
+    border: 2px solid rgba(255,255,255,0.14);
+    font-family: var(--aia-font);
+    font-weight: 900; font-size: 18px;
+    color: var(--aia-text-secondary);
+    z-index: 2;
+    transition: all 0.45s cubic-bezier(.2,.8,.2,1);
+}
+.aia-tl-item.aia-active .aia-tl-num {
+    background: var(--aia-gradient-1);
+    color: #fff;
+    border-color: transparent;
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(124,58,237,0.55);
+}
+.aia-tl-card {
+    flex: 1;
+    padding: 24px 28px;
+    border-radius: 18px;
+    background: var(--aia-card);
+    border: 1px solid var(--aia-border);
+    transition: all 0.4s ease;
+}
+.aia-tl-item.aia-active .aia-tl-card { border-color: rgba(124,58,237,0.4); background: rgba(255,255,255,0.07); }
+.aia-tl-card h4 { font-family: var(--aia-font); font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+.aia-tl-card p { font-size: 14px; color: var(--aia-text-secondary); line-height: 1.75; margin: 0; }
+
+@media (max-width: 575px) {
+    .aia-tl-line-bg, .aia-tl-line-fill { left: 25px; }
+    .aia-tl-num { width: 52px; height: 52px; font-size: 14px; }
+}
+
+/* ===================================================================
+   7. STATISTICS
+=================================================================== */
+.aia-stats-section {
+    position: relative;
+    padding: 100px 0;
+    background: linear-gradient(180deg, transparent, rgba(37,99,235,0.07), transparent);
+    border-top: 1px solid var(--aia-border);
+    border-bottom: 1px solid var(--aia-border);
+}
+.aia-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; position: relative; z-index: 2; }
+.aia-stat-card {
+    text-align: center;
+    padding: 36px 16px;
+    border-radius: 20px;
+    background: var(--aia-card);
+    border: 1px solid var(--aia-border);
+    transition: all 0.4s ease;
+}
+.aia-stat-card:hover { transform: translateY(-8px); border-color: rgba(6,182,212,0.4); box-shadow: 0 20px 50px rgba(6,182,212,0.15); }
+.aia-stat-icon { font-size: 26px; color: var(--aia-accent); margin-bottom: 14px; }
+.aia-stat-num {
+    display: block;
+    font-family: var(--aia-font);
+    font-size: 38px; font-weight: 900;
+    background: linear-gradient(135deg, #fff, var(--aia-accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.aia-stat-lbl { font-size: 13.5px; color: var(--aia-text-secondary); margin-top: 6px; display: block; }
+
+@media (max-width: 767px) { .aia-stats-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ===================================================================
+   8. CASE STUDIES
+=================================================================== */
+.aia-cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+.aia-case-card {
+    position: relative;
+    border-radius: 22px;
+    overflow: hidden;
+    border: 1px solid var(--aia-border);
+    background: var(--aia-card);
+    transition: transform 0.4s ease;
+}
+.aia-case-card:hover { transform: translateY(-8px); }
+.aia-case-img { position: relative; overflow: hidden; height: 230px; }
+.aia-case-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease; }
+.aia-case-card:hover .aia-case-img img { transform: scale(1.12); }
+.aia-case-img::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(8,16,40,0.9));
+    opacity: 0.7;
+    transition: opacity 0.4s ease;
+}
+.aia-case-card:hover .aia-case-img::after { opacity: 0.92; }
+.aia-case-tag {
+    position: absolute; top: 16px; left: 16px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 11px; font-weight: 700;
+    background: rgba(8,16,40,0.8);
+    border: 1px solid var(--aia-border);
+    color: var(--aia-accent);
+    backdrop-filter: blur(6px);
+    z-index: 2;
+}
+.aia-case-body { padding: 24px 26px; }
+.aia-case-body h4 { font-family: var(--aia-font); font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+.aia-case-body p { font-size: 13.5px; color: var(--aia-text-secondary); line-height: 1.75; margin-bottom: 16px; }
+.aia-case-results { display: flex; gap: 18px; margin-bottom: 16px; }
+.aia-case-results div { font-size: 12px; color: var(--aia-text-secondary); }
+.aia-case-results strong { display: block; font-family: var(--aia-font); font-size: 17px; color: var(--aia-accent); }
+.aia-case-link { font-size: 13px; font-weight: 700; color: #93c5fd; display: inline-flex; align-items: center; gap: 6px; transition: gap 0.3s ease; }
+.aia-case-card:hover .aia-case-link { gap: 11px; }
+
+@media (max-width: 991px) { .aia-cases-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 575px) { .aia-cases-grid { grid-template-columns: 1fr; } }
+
+/* ===================================================================
+   9. WHY CHOOSE US — TILT CARDS
+=================================================================== */
+.aia-why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+.aia-why-card {
+    padding: 34px 28px;
+    border-radius: 20px;
+    background: var(--aia-card);
+    border: 1px solid var(--aia-border);
+    text-align: left;
+    transform-style: preserve-3d;
+    will-change: transform;
+    transition: transform 0.15s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    position: relative;
+}
+.aia-why-card:hover { border-color: rgba(124,58,237,0.4); box-shadow: 0 25px 55px rgba(37,99,235,0.2); }
+.aia-why-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: 20px;
+    background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(124,58,237,0.18), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+}
+.aia-why-card:hover::before { opacity: 1; }
+.aia-why-icon {
+    width: 56px; height: 56px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, rgba(37,99,235,0.2), rgba(6,182,212,0.16));
+    color: var(--aia-accent);
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+.aia-why-card h4 { font-family: var(--aia-font); font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+.aia-why-card p { font-size: 13.5px; color: var(--aia-text-secondary); line-height: 1.75; margin: 0; }
+
+@media (max-width: 991px) { .aia-why-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 575px) { .aia-why-grid { grid-template-columns: 1fr; } }
+
+/* ===================================================================
+   10. TESTIMONIALS — SWIPER
+=================================================================== */
+.aia-testimonials-section { position: relative; padding: 110px 0; }
+.aia-test-swiper { padding: 20px 4px 50px; overflow: visible; }
+.aia-test-card {
+    height: 100%;
+    padding: 32px 30px;
+    border-radius: 22px;
+    background: var(--aia-card);
+    border: 1px solid var(--aia-border);
+    transition: all 0.4s ease;
+    opacity: 0.55;
+    transform: scale(0.92);
+}
+.swiper-slide-active .aia-test-card { opacity: 1; transform: scale(1); border-color: rgba(124,58,237,0.4); box-shadow: 0 30px 60px rgba(37,99,235,0.2); }
+.aia-test-quote { font-size: 26px; color: var(--aia-accent); margin-bottom: 14px; }
+.aia-test-card p { font-size: 14.5px; color: #e5e7eb; line-height: 1.85; margin-bottom: 22px; min-height: 110px; }
+.aia-test-user { display: flex; align-items: center; gap: 12px; }
+.aia-test-user img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid var(--aia-border); }
+.aia-test-user h4 { font-size: 14.5px; color: #fff; margin: 0; font-family: var(--aia-font); }
+.aia-test-user span { font-size: 12px; color: var(--aia-text-secondary); }
+.aia-test-swiper .swiper-pagination-bullet { background: rgba(255,255,255,0.3); opacity: 1; }
+.aia-test-swiper .swiper-pagination-bullet-active { background: var(--aia-accent); width: 22px; border-radius: 5px; }
+
+/* ===================================================================
+   11. TEAM
+=================================================================== */
+.aia-team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.aia-team-card { position: relative; border-radius: 22px; overflow: hidden; border: 1px solid var(--aia-border); background: var(--aia-card); }
+.aia-team-img { position: relative; height: 260px; overflow: hidden; }
+.aia-team-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.aia-team-card:hover .aia-team-img img { transform: scale(1.1); }
+.aia-team-social {
+    position: absolute;
+    left: 0; right: 0; bottom: -50px;
+    display: flex; justify-content: center; gap: 10px;
+    padding: 14px 0;
+    background: linear-gradient(180deg, transparent, rgba(8,16,40,0.9));
+    transition: bottom 0.4s ease;
+}
+.aia-team-card:hover .aia-team-social { bottom: 0; }
+.aia-team-social a {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid var(--aia-border);
+    color: #fff;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+.aia-team-social a:hover { background: var(--aia-gradient-1); transform: translateY(-3px); }
+.aia-team-body { padding: 20px 22px; text-align: center; }
+.aia-team-body h4 { font-family: var(--aia-font); font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.aia-team-body span { font-size: 12.5px; color: var(--aia-accent); }
+
+@media (max-width: 991px) { .aia-team-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ===================================================================
+   12. FAQ
+=================================================================== */
+.aia-accordion-item {
+    border-radius: 16px;
+    background: var(--aia-card);
+    border: 1px solid var(--aia-border);
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+}
+.aia-accordion-item:hover { border-color: rgba(124,58,237,0.35); }
+.aia-accordion-btn {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    cursor: pointer;
+}
+.aia-accordion-btn i { transition: transform 0.4s cubic-bezier(.2,.8,.2,1); color: var(--aia-accent); flex-shrink: 0; }
+.aia-accordion-btn[aria-expanded="true"] i { transform: rotate(180deg); }
+.aia-accordion-body { padding: 0 24px 20px; font-size: 13.5px; color: var(--aia-text-secondary); line-height: 1.8; }
+
+/* ===================================================================
+   13. BLOG / INSIGHTS
+=================================================================== */
+.aia-blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+.aia-blog-card {
+    border-radius: 22px;
+    overflow: hidden;
+    background: var(--aia-card);
+    border: 1px solid var(--aia-border);
+    transition: all 0.4s ease;
+}
+.aia-blog-card:hover { transform: translateY(-8px); border-color: rgba(6,182,212,0.35); box-shadow: 0 25px 55px rgba(6,182,212,0.15); }
+.aia-blog-thumb {
+    height: 170px;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, rgba(37,99,235,0.22), rgba(124,58,237,0.18));
+    position: relative;
+    overflow: hidden;
+}
+.aia-blog-thumb i { font-size: 42px; color: rgba(255,255,255,0.85); transition: transform 0.5s ease; }
+.aia-blog-card:hover .aia-blog-thumb i { transform: scale(1.15) rotate(8deg); }
+.aia-blog-badge {
+    position: absolute; top: 14px; left: 14px;
+    padding: 5px 13px;
+    border-radius: 999px;
+    font-size: 10.5px; font-weight: 700;
+    background: rgba(8,16,40,0.8);
+    border: 1px solid var(--aia-border);
+    color: var(--aia-accent);
+    transition: transform 0.35s ease;
+}
+.aia-blog-card:hover .aia-blog-badge { transform: scale(1.08); }
+.aia-blog-body { padding: 22px 24px; }
+.aia-blog-meta { font-size: 11.5px; color: var(--aia-text-secondary); margin-bottom: 10px; display: flex; gap: 14px; }
+.aia-blog-body h4 { font-family: var(--aia-font); font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 12px; line-height: 1.4; }
+.aia-blog-link { font-size: 13px; font-weight: 700; color: #93c5fd; display: inline-flex; align-items: center; gap: 6px; transition: gap 0.3s ease; }
+.aia-blog-card:hover .aia-blog-link { gap: 11px; }
+
+@media (max-width: 991px) { .aia-blog-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 575px) { .aia-blog-grid { grid-template-columns: 1fr; } }
+
+/* ===================================================================
+   14. CTA + CONTACT
+=================================================================== */
+.aia-cta { position: relative; padding: 110px 0 130px; }
+.aia-cta-banner {
+    position: relative;
+    border-radius: 28px;
+    padding: 64px 50px;
+    background: var(--aia-gradient-1);
+    overflow: hidden;
+    margin-bottom: 70px;
+    text-align: center;
+}
+.aia-cta-banner::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.2), transparent 45%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.14), transparent 45%);
+    animation: aiaPulseGlow 5s ease-in-out infinite;
+}
+@keyframes aiaPulseGlow { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+.aia-cta-banner h2 { position: relative; z-index: 2; font-family: var(--aia-font); font-size: clamp(26px, 4vw, 42px); font-weight: 900; color: #fff; margin-bottom: 14px; }
+.aia-cta-banner p { position: relative; z-index: 2; color: rgba(255,255,255,0.88); max-width: 600px; margin: 0 auto 30px; }
+.aia-cta-banner .aia-cta-btns { position: relative; z-index: 2; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.aia-btn-white {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 1rem 2rem;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--aia-dark) !important;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+.aia-btn-white:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(0,0,0,0.3); color: var(--aia-dark) !important; }
+
+.aia-contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: flex-start; }
+.aia-contact-info h3 { font-family: var(--aia-font); font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 14px; }
+.aia-contact-info p { font-size: 14.5px; color: var(--aia-text-secondary); line-height: 1.85; margin-bottom: 26px; }
+.aia-contact-item { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+.aia-contact-icon {
+    width: 46px; height: 46px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--aia-card);
+    border: 1px solid var(--aia-border);
+    color: var(--aia-accent);
+    flex-shrink: 0;
+}
+.aia-contact-item span { font-size: 12px; color: var(--aia-text-secondary); display: block; }
+.aia-contact-item h4 { font-size: 15px; color: #fff; margin: 0; }
+
+.aia-form-card {
+    border-radius: 22px;
+    padding: 34px;
+    background: var(--aia-card);
+    border: 1px solid var(--aia-border);
+    backdrop-filter: blur(10px);
+}
+.aia-form-card .Contact-Form label { color: rgba(255,255,255,0.8); }
+.aia-form-card .Contact-Form input,
+.aia-form-card .Contact-Form textarea { background-color: rgba(255,255,255,0.92); }
+.aia-form-card .Contact-Form input:focus,
+.aia-form-card .Contact-Form textarea:focus { outline: none; box-shadow: 0 0 0 3px rgba(6,182,212,0.3); }
+.aia-form-card .Contact-Form button { background: var(--aia-gradient-1); background-color: transparent; padding: 10px 38px; }
+
+@media (max-width: 991px) { .aia-contact-wrap { grid-template-columns: 1fr; } }
+
+/* ===================================================================
+   GENERIC REVEAL STATE (GSAP hooks via JS, base hidden state for no-js)
+=================================================================== */
+[data-reveal] { will-change: transform, opacity; }
+
+@media (max-width: 1199px) {
+    .aia-section { padding: 90px 0; }
+}
+@media (max-width: 767px) {
+    .aia-section { padding: 70px 0; }
+    .aia-hero { padding: 150px 0 90px; }
+}

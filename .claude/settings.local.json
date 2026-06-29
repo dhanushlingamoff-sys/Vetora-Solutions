@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:assamtea.vercel.app)",
+      "WebFetch(domain:trionova.in)",
+      "PowerShell(cd d:\\\\laragon\\\\www\\\\vetora; Start-Process -NoNewWindow php -ArgumentList \"artisan\",\"serve\",\"--port=8123\" ; Start-Sleep -Seconds 3; \\(Invoke-WebRequest -Uri \"http://127.0.0.1:8123/AI\" -UseBasicParsing\\).StatusCode)",
+      "PowerShell(php -l \"d:\\\\laragon\\\\www\\\\vetora\\\\resources\\\\views\\\\services\\\\business\\\\AI.blade.php\" 2>&1)",
+      "WebFetch(domain:www.metaminds.studio)",
+      "PowerShell(Select-String -Path \"d:\\\\laragon\\\\www\\\\vetora\\\\resources\\\\views\\\\services\\\\business\\\\mobile-app-australia.blade.php\" -Pattern \"hww\" | Select-Object -First 10 | ForEach-Object { \"$\\($_.LineNumber\\): $\\($_.Line.Trim\\(\\)\\)\" })",
+      "PowerShell(Get-Content \"d:\\\\laragon\\\\www\\\\vetora\\\\public\\\\Assets\\\\css\\\\mobile-app.css\" | Select-Object -Index \\(2095..2115\\) | ForEach-Object { $_ })",
+      "PowerShell(Select-String -Path \"d:\\\\laragon\\\\www\\\\vetora\\\\resources\\\\views\\\\services\\\\business\\\\mobile-app-australia.blade.php\" -Pattern \"hww\" | Select-Object -First 8 | ForEach-Object { \"$\\($_.LineNumber\\): $\\($_.Line.Trim\\(\\)\\)\" })",
+      "PowerShell(Select-String -Path \"d:\\\\laragon\\\\www\\\\vetora\\\\resources\\\\views\\\\services\\\\business\\\\mobile-app-australia.blade.php\" -Pattern \"hww3\" | Select-Object -First 5 | ForEach-Object { \"$\\($_.LineNumber\\): $\\($_.Line.Trim\\(\\)\\)\" })",
+      "PowerShell(Select-String -Path \"d:\\\\laragon\\\\www\\\\vetora\\\\resources\\\\views\\\\services\\\\business\\\\mobile-app-australia.blade.php\" -Pattern \"mobile-app.css\" | ForEach-Object { \"$\\($_.LineNumber\\): $\\($_.Line.Trim\\(\\)\\)\" })",
+      "PowerShell(Select-String -Path \"d:\\\\laragon\\\\www\\\\vetora\\\\resources\\\\views\\\\services\\\\business\\\\mobile-app-australia.blade.php\" -Pattern \"mpfSection|mpf__block|mpfInit|mpf-reveal\" | Select-Object -First 6 | ForEach-Object { \"$\\($_.LineNumber\\): $\\($_.Line.Trim\\(\\)\\)\" })",
+      "PowerShell(Select-String -Path \"d:\\\\laragon\\\\www\\\\vetora\\\\public\\\\Assets\\\\css\\\\mobile-app.css\" -Pattern \"mpf__collage|mpf__shot|mpf-reveal\" | Select-Object -First 6 | ForEach-Object { \"$\\($_.LineNumber\\): $\\($_.Line.Trim\\(\\)\\)\" })",
+      "PowerShell(Select-String -Path \"d:\\\\laragon\\\\www\\\\vetora\\\\resources\\\\views\\\\services\\\\business\\\\mobile-app-australia.blade.php\" -Pattern \"mpfInit\" | ForEach-Object { \"$\\($_.LineNumber\\): $\\($_.Line.Trim\\(\\)\\)\" })",
+      "PowerShell(Select-String -Path \"d:\\\\laragon\\\\www\\\\vetora\\\\resources\\\\views\\\\services\\\\business\\\\mobile-app-australia.blade.php\" -Pattern \"rotation: -9|reference angle\" | ForEach-Object { \"$\\($_.LineNumber\\): $\\($_.Line.Trim\\(\\)\\)\" })",
+      "PowerShell(\\(Get-Content \"d:\\\\laragon\\\\www\\\\vetora\\\\public\\\\Assets\\\\css\\\\mobile-app.css\" | Measure-Object -Line\\).Lines)",
+      "PowerShell(\\(Get-Content \"d:\\\\laragon\\\\www\\\\vetora\\\\public\\\\Assets\\\\css\\\\mobile-app.css\"\\).Count)",
+      "PowerShell(& \"C:\\\\Program Files\\\\Git\\\\cmd\\\\git.exe\" --version)"
+    ],
+    "additionalDirectories": [
+      "d:\\laragon\\www\\vetora\\storage\\framework\\views"
+    ]
+  }
+}
