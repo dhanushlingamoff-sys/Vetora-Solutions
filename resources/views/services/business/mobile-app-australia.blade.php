@@ -2101,6 +2101,13 @@
 
                 /* DESKTOP (>= 769px) */
                 mm.add('(min-width: 769px)', function () {
+                    /* How much VERTICAL scroll maps to the HORIZONTAL row travel.
+                       1 = the row moves 1px per 1px of scroll (fast). Higher =
+                       the pin lasts longer so the row glides more slowly and each
+                       step dwells in view  matches the reference's deliberate
+                       feel. Tune this one number to taste. */
+                    var SPEED = 2;
+
                     var vw, dist;
 
                     function measure() {
@@ -2137,7 +2144,7 @@
                         scrollTrigger: {
                             trigger:             section,
                             start:               'top top',
-                            end:                 function () { measure(); return '+=' + dist; },
+                            end:                 function () { measure(); return '+=' + Math.round(dist * SPEED); },
                             pin:                 true,
                             pinSpacing:          true,
                             scrub:               1,
