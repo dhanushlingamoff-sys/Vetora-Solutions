@@ -2357,6 +2357,25 @@
     pointer-events: none;
 }
 
+/* Soft dark scrim behind the header so the horizontally-scrolling step
+   titles/body never bleed through it on short viewports (small laptops).
+   It's invisible over the plain black background and only masks content that
+   passes behind the header. */
+.hww2__hd::before {
+    content: '';
+    position: absolute;
+    top: -130px;
+    left: -130px;
+    right: -180px;
+    bottom: -120px;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(ellipse at 32% 42%,
+        #000             0%,
+        #000             40%,
+        rgba(0, 0, 0, 0) 72%);
+}
+
 .hww2__pill {
     display: inline-flex;
     align-items: center;
