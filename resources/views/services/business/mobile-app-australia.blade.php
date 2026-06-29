@@ -1802,36 +1802,84 @@
     })();
 
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-       WDM VIDEO  scroll-driven expand (scrubbed, reversible)
-       start: video wrapper top at 80% viewport height
-       end:   video wrapper top at 20% viewport height
-       scale: 0.6 â†' 1  |  border-radius: 24px â†' 12px
+       WDM VIDEO  pinned scroll-driven expand (scrubbed, reversible)
+       The section pins ("freezes"); the small video pill morphs into a
+       centred, full-width rounded banner as you scroll, then reverses
+       on scroll-up. Desktop/tablet only  mobile shows a static banner.
     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
     (function () {
-        gsap.registerPlugin(ScrollTrigger);
-
-        const morph = document.querySelector('#wdmVideoMorph');
+        var morph = document.querySelector('#wdmVideoMorph');
         if (!morph) return;
 
-        const video = morph.querySelector('video');
-        if (video) video.play().catch(() => {});
+        var section = document.getElementById('wdm');
+        var video   = morph.querySelector('video');
+        var ctaRow  = document.querySelector('.wdm__cta-row');
+        if (video) video.play().catch(function () {});
 
-        const ctaRow = document.querySelector('.wdm__cta-row');
+        if (!window.gsap || !window.ScrollTrigger) return;
 
-        gsap.timeline({
-            scrollTrigger: {
-                trigger: '.wdm__cta-video-row',
-                start: 'top 70%',
-                end: '+=500',
-                scrub: 1,
-                invalidateOnRefresh: true
-            }
-        })
-        .to(ctaRow, { opacity: 0, duration: 0.1, ease: 'none' })
-        .to(morph,  { width: () => window.innerWidth, x: () => -morph.getBoundingClientRect().left, y: 60, duration: 0.45, ease: 'none' }, '<')
-        .to(morph,  { height: 520, duration: 0.55, ease: 'none' }, '<')
-        .to(morph,  { borderRadius: 20, duration: 0.2,  ease: 'none' }, '<')
-        .fromTo(video, { scale: 1.18 }, { scale: 1,    duration: 1,    ease: 'none' }, '<');
+        /* Reduced-motion: CSS renders the video as a static banner already */
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        var mm = gsap.matchMedia();
+
+        /* DESKTOP / TABLET (>= 769px): pin the section, then morph the small
+           video pill into a centred full-width rounded banner. The pin makes
+           the page "freeze" while the video takes over; scrub makes it fully
+           reversible on scroll-up. Smaller screens get a static CSS banner. */
+        mm.add('(min-width: 769px)', function () {
+            /* Final banner size  full-width rounded, capped to the layout. */
+            function targetW() { return Math.min(window.innerWidth - 48, 1280); }
+            function targetH() { return Math.min(Math.round(window.innerHeight * 0.6), 520); }
+
+            var tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger:             section,
+                    start:               'top top',
+                    end:                 '+=900',
+                    pin:                 true,
+                    pinSpacing:          true,
+                    scrub:               1,
+                    anticipatePin:       1,
+                    fastScrollEnd:       true,
+                    invalidateOnRefresh: true
+                }
+            });
+
+            tl
+              /* fade the "Know More" button out as the takeover begins */
+              .to(ctaRow, { autoAlpha: 0, ease: 'none', duration: 0.12 }, 0)
+              /* morph the pill into a centred full-width banner. The pill's
+                 offset is measured relative to the section (not the viewport)
+                 so the maths stays correct no matter where a ScrollTrigger
+                 refresh happens to fire  the section is fixed at top:0 while
+                 pinned, so section-relative offset == on-screen position. */
+              .to(morph, {
+                    width:        function () { return targetW(); },
+                    height:       function () { return targetH(); },
+                    borderRadius: 20,
+                    x: function () {
+                        var m = morph.getBoundingClientRect(), s = section.getBoundingClientRect();
+                        return (window.innerWidth  - targetW()) / 2 - (m.left - s.left);
+                    },
+                    y: function () {
+                        var m = morph.getBoundingClientRect(), s = section.getBoundingClientRect();
+                        return (window.innerHeight - targetH()) / 2 - (m.top - s.top);
+                    },
+                    ease:     'none',
+                    duration: 1
+              }, 0)
+              /* settle the video zoom as the frame grows */
+              .fromTo(video, { scale: 1.18 }, { scale: 1, ease: 'none', duration: 1 }, 0);
+
+            return function () {
+                if (tl.scrollTrigger) tl.scrollTrigger.kill();
+                tl.kill();
+                gsap.set([morph, ctaRow, video].filter(Boolean), { clearProps: 'all' });
+            };
+        });
     })();
 
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
