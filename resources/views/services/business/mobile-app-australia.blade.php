@@ -1954,6 +1954,24 @@
         if (document.fonts && document.fonts.ready) {
             document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
         }
+
+        /* Keep the effect responsive. Another pin in this view sets
+           autoRefreshEvents to 'DOMContentLoaded,load', which removes `resize`
+           from ScrollTrigger's auto-refresh  so resizing the window or toggling
+           fullscreen leaves this pin's start/end and the video measurements
+           stale and scrolling jerks. Re-measure (debounced) on those events;
+           all sizes are viewport-relative so the animation then re-fits any
+           screen. */
+        var wdmRT;
+        function wdmRefreshSoon(delay) {
+            clearTimeout(wdmRT);
+            wdmRT = setTimeout(function () {
+                if (window.ScrollTrigger) ScrollTrigger.refresh();
+            }, delay);
+        }
+        window.addEventListener('resize', function () { wdmRefreshSoon(200); });
+        window.addEventListener('orientationchange', function () { wdmRefreshSoon(250); });
+        document.addEventListener('fullscreenchange', function () { wdmRefreshSoon(60); });
     })();
 
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
