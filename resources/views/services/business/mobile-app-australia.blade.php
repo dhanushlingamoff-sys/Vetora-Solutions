@@ -1802,18 +1802,19 @@
     })();
 
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-       WDM VIDEO  pinned scroll-driven expand (scrubbed, reversible)
-       The section pins ("freezes"); the small video pill morphs into a
-       centred, full-width rounded banner as you scroll, then reverses
-       on scroll-up. Desktop/tablet only  mobile shows a static banner.
+       WDM VIDEO  scroll-driven expand-in-place (scrubbed, reversible)
+       The page scrolls normally while the small video pill grows in place
+       into a full-bleed (100vw) rounded video and the "Know More" button
+       fades out; scrolling back up reverses it. Desktop/tablet only
+       mobile shows a static banner via CSS.
     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
     (function () {
         var morph = document.querySelector('#wdmVideoMorph');
         if (!morph) return;
 
-        var section = document.getElementById('wdm');
-        var video   = morph.querySelector('video');
-        var ctaRow  = document.querySelector('.wdm__cta-row');
+        var video  = morph.querySelector('video');
+        var ctaRow = document.querySelector('.wdm__cta-row');
+        var row    = document.querySelector('.wdm__cta-video-row');
         if (video) video.play().catch(function () {});
 
         if (!window.gsap || !window.ScrollTrigger) return;
@@ -1823,60 +1824,57 @@
 
         gsap.registerPlugin(ScrollTrigger);
 
+        function lerp(a, b, t)  { return a + (b - a) * t; }
+        function clamp(v, lo, hi) { return v < lo ? lo : (v > hi ? hi : v); }
+
         var mm = gsap.matchMedia();
 
-        /* DESKTOP / TABLET (>= 769px): pin the section, then morph the small
-           video pill into a centred full-width rounded banner. The pin makes
-           the page "freeze" while the video takes over; scrub makes it fully
-           reversible on scroll-up. Smaller screens get a static CSS banner. */
+        /* DESKTOP / TABLET (>= 769px): the page scrolls normally (NOT pinned)
+           while the small video pill grows in place into a full-bleed (100vw)
+           rounded video, and the "Know More" button fades out. Driven by
+           scroll progress (scrub) so it reverses smoothly on scroll-up.
+           Smaller screens get a plain static banner via CSS. */
         mm.add('(min-width: 769px)', function () {
-            /* Final banner size  full-width rounded, capped to the layout. */
-            function targetW() { return Math.min(window.innerWidth - 48, 1280); }
-            function targetH() { return Math.min(Math.round(window.innerHeight * 0.6), 520); }
+            /* Pill metrics captured with transforms cleared, refreshed on
+               resize. base.left is horizontal-only, so vertical scroll never
+               invalidates it. */
+            var base = { left: 0, w: 0, h: 0 };
 
-            var tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger:             section,
-                    start:               'top top',
-                    end:                 '+=900',
-                    pin:                 true,
-                    pinSpacing:          true,
-                    scrub:               1,
-                    anticipatePin:       1,
-                    fastScrollEnd:       true,
-                    invalidateOnRefresh: true
+            function measure() {
+                gsap.set(morph, { clearProps: 'width,height,borderRadius,x,y' });
+                var r = morph.getBoundingClientRect();
+                base.left = r.left;
+                base.w    = r.width;
+                base.h    = r.height;
+            }
+
+            /* Final video height  tall enough to fill most of the viewport. */
+            function targetH() { return Math.min(Math.round(window.innerHeight * 0.82), 760); }
+
+            var st = ScrollTrigger.create({
+                trigger:             row,
+                start:               'top 80%',
+                end:                 function () { return '+=' + Math.round(window.innerHeight); },
+                scrub:               1,
+                invalidateOnRefresh: true,
+                onRefreshInit:       measure,
+                onUpdate: function (self) {
+                    var p  = self.progress;
+                    var vw = document.documentElement.clientWidth; /* excludes scrollbar */
+                    gsap.set(morph, {
+                        width:        lerp(base.w, vw, p),
+                        height:       lerp(base.h, targetH(), p),
+                        x:            -base.left * p,                 /* slide the left edge out to the viewport edge */
+                        borderRadius: lerp(999, 18, clamp(p * 2, 0, 1)),
+                        force3D:      true
+                    });
+                    if (ctaRow) gsap.set(ctaRow, { autoAlpha: clamp(1 - p * 4, 0, 1) });
+                    if (video)  gsap.set(video,  { scale: lerp(1.18, 1, p) });
                 }
             });
 
-            tl
-              /* fade the "Know More" button out as the takeover begins */
-              .to(ctaRow, { autoAlpha: 0, ease: 'none', duration: 0.12 }, 0)
-              /* morph the pill into a centred full-width banner. The pill's
-                 offset is measured relative to the section (not the viewport)
-                 so the maths stays correct no matter where a ScrollTrigger
-                 refresh happens to fire  the section is fixed at top:0 while
-                 pinned, so section-relative offset == on-screen position. */
-              .to(morph, {
-                    width:        function () { return targetW(); },
-                    height:       function () { return targetH(); },
-                    borderRadius: 20,
-                    x: function () {
-                        var m = morph.getBoundingClientRect(), s = section.getBoundingClientRect();
-                        return (window.innerWidth  - targetW()) / 2 - (m.left - s.left);
-                    },
-                    y: function () {
-                        var m = morph.getBoundingClientRect(), s = section.getBoundingClientRect();
-                        return (window.innerHeight - targetH()) / 2 - (m.top - s.top);
-                    },
-                    ease:     'none',
-                    duration: 1
-              }, 0)
-              /* settle the video zoom as the frame grows */
-              .fromTo(video, { scale: 1.18 }, { scale: 1, ease: 'none', duration: 1 }, 0);
-
             return function () {
-                if (tl.scrollTrigger) tl.scrollTrigger.kill();
-                tl.kill();
+                st.kill();
                 gsap.set([morph, ctaRow, video].filter(Boolean), { clearProps: 'all' });
             };
         });
