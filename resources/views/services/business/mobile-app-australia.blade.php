@@ -1913,23 +1913,28 @@
                     var r   = lerp(999, 36, clamp(g * 2.2, 0, 1));
 
                     /* Vertical: the box is TOP-anchored, so growing the height
-                       extends it DOWNWARD. Its top is lifted only in lockstep
-                       with the copy scrolling away (same `shift`), so it never
-                       rises into the text above. The shift is sized so the
-                       finished card lands vertically centred. */
+                       extends it DOWNWARD. Its top is lifted as the copy scrolls
+                       away, so it never rises into the text above. */
                     var D     = Math.max(0, base.top - (H - th) / 2);
-                    var shift = smooth(g) * D;
+                    var shift = smooth(g) * D;             /* copy scrolls fully up */
+
+                    /* The video itself is lifted slightly LESS, so the finished
+                       card settles a touch below dead-centre and its top clears
+                       the carousel arrows. Capped to the bottom breathing room
+                       so it never runs off the viewport on short screens. */
+                    var drop       = Math.min(56, Math.max(0, (H - th) / 2 - 16));
+                    var videoShift = smooth(g) * Math.max(0, D - drop);
 
                     gsap.set(morph, {
                         width:        w,
                         height:       h,
                         x:            (cx - w / 2) - base.left,
-                        y:            -shift,
+                        y:            -videoShift,
                         borderRadius: r,
                         force3D:      true
                     });
 
-                    /* button fades out fast; copy scrolls up by the same shift */
+                    /* button fades out fast; copy scrolls up by the full shift */
                     if (ctaRow) gsap.set(ctaRow, { autoAlpha: clamp(1 - g / 0.12, 0, 1) });
                     gsap.set(textEls, { y: -shift });
                     if (video) gsap.set(video, { scale: lerp(1.18, 1, g) });
@@ -1954,6 +1959,24 @@
         if (document.fonts && document.fonts.ready) {
             document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
         }
+
+        /* Keep the effect responsive. Another pin in this view sets
+           autoRefreshEvents to 'DOMContentLoaded,load', which removes `resize`
+           from ScrollTrigger's auto-refresh  so resizing the window or toggling
+           fullscreen leaves this pin's start/end and the video measurements
+           stale and scrolling jerks. Re-measure (debounced) on those events;
+           all sizes are viewport-relative so the animation then re-fits any
+           screen. */
+        var wdmRT;
+        function wdmRefreshSoon(delay) {
+            clearTimeout(wdmRT);
+            wdmRT = setTimeout(function () {
+                if (window.ScrollTrigger) ScrollTrigger.refresh();
+            }, delay);
+        }
+        window.addEventListener('resize', function () { wdmRefreshSoon(200); });
+        window.addEventListener('orientationchange', function () { wdmRefreshSoon(250); });
+        document.addEventListener('fullscreenchange', function () { wdmRefreshSoon(60); });
     })();
 
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
