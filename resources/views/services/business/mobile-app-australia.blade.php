@@ -1802,19 +1802,20 @@
     })();
 
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-       WDM VIDEO  scroll-driven expand-in-place (scrubbed, reversible)
-       The page scrolls normally while the small video pill grows in place
-       into a full-bleed (100vw) rounded video and the "Know More" button
-       fades out; scrolling back up reverses it. Desktop/tablet only
-       mobile shows a static banner via CSS.
+       WDM VIDEO  pinned scroll-driven expand (scrubbed, reversible)
+       The section pins (freezes) at the top of the viewport; scrolling then
+       scrubs the small video pill as it grows in place into a centred,
+       full-bleed (100vw) rounded video and the "Know More" button fades out.
+       After the growth completes the pin releases and the page continues to
+       the next section. Desktop/tablet only  mobile shows a static banner.
     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
     (function () {
         var morph = document.querySelector('#wdmVideoMorph');
         if (!morph) return;
 
-        var video  = morph.querySelector('video');
-        var ctaRow = document.querySelector('.wdm__cta-row');
-        var row    = document.querySelector('.wdm__cta-video-row');
+        var section = document.getElementById('wdm');
+        var video   = morph.querySelector('video');
+        var ctaRow  = document.querySelector('.wdm__cta-row');
         if (video) video.play().catch(function () {});
 
         if (!window.gsap || !window.ScrollTrigger) return;
@@ -1824,47 +1825,64 @@
 
         gsap.registerPlugin(ScrollTrigger);
 
-        function lerp(a, b, t)  { return a + (b - a) * t; }
+        function lerp(a, b, t)   { return a + (b - a) * t; }
         function clamp(v, lo, hi) { return v < lo ? lo : (v > hi ? hi : v); }
 
         var mm = gsap.matchMedia();
 
-        /* DESKTOP / TABLET (>= 769px): the page scrolls normally (NOT pinned)
-           while the small video pill grows in place into a full-bleed (100vw)
-           rounded video, and the "Know More" button fades out. Driven by
-           scroll progress (scrub) so it reverses smoothly on scroll-up.
-           Smaller screens get a plain static banner via CSS. */
+        /* DESKTOP / TABLET (>= 769px): the section PINS (freezes) when its top
+           reaches the top of the viewport. While pinned, scrolling scrubs the
+           small video pill as it grows in place into a centred, full-bleed
+           (100vw) rounded video and the "Know More" button fades out. Once the
+           growth completes the pin releases and the page continues to the next
+           section. Reverses smoothly on scroll-up. Mobile gets a static CSS
+           banner instead. */
         mm.add('(min-width: 769px)', function () {
-            /* Pill metrics captured with transforms cleared, refreshed on
-               resize. base.left is horizontal-only, so vertical scroll never
-               invalidates it. */
-            var base = { left: 0, w: 0, h: 0 };
+            /* Pill metrics, captured with transforms cleared and refreshed on
+               resize. base.left is horizontal-only and base.top is the offset
+               within the section  both are independent of vertical scroll, and
+               while pinned at top:0 base.top equals the pill's on-screen top. */
+            var base = { left: 0, top: 0, w: 0, h: 0 };
 
             function measure() {
                 gsap.set(morph, { clearProps: 'width,height,borderRadius,x,y' });
-                var r = morph.getBoundingClientRect();
-                base.left = r.left;
-                base.w    = r.width;
-                base.h    = r.height;
+                var m = morph.getBoundingClientRect();
+                var s = section.getBoundingClientRect();
+                base.left = m.left;
+                base.top  = m.top - s.top;
+                base.w    = m.width;
+                base.h    = m.height;
             }
 
-            /* Final video height  tall enough to fill most of the viewport. */
-            function targetH() { return Math.min(Math.round(window.innerHeight * 0.82), 760); }
+            /* Final video size  full-bleed width, near-full-height. */
+            function targetH() { return Math.min(Math.round(window.innerHeight * 0.86), window.innerHeight - 40); }
 
             var st = ScrollTrigger.create({
-                trigger:             row,
-                start:               'top 80%',
+                trigger:             section,
+                start:               'top top',
                 end:                 function () { return '+=' + Math.round(window.innerHeight); },
+                pin:                 true,
+                pinSpacing:          true,
+                anticipatePin:       1,
                 scrub:               1,
                 invalidateOnRefresh: true,
                 onRefreshInit:       measure,
                 onUpdate: function (self) {
                     var p  = self.progress;
                     var vw = document.documentElement.clientWidth; /* excludes scrollbar */
+                    var vh = window.innerHeight;
+                    var w  = lerp(base.w, vw, p);
+                    var h  = lerp(base.h, targetH(), p);
+                    /* interpolate the box CENTRE from the pill centre to the
+                       viewport centre, so it grows from its real position out
+                       to a centred full-bleed video (no jump at progress 0). */
+                    var cx = lerp(base.left + base.w / 2, vw / 2, p);
+                    var cy = lerp(base.top  + base.h / 2, vh / 2, p);
                     gsap.set(morph, {
-                        width:        lerp(base.w, vw, p),
-                        height:       lerp(base.h, targetH(), p),
-                        x:            -base.left * p,                 /* slide the left edge out to the viewport edge */
+                        width:        w,
+                        height:       h,
+                        x:            (cx - w / 2) - base.left,
+                        y:            (cy - h / 2) - base.top,
                         borderRadius: lerp(999, 18, clamp(p * 2, 0, 1)),
                         force3D:      true
                     });
