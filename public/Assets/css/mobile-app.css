@@ -1925,8 +1925,26 @@
 }
 
 @media (max-width: 768px) {
+    /* No pin/scrub on small screens  show the video as a static banner */
+    .wdm__cta-video-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 22px;
+    }
+
     .wdm__video-stage {
-        height: 360px;
+        width: 100%;
+        height: auto;
+    }
+
+    .wdm__video-morph {
+        width: 100%;
+        height: 300px;
+        border-radius: 18px;
+    }
+
+    .wdm__cta-video-row .wdm__cta-row {
+        width: 100%;
     }
 }
 
@@ -1963,6 +1981,17 @@
     .wdm__divider {
         width: 100%;
         transition: none;
+    }
+
+    /* Static banner (the JS scroll-expand is skipped under reduced motion) */
+    .wdm__cta-video-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .wdm__video-stage {
+        width: 100% !important;
+        height: auto !important;
     }
 
     .wdm__video-morph {
