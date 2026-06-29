@@ -2092,9 +2092,14 @@
         window.addEventListener('load', function () {
             requestAnimationFrame(function () {
                 gsap.registerPlugin(ScrollTrigger);
+                /* Keep `resize` in the refresh events so the pin re-measures when
+                   the viewport changes (window resize, fullscreen, opening
+                   DevTools)  otherwise the pin-spacer keeps its old height and
+                   the section breaks with empty space above it. ignoreMobileResize
+                   still suppresses the mobile address-bar resize jitter. */
                 ScrollTrigger.config({
                     ignoreMobileResize: true,
-                    autoRefreshEvents: 'DOMContentLoaded,load'
+                    autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load,resize'
                 });
 
                 var mm = gsap.matchMedia();
