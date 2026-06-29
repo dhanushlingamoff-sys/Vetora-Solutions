@@ -1591,6 +1591,20 @@
     position: relative;
 }
 
+/* Desktop only: the section is pinned while the video expands, so it must
+   fill the viewport  otherwise (e.g. fullscreen / tall windows) the next
+   section shows through the bottom and the centred video overlaps it. */
+@media (min-width: 769px) {
+    .wdm {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+    }
+    .wdm__inner {
+        width: 100%;
+    }
+}
+
 /* â”€â”€ In-column video box (scroll-expand animation) â”€â”€ */
 .wdm__cta-video-row {
     display: flex;

@@ -1828,6 +1828,11 @@
         function lerp(a, b, t)   { return a + (b - a) * t; }
         function clamp(v, lo, hi) { return v < lo ? lo : (v > hi ? hi : v); }
 
+        /* Build the pin only after the page has fully settled (see the call at
+           the bottom). Creating it at parse time made it measure against a
+           pre-font/pre-image layout, so the pin engaged against a stale start
+           and the section overshot the top then snapped back. */
+        function build() {
         var mm = gsap.matchMedia();
 
         /* DESKTOP / TABLET (>= 769px): the section PINS (freezes) when its top
@@ -1885,8 +1890,8 @@
                 end:                 function () { return '+=' + Math.round(window.innerHeight * (GROW + HOLD)); },
                 pin:                 true,
                 pinSpacing:          true,
-                anticipatePin:       1,
                 scrub:               1,
+                fastScrollEnd:       true,
                 invalidateOnRefresh: true,
                 onRefreshInit:       measure,
                 onUpdate: function (self) {
@@ -1938,17 +1943,17 @@
                 textEls.forEach(function (el) { el.style.transition = ''; });
             };
         });
+        } /* end build() */
 
-        /* The pin's start position is measured against the page height. If web
-           fonts (Oswald/Manrope) or images above the section finish loading
-           AFTER that measurement, the section ends up taller/shorter than
-           assumed and the pin engages against a stale start  the section
-           overshoots the top then snaps back. Re-measure once everything has
-           settled so engagement is seamless. */
-        function wdmRefresh() { ScrollTrigger.refresh(); }
-        if (document.readyState === 'complete') { wdmRefresh(); }
-        else { window.addEventListener('load', wdmRefresh, { once: true }); }
-        if (document.fonts && document.fonts.ready) { document.fonts.ready.then(wdmRefresh); }
+        /* Create the pin once the layout has settled (after load), in a rAF, and
+           re-measure again when web fonts finish  this matches the other pinned
+           section in this view and stops the engage-time jump. */
+        function startWdm() { requestAnimationFrame(build); }
+        if (document.readyState === 'complete') { startWdm(); }
+        else { window.addEventListener('load', startWdm, { once: true }); }
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
+        }
     })();
 
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
