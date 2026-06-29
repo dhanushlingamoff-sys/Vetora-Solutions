@@ -1846,12 +1846,17 @@
                while pinned at top:0 base.top equals the pill's on-screen top. */
             var base = { left: 0, top: 0, w: 0, h: 0 };
 
-            /* The copy that scrolls up out of the way while the video grows. */
+            /* The copy that scrolls up out of the way while the video grows.
+               These carry a .wdm-reveal `transition: transform .65s`; left as-is
+               that makes their scrub-driven movement lag ~0.65s behind the
+               video on fast scroll (the pill then overlaps the text). Kill the
+               transition so they track the scrub frame-for-frame. */
             var textEls = [
                 section.querySelector('.wdm__left'),
                 section.querySelector('.wdm__pill'),
                 section.querySelector('.wdm__headline')
             ].filter(Boolean);
+            textEls.forEach(function (el) { el.style.transition = 'none'; });
 
             function measure() {
                 gsap.set(morph, { clearProps: 'width,height,borderRadius,x,y' });
@@ -1930,6 +1935,7 @@
                 st.kill();
                 gsap.set([morph, ctaRow, video].filter(Boolean), { clearProps: 'all' });
                 gsap.set(textEls, { clearProps: 'all' });
+                textEls.forEach(function (el) { el.style.transition = ''; });
             };
         });
     })();

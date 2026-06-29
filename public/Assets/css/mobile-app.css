@@ -1587,6 +1587,7 @@
     background: #000;
     padding: 100px 0;
     overflow: visible;
+    overflow-x: clip; /* the video grows past the layout while expanding; never let it create a horizontal scrollbar */
     position: relative;
 }
 
@@ -1605,19 +1606,23 @@
     position: relative;
     flex-shrink: 0;
     width: 170px;
+    height: 46px; /* fixed footprint  the morph expands absolutely on top, so layout never grows */
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
 }
 
 .wdm__video-morph {
+    /* Absolutely positioned so growing its width/height during the scroll
+       animation never reflows the page (no layout push / scrollbars). */
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 170px;
     height: 46px;
-    flex-shrink: 0;
     overflow: hidden;
     border-radius: 999px;
     transform-origin: left center;
-    position: relative;
     z-index: 2;
     background: linear-gradient(135deg, #4B3FD8 0%, #7B6FEF 45%, #A09BF8 100%);
     box-shadow: 0 12px 40px rgba(75, 63, 216, .35);
@@ -1938,6 +1943,7 @@
     }
 
     .wdm__video-morph {
+        position: relative; /* back in flow for the static banner (no JS animation on mobile) */
         width: 100%;
         height: 300px;
         border-radius: 18px;
@@ -1995,6 +2001,7 @@
     }
 
     .wdm__video-morph {
+        position: relative !important; /* back in flow for the static banner */
         width: 100% !important;
         height: 420px !important;
         border-radius: 14px !important;
