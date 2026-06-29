@@ -1831,14 +1831,14 @@
         var mm = gsap.matchMedia();
 
         /* DESKTOP / TABLET (>= 769px): the section PINS (freezes) when its top
-           reaches the top of the viewport. While pinned, scrolling scrubs a
-           two-stage growth that mirrors the reference:
-             stage 1  the pill widens in place (button fades out),
-             stage 2  it balloons into a centred, full-bleed video (~78vh) while
-                      the heading + stats scroll up past it.
-           When the growth completes the pin releases and the page continues to
-           the next section. Reverses smoothly on scroll-up. Mobile gets a
-           static CSS banner instead. */
+           reaches the top of the viewport. While pinned, scrolling scrubs the
+           video pill as it grows  width and height expand together from the
+           pill out to a centred rounded video card (~90vw x ~82vh), the button
+           fades, and the heading + stats scroll up past it. The box centres
+           horizontally early and vertically gradually. When the growth
+           completes the pin releases and the page continues to the next
+           section. Reverses smoothly on scroll-up. Mobile gets a static CSS
+           banner instead. */
         mm.add('(min-width: 769px)', function () {
             /* Pill metrics, captured with transforms cleared and refreshed on
                resize. base.left is horizontal-only and base.top is the offset
@@ -1865,16 +1865,14 @@
             }
 
             function vwidth()  { return document.documentElement.clientWidth; } /* excludes scrollbar */
-            function targetH() { return Math.round(window.innerHeight * 0.78); }
-            function midW()    { return Math.min(360, Math.round(vwidth() * 0.32)); }
+            function targetW() { return Math.round(vwidth() * 0.90); }            /* ~90vw, small side gutters */
+            function targetH() { return Math.round(window.innerHeight * 0.82); }  /* ~82vh */
             function smooth(t) { return t <= 0 ? 0 : (t >= 1 ? 1 : t * t * (3 - 2 * t)); }
-
-            var STAGE1 = 0.2; /* fraction of the scrub spent widening the pill */
 
             var st = ScrollTrigger.create({
                 trigger:             section,
                 start:               'top top',
-                end:                 function () { return '+=' + Math.round(window.innerHeight * 1.15); },
+                end:                 function () { return '+=' + Math.round(window.innerHeight * 1.2); },
                 pin:                 true,
                 pinSpacing:          true,
                 anticipatePin:       1,
@@ -1887,24 +1885,18 @@
                     var H  = window.innerHeight;
                     var pillCx = base.left + base.w / 2;
                     var pillCy = base.top  + base.h / 2;
-                    var s1 = smooth(clamp(p / STAGE1, 0, 1));
-                    var s2 = smooth(clamp((p - STAGE1) / (1 - STAGE1), 0, 1));
 
-                    var w, h, cx, cy, r;
-                    if (p <= STAGE1) {
-                        /* stage 1: widen the pill in place, still pill-shaped */
-                        w = lerp(base.w, midW(), s1);
-                        h = base.h;
-                        cx = pillCx; cy = pillCy;
-                        r = 999;
-                    } else {
-                        /* stage 2: balloon out to a centred full-bleed video */
-                        w  = lerp(midW(), W, s2);
-                        h  = lerp(base.h, targetH(), s2);
-                        cx = lerp(pillCx, W / 2, s2);
-                        cy = lerp(pillCy, H / 2, s2);
-                        r  = lerp(999, 24, clamp(s2 * 1.5, 0, 1));
-                    }
+                    /* Width & height grow linearly together (matches the measured
+                       stage sizes). The box centres HORIZONTALLY early (~40% of
+                       the scrub) and VERTICALLY gradually, so it drifts from the
+                       pill's spot to a centred rounded video card. */
+                    var w   = lerp(base.w, targetW(), p);
+                    var h   = lerp(base.h, targetH(), p);
+                    var cxP = smooth(clamp(p / 0.42, 0, 1));
+                    var cyP = p;
+                    var cx  = lerp(pillCx, W / 2, cxP);
+                    var cy  = lerp(pillCy, H / 2, cyP);
+                    var r   = lerp(999, 36, clamp(p * 2.2, 0, 1));
 
                     gsap.set(morph, {
                         width:        w,
@@ -1915,9 +1907,10 @@
                         force3D:      true
                     });
 
-                    /* button fades during stage 1; copy scrolls up during stage 2 */
-                    if (ctaRow) gsap.set(ctaRow, { autoAlpha: 1 - s1 });
-                    gsap.set(textEls, { y: -s2 * H * 0.95 });
+                    /* button fades out fast; copy scrolls up to clear the way */
+                    if (ctaRow) gsap.set(ctaRow, { autoAlpha: clamp(1 - p / 0.12, 0, 1) });
+                    var tp = smooth(clamp((p - 0.08) / 0.82, 0, 1));
+                    gsap.set(textEls, { y: -tp * H * 0.95 });
                     if (video) gsap.set(video, { scale: lerp(1.18, 1, p) });
                 }
             });
