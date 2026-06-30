@@ -2363,28 +2363,6 @@
     pointer-events: none;
 }
 
-/* Soft dark scrim behind the header so the horizontally-scrolling step
-   titles/body never bleed through it on short viewports (small laptops).
-   It's invisible over the plain black background and only masks content that
-   passes behind the header. */
-.hww2__hd::before {
-    content: '';
-    position: absolute;
-    top: -120px;
-    left: -120px;
-    right: -120px;
-    bottom: -90px;
-    z-index: -1;
-    pointer-events: none;
-    /* Gentle backstop only: softly fades any step text that passes right
-       behind the heading so it never collides hard, without an abrupt black
-       mask. Real separation comes from the responsive sizing below. */
-    background: radial-gradient(ellipse at 30% 42%,
-        rgba(0, 0, 0, .92) 0%,
-        rgba(0, 0, 0, .72) 38%,
-        rgba(0, 0, 0, 0)   66%);
-}
-
 .hww2__pill {
     display: inline-flex;
     align-items: center;
@@ -2393,7 +2371,7 @@
     border-radius: 999px;
     border: 1px solid rgba(255, 255, 255, .10);
     background: rgba(255, 255, 255, .04);
-    font-family: “Manrope”, sans-serif;
+    font-family: "Manrope", sans-serif;
     font-size: 13px;
     color: #c4c4d8;
     font-weight: 500;
@@ -2415,9 +2393,9 @@
 }
 
 .hww2__h2 {
-    font-family: “Oswald”, sans-serif;
-    font-size: clamp(28px, 2.8vw, 42px);
-    font-weight: 600;
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(32px, 2.9vw, 48px);
+    font-weight: 700;
     color: #f0f0f8;
     line-height: 1.12;
     margin: 0;
@@ -2448,27 +2426,33 @@
     z-index: 10;
 }
 
-/* ── Progress track ── */
+/* ── Progress track (fixed on screen, vertically centred like the reference) ── */
 .hww2__track {
     position: absolute;
-    bottom: 260px;
-    left: 420px;
-    right: max(410px, 50vw);
-    height: 20px;
+    top: 61%;
+    transform: translateY(-50%);
+    left: 48px;
+    right: 230px;
+    height: 54px;
     background: transparent;
-    z-index: 1;
+    z-index: 5;
     pointer-events: none;
 }
 
+/* Fill is absolutely positioned; JS drives its left/width so it starts as a
+   centred dot and stretches into the thick glowing pill (the reference). */
 .hww2__fill {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0;
     height: 100%;
-    width: 0%;
-    border-radius: 10px;
-    background: linear-gradient(90deg, #5540d8, #7b7bff 40%, #6c5ce7 100%);
+    border-radius: 27px;
+    background: linear-gradient(90deg, #5b48dc, #7b7bff 45%, #6c5ce7 100%);
     box-shadow:
-        0 0 14px rgba(123, 123, 255, .85),
-        0 0 28px rgba(108, 92, 231, .50),
-        0 0 56px rgba(90, 70, 220, .28);
+        0 0 22px rgba(123, 123, 255, .80),
+        0 0 44px rgba(108, 92, 231, .50),
+        0 0 90px rgba(90, 70, 220, .30);
     pointer-events: none;
 }
 
@@ -2491,43 +2475,37 @@
     position: relative;
 }
 
-/* Title zone — above the track */
+/* Title zone — fills the top half so the title sits just above the centred line */
 .hww2__step-top {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding-top: 88px;
-    padding-bottom: 28px;
+    padding-top: 0;
+    padding-bottom: 64px; /* gap from the title down to the (thick, centred) line */
 }
 
+/* Reference shows no step numbers above the titles */
 .hww2__step-num {
-    display: block;
-    font-family: “Manrope”, sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    color: rgba(123, 123, 255, .80);
-    letter-spacing: .20em;
-    text-transform: uppercase;
-    margin-bottom: 14px;
+    display: none;
 }
 
 .hww2__step-title {
-    font-family: “Oswald”, sans-serif;
-    font-size: clamp(36px, 4.0vw, 62px);
-    font-weight: 600;
-    color: #323248;
-    line-height: 1.06;
-    letter-spacing: -.02em;
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(38px, 3.6vw, 62px);
+    font-weight: 700;
+    color: #54545e;                 /* inactive: muted grey */
+    line-height: 1.08;
+    letter-spacing: -.01em;
     margin: 0;
-    transition: color .38s ease;
+    transition: color .4s ease;
 }
 
-.hww2__step-title.is-active {
-    color: #ffffff;
-}
+/* Active step (centred) — title + body brighten together, like the reference */
+.hww2__step.is-active .hww2__step-title { color: #ffffff; }
+.hww2__step.is-active .hww2__step-body  { color: rgba(255, 255, 255, .92); }
 
-/* Dashed vertical tick at track level */
+/* Dashed vertical tick at line level */
 .hww2__step-marker {
     flex: 0 0 3px;
     flex-shrink: 0;
@@ -2538,27 +2516,28 @@
     content: '';
     position: absolute;
     left: -60px;
-    top: -38px;
-    bottom: -38px;
+    top: -48px;
+    bottom: -48px;
     width: 0;
     border-left: 2px dashed rgba(123, 123, 255, .50);
 }
 
-/* Body zone — below the track */
+/* Body zone — below the line */
 .hww2__step-bot {
-    flex: 0 0 260px;
+    flex: 0 0 39vh;
     flex-shrink: 0;
-    padding-top: 28px;
+    padding-top: 88px; /* clears the thick line + gap */
     overflow: hidden;
 }
 
 .hww2__step-body {
-    font-family: “Manrope”, sans-serif;
-    font-size: 15.5px;
-    line-height: 1.68;
-    color: rgba(255, 255, 255, .56);
+    font-family: "Manrope", sans-serif;
+    font-size: 16px;
+    line-height: 1.66;
+    color: #54545e;                 /* inactive grey; active state brightens it above */
     margin: 0;
-    max-width: 460px;
+    max-width: 440px;
+    transition: color .4s ease;
 }
 
 /* ── Right tail ── */
@@ -2589,16 +2568,14 @@
     .hww2__tail   { flex-basis: max(60px, calc(50vw - 280px)); }
 }
 
-/* ── Short viewports (small laptops / windowed): keep the heading compact and
-   push the step cluster down so the scrolling titles clear it (no overlap). ── */
+/* ── Short viewports (small laptops / windowed): keep the heading compact.
+   The cluster is vh-based so it already centres clear of the header. ── */
 @media (min-width: 769px) and (max-height: 800px) {
     .hww2__hd { top: 44px; left: 48px; }
     .hww2__pill { margin-bottom: 12px; }
     .hww2__h2 { font-size: clamp(20px, 2.2vw, 30px); }
-    .hww2__step-top { padding-top: 150px; padding-bottom: 22px; }
     .hww2__step-title { font-size: clamp(28px, 3.2vw, 44px); }
-    .hww2__step-bot { flex-basis: 200px; }
-    .hww2__track { bottom: 220px; }
+    .hww2__step-body { font-size: 14.5px; }
 }
 
 /* ── Mobile (≤ 768 px): vertical stacked layout ── */
@@ -2683,6 +2660,11 @@
         height: auto;
         overflow: visible;
         padding-top: 8px;
+    }
+
+    /* stacked list: every step is shown, so bodies stay readable */
+    .hww2__step-body {
+        color: rgba(255, 255, 255, .66);
     }
 }
 
