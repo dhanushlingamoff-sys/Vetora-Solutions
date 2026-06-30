@@ -2145,9 +2145,9 @@
                                 var stepL   = step.offsetLeft - translateX;
                                 var stepCtr = stepL + step.offsetWidth / 2;
                                 var d       = Math.abs(stepCtr - vwCtr);
-                                title.classList.toggle('is-active', d < step.offsetWidth * 0.50);
+                                step.classList.toggle('is-active', d < step.offsetWidth * 0.50);
                             } else {
-                                title.classList.remove('is-active');
+                                step.classList.remove('is-active');
                             }
                         });
                     }

@@ -2393,9 +2393,9 @@
 }
 
 .hww2__h2 {
-    font-family: "Oswald", sans-serif;
-    font-size: clamp(28px, 2.8vw, 42px);
-    font-weight: 600;
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(32px, 2.9vw, 48px);
+    font-weight: 700;
     color: #f0f0f8;
     line-height: 1.12;
     margin: 0;
@@ -2429,30 +2429,30 @@
 /* ── Progress track (fixed on screen, vertically centred like the reference) ── */
 .hww2__track {
     position: absolute;
-    top: 50%;
+    top: 61%;
     transform: translateY(-50%);
     left: 48px;
     right: 230px;
-    height: 16px;
+    height: 54px;
     background: transparent;
     z-index: 5;
     pointer-events: none;
 }
 
 /* Fill is absolutely positioned; JS drives its left/width so it starts as a
-   centred dot and stretches into the line (the reference's intro). */
+   centred dot and stretches into the thick glowing pill (the reference). */
 .hww2__fill {
     position: absolute;
     top: 0;
     left: 50%;
     width: 0;
     height: 100%;
-    border-radius: 8px;
-    background: linear-gradient(90deg, #5540d8, #7b7bff 40%, #6c5ce7 100%);
+    border-radius: 27px;
+    background: linear-gradient(90deg, #5b48dc, #7b7bff 45%, #6c5ce7 100%);
     box-shadow:
-        0 0 14px rgba(123, 123, 255, .85),
-        0 0 28px rgba(108, 92, 231, .50),
-        0 0 56px rgba(90, 70, 220, .28);
+        0 0 22px rgba(123, 123, 255, .80),
+        0 0 44px rgba(108, 92, 231, .50),
+        0 0 90px rgba(90, 70, 220, .30);
     pointer-events: none;
 }
 
@@ -2482,36 +2482,30 @@
     flex-direction: column;
     justify-content: flex-end;
     padding-top: 0;
-    padding-bottom: 26px;
+    padding-bottom: 64px; /* gap from the title down to the (thick, centred) line */
 }
 
+/* Reference shows no step numbers above the titles */
 .hww2__step-num {
-    display: block;
-    font-family: "Manrope", sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    color: rgba(123, 123, 255, .80);
-    letter-spacing: .20em;
-    text-transform: uppercase;
-    margin-bottom: 14px;
+    display: none;
 }
 
 .hww2__step-title {
-    font-family: "Oswald", sans-serif;
-    font-size: clamp(36px, 4.0vw, 62px);
-    font-weight: 600;
-    color: #323248;
-    line-height: 1.06;
-    letter-spacing: -.02em;
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(38px, 3.6vw, 62px);
+    font-weight: 700;
+    color: #54545e;                 /* inactive: muted grey */
+    line-height: 1.08;
+    letter-spacing: -.01em;
     margin: 0;
-    transition: color .38s ease;
+    transition: color .4s ease;
 }
 
-.hww2__step-title.is-active {
-    color: #ffffff;
-}
+/* Active step (centred) — title + body brighten together, like the reference */
+.hww2__step.is-active .hww2__step-title { color: #ffffff; }
+.hww2__step.is-active .hww2__step-body  { color: rgba(255, 255, 255, .92); }
 
-/* Dashed vertical tick at track level */
+/* Dashed vertical tick at line level */
 .hww2__step-marker {
     flex: 0 0 3px;
     flex-shrink: 0;
@@ -2522,27 +2516,28 @@
     content: '';
     position: absolute;
     left: -60px;
-    top: -38px;
-    bottom: -38px;
+    top: -48px;
+    bottom: -48px;
     width: 0;
     border-left: 2px dashed rgba(123, 123, 255, .50);
 }
 
-/* Body zone — lower half (the marker between top/bot then lands at 50% = the line) */
+/* Body zone — below the line */
 .hww2__step-bot {
-    flex: 0 0 50vh;
+    flex: 0 0 39vh;
     flex-shrink: 0;
-    padding-top: 26px;
+    padding-top: 88px; /* clears the thick line + gap */
     overflow: hidden;
 }
 
 .hww2__step-body {
     font-family: "Manrope", sans-serif;
-    font-size: 15.5px;
-    line-height: 1.68;
-    color: rgba(255, 255, 255, .56);
+    font-size: 16px;
+    line-height: 1.66;
+    color: #54545e;                 /* inactive grey; active state brightens it above */
     margin: 0;
-    max-width: 460px;
+    max-width: 440px;
+    transition: color .4s ease;
 }
 
 /* ── Right tail ── */
@@ -2665,6 +2660,11 @@
         height: auto;
         overflow: visible;
         padding-top: 8px;
+    }
+
+    /* stacked list: every step is shown, so bodies stay readable */
+    .hww2__step-body {
+        color: rgba(255, 255, 255, .66);
     }
 }
 
