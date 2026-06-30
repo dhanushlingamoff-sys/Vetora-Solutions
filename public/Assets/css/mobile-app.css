@@ -2,6 +2,28 @@
    MOBILE APP PAGE â€” Vetora Ã— Agency-Landing Design System
    ============================================================ */
 
+/* ── Lenis smooth-scroll support ──
+   The global stylesheet sets `html { scroll-behavior: smooth }`, which fights
+   Lenis (both animate the scroll position) and makes scrolling stutter/lag.
+   Lenis adds `lenis lenis-smooth` to <html>, so force native behaviour OFF
+   while it is active. Only applies on pages where Lenis runs. */
+html.lenis,
+html.lenis body {
+    height: auto;
+}
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+    pointer-events: none;
+}
+
 .ma-page {
     background: #000;
     color: #f4f6fb;
