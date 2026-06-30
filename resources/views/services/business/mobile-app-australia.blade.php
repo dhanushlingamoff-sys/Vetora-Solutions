@@ -1583,6 +1583,10 @@
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         if (!window.Lenis) return;
 
+        /* The global stylesheet sets html{scroll-behavior:smooth}; that fights
+           Lenis and makes scrolling stutter. Force it off while Lenis runs. */
+        document.documentElement.style.scrollBehavior = 'auto';
+
         var lenis = new Lenis({
             lerp: 0.12,        /* light, responsive smoothing (was a slow 1.05s duration) */
             wheelMultiplier: 1,
