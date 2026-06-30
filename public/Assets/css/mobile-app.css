@@ -2449,10 +2449,9 @@
     height: 100%;
     border-radius: 22px;
     background: linear-gradient(90deg, #5b48dc, #7b7bff 45%, #6c5ce7 100%);
-    box-shadow:
-        0 0 22px rgba(123, 123, 255, .80),
-        0 0 44px rgba(108, 92, 231, .50),
-        0 0 90px rgba(90, 70, 220, .30);
+    /* Single, modest glow  big multi-layer blurs on a wide element that
+       changes width every frame are a major paint cost (scroll jank). */
+    box-shadow: 0 0 26px rgba(110, 100, 235, .55);
     pointer-events: none;
 }
 

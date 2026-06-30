@@ -1584,8 +1584,8 @@
         if (!window.Lenis) return;
 
         var lenis = new Lenis({
-            duration: 1.05,
-            easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+            lerp: 0.12,        /* light, responsive smoothing (was a slow 1.05s duration) */
+            wheelMultiplier: 1,
             smoothWheel: true,
             syncTouch: false   /* keep native momentum scrolling on touch devices */
         });
