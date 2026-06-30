@@ -2431,18 +2431,23 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    left: 60px;
-    right: 200px;
+    left: 48px;
+    right: 230px;
     height: 16px;
     background: transparent;
     z-index: 5;
     pointer-events: none;
 }
 
+/* Fill is absolutely positioned; JS drives its left/width so it starts as a
+   centred dot and stretches into the line (the reference's intro). */
 .hww2__fill {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0;
     height: 100%;
-    width: 0%;
-    border-radius: 10px;
+    border-radius: 8px;
     background: linear-gradient(90deg, #5540d8, #7b7bff 40%, #6c5ce7 100%);
     box-shadow:
         0 0 14px rgba(123, 123, 255, .85),

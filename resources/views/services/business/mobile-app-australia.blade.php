@@ -2081,6 +2081,7 @@
 
         /* Reduced-motion: show everything statically */
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            fill.style.left = '0%';
             fill.style.width = '100%';
             steps.forEach(function (s) { s.classList.add('is-visible'); });
             titles.forEach(function (t) { if (t) t.classList.add('is-active'); });
@@ -2160,12 +2161,26 @@
                         onRefreshInit:       measure,
                         onUpdate: function (self) {
                             gsap.set(row, { x: -self.progress * dist });
-                            fill.style.width = (self.progress * 100).toFixed(2) + '%';
+                            setFill(self.progress);
                             updateActive(self.progress);
                         }
                     });
 
+                    /* Progress line: starts as a centred dot and stretches into
+                       the line  the tail (left edge) slides from centre to the
+                       start over the first ~12% of scroll, while the lead (right
+                       edge) grows to full. Mirrors the reference intro. */
+                    function setFill(p) {
+                        var lead = 50 + 50 * p;                              /* right edge: 50% -> 100% */
+                        var tail = 50 * (1 - Math.min(p / 0.12, 1));         /* left edge: 50% -> 0% */
+                        var w    = lead - tail;
+                        if (w < 1.4) { w = 1.4; tail = 50 - w / 2; }         /* keep a visible centred dot at p=0 */
+                        fill.style.left  = tail.toFixed(2) + '%';
+                        fill.style.width = w.toFixed(2) + '%';
+                    }
+
                     gsap.set(row, { x: 0 });
+                    setFill(0);
                     updateActive(0);
 
                     return function () {
@@ -2177,6 +2192,7 @@
 
                 /* MOBILE (<= 768px) */
                 mm.add('(max-width: 768px)', function () {
+                    fill.style.left = '0%';
                     fill.style.width = '100%';
                     titles.forEach(function (t) { if (t) t.classList.add('is-active'); });
 
