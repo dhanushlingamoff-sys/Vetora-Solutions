@@ -2104,13 +2104,16 @@
 
                 var mm = gsap.matchMedia();
 
-                /* DESKTOP (>= 769px) */
+                /* DESKTOP (>= 769px): native CSS sticky pin (NOT a GSAP pin).
+                   The section sticks while .hww2-outer's extra height scrolls
+                   past; we only SCRUB the horizontal row translation. Because the
+                   hold is native sticky, resizing / going fullscreen re-fits by
+                   itself  no stale pin-spacer, no empty-space break. */
                 mm.add('(min-width: 769px)', function () {
                     /* How much VERTICAL scroll maps to the HORIZONTAL row travel.
                        1 = the row moves 1px per 1px of scroll (fast). Higher =
-                       the pin lasts longer so the row glides more slowly and each
-                       step dwells in view  matches the reference's deliberate
-                       feel. Tune this one number to taste. */
+                       the row glides more slowly and each step dwells in view
+                       matches the reference's deliberate feel. Tune to taste. */
                     var SPEED = 2;
 
                     var vw, dist;
@@ -2118,6 +2121,9 @@
                     function measure() {
                         vw   = window.innerWidth;
                         dist = Math.max(0, row.scrollWidth - vw);
+                        /* Sticky scroll track = one viewport (the sticky frame)
+                           plus the horizontal travel x SPEED. */
+                        outer.style.height = (window.innerHeight + Math.round(dist * SPEED)) + 'px';
                     }
                     measure();
 
@@ -2145,26 +2151,28 @@
                         });
                     }
 
-                    var tl = gsap.timeline({
-                        scrollTrigger: {
-                            trigger:             section,
-                            start:               'top top',
-                            end:                 function () { measure(); return '+=' + Math.round(dist * SPEED); },
-                            pin:                 true,
-                            pinSpacing:          true,
-                            scrub:               1,
-                            fastScrollEnd:       true,
-                            invalidateOnRefresh: true,
-                            onUpdate: function (self) {
-                                fill.style.width = (self.progress * 100).toFixed(2) + '%';
-                                updateActive(self.progress);
-                            }
+                    var st = ScrollTrigger.create({
+                        trigger:             outer,
+                        start:               'top top',
+                        end:                 'bottom bottom',
+                        scrub:               1,
+                        invalidateOnRefresh: true,
+                        onRefreshInit:       measure,
+                        onUpdate: function (self) {
+                            gsap.set(row, { x: -self.progress * dist });
+                            fill.style.width = (self.progress * 100).toFixed(2) + '%';
+                            updateActive(self.progress);
                         }
                     });
 
-                    tl.to(row, { x: function () { return -dist; }, ease: 'none', duration: 1 });
+                    gsap.set(row, { x: 0 });
                     updateActive(0);
-                    return function () { tl.kill(); };
+
+                    return function () {
+                        st.kill();
+                        gsap.set(row, { clearProps: 'x' });
+                        outer.style.height = '';
+                    };
                 });
 
                 /* MOBILE (<= 768px) */
