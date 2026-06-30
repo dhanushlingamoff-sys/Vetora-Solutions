@@ -2172,10 +2172,11 @@
                             step.classList.toggle('is-visible', visible);
 
                             if (visible) {
-                                var stepL   = step.offsetLeft - translateX;
-                                var stepCtr = stepL + step.offsetWidth / 2;
-                                var d       = Math.abs(stepCtr - vwCtr);
-                                step.classList.toggle('is-active', d < step.offsetWidth * 0.50);
+                                /* titles are left-aligned (60px step padding), so
+                                   track the TITLE position, not the step centre. */
+                                var markerX = step.offsetLeft + 60 - translateX;
+                                var rel     = markerX - vwCtr;          /* +right / -left of centre */
+                                step.classList.toggle('is-active', rel < 140 && rel > -step.offsetWidth * 0.70);
                             } else {
                                 step.classList.remove('is-active');
                             }
@@ -2196,17 +2197,22 @@
                         }
                     });
 
-                    /* Progress line: starts as a centred dot and stretches into
-                       the line  the tail (left edge) slides from centre to the
-                       start over the first ~12% of scroll, while the lead (right
-                       edge) grows to full. Mirrors the reference intro. */
+                    /* Progress line (viewport-px driven so it lines up exactly):
+                       p=0  -> a round dot centred on screen (under step 1)
+                       then -> the LEFT edge slides out to the screen edge over the
+                               first ~22%, while the RIGHT edge grows from centre to
+                               ~70% of the width. Mirrors the reference 0 -> 100%. */
                     function setFill(p) {
-                        var lead = 50 + 50 * p;                              /* right edge: 50% -> 100% */
-                        var tail = 50 * (1 - Math.min(p / 0.12, 1));         /* left edge: 50% -> 0% */
-                        var w    = lead - tail;
-                        if (w < 1.4) { w = 1.4; tail = 50 - w / 2; }         /* keep a visible centred dot at p=0 */
-                        fill.style.left  = tail.toFixed(2) + '%';
-                        fill.style.width = w.toFixed(2) + '%';
+                        var W   = document.documentElement.clientWidth;
+                        var DOT = 44;                       /* = line height -> round dot */
+                        var c   = W / 2;
+                        var leadX = c + (0.70 * W - c) * p;             /* right edge: 50% -> 70% */
+                        var tn    = Math.min(p / 0.22, 1);
+                        var tailX = c * (1 - tn * tn * (3 - 2 * tn));   /* left edge: centre -> 0 (eased) */
+                        var w     = leadX - tailX;
+                        if (w < DOT) { w = DOT; tailX = c - DOT / 2; }  /* round centred dot at the start */
+                        fill.style.left  = tailX.toFixed(1) + 'px';
+                        fill.style.width = w.toFixed(1) + 'px';
                     }
 
                     gsap.set(row, { x: 0 });
