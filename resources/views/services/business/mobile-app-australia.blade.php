@@ -520,13 +520,13 @@
             </h2>
         </div>
 
+        <!-- Progress bar track (fixed on screen, does NOT translate with the row) -->
+        <div class="hww2__track" aria-hidden="true">
+            <div class="hww2__fill" id="hww2Fill"></div>
+        </div>
+
         <!-- Horizontally translating row -->
         <div class="hww2__row" id="hww2Row">
-
-            <!-- Progress bar track -->
-            <div class="hww2__track" aria-hidden="true">
-                <div class="hww2__fill" id="hww2Fill"></div>
-            </div>
 
             <!-- Left spacer -->
             <div class="hww2__spacer" aria-hidden="true"></div>
