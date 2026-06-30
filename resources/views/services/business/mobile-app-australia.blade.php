@@ -2146,11 +2146,19 @@
                        matches the reference's deliberate feel. Tune to taste. */
                     var SPEED = 2;
 
-                    var vw, dist;
+                    var vw, dist, contentW;
 
                     function measure() {
                         vw   = window.innerWidth;
                         dist = Math.max(0, row.scrollWidth - vw);
+                        /* Per-step ACTUAL content width = the wider of its title /
+                           body, so the progress line can stop exactly where the
+                           visible text ends (tighter than the 540px column). */
+                        contentW = steps.map(function (s) {
+                            var t = s.querySelector('.hww2__step-title');
+                            var b = s.querySelector('.hww2__step-body');
+                            return Math.max(t ? t.offsetWidth : 0, b ? b.offsetWidth : 0);
+                        });
                         /* Sticky scroll track = one viewport (the sticky frame)
                            plus the horizontal travel x SPEED. */
                         outer.style.height = (window.innerHeight + Math.round(dist * SPEED)) + 'px';
@@ -2202,19 +2210,60 @@
                     });
 
                     /* Progress line (viewport-px driven so it lines up exactly):
-                       its LEFT edge starts where the first step's content starts
-                       (the title/body left edge) and follows it as the row scrolls
-                       left; the RIGHT edge grows from there out to ~70% of the
-                       width. At p=0 it's a round dot at that start point. */
+                       LEFT edge starts at the first step's content-left and follows
+                       it as the row scrolls. RIGHT edge ends where the CONTENT ends
+                       (the content-right of the centred step), and never runs past
+                       the last step's content when it's parked at the end  so the
+                       line never extends across into empty space. At p=0 it's a
+                       round dot at the start point. */
                     function setFill(p) {
-                        var W   = document.documentElement.clientWidth;
                         var DOT = 44;                       /* = line height -> round dot */
-                        /* first step's content-left (title/body left) at p=0; 60 = step padding */
-                        var c0  = (steps[0] ? steps[0].offsetLeft + 60 : W / 2);
-                        var tailX = c0 - p * dist;                      /* left edge follows the content as it scrolls */
-                        var leadX = c0 + (0.70 * W - c0) * p;           /* right edge grows to ~70% width */
-                        var w     = leadX - tailX;
-                        if (w < DOT) { w = DOT; tailX = c0 - DOT / 2; } /* round dot at the start point */
+                        var center = vw / 2;
+                        var translateX = p * dist;
+                        var n  = steps.length;
+                        var s0 = steps[0];
+                        var c0Left = (s0 ? s0.offsetLeft + 60 : center);          /* first content-left */
+                        var tailX  = c0Left - translateX;
+
+                        /* scroll distance (translateX) at which step k's content-left
+                           sits exactly at viewport centre. */
+                        function centerScroll(k) { return steps[k].offsetLeft + 60 - center; }
+
+                        /* The leading edge ends at the CONTENT-right of the currently
+                           centred (active) step. As the next step glides toward centre
+                           we interpolate its content width into the previous one, so
+                           the edge moves continuously with no jump. */
+                        var W;
+                        if (n === 0) {
+                            W = 0;
+                        } else if (n === 1 || translateX <= centerScroll(0)) {
+                            W = contentW[0];
+                        } else {
+                            var N = n - 1;
+                            for (var k = 0; k < n - 1; k++) {
+                                if (translateX < centerScroll(k + 1)) { N = k; break; }
+                            }
+                            if (N >= n - 1) {
+                                W = contentW[n - 1];
+                            } else {
+                                var a = centerScroll(N), b = centerScroll(N + 1);
+                                var frac = (b > a) ? (translateX - a) / (b - a) : 0;
+                                if (frac < 0) frac = 0; else if (frac > 1) frac = 1;
+                                W = contentW[N] + (contentW[N + 1] - contentW[N]) * frac;
+                            }
+                        }
+
+                        var leadTarget = center + W;
+                        /* never run past the last step's real content-right (parked end) */
+                        var last = steps[n - 1];
+                        if (last) {
+                            var lastRight = last.offsetLeft + 60 + contentW[n - 1] - translateX;
+                            leadTarget = Math.min(leadTarget, lastRight);
+                        }
+
+                        var leadX = tailX + (leadTarget - tailX) * Math.min(p / 0.06, 1); /* grow from the dot */
+                        var w = leadX - tailX;
+                        if (w < DOT) { var cx = (tailX + leadX) / 2; tailX = cx - DOT / 2; w = DOT; } /* round dot */
                         fill.style.left  = tailX.toFixed(1) + 'px';
                         fill.style.width = w.toFixed(1) + 'px';
                     }
