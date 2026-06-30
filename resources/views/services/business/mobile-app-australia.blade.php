@@ -1576,6 +1576,32 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
+    {{-- Lenis smooth scrolling (drives native scroll, so sticky/ScrollTrigger stay correct) --}}
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+    <script>
+    (function () {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        if (!window.Lenis) return;
+
+        var lenis = new Lenis({
+            duration: 1.05,
+            easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+            smoothWheel: true,
+            syncTouch: false   /* keep native momentum scrolling on touch devices */
+        });
+        window.__lenis = lenis;
+
+        if (window.gsap && window.ScrollTrigger) {
+            /* Keep ScrollTrigger (pins, sticky scrubs) in lock-step with Lenis */
+            lenis.on('scroll', ScrollTrigger.update);
+            gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+            gsap.ticker.lagSmoothing(0);
+        } else {
+            (function raf(t) { lenis.raf(t); requestAnimationFrame(raf); })(0);
+        }
+    })();
+    </script>
+
     <script>
     // â”€â”€ Portfolio Carousel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
