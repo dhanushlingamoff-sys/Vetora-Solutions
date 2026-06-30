@@ -2167,14 +2167,20 @@
                             if (!title) return;
                             var step        = steps[i];
                             var markerRatio = (step.offsetLeft - trackStart) / trackW;
-                            var visible     = progress >= markerRatio - 0.005;
+                            /* At the very start only the dot is shown  the first
+                               step stays hidden until the line begins to stretch
+                               (~4%), then fades in. */
+                            var visible     = (i === 0)
+                                                ? (progress >= 0.04)
+                                                : (progress >= markerRatio - 0.005);
                             step.classList.toggle('is-visible', visible);
 
                             if (visible) {
-                                var stepL   = step.offsetLeft - translateX;
-                                var stepCtr = stepL + step.offsetWidth / 2;
-                                var d       = Math.abs(stepCtr - vwCtr);
-                                step.classList.toggle('is-active', d < step.offsetWidth * 0.50);
+                                /* titles are left-aligned (60px step padding), so
+                                   track the TITLE position, not the step centre. */
+                                var markerX = step.offsetLeft + 60 - translateX;
+                                var rel     = markerX - vwCtr;          /* +right / -left of centre */
+                                step.classList.toggle('is-active', rel < 140 && rel > -step.offsetWidth * 0.70);
                             } else {
                                 step.classList.remove('is-active');
                             }
@@ -2195,17 +2201,22 @@
                         }
                     });
 
-                    /* Progress line: starts as a centred dot and stretches into
-                       the line  the tail (left edge) slides from centre to the
-                       start over the first ~12% of scroll, while the lead (right
-                       edge) grows to full. Mirrors the reference intro. */
+                    /* Progress line (viewport-px driven so it lines up exactly):
+                       its LEFT edge starts where the first step's content starts
+                       (the title/body left edge) and follows it as the row scrolls
+                       left; the RIGHT edge grows from there out to ~70% of the
+                       width. At p=0 it's a round dot at that start point. */
                     function setFill(p) {
-                        var lead = 50 + 50 * p;                              /* right edge: 50% -> 100% */
-                        var tail = 50 * (1 - Math.min(p / 0.12, 1));         /* left edge: 50% -> 0% */
-                        var w    = lead - tail;
-                        if (w < 1.4) { w = 1.4; tail = 50 - w / 2; }         /* keep a visible centred dot at p=0 */
-                        fill.style.left  = tail.toFixed(2) + '%';
-                        fill.style.width = w.toFixed(2) + '%';
+                        var W   = document.documentElement.clientWidth;
+                        var DOT = 44;                       /* = line height -> round dot */
+                        /* first step's content-left (title/body left) at p=0; 60 = step padding */
+                        var c0  = (steps[0] ? steps[0].offsetLeft + 60 : W / 2);
+                        var tailX = c0 - p * dist;                      /* left edge follows the content as it scrolls */
+                        var leadX = c0 + (0.70 * W - c0) * p;           /* right edge grows to ~70% width */
+                        var w     = leadX - tailX;
+                        if (w < DOT) { w = DOT; tailX = c0 - DOT / 2; } /* round dot at the start point */
+                        fill.style.left  = tailX.toFixed(1) + 'px';
+                        fill.style.width = w.toFixed(1) + 'px';
                     }
 
                     gsap.set(row, { x: 0 });
