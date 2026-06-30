@@ -36,7 +36,7 @@
                     <!-- Menu -->
                     <ul class="nav-menu">
                         <li><a href="#hv2">Home</a></li>
-                        <li><a href="#wdm">About Us</a></li>
+                        {{-- <li><a href="#wdm">About Us</a></li> --}}
 <li><a href="#mpfSection">Portfolio</a></li>
                         <li><a href="#ctaf">Contact Us</a></li>
 
@@ -97,7 +97,7 @@
                 {{-- Badge --}}
                 <div class="hv2__badge animate-hv2" data-hv2-delay="0">
                     <span class="hv2__badge-icon" aria-hidden="true"><i class="bi bi-star-fill"></i></span>
-                    Leading App Development Company in Melbourne 2026
+                    Leading App Development Company in Melbourne
                 </div>
 
                 {{-- H1 --}}
@@ -516,7 +516,7 @@
                 How we work
             </div>
             <h2 class="hww2__h2 hww2-reveal" data-hww2-delay="90">
-                Smooth Journey from<br>Idea to Launch.
+                Smooth Journey from Idea to Launch.
             </h2>
         </div>
 
@@ -547,7 +547,7 @@
             <div class="hww2__step">
                 <div class="hww2__step-top">
                     <span class="hww2__step-num">02</span>
-                    <h3 class="hww2__step-title">Wireframe & User Flows</h3>
+                    <h3 class="hww2__step-title">User Flows</h3>
                 </div>
                 <div class="hww2__step-marker" aria-hidden="true"></div>
                 <div class="hww2__step-bot">
@@ -1344,7 +1344,7 @@
                         <div class="prc__spiral-float" x-show="activeTab === 'project'"
                              x-transition:enter="prc-e" x-transition:enter-start="prc-e-from" x-transition:enter-end="prc-e-to"
                              x-transition:leave="prc-l" x-transition:leave-start="prc-l-from" x-transition:leave-end="prc-l-to">
-                            <img src="http://cdn.prod.website-files.com/6968c40c3d0877f59b6c1749/69a0555435a3d8d416145233_Container%20(2).webp"
+                            <img src="{{ asset('Assets/Images/Mobile-App/project-based.webp') }}"
                                  alt="" class="prc__spiral" loading="lazy" decoding="async">
                         </div>
 
@@ -1443,7 +1443,7 @@
                 <h2 class="faq-section__heading" id="faq-title">
                     Frequently Asked Questions
                 </h2>
-                <img src="{{ asset('Assets/Images/Contact-us/contact-address.webp') }}" alt="FAQ" class="faq-section__img">
+                <img src="{{ asset('Assets/Images/Mobile-App/faq.webp') }}" alt="FAQ" class="faq-section__img d-none d-md-block">
             </div>
 
             {{-- Right: accordion list --}}

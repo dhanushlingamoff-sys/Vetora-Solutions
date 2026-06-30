@@ -73,7 +73,7 @@
                     <!-- SERVICES -->
                     <div class="col-lg-4 col-md-4 d-flex justify-content-center">
 
-                        <div class="footer-links-col " style="width: 70%;">
+                        <div class="footer-links-col footer-services-col" style="width: 70%;">
 
                             <h4>Services</h4>
 

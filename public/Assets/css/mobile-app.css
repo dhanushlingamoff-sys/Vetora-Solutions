@@ -1351,8 +1351,10 @@ html.lenis body {
     width: max-content;
 }
 
-.hv2__marquee:hover .hv2__marquee-track {
-    animation-play-state: paused;
+@media (min-width: 769px) {
+    .hv2__marquee:hover .hv2__marquee-track {
+        animation-play-state: paused;
+    }
 }
 
 @keyframes hv2-scroll {
@@ -1435,6 +1437,12 @@ html.lenis body {
 
     .hv2__stores {
         justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .hv2__stores-label {
+        width: 100%;
+        text-align: center;
     }
 
     .hv2__badge {
@@ -2704,6 +2712,14 @@ html.lenis body {
     }
 }
 
+@media (max-width: 400px) {
+    .hv2__store-pill {
+        font-size: 11px;
+        padding: 6px 10px;
+        gap: 5px;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     .hww2-reveal {
         opacity: 1;
@@ -3538,7 +3554,13 @@ html.lenis body {
         white-space: normal;
     }
 
+    .wcus__desc-wrap {
+        min-height: unset;
+        margin-top: 24px;
+    }
+
     .wcus__desc {
+        position: static;
         font-size: 15px;
     }
 }
@@ -4963,7 +4985,7 @@ html.lenis body {
     color: var(--fq-white);
     line-height: 1.04;
     letter-spacing: -0.03em;
-    margin: 0;
+    margin: 0 0 12px;
     opacity: 0;
     transform: translateY(28px);
     transition: opacity 0.7s var(--fq-ease) 0.06s, transform 0.7s var(--fq-ease) 0.06s;

@@ -2093,6 +2093,10 @@ textarea.error-border {
 
 @media(max-width:768px) {
 
+    .footer-services-col {
+        width: 100% !important;
+    }
+
     .wa-float {
 
         width: 60px;
