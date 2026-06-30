@@ -2146,11 +2146,19 @@
                        matches the reference's deliberate feel. Tune to taste. */
                     var SPEED = 2;
 
-                    var vw, dist;
+                    var vw, dist, contentW;
 
                     function measure() {
                         vw   = window.innerWidth;
                         dist = Math.max(0, row.scrollWidth - vw);
+                        /* Per-step ACTUAL content width = the wider of its title /
+                           body, so the progress line can stop exactly where the
+                           visible text ends (tighter than the 540px column). */
+                        contentW = steps.map(function (s) {
+                            var t = s.querySelector('.hww2__step-title');
+                            var b = s.querySelector('.hww2__step-body');
+                            return Math.max(t ? t.offsetWidth : 0, b ? b.offsetWidth : 0);
+                        });
                         /* Sticky scroll track = one viewport (the sticky frame)
                            plus the horizontal travel x SPEED. */
                         outer.style.height = (window.innerHeight + Math.round(dist * SPEED)) + 'px';
@@ -2212,16 +2220,47 @@
                         var DOT = 44;                       /* = line height -> round dot */
                         var center = vw / 2;
                         var translateX = p * dist;
+                        var n  = steps.length;
                         var s0 = steps[0];
                         var c0Left = (s0 ? s0.offsetLeft + 60 : center);          /* first content-left */
                         var tailX  = c0Left - translateX;
-                        /* content-right of a centred step (step padding 60 each side) */
-                        var stepW  = s0 ? s0.offsetWidth : 660;
-                        var centredRight = center + (stepW / 2 - 60);
-                        /* last step's content-right on screen (clamps the parked end) */
-                        var last = steps[steps.length - 1];
-                        var lastRight = last ? (last.offsetLeft + last.offsetWidth - 60 - translateX) : centredRight;
-                        var leadTarget = Math.min(centredRight, lastRight);
+
+                        /* scroll distance (translateX) at which step k's content-left
+                           sits exactly at viewport centre. */
+                        function centerScroll(k) { return steps[k].offsetLeft + 60 - center; }
+
+                        /* The leading edge ends at the CONTENT-right of the currently
+                           centred (active) step. As the next step glides toward centre
+                           we interpolate its content width into the previous one, so
+                           the edge moves continuously with no jump. */
+                        var W;
+                        if (n === 0) {
+                            W = 0;
+                        } else if (n === 1 || translateX <= centerScroll(0)) {
+                            W = contentW[0];
+                        } else {
+                            var N = n - 1;
+                            for (var k = 0; k < n - 1; k++) {
+                                if (translateX < centerScroll(k + 1)) { N = k; break; }
+                            }
+                            if (N >= n - 1) {
+                                W = contentW[n - 1];
+                            } else {
+                                var a = centerScroll(N), b = centerScroll(N + 1);
+                                var frac = (b > a) ? (translateX - a) / (b - a) : 0;
+                                if (frac < 0) frac = 0; else if (frac > 1) frac = 1;
+                                W = contentW[N] + (contentW[N + 1] - contentW[N]) * frac;
+                            }
+                        }
+
+                        var leadTarget = center + W;
+                        /* never run past the last step's real content-right (parked end) */
+                        var last = steps[n - 1];
+                        if (last) {
+                            var lastRight = last.offsetLeft + 60 + contentW[n - 1] - translateX;
+                            leadTarget = Math.min(leadTarget, lastRight);
+                        }
+
                         var leadX = tailX + (leadTarget - tailX) * Math.min(p / 0.06, 1); /* grow from the dot */
                         var w = leadX - tailX;
                         if (w < DOT) { var cx = (tailX + leadX) / 2; tailX = cx - DOT / 2; w = DOT; } /* round dot */
