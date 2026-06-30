@@ -28,7 +28,7 @@
                             <i class="bi bi-calendar3"></i> Last updated: 1 June 2025
                         </span>
                         <span class="legal-hero-meta-item">
-                            <i class="bi bi-geo-alt"></i> Jurisdiction: Chennai, India
+                            <i class="bi bi-geo-alt"></i> Jurisdiction: Australia & International
                         </span>
                         <span class="legal-hero-meta-item">
                             <i class="bi bi-file-earmark-text"></i> Version 3.0
@@ -187,10 +187,7 @@
 
                                 <h2 id="governing-law">8. Governing Law and Jurisdiction</h2>
                                 <p>
-                                    These Terms and Conditions shall be governed by and interpreted in accordance with the
-                                    laws of <strong>India</strong>. Any dispute, claim, or controversy arising out of or relating
-                                    to these Terms shall be subject to the exclusive jurisdiction of the competent courts
-                                    located in <strong>Chennai, Tamil Nadu, India</strong>.
+                                    These Terms and Conditions shall be governed by and interpreted in accordance with the laws of Australia. Any dispute, claim, or controversy arising out of or relating to these Terms shall be subject to the exclusive jurisdiction of the competent courts of Victoria, Australia. The Company's registered office is located at 66 Victor Cres, Narre Warren VIC 3805, Australia.
                                 </p>
 
                                 <h2 id="contact-terms">9. Contact Information</h2>

@@ -157,7 +157,7 @@
             <div class="footer-bottom-inner">
 
                 <p>
-                    © 2026 Vetora Technologies.
+                    © 2026 Vetora Solutions.
                     All rights reserved.
                 </p>
 

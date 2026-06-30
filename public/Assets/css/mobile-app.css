@@ -1,4 +1,4 @@
-﻿/* ============================================================
+﻿﻿/* ============================================================
    MOBILE APP PAGE â€” Vetora Ã— Agency-Landing Design System
    ============================================================ */
 
@@ -2277,11 +2277,12 @@ html.lenis body {
 .adsvc__card-desc {
     font-family: "Manrope", sans-serif;
     font-size: 15px;
-    color: rgba(200, 200, 220, .75);
+    color: rgb(225 225 232);
     line-height: 1.65;
     margin: 0 0 32px;
     /* breathing room before the image area */
     max-width: 420px;
+    font-weight: 600;
 }
 
 /* â”€â”€ Scroll reveal â”€â”€ */
@@ -2461,9 +2462,9 @@ html.lenis body {
     position: absolute;
     top: 61%;
     transform: translateY(-50%);
-    left: 0;
-    right: 0;
-    height: 44px;
+    left: 48px;
+    right: 230px;
+    height: 35px;
     background: transparent;
     z-index: 5;
     pointer-events: none;
@@ -2486,10 +2487,10 @@ html.lenis body {
 }
 
 /* ── Left spacer ── */
-/* Sized so the FIRST step's TITLE/marker starts under the centred dot (the
-   step has 60px left padding, so the title sits at 50vw). */
+/* Sized so the FIRST step starts centred in the viewport (like the reference),
+   mirroring the right tail. Step is 660px wide, so half = 330px. */
 .hww2__spacer {
-    flex: 0 0 max(80px, calc(50vw - 60px));
+    flex: 0 0 max(80px, calc(50vw - 330px));
     flex-shrink: 0;
     pointer-events: none;
 }
@@ -2544,7 +2545,7 @@ html.lenis body {
 .hww2__step-marker::before {
     content: '';
     position: absolute;
-    left: 0;            /* dashed tick sits at the title's left edge (like the reference) */
+    left: -60px;
     top: -48px;
     bottom: -48px;
     width: 0;

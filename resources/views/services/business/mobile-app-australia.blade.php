@@ -9,8 +9,7 @@
             <div class="container">
                 <div class="announcement-content">
                     <span class="announcement-badge">New</span>
-                    <span class="announcement-text">We now offer AI-powered business solutions &mdash; <a
-                            href="{{ url('/AI') }}">Explore AI Services</a></span>
+                    <span class="announcement-text">Special Launch Offer: Save big on AI-powered Web &amp; Mobile Applications&mdash;Offer valid for a limited time only!</span>
                 </div>
                 <button class="announcement-close" onclick="this.closest('#announcementBar').style.display='none'"
                     aria-label="Close announcement">
@@ -71,7 +70,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-    <link rel="stylesheet" href="{{ asset('Assets/css/mobile-app.css') }}?v=2.9.0">
+    <link rel="stylesheet" href="{{ asset('Assets/css/mobile-app.css') }}?v=2.9.4">
 @endsection
 
 @section('content')
@@ -160,7 +159,7 @@
                     <span class="hv2__corner hv2__corner--br" aria-hidden="true"></span>
 
                     <h3 class="hv2__form-title">Book a Free Consultation</h3>
-                    <p class="hv2__form-sub">Tell us about your idea we reply within one business day.</p>
+                    <p class="hv2__form-sub">Share your vision—we're ready to bring it to life.</p>
 
                     @include('common.contact-form')
 
@@ -296,7 +295,7 @@
                 <div class="wdm__video-stage">
                     <div class="wdm__video-morph" id="wdmVideoMorph">
                         <video class="wdm__video" autoplay muted loop playsinline>
-                        <source src="{{ asset('Assets/Images/Mobile-App/about-us2.mp4') }}" type="video/mp4">
+                        <source src="{{ asset('Assets/Images/Mobile-App/about-us.webm') }}" type="video/mp4">
                         </video>
                     </div>
                 </div>
@@ -484,7 +483,7 @@
                             <span class="ctaf__fc-corner ctaf__fc-corner--bl" aria-hidden="true"></span>
                             <span class="ctaf__fc-corner ctaf__fc-corner--br" aria-hidden="true"></span>
                             <h3 class="hv2__form-title">Book a Free Consultation</h3>
-                            <p class="hv2__form-sub">Tell us about your idea we reply within one business day.</p>
+                            <p class="hv2__form-sub">Share your vision—we're ready to bring it to life.</p>
                             @include('common.contact-form')
                         </div>
                     </div>{{-- /.ctaf__right --}}
@@ -1351,14 +1350,14 @@
                         <div class="prc__spiral-float" x-show="activeTab === 'hourly'"
                              x-transition:enter="prc-e" x-transition:enter-start="prc-e-from" x-transition:enter-end="prc-e-to"
                              x-transition:leave="prc-l" x-transition:leave-start="prc-l-from" x-transition:leave-end="prc-l-to">
-                            <img src="https://cdn.prod.website-files.com/6968c40c3d0877f59b6c1749/69a055540d6e76c02d793e4f_Frame%20427320142%20(1).webp"
+                            <img src="{{ asset('Assets/Images/Mobile-App/hourly-engagement.webp') }}"
                                  alt="" class="prc__spiral" loading="lazy" decoding="async">
                         </div>
 
                         <div class="prc__spiral-float" x-show="activeTab === 'retainer'"
                              x-transition:enter="prc-e" x-transition:enter-start="prc-e-from" x-transition:enter-end="prc-e-to"
                              x-transition:leave="prc-l" x-transition:leave-start="prc-l-from" x-transition:leave-end="prc-l-to">
-                            <img src="https://cdn.prod.website-files.com/6968c40c3d0877f59b6c1749/69a055542fa2e7c196a06549_Frame%207%20(2).webp"
+                            <img src="{{ asset('Assets/Images/Mobile-App/retainer-model.webp') }}"
                                  alt="" class="prc__spiral" loading="lazy" decoding="async">
                         </div>
 
@@ -1554,7 +1553,7 @@
                             <span class="ctaf__fc-corner ctaf__fc-corner--bl" aria-hidden="true"></span>
                             <span class="ctaf__fc-corner ctaf__fc-corner--br" aria-hidden="true"></span>
                             <h3 class="hv2__form-title">Book a Free Consultation</h3>
-                            <p class="hv2__form-sub">Tell us about your idea we reply within one business day.</p>
+                            <p class="hv2__form-sub">Share your vision—we're ready to bring it to life.</p>
                             @include('common.contact-form')
                         </div>
                     </div>{{-- /.ctaf__right --}}
@@ -2168,20 +2167,14 @@
                             if (!title) return;
                             var step        = steps[i];
                             var markerRatio = (step.offsetLeft - trackStart) / trackW;
-                            /* At the very start only the dot is shown  the first
-                               step stays hidden until the line begins to stretch
-                               (~4%), then fades in. */
-                            var visible     = (i === 0)
-                                                ? (progress >= 0.04)
-                                                : (progress >= markerRatio - 0.005);
+                            var visible     = progress >= markerRatio - 0.005;
                             step.classList.toggle('is-visible', visible);
 
                             if (visible) {
-                                /* titles are left-aligned (60px step padding), so
-                                   track the TITLE position, not the step centre. */
-                                var markerX = step.offsetLeft + 60 - translateX;
-                                var rel     = markerX - vwCtr;          /* +right / -left of centre */
-                                step.classList.toggle('is-active', rel < 140 && rel > -step.offsetWidth * 0.70);
+                                var stepL   = step.offsetLeft - translateX;
+                                var stepCtr = stepL + step.offsetWidth / 2;
+                                var d       = Math.abs(stepCtr - vwCtr);
+                                step.classList.toggle('is-active', d < step.offsetWidth * 0.50);
                             } else {
                                 step.classList.remove('is-active');
                             }
@@ -2202,22 +2195,17 @@
                         }
                     });
 
-                    /* Progress line (viewport-px driven so it lines up exactly):
-                       p=0  -> a round dot centred on screen (under step 1)
-                       then -> the LEFT edge slides out to the screen edge over the
-                               first ~22%, while the RIGHT edge grows from centre to
-                               ~70% of the width. Mirrors the reference 0 -> 100%. */
+                    /* Progress line: starts as a centred dot and stretches into
+                       the line  the tail (left edge) slides from centre to the
+                       start over the first ~12% of scroll, while the lead (right
+                       edge) grows to full. Mirrors the reference intro. */
                     function setFill(p) {
-                        var W   = document.documentElement.clientWidth;
-                        var DOT = 44;                       /* = line height -> round dot */
-                        var c   = W / 2;
-                        var leadX = c + (0.70 * W - c) * p;             /* right edge: 50% -> 70% */
-                        var tn    = Math.min(p / 0.22, 1);
-                        var tailX = c * (1 - tn * tn * (3 - 2 * tn));   /* left edge: centre -> 0 (eased) */
-                        var w     = leadX - tailX;
-                        if (w < DOT) { w = DOT; tailX = c - DOT / 2; }  /* round centred dot at the start */
-                        fill.style.left  = tailX.toFixed(1) + 'px';
-                        fill.style.width = w.toFixed(1) + 'px';
+                        var lead = 50 + 50 * p;                              /* right edge: 50% -> 100% */
+                        var tail = 50 * (1 - Math.min(p / 0.12, 1));         /* left edge: 50% -> 0% */
+                        var w    = lead - tail;
+                        if (w < 1.4) { w = 1.4; tail = 50 - w / 2; }         /* keep a visible centred dot at p=0 */
+                        fill.style.left  = tail.toFixed(2) + '%';
+                        fill.style.width = w.toFixed(2) + '%';
                     }
 
                     gsap.set(row, { x: 0 });
