@@ -2202,19 +2202,29 @@
                     });
 
                     /* Progress line (viewport-px driven so it lines up exactly):
-                       its LEFT edge starts where the first step's content starts
-                       (the title/body left edge) and follows it as the row scrolls
-                       left; the RIGHT edge grows from there out to ~70% of the
-                       width. At p=0 it's a round dot at that start point. */
+                       LEFT edge starts at the first step's content-left and follows
+                       it as the row scrolls. RIGHT edge ends where the CONTENT ends
+                       (the content-right of the centred step), and never runs past
+                       the last step's content when it's parked at the end  so the
+                       line never extends across into empty space. At p=0 it's a
+                       round dot at the start point. */
                     function setFill(p) {
-                        var W   = document.documentElement.clientWidth;
                         var DOT = 44;                       /* = line height -> round dot */
-                        /* first step's content-left (title/body left) at p=0; 60 = step padding */
-                        var c0  = (steps[0] ? steps[0].offsetLeft + 60 : W / 2);
-                        var tailX = c0 - p * dist;                      /* left edge follows the content as it scrolls */
-                        var leadX = c0 + (0.70 * W - c0) * p;           /* right edge grows to ~70% width */
-                        var w     = leadX - tailX;
-                        if (w < DOT) { w = DOT; tailX = c0 - DOT / 2; } /* round dot at the start point */
+                        var center = vw / 2;
+                        var translateX = p * dist;
+                        var s0 = steps[0];
+                        var c0Left = (s0 ? s0.offsetLeft + 60 : center);          /* first content-left */
+                        var tailX  = c0Left - translateX;
+                        /* content-right of a centred step (step padding 60 each side) */
+                        var stepW  = s0 ? s0.offsetWidth : 660;
+                        var centredRight = center + (stepW / 2 - 60);
+                        /* last step's content-right on screen (clamps the parked end) */
+                        var last = steps[steps.length - 1];
+                        var lastRight = last ? (last.offsetLeft + last.offsetWidth - 60 - translateX) : centredRight;
+                        var leadTarget = Math.min(centredRight, lastRight);
+                        var leadX = tailX + (leadTarget - tailX) * Math.min(p / 0.06, 1); /* grow from the dot */
+                        var w = leadX - tailX;
+                        if (w < DOT) { var cx = (tailX + leadX) / 2; tailX = cx - DOT / 2; w = DOT; } /* round dot */
                         fill.style.left  = tailX.toFixed(1) + 'px';
                         fill.style.width = w.toFixed(1) + 'px';
                     }
