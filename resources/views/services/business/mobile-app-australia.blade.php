@@ -2168,7 +2168,12 @@
                             if (!title) return;
                             var step        = steps[i];
                             var markerRatio = (step.offsetLeft - trackStart) / trackW;
-                            var visible     = progress >= markerRatio - 0.005;
+                            /* At the very start only the dot is shown  the first
+                               step stays hidden until the line begins to stretch
+                               (~4%), then fades in. */
+                            var visible     = (i === 0)
+                                                ? (progress >= 0.04)
+                                                : (progress >= markerRatio - 0.005);
                             step.classList.toggle('is-visible', visible);
 
                             if (visible) {
