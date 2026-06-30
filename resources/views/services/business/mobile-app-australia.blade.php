@@ -300,7 +300,7 @@
                     </div>
                 </div>
                 <div class="wdm__cta-row">
-                    <a href="/about-us" class="hv2__btn" aria-label="Know more about Vetora">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#quoteModal" class="hv2__btn" aria-label="Know more about Vetora">
                         <span class="hv2__btn-glow" aria-hidden="true"></span>
                         <span class="hv2__btn-particles" aria-hidden="true">
                             <span class="hv2__particle"></span>
@@ -618,7 +618,7 @@
                 <article class="mpf__block" data-mpf-idx="0">
                     <div class="mpf__card">
                         <img src="Assets/Images/Mobile-App/Portfolio/bet-mobility.webp" alt="BET Mobility">
-                        <a href="#" class="mpf__collage-cta hv2__btn" aria-label="Learn more about BET Mobility">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#quoteModal" class="mpf__collage-cta hv2__btn" aria-label="Learn more about BET Mobility">
                             <span class="hv2__btn-glow" aria-hidden="true"></span>
                             <span class="hv2__btn-particles" aria-hidden="true">
                                 <span class="hv2__particle"></span>
@@ -655,7 +655,7 @@
                     <article class="mpf__block mpf__block--col" data-mpf-idx="1">
                         <div class="mpf__card">
                             <img src="Assets/Images/Mobile-App/Portfolio/Dots.webp" alt="Dots">
-                            <a href="#" class="mpf__collage-cta hv2__btn" aria-label="Learn more about Dots">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#quoteModal" class="mpf__collage-cta hv2__btn" aria-label="Learn more about Dots">
                                 <span class="hv2__btn-glow" aria-hidden="true"></span>
                                 <span class="hv2__btn-particles" aria-hidden="true">
                                     <span class="hv2__particle"></span>
@@ -685,7 +685,7 @@
                     <article class="mpf__block mpf__block--col" data-mpf-idx="2">
                         <div class="mpf__card">
                             <img src="Assets/Images/Mobile-App/Portfolio/abhi-hospital.webp" alt="Abhi SK Hospital">
-                            <a href="#" class="mpf__collage-cta hv2__btn" aria-label="Learn more about Abhi SK Hospital">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#quoteModal" class="mpf__collage-cta hv2__btn" aria-label="Learn more about Abhi SK Hospital">
                                 <span class="hv2__btn-glow" aria-hidden="true"></span>
                                 <span class="hv2__btn-particles" aria-hidden="true">
                                     <span class="hv2__particle"></span>
@@ -718,7 +718,7 @@
                 <article class="mpf__block" data-mpf-idx="3">
                     <div class="mpf__card">
                         <img src="Assets/Images/Mobile-App/Portfolio/ganesh-electricals.webp" alt="Ganesh Electricals">
-                        <a href="#" class="mpf__collage-cta hv2__btn" aria-label="Learn more about Ganesh Electricals">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#quoteModal" class="mpf__collage-cta hv2__btn" aria-label="Learn more about Ganesh Electricals">
                             <span class="hv2__btn-glow" aria-hidden="true"></span>
                             <span class="hv2__btn-particles" aria-hidden="true">
                                 <span class="hv2__particle"></span>
