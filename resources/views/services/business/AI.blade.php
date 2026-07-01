@@ -328,7 +328,7 @@
 {{-- ═══════════════════════════════════════════════════════════
      4. OUR SERVICE
 ═══════════════════════════════════════════════════════════ --}}
-<section class="reveal" style="background:#13112E;padding:110px 0;position:relative;overflow:hidden;">
+<section class="reveal" style="padding:110px 0;position:relative;overflow:hidden;">
     <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(124,58,237,.10) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;"></div>
     <div class="container" style="max-width:1280px;margin:0 auto;padding:0 24px;position:relative;z-index:2;">
 
