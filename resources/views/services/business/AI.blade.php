@@ -245,7 +245,7 @@
             <div class="about-eyebrow">
                 <span class="eyebrow-line-h"></span>
                 <span class="eyebrow-dot-filled"></span>
-                <span class="eyebrow-label">ABOUT AIXO</span>
+                <span class="eyebrow-label">ABOUT VETORA</span>
             </div>
         </div>
 
@@ -334,11 +334,12 @@
 
         <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;margin-bottom:50px;">
             <div>
-                <div style="font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#D946EF;margin-bottom:14px;">→ Our Service</div>
-                <h2 style="font-family:'Lexend',sans-serif;font-weight:800;font-size:clamp(24px,3.6vw,44px);color:#fff;text-transform:uppercase;margin:0;">
-                    Powerful AI Technologies Enabling<br>
-                    <span style="background:linear-gradient(135deg,#7C3AED,#D946EF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Business Efficiency</span>
-                </h2>
+                <div class="feat-eyebrow">
+                    <span class="feat-eyebrow__line"></span>
+                    <span class="feat-eyebrow__dot"></span>
+                    <span class="feat-eyebrow__text">Our Service</span>
+                </div>
+                <h2 class="svc-headline" id="svcHeadline">Powerful AI Technologies Enabling Business Efficiency</h2>
             </div>
             <a href="{{ route('contact') }}" class="page-btn">Our Service &nbsp;→</a>
         </div>

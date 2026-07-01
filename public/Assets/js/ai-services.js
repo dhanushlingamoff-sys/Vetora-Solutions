@@ -275,6 +275,23 @@
         row.addEventListener("click", function () { openSvcRow(row); });
     });
 
+    /* Service headline — word-by-word reveal (same effect as the About headline) */
+    var svcHeadline = document.getElementById("svcHeadline");
+    if (svcHeadline) {
+        var svcWords = svcHeadline.textContent.trim().split(/\s+/);
+        svcHeadline.innerHTML = svcWords
+            .map(function (w) { return '<span class="word">' + w + '</span>'; })
+            .join(' ');
+        var svcWordEls = svcHeadline.querySelectorAll(".word");
+        new IntersectionObserver(function (entries, obs) {
+            if (!entries[0].isIntersecting) return;
+            svcWordEls.forEach(function (w, i) {
+                setTimeout(function () { w.classList.add("lit"); }, i * 80);
+            });
+            obs.disconnect();
+        }, { threshold: 0.3 }).observe(svcHeadline);
+    }
+
     /* ---------------------------------------------------------------
        Swiper — projects carousel
     --------------------------------------------------------------- */
