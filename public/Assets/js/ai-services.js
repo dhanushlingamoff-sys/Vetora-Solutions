@@ -263,12 +263,16 @@
        Services — accordion rows
     --------------------------------------------------------------- */
     var svcRows = document.querySelectorAll(".axo-svc-row");
+    function openSvcRow(row) {
+        svcRows.forEach(function (r) { r.classList.remove("axo-open"); });
+        row.classList.add("axo-open");
+    }
     svcRows.forEach(function (row) {
-        row.addEventListener("click", function () {
-            var wasOpen = row.classList.contains("axo-open");
-            svcRows.forEach(function (r) { r.classList.remove("axo-open"); });
-            if (!wasOpen) row.classList.add("axo-open");
-        });
+        /* Hover opens the row (image slides in on the left, arrow fills) — the
+           first row stays open by default until another is hovered. */
+        row.addEventListener("mouseenter", function () { openSvcRow(row); });
+        /* Touch devices have no hover, so tap opens instead. */
+        row.addEventListener("click", function () { openSvcRow(row); });
     });
 
     /* ---------------------------------------------------------------
