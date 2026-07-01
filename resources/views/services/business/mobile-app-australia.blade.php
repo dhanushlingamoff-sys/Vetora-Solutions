@@ -4,7 +4,7 @@
 <!-- Navbar Start -->
     <header class="site-header">
 
-        <!-- Announcement Bar -->
+        <!-- Announcement Bar (desktop) -->
         <div class="announcement-bar" id="announcementBar">
             <div class="container">
                 <div class="announcement-content">
@@ -12,6 +12,20 @@
                     <span class="announcement-text">Special Launch Offer: Save big on AI-powered Web &amp; Mobile Applications&mdash;Offer valid for a limited time only!</span>
                 </div>
                 <button class="announcement-close" onclick="this.closest('#announcementBar').style.display='none'"
+                    aria-label="Close announcement">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Announcement Bar (mobile) -->
+        <div class="announcement-bar announcement-bar--mobile" id="announcementBarMobile">
+            <div class="container">
+                <div class="announcement-content">
+                    <span class="announcement-badge">New</span>
+                    <span class="announcement-text">Exclusive AI Development Offer&mdash;Limited time only!</span>
+                </div>
+                <button class="announcement-close" onclick="this.closest('#announcementBarMobile').style.display='none'"
                     aria-label="Close announcement">
                     <i class="bi bi-x-lg"></i>
                 </button>

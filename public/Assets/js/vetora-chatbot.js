@@ -243,7 +243,14 @@
             // Clean up on modal close
             var vetoraModal = document.getElementById('VetoraAIModal');
             if (vetoraModal) {
+                vetoraModal.addEventListener('show.bs.modal', function() {
+                    document.body.style.overflow = 'hidden';
+                    document.body.style.paddingRight = '0px';
+                });
+
                 vetoraModal.addEventListener('hidden.bs.modal', function() {
+                    document.body.style.overflow = '';
+                    document.body.style.paddingRight = '';
                     if (recognition && isListening) recognition.stop();
                     if (window.speechSynthesis) window.speechSynthesis.cancel();
                     setListening(false);

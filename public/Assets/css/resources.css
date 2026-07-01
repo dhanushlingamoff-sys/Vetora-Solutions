@@ -9,6 +9,11 @@
     z-index: 1001;
 }
 
+/* Mobile bar hidden by default, shown only on small screens */
+.announcement-bar--mobile {
+    display: none;
+}
+
 .announcement-bar .container {
     display: flex;
     align-items: center;
@@ -690,6 +695,10 @@
 
     .announcement-bar {
         display: none;
+    }
+
+    .announcement-bar--mobile {
+        display: block;
     }
 }
 
@@ -2115,6 +2124,21 @@ textarea.error-border {
 
 
 /* =========================================
+   VETORA AI CHATBOT MODAL — z-index above floating buttons
+========================================= */
+#VetoraAIModal {
+    z-index: 100000;
+    overflow: hidden;
+}
+.modal-backdrop {
+    z-index: 99998;
+    background-color: #000;
+}
+.modal-backdrop.show {
+    opacity: 0.75;
+}
+
+/* =========================================
    VETORA AI CHATBOT — left-side launcher
    (mirror of the WhatsApp float, on the left)
 ========================================= */
@@ -2129,14 +2153,14 @@ textarea.error-border {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #7C3AED 0%, #6D5CE7 50%, #D946EF 100%);
+    background: linear-gradient(135deg, #4A6FE2 0%, #6B3DC2 50%, #7B30B5 100%);
     color: #fff;
     font-size: 30px;
     cursor: pointer;
     z-index: 99999;
     isolation: isolate;
     box-shadow:
-        0 10px 30px rgba(124, 58, 237, .35),
+        0 10px 30px rgba(74, 111, 226, .4),
         0 0 0 1px rgba(255, 255, 255, .08) inset,
         inset 0 2px 6px rgba(255, 255, 255, .25);
     animation: waFloat 4s ease-in-out infinite;
@@ -2152,7 +2176,7 @@ textarea.error-border {
 .chatbot-fab:hover {
     transform: translateY(-8px) scale(1.08) rotate(4deg);
     box-shadow:
-        0 16px 40px rgba(124, 58, 237, .5),
+        0 16px 40px rgba(74, 111, 226, .55),
         0 0 0 1px rgba(255, 255, 255, .12) inset,
         inset 0 2px 6px rgba(255, 255, 255, .3);
 }
@@ -3090,8 +3114,8 @@ textarea.error-border {
 .vetora-modal-body {
     position: relative;
     z-index: 1;
-    height: calc(100vh - 175px);
-    max-height: 755px;
+    height: calc(100vh - 140px);
+    max-height: 880px;
 }
 
 .vetora-grid {
@@ -3113,6 +3137,7 @@ textarea.error-border {
     border-right: 1px solid var(--v-glass-border);
     background: rgba(1, 8, 32, .55);
     overflow-y: auto;
+
     scrollbar-width: thin;
     scrollbar-color: var(--v-glass-border) transparent;
 }
@@ -3127,6 +3152,7 @@ textarea.error-border {
     border-left: 1px solid var(--v-glass-border);
     background: rgba(1, 8, 32, .55);
     overflow-y: auto;
+
     scrollbar-width: thin;
     scrollbar-color: var(--v-glass-border) transparent;
 }
