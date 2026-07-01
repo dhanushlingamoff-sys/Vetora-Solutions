@@ -2114,6 +2114,86 @@ textarea.error-border {
 }
 
 
+/* =========================================
+   VETORA AI CHATBOT — left-side launcher
+   (mirror of the WhatsApp float, on the left)
+========================================= */
+.chatbot-fab {
+    position: fixed;
+    left: 24px;
+    bottom: 24px;
+    width: 68px;
+    height: 68px;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #7C3AED 0%, #6D5CE7 50%, #D946EF 100%);
+    color: #fff;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 99999;
+    isolation: isolate;
+    box-shadow:
+        0 10px 30px rgba(124, 58, 237, .35),
+        0 0 0 1px rgba(255, 255, 255, .08) inset,
+        inset 0 2px 6px rgba(255, 255, 255, .25);
+    animation: waFloat 4s ease-in-out infinite;
+    transition: transform .4s ease, box-shadow .4s ease;
+}
+
+.chatbot-fab i {
+    position: relative;
+    z-index: 2;
+    animation: waIconBounce 2.5s ease-in-out infinite;
+}
+
+.chatbot-fab:hover {
+    transform: translateY(-8px) scale(1.08) rotate(4deg);
+    box-shadow:
+        0 16px 40px rgba(124, 58, 237, .5),
+        0 0 0 1px rgba(255, 255, 255, .12) inset,
+        inset 0 2px 6px rgba(255, 255, 255, .3);
+}
+
+.chatbot-fab__tooltip {
+    position: absolute;
+    left: calc(100% + 14px);
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    background: rgba(20, 16, 45, .95);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(124, 58, 237, .4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .35s ease, transform .35s ease;
+}
+
+.chatbot-fab:hover .chatbot-fab__tooltip {
+    opacity: 1;
+    transform: translateY(-50%) translateX(4px);
+}
+
+@media (max-width: 768px) {
+    .chatbot-fab {
+        width: 60px;
+        height: 60px;
+        left: 18px;
+        bottom: 18px;
+        font-size: 26px;
+    }
+
+    .chatbot-fab__tooltip {
+        display: none;
+    }
+}
+
 
 /* ========================================
    TECHNOLOGY STACK
