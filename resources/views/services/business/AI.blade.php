@@ -351,25 +351,25 @@
             ];
         @endphp
 
-        <div style="border-top:1px solid rgba(255,255,255,.07);">
+        <div class="axo-svc-rows">
             @foreach($services as $svc)
-            <div class="axo-svc-row {{ $loop->first ? 'axo-open' : '' }}" style="border-bottom:1px solid rgba(255,255,255,.07);padding:36px 0;display:grid;grid-template-columns:70px 1fr 130px 56px;align-items:center;gap:24px;cursor:pointer;transition:background .3s ease;">
-                <span style="font-family:'Lexend',sans-serif;font-size:22px;font-weight:700;color:rgba(255,255,255,.32);">{{ $svc['num'] }}</span>
-                <div>
-                    <h3 style="font-family:'Lexend',sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:6px;">{{ $svc['title'] }}</h3>
-                    <p style="font-size:14.5px;color:rgba(255,255,255,.55);margin:0;">{{ $svc['desc'] }}</p>
-                    <div class="axo-svc-tags" style="display:{{ $loop->first ? 'flex' : 'none' }};gap:10px;margin-top:14px;flex-wrap:wrap;">
-                        @foreach($svc['tags'] as $tag)
-                        <span style="font-size:12px;font-weight:600;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(124,58,237,.28);color:rgba(255,255,255,.65);">
-                            <span style="color:#D946EF;">&#x2733;</span> {{ $tag }}
-                        </span>
-                        @endforeach
-                    </div>
+            <div class="axo-svc-row {{ $loop->first ? 'axo-open' : '' }}">
+                {{-- Thumbnail: collapsed to 0 width, slides in on the left only for the active row --}}
+                <div class="axo-svc-thumb">
+                    <img src="{{ asset($svc['img']) }}" alt="{{ $svc['title'] }}"
+                         onerror="this.parentElement.style.background='linear-gradient(135deg,rgba(124,58,237,.35),rgba(13,11,42,.9))'">
                 </div>
-                <div style="width:110px;height:78px;border-radius:14px;overflow:hidden;border:1px solid rgba(124,58,237,.2);">
-                    <img src="{{ asset($svc['img']) }}" alt="{{ $svc['title'] }}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(135deg,rgba(124,58,237,.3),rgba(13,11,42,.9))'">
+                <span class="axo-svc-num">{{ $svc['num'] }}</span>
+                <div class="axo-svc-info">
+                    <h3>{{ $svc['title'] }}</h3>
+                    <p>{{ $svc['desc'] }}</p>
                 </div>
-                <div style="width:56px;height:56px;border-radius:50%;border:1px solid rgba(124,58,237,.3);display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;transition:all .35s ease;">↗</div>
+                <div class="axo-svc-tags">
+                    @foreach($svc['tags'] as $tag)
+                    <span><em>&#x2733;</em>{{ $tag }}</span>
+                    @endforeach
+                </div>
+                <div class="axo-svc-arrow">↗</div>
             </div>
             @endforeach
         </div>
