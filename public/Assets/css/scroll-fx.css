@@ -1,0 +1,37 @@
+/* ============================================================
+   SITE-WIDE SCROLL EFFECTS — Lenis smooth scroll + GSAP reveal
+   Loaded on every page via layouts/app.blade.php.
+   ============================================================ */
+
+/* ── Lenis smooth-scroll support ──
+   The global stylesheet (style.css) sets `html { scroll-behavior: smooth }`,
+   which fights Lenis (both animate the scroll position) and makes scrolling
+   stutter/lag. Lenis adds the classes `lenis lenis-smooth` to <html>, so we
+   force native scroll behaviour OFF while Lenis is active. These rules only
+   take effect once Lenis has actually initialised (i.e. not for reduced-motion
+   users, where Lenis never runs). */
+html.lenis,
+html.lenis body {
+    height: auto;
+}
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+    pointer-events: none;
+}
+
+/* ── Reveal-on-scroll ──
+   The reveal state is applied by JS (inline styles via GSAP) only on browsers
+   that support it and only for elements below the fold, so if JS is disabled
+   or fails, nothing is ever left hidden. Opt any element (or a whole section)
+   OUT of the reveal with `data-no-reveal`. */
+[data-no-reveal] {
+    /* marker only — consumed by scroll-fx.js */
+}
