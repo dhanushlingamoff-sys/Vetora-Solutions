@@ -2198,9 +2198,6 @@ textarea.error-border {
 }
 
 .chatbot-fab:hover {
-    /* Pause the idle motion and give a crisp lift + stronger glow on hover. */
-    animation: none;
-    transform: translateY(-6px) scale(1.09) rotate(4deg);
     box-shadow:
         0 18px 40px rgba(20, 16, 45, .42),
         0 0 0 1px rgba(124, 58, 237, .35),
@@ -2275,7 +2272,7 @@ textarea.error-border {
 
 .chatbot-fab:hover .chatbot-fab__tooltip {
     opacity: 1;
-    transform: translateY(-50%) translateX(4px);
+    /* transform: translateY(-50%) translateX(4px); */
 }
 
 @media (max-width: 768px) {
