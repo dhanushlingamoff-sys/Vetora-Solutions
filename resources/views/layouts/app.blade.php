@@ -35,6 +35,9 @@
 
     {{-- site-wide smooth scrolling + scroll-reveal support --}}
     <link rel="stylesheet" href="{{ asset('Assets/css/scroll-fx.css') }}?v=1.0.0">
+
+    {{-- Fonts used by the site-wide Vetora AI chatbot (Orbitron HUD + Roboto Mono) --}}
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     @yield('styles')
 
     {{-- intl-tel-input v19 — international phone flag + dial-code dropdown --}}
@@ -286,6 +289,16 @@
 
     </a>
 
+    {{-- Left-side launcher that opens the Vetora AI chatbot (site-wide) --}}
+    <button type="button" class="chatbot-fab" data-bs-toggle="modal" data-bs-target="#VetoraAIModal"
+            aria-label="Chat with Vetora AI">
+        <i class="bi bi-stars"></i>
+        <span class="chatbot-fab__tooltip">Chat with Vetora AI</span>
+    </button>
+
+    {{-- Vetora AI chatbot modal (site-wide) --}}
+    @include('partials.vetora-chatbot')
+
     {{-- Site-wide smooth scrolling + scroll-reveal (GSAP + ScrollTrigger + Lenis).
          Loaded before @yield('scripts') so any page-level inline animation code
          can rely on window.gsap / window.Lenis already being defined. --}}
@@ -298,6 +311,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
     </script>
+
+    {{-- Vetora AI chatbot logic (site-wide; no-ops if the modal isn't present) --}}
+    <script src="{{ asset('Assets/js/vetora-chatbot.js') }}?v=1.0.0"></script>
 
     <script src="{{ asset('Assets/js/script.js') }}?v=1.0.2"></script>
 

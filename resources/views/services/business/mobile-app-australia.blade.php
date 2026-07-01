@@ -68,9 +68,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    {{-- Fonts used by the Vetora AI chatbot (Orbitron HUD + Roboto Mono) --}}
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     <link rel="stylesheet" href="{{ asset('Assets/css/mobile-app.css') }}?v=2.9.4">
@@ -1569,15 +1566,6 @@
     </section>{{-- /.ctaf --}}
 
 </div>{{-- /.ma-page --}}
-
-{{-- Left-side launcher that opens the Vetora AI chatbot (mirrors the WhatsApp float) --}}
-<button type="button" class="chatbot-fab" data-bs-toggle="modal" data-bs-target="#VetoraAIModal"
-        aria-label="Chat with Vetora AI">
-    <i class="bi bi-stars"></i>
-    <span class="chatbot-fab__tooltip">Chat with Vetora AI</span>
-</button>
-
-@include('partials.vetora-chatbot')
 @endsection
 
 @section('scripts')
@@ -1585,8 +1573,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
-    {{-- Vetora AI chatbot (opened by the left-side launcher) --}}
-    <script src="{{ asset('Assets/js/vetora-chatbot.js') }}?v=1.0.0"></script>
 
     {{-- GSAP, ScrollTrigger and Lenis smooth scrolling are now loaded globally in
          layouts/app.blade.php (they run before this section), so this page's

@@ -2065,10 +2065,7 @@
     <!-- Testimonial -->
 
 
-    <!-- =============================================
-                     VETORA AI CHATBOT MODAL
-                ============================================= -->
-    @include('partials.vetora-chatbot')
+    {{-- Vetora AI chatbot modal + launcher now render site-wide from layouts/app.blade.php --}}
 
 
 
@@ -2535,7 +2532,4 @@
 
         nmAnimate();
     </script>
-
-
-    <script src="{{ asset('Assets/js/vetora-chatbot.js') }}?v=1.0.0"></script>
 @endsection
