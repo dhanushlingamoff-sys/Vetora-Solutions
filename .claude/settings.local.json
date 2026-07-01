@@ -17,7 +17,13 @@
       "PowerShell(Select-String -Path \"d:\\\\laragon\\\\www\\\\vetora\\\\resources\\\\views\\\\services\\\\business\\\\mobile-app-australia.blade.php\" -Pattern \"rotation: -9|reference angle\" | ForEach-Object { \"$\\($_.LineNumber\\): $\\($_.Line.Trim\\(\\)\\)\" })",
       "PowerShell(\\(Get-Content \"d:\\\\laragon\\\\www\\\\vetora\\\\public\\\\Assets\\\\css\\\\mobile-app.css\" | Measure-Object -Line\\).Lines)",
       "PowerShell(\\(Get-Content \"d:\\\\laragon\\\\www\\\\vetora\\\\public\\\\Assets\\\\css\\\\mobile-app.css\"\\).Count)",
-      "PowerShell(& \"C:\\\\Program Files\\\\Git\\\\cmd\\\\git.exe\" --version)"
+      "PowerShell(& \"C:\\\\Program Files\\\\Git\\\\cmd\\\\git.exe\" --version)",
+      "Bash(git add *)",
+      "Bash(git rm *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(git fetch *)",
+      "Bash(git merge *)"
     ],
     "additionalDirectories": [
       "d:\\laragon\\www\\vetora\\storage\\framework\\views"
