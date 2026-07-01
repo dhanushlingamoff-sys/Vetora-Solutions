@@ -292,7 +292,7 @@
     {{-- Left-side launcher that opens the Vetora AI chatbot (site-wide) --}}
     <button type="button" class="chatbot-fab" data-bs-toggle="modal" data-bs-target="#VetoraAIModal"
             aria-label="Chat with Vetora AI">
-        <img src="{{ asset('Assets/Images/logo.png') }}" alt="Vetora AI" style="width:36px;height:36px;object-fit:contain;">
+        <img src="{{ asset('Assets/Images/logo.png') }}" alt="Vetora AI" class="chatbot-fab__img">
         <span class="chatbot-fab__tooltip">Chat with Vetora AI</span>
     </button>
 

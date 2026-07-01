@@ -2153,30 +2153,36 @@ textarea.error-border {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #4A6FE2 0%, #6B3DC2 50%, #7B30B5 100%);
+    /* Logo colours: blue (#3365C8) -> purple (#551E96), a touch deeper so the
+       logo image stays legible on top. */
+    background: linear-gradient(150deg, #2E4BB5 0%, #3E2FA0 52%, #531C8E 100%);
     color: #fff;
-    font-size: 30px;
     cursor: pointer;
     z-index: 99999;
     isolation: isolate;
     box-shadow:
-        0 10px 30px rgba(74, 111, 226, .4),
+        0 10px 30px rgba(62, 47, 160, .40),
         0 0 0 1px rgba(255, 255, 255, .08) inset,
         inset 0 2px 6px rgba(255, 255, 255, .25);
     animation: waFloat 4s ease-in-out infinite;
     transition: transform .4s ease, box-shadow .4s ease;
 }
 
-.chatbot-fab i {
+.chatbot-fab__img {
     position: relative;
     z-index: 2;
+    width: 58%;
+    height: 58%;
+    object-fit: contain;
+    /* Soft white halo so the blue/purple logo separates from the background. */
+    filter: drop-shadow(0 1px 4px rgba(255, 255, 255, .55));
     animation: waIconBounce 2.5s ease-in-out infinite;
 }
 
 .chatbot-fab:hover {
     transform: translateY(-8px) scale(1.08) rotate(4deg);
     box-shadow:
-        0 16px 40px rgba(74, 111, 226, .55),
+        0 16px 40px rgba(62, 47, 160, .55),
         0 0 0 1px rgba(255, 255, 255, .12) inset,
         inset 0 2px 6px rgba(255, 255, 255, .3);
 }
