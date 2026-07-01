@@ -339,7 +339,7 @@
                     <span class="feat-eyebrow__dot"></span>
                     <span class="feat-eyebrow__text">Our Service</span>
                 </div>
-                <h2 class="svc-headline" id="svcHeadline">Powerful AI Technologies Enabling Business Efficiency</h2>
+                <h2 class="about-headline" id="svcHeadline">Powerful AI Technologies Enabling Business Efficiency</h2>
             </div>
             <a href="{{ route('contact') }}" class="page-btn">Our Service &nbsp;→</a>
         </div>

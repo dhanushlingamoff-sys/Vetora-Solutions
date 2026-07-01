@@ -2943,6 +2943,9 @@ body::before {
 
 /* Headline */
 .about-headline {
+    /* Pinned so the shared headline matches whether or not its container sets
+       this font (the service section inherits Lexend otherwise). */
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: clamp(1.8rem, 3.2vw, 2.75rem);
     font-weight: 700;
     color: #ffffff;
@@ -2964,30 +2967,9 @@ body::before {
     color: #ffffff;
 }
 
-/* Service section headline — large white title with the same word-by-word
-   reveal used by the About headline. */
-.svc-headline {
-    font-family: var(--axo-font-head, 'Lexend', sans-serif);
-    font-weight: 800;
-    font-size: clamp(34px, 4.6vw, 60px);
-    line-height: 1.05;
-    color: #fff;
-    margin: 0;
-    max-width: 800px;
-}
-
-.svc-headline .word {
-    display: inline-block;
-    opacity: 0.2;
-    color: rgba(255, 255, 255, 0.22);
-    transition: opacity 0.4s ease-out, color 0.4s ease-out;
-    margin-right: 0.24em;
-}
-
-.svc-headline .word.lit {
-    opacity: 1;
-    color: #fff;
-}
+/* The service section headline reuses the .about-headline class so its size,
+   weight, colour, spacing and word-by-word reveal are identical to the About
+   headline. (No separate rules needed.) */
 
 /* Holographic knot — image */
 .holo-knot {
