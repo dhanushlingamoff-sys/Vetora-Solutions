@@ -1572,38 +1572,10 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
-    {{-- Lenis smooth scrolling (drives native scroll, so sticky/ScrollTrigger stay correct) --}}
-    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
-    <script>
-    (function () {
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        if (!window.Lenis) return;
-
-        /* The global stylesheet sets html{scroll-behavior:smooth}; that fights
-           Lenis and makes scrolling stutter. Force it off while Lenis runs. */
-        document.documentElement.style.scrollBehavior = 'auto';
-
-        var lenis = new Lenis({
-            lerp: 0.12,        /* light, responsive smoothing (was a slow 1.05s duration) */
-            wheelMultiplier: 1,
-            smoothWheel: true,
-            syncTouch: false   /* keep native momentum scrolling on touch devices */
-        });
-        window.__lenis = lenis;
-
-        if (window.gsap && window.ScrollTrigger) {
-            /* Keep ScrollTrigger (pins, sticky scrubs) in lock-step with Lenis */
-            lenis.on('scroll', ScrollTrigger.update);
-            gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
-            gsap.ticker.lagSmoothing(0);
-        } else {
-            (function raf(t) { lenis.raf(t); requestAnimationFrame(raf); })(0);
-        }
-    })();
-    </script>
+    {{-- GSAP, ScrollTrigger and Lenis smooth scrolling are now loaded globally in
+         layouts/app.blade.php (they run before this section), so this page's
+         section animations below just use the shared window.gsap / window.__lenis. --}}
 
     <script>
     // â”€â”€ Portfolio Carousel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€

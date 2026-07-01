@@ -32,6 +32,9 @@
     {{-- custom css --}}
     <link rel="stylesheet" href="{{ asset('Assets/css/style.css') }}?v=1.0.2">
     <link rel="stylesheet" href="{{ asset('Assets/css/resources.css') }}?v=1.0.2">
+
+    {{-- site-wide smooth scrolling + scroll-reveal support --}}
+    <link rel="stylesheet" href="{{ asset('Assets/css/scroll-fx.css') }}?v=1.0.0">
     @yield('styles')
 
     {{-- intl-tel-input v19 — international phone flag + dial-code dropdown --}}
@@ -282,6 +285,14 @@
         </span>
 
     </a>
+
+    {{-- Site-wide smooth scrolling + scroll-reveal (GSAP + ScrollTrigger + Lenis).
+         Loaded before @yield('scripts') so any page-level inline animation code
+         can rely on window.gsap / window.Lenis already being defined. --}}
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+    <script src="{{ asset('Assets/js/scroll-fx.js') }}?v=1.0.0"></script>
 
     @yield('scripts')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
