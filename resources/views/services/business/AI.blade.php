@@ -245,7 +245,7 @@
             <div class="about-eyebrow">
                 <span class="eyebrow-line-h"></span>
                 <span class="eyebrow-dot-filled"></span>
-                <span class="eyebrow-label">ABOUT AIXO</span>
+                <span class="eyebrow-label">ABOUT VETORA</span>
             </div>
         </div>
 
