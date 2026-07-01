@@ -2193,7 +2193,6 @@ textarea.error-border {
     width: 62%;
     height: 62%;
     object-fit: contain;
-    /* Subtle pop so the logo feels alive. */
     animation: fabIconPop 3.2s ease-in-out infinite;
 }
 
