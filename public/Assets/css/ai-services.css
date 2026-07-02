@@ -3633,11 +3633,11 @@ body::before {
     animation: lineBeam 10s linear infinite;
     opacity: 0;
 }
-.page-lines i:nth-child(1) { left: 25%; animation-duration: 9s;  animation-delay: 0s; }
-.page-lines i:nth-child(2) { left: 50%; animation-duration: 11s; animation-delay: 3.5s; }
-.page-lines i:nth-child(3) { left: 75%; animation-duration: 10s; animation-delay: 1.8s; }
-.page-lines i:nth-child(4) { left: 12%; animation-duration: 12s; animation-delay: 5.5s; }
-.page-lines i:nth-child(5) { left: 88%; animation-duration: 10.5s; animation-delay: 2.6s; }
+.page-lines i:nth-child(1) { left: 25%; animation-duration: 6.5s; animation-delay: 0s; }
+.page-lines i:nth-child(2) { left: 50%; animation-duration: 8s;   animation-delay: 2.6s; }
+.page-lines i:nth-child(3) { left: 75%; animation-duration: 7.2s; animation-delay: 1.3s; }
+.page-lines i:nth-child(4) { left: 12%; animation-duration: 8.6s; animation-delay: 4s; }
+.page-lines i:nth-child(5) { left: 88%; animation-duration: 7.6s; animation-delay: 1.9s; }
 .page-lines i:nth-child(6),
 .page-lines i:nth-child(7) { display: none; }
 
