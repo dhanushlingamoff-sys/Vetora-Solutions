@@ -3428,7 +3428,9 @@ body::before {
    =================================================================== */
 .tech2 {
     position: relative;
-    background: #0D0B2A;
+    /* transparent (same colour as the page body) so the animated line
+       background shows through behind the card */
+    background: transparent;
     padding: 110px 0;
     overflow: hidden;
 }
@@ -3585,12 +3587,25 @@ body::before {
    A fixed layer behind the page content (z-index:-1): faint static vertical
    lines with light beams travelling down them.
    =================================================================== */
+/* Establish a stacking context on the page wrapper so the fixed line layer
+   (z-index:0 below) sits ABOVE the opaque body background but behind the
+   page content. Without this, a z-index:-1 layer hides behind the body bg. */
+.axo-page {
+    position: relative;
+    z-index: 0;
+}
 .page-lines {
     position: fixed;
     inset: 0;
-    z-index: -1;
+    z-index: 0;
     overflow: hidden;
     pointer-events: none;
+}
+/* Page content sits above the line layer. */
+.axo-page > section,
+.axo-page > .video-modal {
+    position: relative;
+    z-index: 1;
 }
 /* Faint static vertical guide lines */
 .page-lines::before {
@@ -3599,22 +3614,22 @@ body::before {
     inset: 0;
     background-image: repeating-linear-gradient(
         90deg,
-        rgba(124, 58, 237, .07) 0 1px,
-        transparent 1px 200px);
+        rgba(139, 116, 235, .14) 0 1px,
+        transparent 1px 150px);
 }
 /* Travelling light beams */
 .page-lines i {
     position: absolute;
-    top: -32vh;
-    width: 2px;
-    height: 32vh;
+    top: -34vh;
+    width: 3px;
+    height: 34vh;
     background: linear-gradient(to bottom,
         transparent,
-        rgba(139, 116, 235, .0) 5%,
-        rgba(168, 130, 255, .85) 50%,
-        rgba(139, 116, 235, .0) 95%,
+        rgba(139, 116, 235, 0) 5%,
+        rgba(180, 150, 255, 1) 50%,
+        rgba(139, 116, 235, 0) 95%,
         transparent);
-    filter: blur(0.3px);
+    box-shadow: 0 0 12px rgba(168, 130, 255, .9);
     animation: lineBeam 7s linear infinite;
     opacity: 0;
 }
