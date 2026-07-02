@@ -250,7 +250,7 @@
     });
 
     /* Section headlines — word-by-word reveal (same effect as the About headline) */
-    ["svcHeadline", "techHeadline", "projHeadline"].forEach(function (id) {
+    ["svcHeadline", "techHeadline", "projHeadline", "tstmHeadline"].forEach(function (id) {
         var el = document.getElementById(id);
         if (!el) return;
         var words = el.textContent.trim().split(/\s+/);

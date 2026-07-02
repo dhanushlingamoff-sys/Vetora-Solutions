@@ -7,7 +7,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-    <link rel="stylesheet" href="{{ asset('Assets/css/ai-services.css') }}?v=1.2.3">
+    <link rel="stylesheet" href="{{ asset('Assets/css/ai-services.css') }}?v=1.2.4">
     <style>body, html { background: #0D0B2A !important; }</style>
 @endsection
 
@@ -492,50 +492,68 @@
 {{-- ═══════════════════════════════════════════════════════════
      8. OUR TESTIMONIALS
 ═══════════════════════════════════════════════════════════ --}}
-<section class="reveal" style="background:#13112E;padding:110px 0;position:relative;overflow:hidden;">
-    <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(124,58,237,.10) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;"></div>
+<section class="tstm reveal" style="padding:110px 0;position:relative;overflow:hidden;">
     <div class="container" style="max-width:1280px;margin:0 auto;padding:0 24px;position:relative;z-index:2;">
 
-        <div style="display:grid;grid-template-columns:auto 1fr;gap:60px;align-items:end;margin-bottom:36px;">
-            <div style="padding-bottom:6px;">
-                <div style="font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#D946EF;white-space:nowrap;">→ Our Testimonials</div>
+        <div class="tstm__head">
+            <div class="feat-eyebrow">
+                <span class="feat-eyebrow__line"></span>
+                <span class="feat-eyebrow__dot"></span>
+                <span class="feat-eyebrow__text">Our Testimonials</span>
             </div>
-            <h2 style="font-family:'Lexend',sans-serif;font-weight:800;font-size:clamp(24px,3.6vw,44px);color:#fff;text-transform:uppercase;margin:0;">
-                What Our Satisfied<br>
-                <span style="background:linear-gradient(135deg,#7C3AED,#D946EF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Customers Say</span>
-            </h2>
+            <h2 class="about-headline" id="tstmHeadline">What Our Satisfied Customers Have to Say About Their Experience</h2>
         </div>
 
-        {{-- Rating bar --}}
-        <div style="display:flex;align-items:center;gap:24px;padding:16px 26px;background:rgba(26,22,64,.72);border:1px solid rgba(124,58,237,.2);border-radius:16px;margin-bottom:50px;flex-wrap:wrap;">
-            <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#D946EF);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0;">V</div>
-            <span style="font-family:'Lexend',sans-serif;font-size:28px;font-weight:800;color:#fff;">4.8/5</span>
-            <span style="color:#FFB22E;font-size:18px;letter-spacing:2px;">★★★★☆</span>
-            <span style="font-size:13px;color:rgba(255,255,255,.48);">Based on 2580 reviews</span>
+        <div class="tstm__rating">
+            <img class="tstm__logo" src="{{ asset('Assets/Images/logo.png') }}" alt="Vetora" onerror="this.style.display='none'">
+            <div class="tstm__rating-body">
+                <div class="tstm__score">4.8/5 <span class="tstm__stars">★★★★★</span></div>
+                <div class="tstm__reviews">Based on 2,580 reviews</div>
+            </div>
         </div>
 
         @php
-            $testi = [
-                ['name'=>'Alice Williams', 'role'=>'Founder',         'img'=>'https://i.pravatar.cc/100?img=12','quote'=>'Vetora Solutions helped us scale our operations with a powerful, efficient platform. We can now manage more vehicles, drivers, and bookings seamlessly.'],
-                ['name'=>'Emily Carter',   'role'=>'Product Manager', 'img'=>'https://i.pravatar.cc/100?img=47','quote'=>'Vetora quickly understood our business needs and delivered a tailored solution. Their smart automation improved efficiency and accelerated approvals significantly.'],
-                ['name'=>'Demon Cats',     'role'=>'CEO',             'img'=>'https://i.pravatar.cc/100?img=15','quote'=>'Vetora Solutions brought our platform to life exactly as envisioned. Their seamless platform and responsive support have greatly improved our efficiency.'],
-                ['name'=>'Simon Cyrene',   'role'=>'CTO',             'img'=>'https://i.pravatar.cc/100?img=22','quote'=>'Vetora developed a highly efficient and secure AI-powered system for our hospital. It streamlined our workflow and improved patient management.'],
-                ['name'=>'Key Benefits',   'role'=>'Manager',         'img'=>'https://i.pravatar.cc/100?img=32','quote'=>'Vetora helped us reach more clients with a professional AI-powered platform. Their expert team delivered outstanding quality and results every time.'],
-                ['name'=>'Michael Jordan', 'role'=>'Director',        'img'=>'https://i.pravatar.cc/100?img=44','quote'=>'The AI roadmap Vetora delivered was clear, realistic, and exactly what our leadership team needed to greenlight the project and move forward.'],
+            $tcols = [
+                [
+                    ['name'=>'Simon Cyrene','role'=>'CTO','img'=>'https://i.pravatar.cc/100?img=12','quote'=>'Their AI solutions transformed our workflow, improved efficiency, and delivered measurable business growth faster than we expected.'],
+                    ['name'=>'Alice Williams','role'=>'Founder','img'=>'https://i.pravatar.cc/100?img=45','feat'=>true,'quote'=>'A highly skilled team that understands technology and business, delivering intelligent solutions with outstanding performance and reliability.'],
+                    ['name'=>'Michael Jordan','role'=>'Director','img'=>'https://i.pravatar.cc/100?img=33','quote'=>'The AI roadmap Vetora delivered was clear, realistic, and exactly what our leadership needed to greenlight the project.'],
+                ],
+                [
+                    ['name'=>'Emily Carter','role'=>'Product Manager','img'=>'https://i.pravatar.cc/100?img=47','feat'=>true,'quote'=>'A highly skilled team that understands technology and business, delivering intelligent solutions with outstanding performance and reliability.'],
+                    ['name'=>'Simon Cyrene','role'=>'CTO','img'=>'https://i.pravatar.cc/100?img=22','quote'=>'Their AI solutions transformed our workflow, improved efficiency, and delivered measurable business growth faster than we expected.'],
+                    ['name'=>'Sofia Nguyen','role'=>'Operations Lead','img'=>'https://i.pravatar.cc/100?img=5','quote'=>'Vetora quickly understood our needs and delivered a tailored solution. Their automation improved efficiency and accelerated approvals significantly.'],
+                ],
+                [
+                    ['name'=>'Demon Cats','role'=>'CEO','img'=>'https://i.pravatar.cc/100?img=15','quote'=>'Their AI solutions transformed our workflow, improved efficiency, and delivered measurable business growth faster than we expected.'],
+                    ['name'=>'Key Benefits','role'=>'Manager','img'=>'https://i.pravatar.cc/100?img=32','feat'=>true,'quote'=>'Vetora helped us reach more clients with a professional AI platform. Their expert team delivered outstanding quality and results every time.'],
+                    ['name'=>'David Miller','role'=>'Head of Data','img'=>'https://i.pravatar.cc/100?img=51','quote'=>'Vetora brought our platform to life exactly as envisioned. Their responsive support has greatly improved our day-to-day efficiency.'],
+                ],
             ];
         @endphp
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px;">
-            @foreach($testi as $i => $t)
-            <div class="reveal" style="background:rgba(26,22,64,.72);border:1px solid rgba(124,58,237,.2);border-radius:18px;padding:28px;transition:transform .35s ease,border-color .35s ease;{{ ($i % 2 !== 0) ? 'margin-top:40px;' : '' }}">
-                <span style="font-size:30px;color:#06B6D4;display:block;margin-bottom:6px;line-height:1;">❝</span>
-                <div style="color:#FFB22E;font-size:13px;margin-bottom:14px;letter-spacing:2px;">★★★★★</div>
-                <p style="font-size:14px;color:rgba(255,255,255,.62);line-height:1.75;margin-bottom:22px;">{{ $t['quote'] }}</p>
-                <div style="display:flex;align-items:center;gap:12px;">
-                    <img src="{{ $t['img'] }}" alt="{{ $t['name'] }}" style="width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid rgba(124,58,237,.35);">
-                    <div>
-                        <div style="font-weight:700;font-size:14.5px;color:#fff;">{{ $t['name'] }}</div>
-                        <div style="font-size:12px;color:rgba(255,255,255,.42);">{{ $t['role'] }}</div>
-                    </div>
+
+        <div class="tstm__cols">
+            @foreach($tcols as $ci => $col)
+            <div class="tstm__col {{ $ci === 1 ? 'tstm__col--down' : 'tstm__col--up' }}">
+                <div class="tstm__track">
+                    @foreach(array_merge($col, $col) as $t)
+                    <article class="tstm-card{{ !empty($t['feat']) ? ' tstm-card--feat' : '' }}">
+                        @if(empty($t['feat']))
+                        <div class="tstm-card__top">
+                            <span class="tstm-card__quote">&#10077;</span>
+                            <span class="tstm-card__stars">★★★★★</span>
+                        </div>
+                        @endif
+                        <p class="tstm-card__text">{{ $t['quote'] }}</p>
+                        <div class="tstm-card__person">
+                            <img src="{{ $t['img'] }}" alt="{{ $t['name'] }}" onerror="this.style.display='none'">
+                            <div>
+                                <span class="tstm-card__name">{{ $t['name'] }}</span>
+                                <span class="tstm-card__role">{{ $t['role'] }}</span>
+                            </div>
+                        </div>
+                    </article>
+                    @endforeach
                 </div>
             </div>
             @endforeach
@@ -630,7 +648,7 @@
     {{-- GSAP + ScrollTrigger are loaded globally in layouts/app.blade.php --}}
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/countup.js@2.8.0/dist/countUp.umd.js"></script>
-    <script src="{{ asset('Assets/js/ai-services.js') }}?v=1.0.3"></script>
+    <script src="{{ asset('Assets/js/ai-services.js') }}?v=1.0.4"></script>
 
     {{-- Matter.js physics for the falling "Our Technologies" capsules --}}
     <script src="https://cdn.jsdelivr.net/npm/matter-js@0.19.0/build/matter.min.js"></script>
