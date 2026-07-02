@@ -972,11 +972,13 @@ body::before {
     transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Active row's arrow fills blue -> purple and the arrow nudges up-right. */
+/* Active row's arrow fills blue -> purple, shifts a bit to the right, and the
+   arrow icon nudges up-right. */
 .axo-svc-row.axo-open .axo-svc-arrow {
     background: linear-gradient(140deg, #6366F1 0%, #7C3AED 100%);
     border-color: transparent;
     box-shadow: 0 10px 26px rgba(99, 102, 241, 0.45);
+    transform: translateX(14px);
 }
 
 .axo-svc-row.axo-open .axo-svc-arrow__icon {
