@@ -3440,13 +3440,31 @@ body::before {
     background-size: 28px 28px;
     pointer-events: none;
 }
-
-.tech2__inner {
+/* Outer container that centres the card. */
+.tech2__wrap {
     position: relative;
     z-index: 2;
     max-width: 1280px;
     margin: 0 auto;
     padding: 0 24px;
+}
+/* The card: rounded, bordered, background image (set inline) with a dark
+   overlay for readability. overflow:hidden clips the bleeding VR image and the
+   falling capsules to the card. */
+.tech2__card {
+    position: relative;
+    border-radius: 28px;
+    border: 1px solid rgba(124, 58, 237, .28);
+    overflow: hidden;
+    padding: 56px;
+    background-color: #12102e;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, .35);
+}
+.tech2__inner {
+    position: relative;
+    z-index: 2;
     display: grid;
     grid-template-columns: 1.05fr 1fr;
     gap: 50px;
@@ -3534,14 +3552,16 @@ body::before {
     pointer-events: none;
 }
 
-/* Transparent cutout figure (VR-headset PNG), aligned to the bottom-right —
-   no box/border so it reads like the reference. */
+/* Transparent cutout figure (VR-headset PNG), aligned to the bottom-right and
+   bleeding to the card's right + bottom edges (negative margins cancel the
+   card padding on those sides). */
 .tech2__right {
     position: relative;
     display: flex;
     align-items: flex-end;
-    justify-content: center;
+    justify-content: flex-end;
     min-height: 520px;
+    margin: -20px -56px -56px 0;
 }
 
 .tech2__right img {
@@ -3555,17 +3575,8 @@ body::before {
 }
 
 @media (max-width: 900px) {
-    .tech2__inner {
-        grid-template-columns: 1fr;
-        gap: 34px;
-    }
-
-    .tech2__right {
-        min-height: 300px;
-        order: -1;
-    }
-
-    .tech2__stage {
-        min-height: 260px;
-    }
+    .tech2__card { padding: 34px; }
+    .tech2__inner { grid-template-columns: 1fr; gap: 34px; }
+    .tech2__right { min-height: 300px; order: -1; margin: -34px -34px 0 -34px; justify-content: center; }
+    .tech2__stage { min-height: 260px; }
 }

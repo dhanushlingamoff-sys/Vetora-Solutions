@@ -7,7 +7,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-    <link rel="stylesheet" href="{{ asset('Assets/css/ai-services.css') }}?v=1.1.4">
+    <link rel="stylesheet" href="{{ asset('Assets/css/ai-services.css') }}?v=1.1.5">
     <style>body, html { background: #0D0B2A !important; }</style>
 @endsection
 
@@ -385,7 +385,10 @@
 ═══════════════════════════════════════════════════════════ --}}
 <section class="tech2 reveal">
     <div class="tech2__bg"></div>
-    <div class="tech2__inner">
+    <div class="tech2__wrap">
+        <div class="tech2__card"
+             style="background-image: linear-gradient(rgba(13,11,42,.80), rgba(16,12,44,.88)), url('{{ asset('Assets/Images/AI-development/bg-01.jpg') }}');">
+        <div class="tech2__inner">
 
         <div class="tech2__left">
             <div class="feat-eyebrow">
@@ -431,7 +434,9 @@
                  onerror="this.style.display='none'">
         </div>
 
-    </div>
+        </div>{{-- /.tech2__inner --}}
+        </div>{{-- /.tech2__card --}}
+    </div>{{-- /.tech2__wrap --}}
 </section>
 
 
