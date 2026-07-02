@@ -6,7 +6,7 @@
                 <!-- Header -->
                 <div class="vetora-modal-header">
                     <div class="vetora-header-left">
-                        <div class="vetora-logo-pulse"><i class="bi bi-cpu-fill"></i></div>
+                        <div class="vetora-logo-pulse"><img src="{{ asset('Assets/Images/logo.png') }}" alt="Vetora" style="width:24px;height:24px;object-fit:contain;"></div>
                         <div>
                             <h5 class="vetora-modal-title">VETORA AI</h5>
                             <span class="vetora-status-dot"><span class="dot-pulse"></span>SYSTEM ONLINE</span>
@@ -91,7 +91,7 @@
                             <div class="vetora-chat-log" id="vetoraChatLog">
 
                                 <div class="chat-msg bot-msg">
-                                    <div class="msg-avatar"><i class="bi bi-cpu-fill"></i></div>
+                                    <div class="msg-avatar"><img src="{{ asset('Assets/Images/logo.png') }}" alt="Vetora" style="width:18px;height:18px;object-fit:contain;"></div>
                                     <div class="msg-body">
                                         <div class="msg-meta"><span class="msg-name">Vetora AI</span><span
                                                 class="msg-time">Just now</span></div>
@@ -101,7 +101,7 @@
                                 </div>
 
                                 <div class="chat-msg bot-msg">
-                                    <div class="msg-avatar"><i class="bi bi-cpu-fill"></i></div>
+                                    <div class="msg-avatar"><img src="{{ asset('Assets/Images/logo.png') }}" alt="Vetora" style="width:18px;height:18px;object-fit:contain;"></div>
                                     <div class="msg-body">
                                         <div class="msg-meta"><span class="msg-name">Vetora AI</span><span
                                                 class="msg-time">10:42 AM</span></div>
@@ -134,7 +134,7 @@
                                 </div>
 
                                 <div class="chat-msg bot-msg">
-                                    <div class="msg-avatar"><i class="bi bi-cpu-fill"></i></div>
+                                    <div class="msg-avatar"><img src="{{ asset('Assets/Images/logo.png') }}" alt="Vetora" style="width:18px;height:18px;object-fit:contain;"></div>
                                     <div class="msg-body">
                                         <div class="msg-meta"><span class="msg-name">Vetora AI</span><span
                                                 class="msg-time">10:43 AM</span></div>
@@ -155,7 +155,7 @@
 
                             <!-- Typing indicator -->
                             <div class="vetora-typing" id="vetoraTyping" style="display:none;">
-                                <div class="msg-avatar"><i class="bi bi-cpu-fill"></i></div>
+                                <div class="msg-avatar"><img src="{{ asset('Assets/Images/logo.png') }}" alt="Vetora" style="width:18px;height:18px;object-fit:contain;"></div>
                                 <div class="typing-dots"><span></span><span></span><span></span></div>
                             </div>
 
