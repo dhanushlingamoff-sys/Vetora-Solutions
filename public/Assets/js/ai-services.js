@@ -275,22 +275,23 @@
         row.addEventListener("click", function () { openSvcRow(row); });
     });
 
-    /* Service headline — word-by-word reveal (same effect as the About headline) */
-    var svcHeadline = document.getElementById("svcHeadline");
-    if (svcHeadline) {
-        var svcWords = svcHeadline.textContent.trim().split(/\s+/);
-        svcHeadline.innerHTML = svcWords
+    /* Section headlines — word-by-word reveal (same effect as the About headline) */
+    ["svcHeadline", "techHeadline"].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        var words = el.textContent.trim().split(/\s+/);
+        el.innerHTML = words
             .map(function (w) { return '<span class="word">' + w + '</span>'; })
             .join(' ');
-        var svcWordEls = svcHeadline.querySelectorAll(".word");
+        var wordEls = el.querySelectorAll(".word");
         new IntersectionObserver(function (entries, obs) {
             if (!entries[0].isIntersecting) return;
-            svcWordEls.forEach(function (w, i) {
+            wordEls.forEach(function (w, i) {
                 setTimeout(function () { w.classList.add("lit"); }, i * 80);
             });
             obs.disconnect();
-        }, { threshold: 0.3 }).observe(svcHeadline);
-    }
+        }, { threshold: 0.3 }).observe(el);
+    });
 
     /* ---------------------------------------------------------------
        Swiper — projects carousel

@@ -7,7 +7,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-    <link rel="stylesheet" href="{{ asset('Assets/css/ai-services.css') }}?v=1.1.3">
+    <link rel="stylesheet" href="{{ asset('Assets/css/ai-services.css') }}?v=1.1.4">
     <style>body, html { background: #0D0B2A !important; }</style>
 @endsection
 
@@ -393,10 +393,7 @@
                 <span class="feat-eyebrow__dot"></span>
                 <span class="feat-eyebrow__text">Our Technologies</span>
             </div>
-            <h2 class="tech2__title">
-                Built On A Modern Stack
-                <span>Delivering Intelligent Solutions</span>
-            </h2>
+            <h2 class="about-headline" id="techHeadline">Built On A Modern Stack Delivering Intelligent Solutions</h2>
             <p class="tech2__para">
                 We build smart, scalable AI solutions that simplify complexity, accelerate
                 growth, and redefine how businesses operate in a digital-first world.
@@ -695,7 +692,7 @@
     {{-- GSAP + ScrollTrigger are loaded globally in layouts/app.blade.php --}}
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/countup.js@2.8.0/dist/countUp.umd.js"></script>
-    <script src="{{ asset('Assets/js/ai-services.js') }}"></script>
+    <script src="{{ asset('Assets/js/ai-services.js') }}?v=1.0.1"></script>
 
     {{-- Matter.js physics for the falling "Our Technologies" capsules --}}
     <script src="https://cdn.jsdelivr.net/npm/matter-js@0.19.0/build/matter.min.js"></script>

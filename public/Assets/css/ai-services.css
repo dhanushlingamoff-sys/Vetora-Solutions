@@ -3434,20 +3434,8 @@ body::before {
     flex-direction: column;
     min-width: 0;
 }
-.tech2__title {
-    font-family: 'Plus Jakarta Sans', 'Lexend', sans-serif;
-    font-weight: 800;
-    font-size: clamp(28px, 3.4vw, 46px);
-    line-height: 1.12;
-    color: #fff;
-    margin: 6px 0 0;
-}
-.tech2__title span {
-    background: linear-gradient(135deg, #7C3AED, #D946EF);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
+/* The technologies headline reuses .about-headline (size/weight/colour/font
+   and the word-by-word reveal), identical to the service + About headlines. */
 .tech2__para {
     font-size: 15.5px;
     line-height: 1.85;
