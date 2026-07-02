@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-    <link rel="stylesheet" href="{{ asset('Assets/css/ai-services.css') }}?v=1.2.8">
+    <link rel="stylesheet" href="{{ asset('Assets/css/ai-services.css') }}?v=1.2.9">
     <style>body, html { background: #0D0B2A !important; }</style>
 @endsection
 
@@ -625,9 +625,9 @@
     {{-- GSAP + ScrollTrigger are loaded globally in layouts/app.blade.php --}}
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/countup.js@2.8.0/dist/countUp.umd.js"></script>
-    <script src="{{ asset('Assets/js/ai-services.js') }}?v=1.0.7"></script>
+    <script src="{{ asset('Assets/js/ai-services.js') }}?v=1.0.8"></script>
 
     {{-- Matter.js physics for the falling "Our Technologies" capsules --}}
     <script src="https://cdn.jsdelivr.net/npm/matter-js@0.19.0/build/matter.min.js"></script>
-    <script src="{{ asset('Assets/js/tech-drop.js') }}?v=1.0.1"></script>
+    <script src="{{ asset('Assets/js/tech-drop.js') }}?v=1.0.2"></script>
 @endsection

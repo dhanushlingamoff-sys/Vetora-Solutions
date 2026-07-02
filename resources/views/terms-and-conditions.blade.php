@@ -2,7 +2,7 @@
 
 @section('meta')
     <title>Terms &amp; Conditions — Vetora Solutions</title>
-    <link rel="stylesheet" href="{{ asset('Assets/css/legal.css') }}?v=1.0.0">
+    <link rel="stylesheet" href="{{ asset('Assets/css/legal.css') }}?v=1.0.1">
 @endsection
 
 @section('content')

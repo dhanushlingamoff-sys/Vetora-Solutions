@@ -30,11 +30,11 @@
     <script src="https://www.google.com/recaptcha/api.js?onload=vetoraRecaptchaLoad&render=explicit" async defer></script>
 
     {{-- custom css --}}
-    <link rel="stylesheet" href="{{ asset('Assets/css/style.css') }}?v=1.0.2">
-    <link rel="stylesheet" href="{{ asset('Assets/css/resources.css') }}?v=1.0.2">
+    <link rel="stylesheet" href="{{ asset('Assets/css/style.css') }}?v=1.0.3">
+    <link rel="stylesheet" href="{{ asset('Assets/css/resources.css') }}?v=1.0.3">
 
     {{-- site-wide smooth scrolling + scroll-reveal support --}}
-    <link rel="stylesheet" href="{{ asset('Assets/css/scroll-fx.css') }}?v=1.0.0">
+    <link rel="stylesheet" href="{{ asset('Assets/css/scroll-fx.css') }}?v=1.0.1">
 
     {{-- Fonts used by the site-wide Vetora AI chatbot (Orbitron HUD + Roboto Mono) --}}
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -305,7 +305,7 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
-    <script src="{{ asset('Assets/js/scroll-fx.js') }}?v=1.0.0"></script>
+    <script src="{{ asset('Assets/js/scroll-fx.js') }}?v=1.0.1"></script>
 
     @yield('scripts')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
@@ -313,9 +313,9 @@
     </script>
 
     {{-- Vetora AI chatbot logic (site-wide; no-ops if the modal isn't present) --}}
-    <script src="{{ asset('Assets/js/vetora-chatbot.js') }}?v=1.0.0"></script>
+    <script src="{{ asset('Assets/js/vetora-chatbot.js') }}?v=1.0.1"></script>
 
-    <script src="{{ asset('Assets/js/script.js') }}?v=1.0.2"></script>
+    <script src="{{ asset('Assets/js/script.js') }}?v=1.0.3"></script>
 
     {{-- intl-tel-input JS — must be loaded before the inline initialization below --}}
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.6/build/js/intlTelInput.min.js"></script>

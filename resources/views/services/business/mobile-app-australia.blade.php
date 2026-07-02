@@ -84,7 +84,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-    <link rel="stylesheet" href="{{ asset('Assets/css/mobile-app.css') }}?v=2.9.5">
+    <link rel="stylesheet" href="{{ asset('Assets/css/mobile-app.css') }}?v=2.9.6">
 @endsection
 
 @section('content')
@@ -2440,6 +2440,6 @@
     })();
     </script>
 
-    <script src="{{ asset('Assets/js/faq.js') }}?v=3.0.0"></script>
+    <script src="{{ asset('Assets/js/faq.js') }}?v=3.0.1"></script>
 
 @endsection

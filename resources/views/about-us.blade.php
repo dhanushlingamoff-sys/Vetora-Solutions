@@ -6,7 +6,7 @@
 @endsection
 
 @section('styles')
-    <link rel="stylesheet" href="{{ asset('Assets/css/about-us.css') }}?v=1.0.0">
+    <link rel="stylesheet" href="{{ asset('Assets/css/about-us.css') }}?v=1.0.1">
 @endsection
 
 @section('content')
