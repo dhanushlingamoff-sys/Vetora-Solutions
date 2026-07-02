@@ -465,10 +465,10 @@
 
         @php
             $projects = [
-                ['img'=>'Assets/Images/Mobile-App/Portfolio/Abhi.webp','cat'=>'Automation','title'=>'Intelligent Workflow Automation'],
-                ['img'=>'Assets/Images/Mobile-App/Portfolio/Dots.webp','cat'=>'Analytics','title'=>'Advanced Predictive Analytics'],
-                ['img'=>'Assets/Images/Mobile-App/Portfolio/A-Team.webp','cat'=>'Chatbots','title'=>'Advanced Chatbots Solutions'],
-                ['img'=>'Assets/Images/Mobile-App/Portfolio/abhi-hospital.webp','cat'=>'Strategy','title'=>'Enterprise Efficiency Platform'],
+                ['img'=>'Assets/Images/AI-development/projects/portfolio-v-01-1000x650.jpg','cat'=>'Automation','title'=>'Intelligent Workflow Automation'],
+                ['img'=>'Assets/Images/AI-development/projects/portfolio-v-02-1000x650.jpg','cat'=>'Analytics','title'=>'Advanced Predictive Analytics'],
+                ['img'=>'Assets/Images/AI-development/projects/portfolio-v-03-1000x650.jpg','cat'=>'Chatbots','title'=>'Advanced Chatbots Solutions'],
+                ['img'=>'Assets/Images/AI-development/projects/portfolio-v-04-1000x650.jpg','cat'=>'Strategy','title'=>'Enterprise Efficiency Platform'],
             ];
         @endphp
         <div class="proj-grid">
