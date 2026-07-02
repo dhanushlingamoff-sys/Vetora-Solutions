@@ -800,22 +800,31 @@ body::before {
 }
 
 .axo-svc-rows {
+    position: relative;
     border-top: 1px solid var(--axo-border-soft);
+    /* Faint vertical grid behind the rows (columns at 0/25/50/75%). Normal rows
+       let it show through; the active row's opaque band covers it — matching
+       the reference. */
+    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 25% 100%;
 }
 
 .axo-svc-row {
+    position: relative;
     border-bottom: 1px solid var(--axo-border-soft);
     padding: 26px 26px;
     display: flex;
     align-items: center;
     border-radius: 18px;
-    transition: background 0.4s ease;
+    transition: background 0.4s ease, box-shadow 0.4s ease;
     cursor: pointer;
 }
 
-/* Active row: a subtle lighter violet band + the thumb/arrow states below. */
+/* Active row: an OPAQUE lighter violet band (so it hides the grid behind it),
+   with a soft edge — the main visual difference from the normal rows. */
 .axo-svc-row.axo-open {
-    background: rgba(124, 58, 237, 0.10);
+    background: linear-gradient(rgba(124, 58, 237, 0.14), rgba(124, 58, 237, 0.14)), #13112E;
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
 }
 
 /* Thumbnail sits at the far LEFT and is collapsed to zero width until the row
