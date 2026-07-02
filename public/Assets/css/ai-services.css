@@ -1542,7 +1542,7 @@ body::before {
     background-color: #060129;
     background-image: url('/Assets/Images/AI-development/banner-pattern.png');
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     background-position: center top;
 }
 
@@ -2138,10 +2138,10 @@ body::before {
 }
 
 .feat-eyebrow__text {
-    font-size: 0.75rem;
+    font-size: 0.9rem;
     font-weight: 700;
     letter-spacing: 0.2em;
-    color: #9CA3AF;
+    color: #fff;
     text-transform: uppercase;
 }
 
@@ -2822,10 +2822,10 @@ body::before {
 }
 
 .eyebrow-label {
-    font-size: 0.75rem;
+    font-size: 0.9rem;
     font-weight: 700;
     letter-spacing: 0.18em;
-    color: #9CA3AF;
+    color: #fff;
     text-transform: uppercase;
 }
 
