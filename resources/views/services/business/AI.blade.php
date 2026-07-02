@@ -360,7 +360,7 @@
                     <img src="{{ asset($svc['img']) }}" alt="{{ $svc['title'] }}"
                          onerror="this.parentElement.style.background='linear-gradient(135deg,rgba(124,58,237,.35),rgba(13,11,42,.9))'">
                 </div>
-                <span class="axo-svc-num">{{ $svc['num'] }}</span>
+                <span class="axo-svc-num">[{{ $svc['num'] }}]</span>
                 <div class="axo-svc-info">
                     <h3>{{ $svc['title'] }}</h3>
                     <p>{{ $svc['desc'] }}</p>
@@ -370,7 +370,7 @@
                     <span><em>&#x2733;</em>{{ $tag }}</span>
                     @endforeach
                 </div>
-                <div class="axo-svc-arrow">↗</div>
+                <div class="axo-svc-arrow"><span class="axo-svc-arrow__icon">&#8599;</span></div>
             </div>
             @endforeach
         </div>

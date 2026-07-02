@@ -853,7 +853,14 @@ body::before {
     font-family: var(--axo-font-head);
     font-size: 22px;
     font-weight: 700;
-    color: var(--axo-text-mute);
+    color: #fff;
+    transition: color 0.35s ease;
+}
+
+/* Collapsed rows show the bracket number a touch dimmer; the active row is
+   full white. */
+.axo-svc-row:not(.axo-open) .axo-svc-num {
+    color: rgba(255, 255, 255, 0.85);
 }
 
 .axo-svc-info {
@@ -893,13 +900,34 @@ body::before {
     font-size: 15px;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.85);
+    /* Rest offset for the "points move" reveal on the active row. */
+    transform: translateX(6px);
+    opacity: 0.82;
+    transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity 0.45s ease;
 }
 
+/* When the row activates, the tag rows slide into place with a small stagger. */
+.axo-svc-row.axo-open .axo-svc-tags span {
+    transform: translateX(0);
+    opacity: 1;
+}
+.axo-svc-row.axo-open .axo-svc-tags span:nth-child(1) { transition-delay: 0.05s; }
+.axo-svc-row.axo-open .axo-svc-tags span:nth-child(2) { transition-delay: 0.12s; }
+.axo-svc-row.axo-open .axo-svc-tags span:nth-child(3) { transition-delay: 0.19s; }
+
 .axo-svc-tags em {
-    color: #D946EF;
+    /* Light-lavender 6-point spark (brightens to magenta on the active row). */
+    color: rgba(190, 185, 230, 0.75);
     font-style: normal;
     font-size: 13px;
     line-height: 1;
+    transition: color 0.35s ease, transform 0.45s ease;
+}
+
+.axo-svc-row.axo-open .axo-svc-tags em {
+    color: #D946EF;
+    transform: rotate(90deg);
 }
 
 .axo-svc-arrow {
@@ -914,14 +942,31 @@ body::before {
     justify-content: center;
     color: #fff;
     font-size: 18px;
-    transition: all 0.35s ease;
+    overflow: hidden;
+    transition: background 0.4s ease, border-color 0.4s ease,
+                box-shadow 0.4s ease, transform 0.4s ease;
 }
 
-/* Active row's arrow fills solid purple. */
+.axo-svc-arrow__icon {
+    display: block;
+    line-height: 1;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Active row's arrow fills blue -> purple and the arrow nudges up-right. */
 .axo-svc-row.axo-open .axo-svc-arrow {
-    background: var(--axo-grad-accent);
+    background: linear-gradient(140deg, #6366F1 0%, #7C3AED 100%);
     border-color: transparent;
-    transform: rotate(0deg);
+    box-shadow: 0 10px 26px rgba(99, 102, 241, 0.45);
+}
+
+.axo-svc-row.axo-open .axo-svc-arrow__icon {
+    transform: translate(3px, -3px);
+}
+
+/* Hovering the arrow itself gives it an extra diagonal nudge. */
+.axo-svc-arrow:hover .axo-svc-arrow__icon {
+    transform: translate(4px, -4px) scale(1.08);
 }
 
 @media (prefers-reduced-motion: reduce) {
