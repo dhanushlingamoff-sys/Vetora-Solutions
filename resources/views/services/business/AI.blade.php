@@ -7,7 +7,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-    <link rel="stylesheet" href="{{ asset('Assets/css/ai-services.css') }}?v=1.2.2">
+    <link rel="stylesheet" href="{{ asset('Assets/css/ai-services.css') }}?v=1.2.3">
     <style>body, html { background: #0D0B2A !important; }</style>
 @endsection
 
@@ -490,81 +490,6 @@
 
 
 {{-- ═══════════════════════════════════════════════════════════
-     7. OUR PRICING
-═══════════════════════════════════════════════════════════ --}}
-<section class="reveal" style="background:#0D0B2A;padding:110px 0;position:relative;overflow:hidden;">
-    <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(124,58,237,.12) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;"></div>
-    <div class="container" style="max-width:1280px;margin:0 auto;padding:0 24px;position:relative;z-index:2;">
-
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:end;margin-bottom:52px;">
-            <div>
-                <div style="font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#D946EF;margin-bottom:14px;">→ Our Pricing</div>
-                <h2 style="font-family:'Lexend',sans-serif;font-weight:800;font-size:clamp(24px,3.6vw,44px);color:#fff;text-transform:uppercase;margin:0;">
-                    Simple, Transparent<br>
-                    <span style="background:linear-gradient(135deg,#7C3AED,#06B6D4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">AI Pricing</span>
-                </h2>
-            </div>
-            <div>
-                <p style="font-size:15.5px;line-height:1.85;color:rgba(255,255,255,.6);margin-bottom:24px;">Choose the plan that fits your ambitions. Every tier includes full onboarding and dedicated support.</p>
-                <div class="axo-pricing-toggle" style="display:inline-flex;align-items:center;padding:5px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(124,58,237,.24);">
-                    <button class="toggle-btn axo-active" data-mode="monthly" data-period="monthly" style="padding:10px 22px;border-radius:999px;border:none;background:linear-gradient(135deg,#6D28D9,#06B6D4);color:#fff;font-weight:700;font-size:13.5px;cursor:pointer;">Monthly</button>
-                    <button class="toggle-btn" data-mode="yearly" data-period="yearly" style="padding:10px 22px;border-radius:999px;border:none;background:transparent;color:rgba(255,255,255,.55);font-weight:700;font-size:13.5px;cursor:pointer;transition:color .3s;">Yearly</button>
-                </div>
-            </div>
-        </div>
-
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;align-items:stretch;">
-
-            {{-- Image card --}}
-            <div style="border-radius:24px;overflow:hidden;border:1px solid rgba(124,58,237,.2);min-height:420px;position:relative;background:linear-gradient(160deg,rgba(124,58,237,.3),rgba(13,11,42,.92));">
-                <img src="{{ asset('Assets/Images/ai-brain.png') }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:screen;opacity:.45;" onerror="this.style.display='none'">
-                <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,11,42,.1),rgba(13,11,42,.88));"></div>
-                <div style="position:absolute;left:28px;right:28px;bottom:30px;">
-                    <p style="font-family:'Lexend',sans-serif;font-size:22px;font-weight:700;color:#fff;line-height:1.35;margin:0;">Your dream, our mission — let's make it happen.</p>
-                </div>
-            </div>
-
-            {{-- Commercial --}}
-            <div data-price-monthly="49" data-price-yearly="470" style="background:rgba(26,22,64,.72);border:1px solid rgba(124,58,237,.32);border-radius:24px;padding:36px 30px;position:relative;overflow:hidden;transition:transform .35s ease;">
-                <div style="position:absolute;top:18px;right:-36px;background:linear-gradient(135deg,#7C3AED,#D946EF);color:#fff;font-size:11px;font-weight:800;letter-spacing:.06em;padding:7px 46px;transform:rotate(40deg);">POPULAR</div>
-                <div style="width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#6D28D9,#06B6D4);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:20px;">♛</div>
-                <h3 style="font-family:'Lexend',sans-serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:4px;">Commercial</h3>
-                <div style="margin:12px 0 16px;">
-                    <span class="axo-price-value" style="font-family:'Lexend',sans-serif;font-size:42px;font-weight:800;color:#fff;">$49</span>
-                    <span class="axo-price-period" style="font-size:14px;color:rgba(255,255,255,.48);margin-left:4px;">/Monthly</span>
-                </div>
-                <p style="font-size:14px;color:rgba(255,255,255,.58);line-height:1.7;margin-bottom:22px;">Begin with essential AI tools and build a strong foundation for growth.</p>
-                <ul style="list-style:none;padding:0;margin:0 0 28px;display:flex;flex-direction:column;gap:12px;">
-                    @foreach(['Basic AI Tools','Essential Features','Beginner-Friendly Interface'] as $f)
-                    <li style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:rgba(255,255,255,.62);"><span style="color:#D946EF;font-size:15px;">✓</span>{{ $f }}</li>
-                    @endforeach
-                </ul>
-                <a href="{{ route('contact') }}" class="page-btn">Choose Package &nbsp;→</a>
-            </div>
-
-            {{-- Premium --}}
-            <div data-price-monthly="99" data-price-yearly="950" style="background:rgba(26,22,64,.5);border:1px solid rgba(124,58,237,.2);border-radius:24px;padding:36px 30px;position:relative;transition:transform .35s ease;">
-                <div style="width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#D946EF);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:20px;">◆</div>
-                <h3 style="font-family:'Lexend',sans-serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:4px;">Premium</h3>
-                <div style="margin:12px 0 16px;">
-                    <span class="axo-price-value" style="font-family:'Lexend',sans-serif;font-size:42px;font-weight:800;color:#fff;">$99</span>
-                    <span class="axo-price-period" style="font-size:14px;color:rgba(255,255,255,.48);margin-left:4px;">/Monthly</span>
-                </div>
-                <p style="font-size:14px;color:rgba(255,255,255,.58);line-height:1.7;margin-bottom:22px;">Enterprise-grade intelligence with premium automation built in.</p>
-                <ul style="list-style:none;padding:0;margin:0 0 28px;display:flex;flex-direction:column;gap:12px;">
-                    @foreach(['Advanced AI Solutions','Scalable For Growth','Optimized Performance Guaranteed'] as $f)
-                    <li style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:rgba(255,255,255,.62);"><span style="color:#D946EF;font-size:15px;">✓</span>{{ $f }}</li>
-                    @endforeach
-                </ul>
-                <a href="{{ route('contact') }}" class="page-btn">Choose Package &nbsp;→</a>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-
-{{-- ═══════════════════════════════════════════════════════════
      8. OUR TESTIMONIALS
 ═══════════════════════════════════════════════════════════ --}}
 <section class="reveal" style="background:#13112E;padding:110px 0;position:relative;overflow:hidden;">
@@ -705,7 +630,7 @@
     {{-- GSAP + ScrollTrigger are loaded globally in layouts/app.blade.php --}}
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/countup.js@2.8.0/dist/countUp.umd.js"></script>
-    <script src="{{ asset('Assets/js/ai-services.js') }}?v=1.0.2"></script>
+    <script src="{{ asset('Assets/js/ai-services.js') }}?v=1.0.3"></script>
 
     {{-- Matter.js physics for the falling "Our Technologies" capsules --}}
     <script src="https://cdn.jsdelivr.net/npm/matter-js@0.19.0/build/matter.min.js"></script>

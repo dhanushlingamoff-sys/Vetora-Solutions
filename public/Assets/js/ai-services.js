@@ -83,32 +83,6 @@
     });
 
     /* ---------------------------------------------------------------
-       4. Pricing toggle — Monthly / Yearly
-          Swaps .axo-active between buttons; updates displayed price.
-    --------------------------------------------------------------- */
-    var toggleBtns = document.querySelectorAll(".axo-pricing-toggle button");
-    var priceCards = document.querySelectorAll("[data-price-monthly]");
-
-    toggleBtns.forEach(function (btn) {
-        btn.addEventListener("click", function () {
-            toggleBtns.forEach(function (b) { b.classList.remove("axo-active"); });
-            btn.classList.add("axo-active");
-
-            var mode = btn.getAttribute("data-mode");
-            priceCards.forEach(function (card) {
-                var val    = mode === "yearly"
-                    ? card.getAttribute("data-price-yearly")
-                    : card.getAttribute("data-price-monthly");
-                var period = mode === "yearly" ? "/Yearly" : "/Monthly";
-                var valEl  = card.querySelector(".axo-price-value");
-                var perEl  = card.querySelector(".axo-price-period");
-                if (valEl) valEl.textContent = "$" + val;
-                if (perEl) perEl.textContent = period;
-            });
-        });
-    });
-
-    /* ---------------------------------------------------------------
        5. Scroll-to-top — show after 300 px, smooth scroll on click
     --------------------------------------------------------------- */
     var totop = document.querySelector(".axo-totop");
