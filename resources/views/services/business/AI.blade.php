@@ -7,12 +7,17 @@
 
 @section('styles')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-    <link rel="stylesheet" href="{{ asset('Assets/css/ai-services.css') }}?v=1.1.5">
+    <link rel="stylesheet" href="{{ asset('Assets/css/ai-services.css') }}?v=1.1.6">
     <style>body, html { background: #0D0B2A !important; }</style>
 @endsection
 
 @section('content')
 <div id="top" class="axo-page" style="font-family:'Lexend','Livvic',sans-serif;color:#fff;overflow-x:hidden;">
+
+{{-- Animated vertical-line background (light beams travelling down faint lines) --}}
+<div class="page-lines" aria-hidden="true">
+    <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+</div>
 
 {{-- ═══════════════════════════════════════════════════════════
      1. HERO

@@ -3579,3 +3579,60 @@ body::before {
     .tech2__right { min-height: 300px; order: -1; margin: -34px -34px 0 -34px; justify-content: center; }
     .tech2__stage { min-height: 260px; }
 }
+
+/* ===================================================================
+   ANIMATED VERTICAL-LINE BACKGROUND
+   A fixed layer behind the page content (z-index:-1): faint static vertical
+   lines with light beams travelling down them.
+   =================================================================== */
+.page-lines {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+/* Faint static vertical guide lines */
+.page-lines::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+        90deg,
+        rgba(124, 58, 237, .07) 0 1px,
+        transparent 1px 200px);
+}
+/* Travelling light beams */
+.page-lines i {
+    position: absolute;
+    top: -32vh;
+    width: 2px;
+    height: 32vh;
+    background: linear-gradient(to bottom,
+        transparent,
+        rgba(139, 116, 235, .0) 5%,
+        rgba(168, 130, 255, .85) 50%,
+        rgba(139, 116, 235, .0) 95%,
+        transparent);
+    filter: blur(0.3px);
+    animation: lineBeam 7s linear infinite;
+    opacity: 0;
+}
+.page-lines i:nth-child(1) { left: 8%;  animation-duration: 6.5s; animation-delay: 0s; }
+.page-lines i:nth-child(2) { left: 22%; animation-duration: 8s;   animation-delay: 2.4s; }
+.page-lines i:nth-child(3) { left: 38%; animation-duration: 7s;   animation-delay: 1.2s; }
+.page-lines i:nth-child(4) { left: 54%; animation-duration: 9s;   animation-delay: 3.6s; }
+.page-lines i:nth-child(5) { left: 68%; animation-duration: 6.8s; animation-delay: 0.8s; }
+.page-lines i:nth-child(6) { left: 82%; animation-duration: 8.5s; animation-delay: 4.2s; }
+.page-lines i:nth-child(7) { left: 93%; animation-duration: 7.4s; animation-delay: 2s; }
+
+@keyframes lineBeam {
+    0%   { transform: translateY(0);     opacity: 0; }
+    8%   { opacity: 1; }
+    92%  { opacity: 1; }
+    100% { transform: translateY(132vh); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-lines i { animation: none; opacity: 0; }
+}
