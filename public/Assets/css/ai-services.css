@@ -146,6 +146,7 @@ body::before {
     color: var(--axo-white);
     font-family: var(--axo-font-body);
     overflow-x: hidden;
+    overflow-y: clip;
     position: relative;
 }
 
@@ -948,15 +949,15 @@ body::before {
 
 .axo-svc-tags em {
     /* Light-lavender 6-point spark (brightens to magenta on the active row). */
-    color: rgba(190, 185, 230, 0.75);
+    color: #fff;
     font-style: normal;
     font-size: 18px;
+    font-weight: 700;
     line-height: 1;
     transition: color 0.35s ease, transform 0.45s ease;
 }
 
-.axo-svc-row.axo-open .axo-svc-tags em {
-    color: #D946EF;
+.axo-svc-row.axo-open .axo-svc-tags em {    
     transform: rotate(90deg);
 }
 
@@ -3793,7 +3794,7 @@ body::before {
     background: #151134;
     border: 1px solid rgba(124, 58, 237, .18);
     border-radius: 18px;
-    padding: 24px;
+    padding: 30px;
     margin-bottom: 24px;
 }
 
