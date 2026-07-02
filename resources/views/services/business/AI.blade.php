@@ -7,7 +7,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-    <link rel="stylesheet" href="{{ asset('Assets/css/ai-services.css') }}?v=1.2.6">
+    <link rel="stylesheet" href="{{ asset('Assets/css/ai-services.css') }}?v=1.2.7">
     <style>body, html { background: #0D0B2A !important; }</style>
 @endsection
 
@@ -563,40 +563,46 @@
 {{-- ═══════════════════════════════════════════════════════════
      9. OUR BLOG
 ═══════════════════════════════════════════════════════════ --}}
-<section class="reveal" style="background:#0D0B2A;padding:110px 0;position:relative;overflow:hidden;">
-    <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(124,58,237,.12) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;"></div>
+<section class="blog2 reveal" style="padding:110px 0;position:relative;overflow:hidden;">
     <div class="container" style="max-width:1280px;margin:0 auto;padding:0 24px;position:relative;z-index:2;">
-
-        <div style="margin-bottom:52px;">
-            <div style="font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#D946EF;margin-bottom:14px;">→ AI Insights</div>
-            <h2 style="font-family:'Lexend',sans-serif;font-weight:800;font-size:clamp(24px,3.6vw,44px);color:#fff;text-transform:uppercase;margin:0;">
-                Powerful AI Technologies Enabling<br>
-                <span style="background:linear-gradient(135deg,#7C3AED,#D946EF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Business Efficiency</span>
-            </h2>
-        </div>
-
-        @php
-            $blogs = [
-                ['img'=>'Assets/Images/Mobile-App/Portfolio/Dots.webp',  'cat'=>'Robotics',   'title'=>'Unlocking Business Value Through Advanced Machine Learning', 'date'=>'Jan 29, 2026'],
-                ['img'=>'Assets/Images/Mobile-App/Portfolio/WFB.webp',   'cat'=>'Technology', 'title'=>'How Artificial Intelligence Is Transforming Modern Enterprises', 'date'=>'Feb 05, 2026'],
-                ['img'=>'Assets/Images/Mobile-App/Portfolio/Allo.webp',  'cat'=>'Software',   'title'=>'Transforming Digital Operations Using Smart AI Technologies', 'date'=>'Feb 12, 2026'],
-            ];
-        @endphp
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:26px;">
-            @foreach($blogs as $blog)
-            <div class="reveal" style="background:#1A1640;border:1px solid rgba(124,58,237,.2);border-radius:18px;overflow:hidden;transition:transform .35s ease,border-color .35s ease;">
-                <div style="height:250px;position:relative;overflow:hidden;background:linear-gradient(160deg,rgba(124,58,237,.25),rgba(13,11,42,.85));">
-                    <img src="{{ asset($blog['img']) }}" alt="{{ $blog['title'] }}" style="width:100%;height:100%;object-fit:cover;transition:transform .6s ease;" onerror="this.style.display='none'">
-                    <span style="position:absolute;top:16px;left:16px;font-size:11px;font-weight:700;padding:6px 14px;border-radius:999px;background:rgba(13,11,42,.82);border:1px solid rgba(124,58,237,.3);color:#D946EF;backdrop-filter:blur(6px);">{{ $blog['cat'] }}</span>
-                </div>
-                <div style="padding:24px;">
-                    <div style="display:flex;gap:14px;font-size:12px;color:rgba(255,255,255,.38);margin-bottom:12px;">
-                        <span>{{ $blog['date'] }}</span><span>0 Comments</span>
-                    </div>
-                    <h4 style="font-family:'Lexend',sans-serif;font-size:17px;font-weight:700;color:#fff;margin-bottom:18px;line-height:1.4;">{{ $blog['title'] }}</h4>
-                    <a href="{{ url('/contact-us') }}" class="page-btn">Read More &nbsp;→</a>
-                </div>
+        <div class="blog2__head">
+            <div class="feat-eyebrow">
+                <span class="feat-eyebrow__line"></span>
+                <span class="feat-eyebrow__dot"></span>
+                <span class="feat-eyebrow__text">AI Insights</span>
             </div>
+            <h2 class="about-headline" id="blogHeadline">Powerful AI Technologies Enabling Business Efficiency</h2>
+        </div>
+    </div>
+
+    @php
+        $blogs = [
+            ['img'=>'Assets/Images/Mobile-App/Portfolio/Dots.webp',    'cat'=>'Robotics',     'title'=>'Unlocking Business Value Through Advanced Machine Learning', 'date'=>'Jan 29, 2026'],
+            ['img'=>'Assets/Images/Mobile-App/Portfolio/WFB.webp',     'cat'=>'Technology',   'title'=>'How Artificial Intelligence Is Transforming Modern Enterprises', 'date'=>'Feb 05, 2026'],
+            ['img'=>'Assets/Images/Mobile-App/Portfolio/Allo.webp',    'cat'=>'Software',     'title'=>'Transforming Digital Operations Using Smart AI Technologies', 'date'=>'Feb 12, 2026'],
+            ['img'=>'Assets/Images/Mobile-App/Portfolio/A-Team.webp',  'cat'=>'Organization', 'title'=>'Turning Challenges into Opportunities with Business Consultants', 'date'=>'Feb 18, 2026'],
+            ['img'=>'Assets/Images/Mobile-App/Portfolio/Abhi.webp',    'cat'=>'Automation',   'title'=>'Scaling Operations with Intelligent Workflow Automation', 'date'=>'Feb 24, 2026'],
+            ['img'=>'Assets/Images/Mobile-App/Portfolio/Qrooze.webp',  'cat'=>'Analytics',    'title'=>'From Data to Decisions with Predictive AI Analytics', 'date'=>'Mar 03, 2026'],
+        ];
+    @endphp
+
+    <div class="blog2__marquee">
+        <div class="blog2__track">
+            @foreach(array_merge($blogs, $blogs) as $b)
+            <article class="blog-card">
+                <a href="{{ url('/contact-us') }}" class="blog-card__media">
+                    <img src="{{ asset($b['img']) }}" alt="{{ $b['title'] }}" onerror="this.style.display='none'">
+                    <span class="blog-card__tag">{{ $b['cat'] }}</span>
+                </a>
+                <div class="blog-card__body">
+                    <h4 class="blog-card__title"><a href="{{ url('/contact-us') }}">{{ $b['title'] }}</a></h4>
+                    <div class="blog-card__meta">
+                        <span>{{ $b['date'] }}</span>
+                        <span class="blog-card__dot">•</span>
+                        <span>0 Comments</span>
+                    </div>
+                </div>
+            </article>
             @endforeach
         </div>
     </div>
@@ -613,7 +619,7 @@
     {{-- GSAP + ScrollTrigger are loaded globally in layouts/app.blade.php --}}
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/countup.js@2.8.0/dist/countUp.umd.js"></script>
-    <script src="{{ asset('Assets/js/ai-services.js') }}?v=1.0.4"></script>
+    <script src="{{ asset('Assets/js/ai-services.js') }}?v=1.0.5"></script>
 
     {{-- Matter.js physics for the falling "Our Technologies" capsules --}}
     <script src="https://cdn.jsdelivr.net/npm/matter-js@0.19.0/build/matter.min.js"></script>
