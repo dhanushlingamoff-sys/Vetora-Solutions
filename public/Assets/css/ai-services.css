@@ -3459,12 +3459,16 @@ body::before {
     align-self: flex-start;
 }
 
-/* Physics stage — capsules are absolutely positioned and driven by JS. */
+/* Physics stage — capsules are absolutely positioned and driven by JS.
+   overflow:hidden clips the drop to the stage box, so the capsules appear to
+   fall in from just below the About Company button (the stage's top edge)
+   rather than from the top of the section. */
 .tech2__stage {
     position: relative;
     flex: 1 1 auto;
-    min-height: 320px;
-    margin-top: 34px;
+    min-height: 380px;
+    margin-top: 28px;
+    overflow: hidden;
 }
 .tech-cap {
     position: absolute;

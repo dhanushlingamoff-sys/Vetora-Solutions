@@ -58,8 +58,11 @@
                 var w = cap.offsetWidth;
                 var h = cap.offsetHeight;
                 var x = 40 + Math.random() * Math.max(1, (W - 80 - w)) + w / 2;
-                /* start stacked above the stage so they drop in with a stagger */
-                var y = -80 - i * 64 - Math.random() * 60;
+                /* Start just above the stage top (which sits below the About
+                   Company button) with a small stagger, so — combined with the
+                   stage's overflow:hidden — they appear to drop in from below
+                   the button rather than from the top of the section. */
+                var y = -(h / 2) - 12 - i * 40 - Math.random() * 24;
                 var body = M.Bodies.rectangle(x, y, w, h, {
                     chamfer: { radius: h / 2 },
                     restitution: 0.35,

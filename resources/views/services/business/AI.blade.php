@@ -699,5 +699,5 @@
 
     {{-- Matter.js physics for the falling "Our Technologies" capsules --}}
     <script src="https://cdn.jsdelivr.net/npm/matter-js@0.19.0/build/matter.min.js"></script>
-    <script src="{{ asset('Assets/js/tech-drop.js') }}?v=1.0.0"></script>
+    <script src="{{ asset('Assets/js/tech-drop.js') }}?v=1.0.1"></script>
 @endsection
