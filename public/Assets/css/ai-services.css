@@ -3457,7 +3457,6 @@ body::before {
     border: 1px solid rgba(124, 58, 237, .28);
     overflow: hidden;
     padding: 56px;
-    background-color: #12102e;
     background-size: cover;
     background-position: center;
     box-shadow: 0 30px 70px rgba(0, 0, 0, .35);

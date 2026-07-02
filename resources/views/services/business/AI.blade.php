@@ -387,7 +387,7 @@
     <div class="tech2__bg"></div>
     <div class="tech2__wrap">
         <div class="tech2__card"
-             style="background-image: linear-gradient(rgba(13,11,42,.80), rgba(16,12,44,.88)), url('{{ asset('Assets/Images/AI-development/bg-01.jpg') }}');">
+             style="background-image: url('{{ asset('Assets/Images/AI-development/bg-01.jpg') }}');">
         <div class="tech2__inner">
 
         <div class="tech2__left">
