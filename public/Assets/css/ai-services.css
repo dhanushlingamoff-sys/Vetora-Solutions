@@ -896,12 +896,13 @@ body::before {
     font-size: 22px;
     font-weight: 700;
     color: #fff;
-    margin-bottom: 8px;
+    margin-bottom: 15px;
 }
 
 .axo-svc-info p {
-    font-size: 14.5px;
-    color: var(--axo-text-dim);
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
     margin-bottom: 0;
     max-width: 340px;
 }
@@ -2988,8 +2989,8 @@ body::before {
 }
 
 .about-avatar {
-    width: 44px;
-    height: 44px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     border: 2.5px solid #0D0B2A;
     margin-left: -14px;
@@ -3295,9 +3296,9 @@ body::before {
 /* The technologies headline reuses .about-headline (size/weight/colour/font
    and the word-by-word reveal), identical to the service + About headlines. */
 .tech2__para {
-    font-size: 15.5px;
+    font-size: 16px;
     line-height: 1.85;
-    color: rgba(255, 255, 255, .6);
+    color: #fff;
     margin: 18px 0 26px;
     max-width: 520px;
 }
@@ -3330,7 +3331,7 @@ body::before {
     background: rgba(15, 11, 40, .92);
     border: 1px solid rgba(124, 58, 237, .30);
     box-shadow: 0 10px 26px rgba(0, 0, 0, .38);
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 600;
     color: #fff;
     white-space: nowrap;
@@ -3343,8 +3344,8 @@ body::before {
     transform-origin: center center;
     /* NB: transform is driven by the physics engine every frame, so it is
        intentionally NOT transitioned here — only the colour/shadow are. */
-    transition: background 0.3s ease, border-color 0.3s ease,
-        box-shadow 0.3s ease, color 0.3s ease;
+    transition: background 0.6s ease, border-color 0.6s ease,
+        box-shadow 0.6s ease, color 0.6s ease;
 }
 
 .tech-cap:active {
@@ -3462,37 +3463,37 @@ body::before {
             rgba(170, 140, 250, .5) 82%,
             rgba(215, 185, 255, .95) 100%);
     filter: blur(0.6px) drop-shadow(0 0 7px rgba(190, 150, 255, .7));
-    animation: lineBeam 10s linear infinite;
+    animation: lineBeam 8s linear infinite;
     opacity: 0;
 }
 
 .page-lines i:nth-child(1) {
     left: 25%;
-    animation-duration: 6.5s;
+    animation-duration: 5.2s;
     animation-delay: 0s;
 }
 
 .page-lines i:nth-child(2) {
     left: 50%;
-    animation-duration: 8s;
+    animation-duration: 6.4s;
     animation-delay: 2.6s;
 }
 
 .page-lines i:nth-child(3) {
     left: 75%;
-    animation-duration: 7.2s;
+    animation-duration: 5.8s;
     animation-delay: 1.3s;
 }
 
 .page-lines i:nth-child(4) {
     left: 12%;
-    animation-duration: 8.6s;
+    animation-duration: 6.9s;
     animation-delay: 4s;
 }
 
 .page-lines i:nth-child(5) {
     left: 88%;
-    animation-duration: 7.6s;
+    animation-duration: 6.1s;
     animation-delay: 1.9s;
 }
 
@@ -3551,8 +3552,8 @@ body::before {
 }
 
 .proj-head__sub {
-    font-size: 15.5px;
-    color: rgba(255, 255, 255, .58);
+    font-size: 16px;
+    color: #fff;
     line-height: 1.8;
     margin: 0;
     max-width: 620px;
@@ -3602,26 +3603,25 @@ body::before {
     right: 16px;
     bottom: 16px;
     padding: 16px 18px;
-    border-radius: 16px;
-    background: rgba(18, 14, 42, .5);
-    -webkit-backdrop-filter: blur(14px);
-    backdrop-filter: blur(14px);
+    border-radius: 15px;
+    background-color: #06012966;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, .12);
     transition: background .4s ease, transform .4s ease, box-shadow .4s ease;
 }
 
 .proj-card:hover .proj-card__panel {
-    background: rgba(32, 24, 70, .72);
     transform: translateY(-4px);
     box-shadow: 0 16px 40px rgba(0, 0, 0, .38);
 }
 
 .proj-card__tag {
     display: inline-block;
-    font-size: 11.5px;
-    font-weight: 700;
+    font-size: 16px;
+    font-weight: 400;
     letter-spacing: .04em;
-    padding: 6px 14px;
+    padding: 3px 12px;
     border-radius: 999px;
     margin-bottom: 12px;
     background: rgba(13, 11, 42, .7);
@@ -3638,7 +3638,7 @@ body::before {
 
 .proj-card__title {
     font-family: 'Plus Jakarta Sans', 'Lexend', sans-serif;
-    font-size: 19px;
+    font-size: 22px;
     font-weight: 700;
     color: #fff;
     margin: 0;
@@ -3737,7 +3737,7 @@ body::before {
 
 .tstm__reviews {
     font-size: 12.5px;
-    color: rgba(255, 255, 255, .5);
+    color: #fff;
     margin-top: 2px;
 }
 
