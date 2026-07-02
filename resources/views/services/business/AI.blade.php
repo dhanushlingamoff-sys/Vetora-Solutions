@@ -581,12 +581,12 @@
 
             @php
                 $blogs = [
-                    ['img'=>'Assets/Images/Mobile-App/Portfolio/Dots.webp',    'cat'=>'Robotics',     'title'=>'Unlocking Business Value Through Advanced Machine Learning', 'date'=>'Jan 29, 2026'],
-                    ['img'=>'Assets/Images/Mobile-App/Portfolio/WFB.webp',     'cat'=>'Technology',   'title'=>'How Artificial Intelligence Is Transforming Modern Enterprises', 'date'=>'Feb 05, 2026'],
-                    ['img'=>'Assets/Images/Mobile-App/Portfolio/Allo.webp',    'cat'=>'Software',     'title'=>'Transforming Digital Operations Using Smart AI Technologies', 'date'=>'Feb 12, 2026'],
-                    ['img'=>'Assets/Images/Mobile-App/Portfolio/A-Team.webp',  'cat'=>'Organization', 'title'=>'Turning Challenges into Opportunities with Business Consultants', 'date'=>'Feb 18, 2026'],
-                    ['img'=>'Assets/Images/Mobile-App/Portfolio/Abhi.webp',    'cat'=>'Automation',   'title'=>'Scaling Operations with Intelligent Workflow Automation', 'date'=>'Feb 24, 2026'],
-                    ['img'=>'Assets/Images/Mobile-App/Portfolio/Qrooze.webp',  'cat'=>'Analytics',    'title'=>'From Data to Decisions with Predictive AI Analytics', 'date'=>'Mar 03, 2026'],
+                    ['img'=>'Assets/Images/AI-development/insight/blog-01.jpg', 'cat'=>'Robotics',     'title'=>'Unlocking Business Value Through Advanced Machine Learning', 'date'=>'Jan 29, 2026'],
+                    ['img'=>'Assets/Images/AI-development/insight/blog-02.jpg', 'cat'=>'Technology',   'title'=>'How Artificial Intelligence Is Transforming Modern Enterprises', 'date'=>'Feb 05, 2026'],
+                    ['img'=>'Assets/Images/AI-development/insight/blog-03.jpg', 'cat'=>'Software',     'title'=>'Transforming Digital Operations Using Smart AI Technologies', 'date'=>'Feb 12, 2026'],
+                    ['img'=>'Assets/Images/AI-development/insight/blog-01.jpg', 'cat'=>'Organization', 'title'=>'Turning Challenges into Opportunities with Business Consultants', 'date'=>'Feb 18, 2026'],
+                    ['img'=>'Assets/Images/AI-development/insight/blog-02.jpg', 'cat'=>'Automation',   'title'=>'Scaling Operations with Intelligent Workflow Automation', 'date'=>'Feb 24, 2026'],
+                    ['img'=>'Assets/Images/AI-development/insight/blog-03.jpg', 'cat'=>'Analytics',    'title'=>'From Data to Decisions with Predictive AI Analytics', 'date'=>'Mar 03, 2026'],
                 ];
             @endphp
 
