@@ -7,7 +7,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-    <link rel="stylesheet" href="{{ asset('Assets/css/ai-services.css') }}?v=1.1.8">
+    <link rel="stylesheet" href="{{ asset('Assets/css/ai-services.css') }}?v=1.1.9">
     <style>body, html { background: #0D0B2A !important; }</style>
 @endsection
 
