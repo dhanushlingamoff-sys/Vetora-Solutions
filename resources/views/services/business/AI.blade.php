@@ -7,7 +7,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-    <link rel="stylesheet" href="{{ asset('Assets/css/ai-services.css') }}?v=1.1.2">
+    <link rel="stylesheet" href="{{ asset('Assets/css/ai-services.css') }}?v=1.1.3">
     <style>body, html { background: #0D0B2A !important; }</style>
 @endsection
 
@@ -430,7 +430,7 @@
         </div>
 
         <div class="tech2__right">
-            <img src="{{ asset('Assets/Images/hero-banner2.png') }}" alt="AI technology"
+            <img src="{{ asset('Assets/Images/AI-development/tech.png') }}" alt="AI technology"
                  onerror="this.style.display='none'">
         </div>
 
