@@ -3493,9 +3493,22 @@ body::before {
     transform: translate(-300px, -300px);
     will-change: transform;
     transform-origin: center center;
+    /* NB: transform is driven by the physics engine every frame, so it is
+       intentionally NOT transitioned here — only the colour/shadow are. */
+    transition: background 0.3s ease, border-color 0.3s ease,
+                box-shadow 0.3s ease, color 0.3s ease;
 }
 .tech-cap:active {
     cursor: grabbing;
+}
+
+/* Hover: the capsule lights up with the brand purple gradient (like the
+   highlighted capsule in the reference). */
+.tech-cap:hover {
+    background: linear-gradient(135deg, #7C3AED 0%, #A855F7 100%);
+    border-color: rgba(168, 85, 247, 0.65);
+    box-shadow: 0 14px 32px rgba(124, 58, 237, 0.55);
+    color: #fff;
 }
 .tech-cap img {
     width: 26px;
