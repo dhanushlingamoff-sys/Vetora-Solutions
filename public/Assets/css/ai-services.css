@@ -1543,7 +1543,7 @@ body::before {
     background-image: url('/Assets/Images/AI-development/banner-pattern.png');
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center center;
+    background-position: center top;
 }
 
 .ai-hero__glow {
