@@ -3607,44 +3607,45 @@ body::before {
     position: relative;
     z-index: 1;
 }
-/* Faint static vertical guide lines (a few columns, subtle). */
+/* Faint static vertical guide lines (a few columns). */
 .page-lines::before {
     content: '';
     position: absolute;
     inset: 0;
     background-image: repeating-linear-gradient(
         90deg,
-        rgba(139, 116, 235, .06) 0 1px,
+        rgba(139, 116, 235, .08) 0 1px,
         transparent 1px 25%);
 }
-/* Soft light glows that drift slowly down the lines — subtle, not laser-bright. */
+/* A soft glowing head with a fading tail that slides down each line — like a
+   comet descending. Visible but not laser-harsh. */
 .page-lines i {
     position: absolute;
-    top: -40vh;
-    width: 1px;
-    height: 40vh;
+    top: -42vh;
+    width: 2px;
+    height: 42vh;
     background: linear-gradient(to bottom,
-        transparent,
-        rgba(150, 130, 240, .42) 55%,
-        rgba(190, 150, 255, .55) 82%,
-        transparent);
-    filter: blur(1px);
-    animation: lineBeam 14s linear infinite;
+        transparent 0%,
+        rgba(150, 130, 240, 0) 45%,
+        rgba(170, 140, 250, .5) 82%,
+        rgba(215, 185, 255, .95) 100%);
+    filter: blur(0.6px) drop-shadow(0 0 7px rgba(190, 150, 255, .7));
+    animation: lineBeam 10s linear infinite;
     opacity: 0;
 }
-.page-lines i:nth-child(1) { left: 25%; animation-duration: 15s; animation-delay: 0s; }
-.page-lines i:nth-child(2) { left: 50%; animation-duration: 18s; animation-delay: 6s; }
-.page-lines i:nth-child(3) { left: 75%; animation-duration: 16s; animation-delay: 3s; }
-.page-lines i:nth-child(4) { left: 12%; animation-duration: 19s; animation-delay: 9s; }
-.page-lines i:nth-child(5) { left: 62%; animation-duration: 17s; animation-delay: 12s; }
+.page-lines i:nth-child(1) { left: 25%; animation-duration: 9s;  animation-delay: 0s; }
+.page-lines i:nth-child(2) { left: 50%; animation-duration: 11s; animation-delay: 3.5s; }
+.page-lines i:nth-child(3) { left: 75%; animation-duration: 10s; animation-delay: 1.8s; }
+.page-lines i:nth-child(4) { left: 12%; animation-duration: 12s; animation-delay: 5.5s; }
+.page-lines i:nth-child(5) { left: 88%; animation-duration: 10.5s; animation-delay: 2.6s; }
 .page-lines i:nth-child(6),
 .page-lines i:nth-child(7) { display: none; }
 
 @keyframes lineBeam {
     0%   { transform: translateY(0);     opacity: 0; }
-    12%  { opacity: 1; }
-    88%  { opacity: 1; }
-    100% { transform: translateY(140vh); opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { transform: translateY(150vh); opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
