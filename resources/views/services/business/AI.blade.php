@@ -383,44 +383,57 @@
 {{-- ═══════════════════════════════════════════════════════════
      5. OUR TECHNOLOGIES
 ═══════════════════════════════════════════════════════════ --}}
-<section class="reveal" style="background:#0D0B2A;padding:110px 0;position:relative;overflow:hidden;">
-    <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(124,58,237,.12) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;"></div>
-    <div class="container" style="max-width:1280px;margin:0 auto;padding:0 24px;position:relative;z-index:2;">
+<section class="tech2 reveal">
+    <div class="tech2__bg"></div>
+    <div class="tech2__inner">
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-bottom:64px;">
-            <div>
-                <div style="font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#D946EF;margin-bottom:14px;">→ Our Technologies</div>
-                <h2 style="font-family:'Lexend',sans-serif;font-weight:800;font-size:clamp(24px,3.6vw,44px);color:#fff;text-transform:uppercase;margin-bottom:20px;">
-                    Built On Trusted<br>
-                    <span style="background:linear-gradient(135deg,#7C3AED,#06B6D4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">AI Infrastructure</span>
-                </h2>
-                <p style="font-size:15.5px;line-height:1.85;color:rgba(255,255,255,.6);margin-bottom:28px;">We integrate the AI platforms and frameworks businesses already trust, so your systems stay reliable, current, and easy to extend.</p>
-                <a href="{{ route('contact') }}" class="page-btn">About Company &nbsp;→</a>
+        <div class="tech2__left">
+            <div class="feat-eyebrow">
+                <span class="feat-eyebrow__line"></span>
+                <span class="feat-eyebrow__dot"></span>
+                <span class="feat-eyebrow__text">Our Technologies</span>
             </div>
-            <div style="border-radius:24px;overflow:hidden;border:1px solid rgba(124,58,237,.22);height:440px;background:linear-gradient(160deg,rgba(124,58,237,.2),rgba(13,11,42,.85));">
-                <img src="{{ asset('Assets/Images/hero-banner2.png') }}" alt="VR headset AI" style="width:100%;height:100%;object-fit:cover;opacity:.72;" onerror="this.style.display='none'">
-            </div>
-        </div>
+            <h2 class="tech2__title">
+                Built On A Modern Stack
+                <span>Delivering Intelligent Solutions</span>
+            </h2>
+            <p class="tech2__para">
+                We build smart, scalable AI solutions that simplify complexity, accelerate
+                growth, and redefine how businesses operate in a digital-first world.
+            </p>
+            <a href="{{ route('contact') }}" class="page-btn">About Company &nbsp;→</a>
 
-        <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;">
+            {{-- Physics stage: capsules fall from above, tumble and pile up on scroll-in --}}
             @php
-                $pills = [
-                    ['icon'=>'M','name'=>'Meta AI','c'=>'#1877F2'],
-                    ['icon'=>'⊞','name'=>'Microsoft','c'=>'#00A4EF'],
-                    ['icon'=>'◈','name'=>'Notion','c'=>'#fff'],
-                    ['icon'=>'✦','name'=>'ChatGPT','c'=>'#10A37F'],
-                    ['icon'=>'G','name'=>'Google Cloud','c'=>'#4285F4'],
-                    ['icon'=>'⚡','name'=>'OpenAI','c'=>'#06B6D4'],
-                    ['icon'=>'▲','name'=>'AWS','c'=>'#FF9900'],
-                    ['icon'=>'◆','name'=>'NVIDIA','c'=>'#76B900'],
+                $caps = [
+                    ['img'=>'Assets/Images/Technologies/Mobile-icons/react.png','name'=>'React'],
+                    ['img'=>'Assets/Images/Technologies/Mobile-icons/laravel.png','name'=>'Laravel'],
+                    ['img'=>'Assets/Images/Technologies/Mobile-icons/python.png','name'=>'Python'],
+                    ['img'=>'Assets/Images/Technologies/Mobile-icons/node-js.png','name'=>'Node.js'],
+                    ['img'=>'Assets/Images/Technologies/Docker.png','name'=>'Docker'],
+                    ['img'=>'Assets/Images/Technologies/Kubernetes.png','name'=>'Kubernetes'],
+                    ['img'=>'Assets/Images/Technologies/Mobile-icons/typescript.png','name'=>'TypeScript'],
+                    ['img'=>'Assets/Images/Technologies/Mobile-icons/mysql.png','name'=>'MySQL'],
+                    ['img'=>'Assets/Images/Technologies/Mobile-icons/firebase.png','name'=>'Firebase'],
+                    ['img'=>'Assets/Images/Technologies/Mobile-icons/flutter.png','name'=>'Flutter'],
                 ];
             @endphp
-            @foreach($pills as $pill)
-            <div class="tech-pill" style="display:inline-flex;align-items:center;gap:10px;padding:12px 22px;border-radius:999px;background:rgba(26,22,64,.85);border:1px solid rgba(124,58,237,.24);font-size:14px;font-weight:600;color:rgba(255,255,255,.82);backdrop-filter:blur(8px);transition:all .3s ease;cursor:default;">
-                <span style="font-size:16px;color:{{ $pill['c'] }};">{{ $pill['icon'] }}</span>{{ $pill['name'] }}
+            <div class="tech2__stage" id="techStage" aria-label="Technologies we use">
+                @foreach($caps as $cap)
+                <div class="tech-cap">
+                    <img src="{{ asset($cap['img']) }}" alt="{{ $cap['name'] }}"
+                         onerror="this.style.display='none'">
+                    <span>{{ $cap['name'] }}</span>
+                </div>
+                @endforeach
             </div>
-            @endforeach
         </div>
+
+        <div class="tech2__right">
+            <img src="{{ asset('Assets/Images/hero-banner2.png') }}" alt="AI technology"
+                 onerror="this.style.display='none'">
+        </div>
+
     </div>
 </section>
 
@@ -683,4 +696,8 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/countup.js@2.8.0/dist/countUp.umd.js"></script>
     <script src="{{ asset('Assets/js/ai-services.js') }}"></script>
+
+    {{-- Matter.js physics for the falling "Our Technologies" capsules --}}
+    <script src="https://cdn.jsdelivr.net/npm/matter-js@0.19.0/build/matter.min.js"></script>
+    <script src="{{ asset('Assets/js/tech-drop.js') }}?v=1.0.0"></script>
 @endsection
