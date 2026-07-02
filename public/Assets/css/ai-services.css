@@ -873,8 +873,20 @@ body::before {
 }
 
 .axo-svc-info {
-    flex: 1 1 auto;
+    /* Natural width (does NOT grow) so the flex gaps around the tags do the
+       centring / shifting. */
+    flex: 0 1 auto;
     min-width: 0;
+    max-width: 360px;
+}
+
+/* Flexible spacers on each side of the tags: equal, so the tags sit CENTRED
+   between the info block and the (far-right) arrow. When the row activates and
+   the image pushes the left content right, the left gap shrinks and the tags
+   slide right toward the arrow — matching the reference. */
+.axo-svc-gap {
+    flex: 1 1 auto;
+    min-width: 16px;
 }
 
 .axo-svc-info h3 {
@@ -896,7 +908,6 @@ body::before {
 .axo-svc-tags {
     flex: 0 0 auto;
     width: 250px;
-    margin-left: 26px;
     display: flex;
     flex-direction: column;
     gap: 14px;
@@ -941,7 +952,6 @@ body::before {
 
 .axo-svc-arrow {
     flex: 0 0 auto;
-    margin-left: 26px;
     width: 56px;
     height: 56px;
     border-radius: 50%;

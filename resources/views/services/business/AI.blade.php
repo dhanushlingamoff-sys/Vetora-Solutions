@@ -365,11 +365,13 @@
                     <h3>{{ $svc['title'] }}</h3>
                     <p>{{ $svc['desc'] }}</p>
                 </div>
+                <span class="axo-svc-gap"></span>
                 <div class="axo-svc-tags">
                     @foreach($svc['tags'] as $tag)
                     <span><em>&#x2733;</em>{{ $tag }}</span>
                     @endforeach
                 </div>
+                <span class="axo-svc-gap"></span>
                 <div class="axo-svc-arrow"><span class="axo-svc-arrow__icon">&#8599;</span></div>
             </div>
             @endforeach
