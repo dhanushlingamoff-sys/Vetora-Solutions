@@ -602,39 +602,6 @@
     </div>
 </section>
 
-
-{{-- ═══════════════════════════════════════════════════════════
-     10. CTA + FOOTER
-═══════════════════════════════════════════════════════════ --}}
-<section style="background:#0D0B2A;padding:110px 0 0;position:relative;overflow:hidden;">
-    <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(124,58,237,.10) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:0;"></div>
-    <div class="container" style="max-width:1280px;margin:0 auto;padding:0 24px;position:relative;z-index:2;">
-
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding-bottom:90px;">
-            <div>
-                <h2 style="font-family:'Lexend',sans-serif;font-weight:800;font-size:clamp(42px,6vw,80px);line-height:1.0;text-transform:uppercase;color:#fff;margin:0;">
-                    LET'S WORK<br>
-                    <span style="display:inline-flex;align-items:center;gap:14px;flex-wrap:wrap;">
-                        <svg width="0.68em" height="0.68em" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;flex-shrink:0;">
-                            <defs><linearGradient id="ctaG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7C3AED"/><stop offset="100%" stop-color="#06B6D4"/></linearGradient></defs>
-                            <rect width="48" height="48" rx="12" fill="url(#ctaG)"/>
-                            <polyline points="8,16 20,24 8,32" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <line x1="26" y1="16" x2="40" y2="16" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
-                            <line x1="26" y1="24" x2="38" y2="24" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
-                            <line x1="26" y1="32" x2="40" y2="32" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
-                        </svg>
-                        <span style="background:linear-gradient(135deg,#7C3AED,#D946EF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">TOGETHER</span>
-                    </span>
-                </h2>
-            </div>
-            <div>
-                <p style="font-size:16px;line-height:1.85;color:rgba(255,255,255,.62);margin-bottom:32px;">Partner with our AI team to design, build, and launch intelligent systems that give your business a real competitive edge — no obligation, just clarity.</p>
-                <a href="{{ route('contact') }}" class="page-btn">Get Free Consultation &nbsp;→</a>
-            </div>
-        </div>
-    </div>
-</section>
-
 {{-- Scroll-to-top --}}
 <a href="#top" id="scrollTop" class="axo-totop" aria-label="Back to top" style="width:44px;height:44px;border:2px solid rgba(124,58,237,.6);font-size:16px;color:#7C3AED;">↑</a>
 
