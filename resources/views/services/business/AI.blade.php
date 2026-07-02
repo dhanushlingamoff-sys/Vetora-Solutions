@@ -539,7 +539,7 @@
                     @foreach(array_merge($col, $col) as $t)
                     <article class="tstm-card">
                         <div class="tstm-card__top">
-                            <span class="tstm-card__quote">&#10077;</span>
+                            <i class="bi bi-quote tstm-card__quote"></i>
                             <span class="tstm-card__stars">★★★★★</span>
                         </div>
                         <p class="tstm-card__text">{{ $t['quote'] }}</p>
