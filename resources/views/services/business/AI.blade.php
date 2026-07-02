@@ -353,9 +353,9 @@
 
         @php
             $services = [
-                ['num'=>'01','img'=>'Assets/Images/Mobile-App/Portfolio/WFB.webp','title'=>'AI Automation','desc'=>'Develop intelligent AI systems designed to optimize performance.','tags'=>['Smarter AI Systems','Smart Automation','Intelligent Insights']],
-                ['num'=>'02','img'=>'Assets/Images/Mobile-App/Portfolio/Allo.webp','title'=>'Machine Learning','desc'=>'Streamline your business processes with intelligent automation solutions.','tags'=>['Cognitive Analytics','Scalable Intelligence','Automate Your Business']],
-                ['num'=>'03','img'=>'Assets/Images/Mobile-App/Portfolio/Qrooze.webp','title'=>'Data Intelligence','desc'=>'Our solutions help uncover patterns, generate insights, and support smarter decisions.','tags'=>['Data into Intelligence','Optimize Performance','Smart AI solutions']],
+                ['num'=>'01','img'=>'Assets/Images/AI-development/services/service-01-1000x650.jpg','title'=>'AI Automation','desc'=>'Develop intelligent AI systems designed to optimize performance.','tags'=>['Smarter AI Systems','Smart Automation','Intelligent Insights']],
+                ['num'=>'02','img'=>'Assets/Images/AI-development/services/service-02-1000x650.jpg','title'=>'Machine Learning','desc'=>'Streamline your business processes with intelligent automation solutions.','tags'=>['Cognitive Analytics','Scalable Intelligence','Automate Your Business']],
+                ['num'=>'03','img'=>'Assets/Images/AI-development/services/service-03-1000x650.jpg','title'=>'Data Intelligence','desc'=>'Our solutions help uncover patterns, generate insights, and support smarter decisions.','tags'=>['Data into Intelligence','Optimize Performance','Smart AI solutions']],
             ];
         @endphp
 
