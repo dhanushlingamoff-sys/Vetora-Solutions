@@ -609,7 +609,7 @@
 </section>
 
 {{-- Scroll-to-top --}}
-<a href="#top" id="scrollTop" class="axo-totop" aria-label="Back to top" style="width:44px;height:44px;border:2px solid rgba(124,58,237,.6);font-size:16px;color:#7C3AED;">↑</a>
+{{-- <a href="#top" id="scrollTop" class="axo-totop" aria-label="Back to top" style="width:44px;height:44px;border:2px solid rgba(124,58,237,.6);font-size:16px;color:#7C3AED;">↑</a> --}}
 
 </div>
 @endsection
