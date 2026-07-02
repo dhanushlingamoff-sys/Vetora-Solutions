@@ -7,7 +7,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-    <link rel="stylesheet" href="{{ asset('Assets/css/ai-services.css') }}?v=1.2.1">
+    <link rel="stylesheet" href="{{ asset('Assets/css/ai-services.css') }}?v=1.2.2">
     <style>body, html { background: #0D0B2A !important; }</style>
 @endsection
 
@@ -448,37 +448,40 @@
 {{-- ═══════════════════════════════════════════════════════════
      6. OUR PROJECTS
 ═══════════════════════════════════════════════════════════ --}}
-<section class="reveal" style="background:#13112E;padding:110px 0;position:relative;overflow:hidden;">
-    <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(124,58,237,.10) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;"></div>
+<section class="proj2 reveal" style="padding:110px 0;position:relative;overflow:hidden;">
     <div class="container" style="max-width:1280px;margin:0 auto;padding:0 24px;position:relative;z-index:2;">
 
-        <div style="text-align:center;max-width:720px;margin:0 auto 54px;">
-            <div style="font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#D946EF;margin-bottom:14px;">→ Our Projects</div>
-            <h2 style="font-family:'Lexend',sans-serif;font-weight:800;font-size:clamp(24px,3.6vw,44px);color:#fff;text-transform:uppercase;margin-bottom:16px;">
-                AI-Powered Projects Driving<br>
-                <span style="background:linear-gradient(135deg,#7C3AED,#D946EF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Business Transformation</span>
-            </h2>
-            <p style="font-size:15.5px;color:rgba(255,255,255,.58);line-height:1.8;margin:0;">A look at how we've helped Australian businesses put AI to work in production.</p>
+        <div class="proj-head">
+            <div class="feat-eyebrow">
+                <span class="feat-eyebrow__line"></span>
+                <span class="feat-eyebrow__dot"></span>
+                <span class="feat-eyebrow__text">Our Project</span>
+            </div>
+            <h2 class="about-headline" id="projHeadline">AI-Powered Projects Driving Business Transformation</h2>
+            <p class="proj-head__sub">Driven by a passion for innovation, we specialize in delivering intelligent, scalable AI solutions.</p>
         </div>
 
         @php
             $projects = [
-                ['img'=>'Assets/Images/Mobile-App/Portfolio/Abhi.webp','cat'=>'Automation','title'=>'Intelligent Workflow Automation','arrow'=>false],
-                ['img'=>'Assets/Images/Mobile-App/Portfolio/Dots.webp','cat'=>'Analytics','title'=>'Advanced Predictive Analytics','arrow'=>false],
-                ['img'=>'Assets/Images/Mobile-App/Portfolio/A-Team.webp','cat'=>'Chatbots','title'=>'Advanced Chatbots Solutions','arrow'=>true],
-                ['img'=>'Assets/Images/Mobile-App/Portfolio/abhi-hospital.webp','cat'=>'Strategy','title'=>'Enterprise Efficiency Platform','arrow'=>false],
+                ['img'=>'Assets/Images/Mobile-App/Portfolio/Abhi.webp','cat'=>'Automation','title'=>'Intelligent Workflow Automation'],
+                ['img'=>'Assets/Images/Mobile-App/Portfolio/Dots.webp','cat'=>'Analytics','title'=>'Advanced Predictive Analytics'],
+                ['img'=>'Assets/Images/Mobile-App/Portfolio/A-Team.webp','cat'=>'Chatbots','title'=>'Advanced Chatbots Solutions'],
+                ['img'=>'Assets/Images/Mobile-App/Portfolio/abhi-hospital.webp','cat'=>'Strategy','title'=>'Enterprise Efficiency Platform'],
             ];
         @endphp
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;">
+        <div class="proj-grid">
             @foreach($projects as $proj)
-            <a href="{{ url('/contact-us') }}" style="position:relative;border-radius:22px;overflow:hidden;height:320px;border:1px solid rgba(124,58,237,.2);display:block;text-decoration:none;background:linear-gradient(160deg,rgba(124,58,237,.22),rgba(13,11,42,.9));">
-                <img src="{{ asset($proj['img']) }}" alt="{{ $proj['title'] }}" style="width:100%;height:100%;object-fit:cover;transition:transform .6s ease;" onerror="this.style.display='none'">
-                <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(13,11,42,.92) 100%);"></div>
-                <span style="position:absolute;top:16px;left:16px;font-size:11.5px;font-weight:700;padding:6px 14px;border-radius:999px;background:rgba(13,11,42,.78);border:1px solid rgba(124,58,237,.3);color:#D946EF;backdrop-filter:blur(6px);">{{ $proj['cat'] }}</span>
-                <span style="position:absolute;bottom:20px;left:20px;right:{{ $proj['arrow'] ? '66px' : '20px' }};font-family:'Lexend',sans-serif;font-size:18px;font-weight:700;color:#fff;line-height:1.3;">{{ $proj['title'] }}</span>
-                @if($proj['arrow'])
-                <span style="position:absolute;bottom:20px;right:20px;width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#D946EF);display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;">↗</span>
-                @endif
+            <a href="{{ url('/contact-us') }}" class="proj-card">
+                <img class="proj-card__img" src="{{ asset($proj['img']) }}" alt="{{ $proj['title'] }}"
+                     onerror="this.style.display='none'">
+                <div class="proj-card__shade"></div>
+                <div class="proj-card__panel">
+                    <span class="proj-card__tag">{{ $proj['cat'] }}</span>
+                    <div class="proj-card__row">
+                        <h3 class="proj-card__title">{{ $proj['title'] }}</h3>
+                        <span class="proj-card__arrow">&#8599;</span>
+                    </div>
+                </div>
             </a>
             @endforeach
         </div>
@@ -702,7 +705,7 @@
     {{-- GSAP + ScrollTrigger are loaded globally in layouts/app.blade.php --}}
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/countup.js@2.8.0/dist/countUp.umd.js"></script>
-    <script src="{{ asset('Assets/js/ai-services.js') }}?v=1.0.1"></script>
+    <script src="{{ asset('Assets/js/ai-services.js') }}?v=1.0.2"></script>
 
     {{-- Matter.js physics for the falling "Our Technologies" capsules --}}
     <script src="https://cdn.jsdelivr.net/npm/matter-js@0.19.0/build/matter.min.js"></script>
