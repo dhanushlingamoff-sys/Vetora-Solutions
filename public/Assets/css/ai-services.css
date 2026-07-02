@@ -3583,7 +3583,7 @@ body::before {
 /* ===================================================================
    OUR TESTIMONIALS — split header + 3-column vertical marquee
    =================================================================== */
-.tstm { background: transparent; }
+.tstm { background: #060129; }
 .tstm__head {
     display: grid;
     grid-template-columns: 0.72fr 1.6fr;
