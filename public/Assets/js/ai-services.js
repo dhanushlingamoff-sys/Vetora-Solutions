@@ -12,6 +12,35 @@
     var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     /* ---------------------------------------------------------------
+       0. AI Insights / blog — Owl Carousel (autoplay slide)
+    --------------------------------------------------------------- */
+    if (window.jQuery && jQuery.fn.owlCarousel) {
+        /* jQuery 3.5+ removed $.camelCase, which Owl Carousel 2.x still calls —
+           polyfill it so the carousel initialises. */
+        if (typeof jQuery.camelCase !== "function") {
+            jQuery.camelCase = function (str) {
+                return str.replace(/-([\da-z])/gi, function (m, l) { return l.toUpperCase(); });
+            };
+        }
+        jQuery(".blog-owl").owlCarousel({
+            loop: true,
+            margin: 26,
+            nav: false,
+            dots: false,
+            autoplay: !reduced,
+            autoplayTimeout: 3200,
+            autoplayHoverPause: false,
+            smartSpeed: 850,
+            slideBy: 1,
+            responsive: {
+                0:    { items: 1 },
+                640:  { items: 2 },
+                1080: { items: 3 }
+            }
+        });
+    }
+
+    /* ---------------------------------------------------------------
        1. IntersectionObserver — .reveal → .revealed
           Stagger siblings: each .reveal child gets delay = index * 100ms
     --------------------------------------------------------------- */

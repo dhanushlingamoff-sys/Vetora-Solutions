@@ -3905,24 +3905,20 @@ body::before {
 }
 .blog2__head .about-headline { margin: 0; max-width: none; }
 
-.blog2__marquee {
+/* Card wrapper with the insight-bg image + #0D0733 base colour */
+.blog2__card {
     position: relative;
+    border-radius: 28px;
+    border: 1px solid rgba(124, 58, 237, .28);
     overflow: hidden;
-    -webkit-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
-            mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+    padding: 54px 40px 48px;
+    background-color: #0D0733;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, .35);
 }
-.blog2__track {
-    display: flex;
-    width: -moz-max-content;
-    width: max-content;
-    animation: blogScroll 55s linear infinite;
-    will-change: transform;
-}
-.blog2__marquee:hover .blog2__track { animation-play-state: paused; }
-@keyframes blogScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-/* Cards — margin-right (not gap) so translateX(-50%) loops seamlessly */
-.blog-card { flex: 0 0 380px; margin-right: 26px; }
+/* Owl carousel item cards */
 .blog-card__media {
     display: block;
     position: relative;
@@ -3971,11 +3967,19 @@ body::before {
 }
 .blog-card__dot { color: #7C3AED; }
 
+/* Alternating image heights — short / tall / short … (shifts as it slides) */
+.blog-card--short .blog-card__media { height: 250px; }
+.blog-card--tall  .blog-card__media { height: 340px; }
+
+/* Owl carousel: top-align the differing-height items, hide nav/dots */
+.blog-owl .owl-stage { display: flex; align-items: flex-start; }
+.blog-owl .owl-nav, .blog-owl .owl-dots { display: none; }
+.blog-owl .owl-item { opacity: .35; transition: opacity .6s ease; }
+.blog-owl .owl-item.active { opacity: 1; }
+
 @media (max-width: 900px) {
     .blog2__head { grid-template-columns: 1fr; gap: 16px; }
-    .blog-card { flex-basis: 300px; }
-    .blog-card__media { height: 220px; }
-}
-@media (prefers-reduced-motion: reduce) {
-    .blog2__track { animation: none; flex-wrap: wrap; }
+    .blog2__card { padding: 34px 20px; }
+    .blog-card--short .blog-card__media,
+    .blog-card--tall .blog-card__media { height: 220px; }
 }
