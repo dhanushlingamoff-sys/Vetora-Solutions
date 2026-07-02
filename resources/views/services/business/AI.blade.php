@@ -7,7 +7,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-    <link rel="stylesheet" href="{{ asset('Assets/css/ai-services.css') }}?v=1.2.5">
+    <link rel="stylesheet" href="{{ asset('Assets/css/ai-services.css') }}?v=1.2.6">
     <style>body, html { background: #0D0B2A !important; }</style>
 @endsection
 
@@ -537,13 +537,11 @@
             <div class="tstm__col {{ $ci === 1 ? 'tstm__col--down' : 'tstm__col--up' }}">
                 <div class="tstm__track">
                     @foreach(array_merge($col, $col) as $t)
-                    <article class="tstm-card{{ !empty($t['feat']) ? ' tstm-card--feat' : '' }}">
-                        @if(empty($t['feat']))
+                    <article class="tstm-card">
                         <div class="tstm-card__top">
                             <span class="tstm-card__quote">&#10077;</span>
                             <span class="tstm-card__stars">★★★★★</span>
                         </div>
-                        @endif
                         <p class="tstm-card__text">{{ $t['quote'] }}</p>
                         <div class="tstm-card__person">
                             <img src="{{ $t['img'] }}" alt="{{ $t['name'] }}" onerror="this.style.display='none'">

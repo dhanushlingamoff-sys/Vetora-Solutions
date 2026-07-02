@@ -3637,7 +3637,6 @@ body::before {
 .tstm__col--up .tstm__track   { animation: tstmUp 36s linear infinite; }
 .tstm__col--down .tstm__track { animation: tstmDown 32s linear infinite; }
 .tstm__col:nth-child(3) .tstm__track { animation-duration: 40s; }
-.tstm__cols:hover .tstm__track { animation-play-state: paused; }
 
 @keyframes tstmUp   { from { transform: translateY(0); }        to { transform: translateY(-50%); } }
 @keyframes tstmDown { from { transform: translateY(-50%); }     to { transform: translateY(0); } }
@@ -3649,10 +3648,6 @@ body::before {
     border-radius: 18px;
     padding: 24px;
     margin-bottom: 24px;
-}
-.tstm-card--feat {
-    background: linear-gradient(155deg, rgba(124, 58, 237, .55), rgba(58, 28, 104, .5));
-    border-color: rgba(168, 85, 247, .45);
 }
 .tstm-card__top {
     display: flex;
@@ -3668,7 +3663,6 @@ body::before {
     line-height: 1.7;
     margin: 0 0 20px;
 }
-.tstm-card--feat .tstm-card__text { color: rgba(255, 255, 255, .92); }
 .tstm-card__person { display: flex; align-items: center; gap: 12px; }
 .tstm-card__person img {
     width: 46px;
