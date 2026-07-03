@@ -1911,38 +1911,68 @@ body::before {
         height: 380px;
     }
 
+    /* ---- Hero: single-column stacked layout ---- */
+    .ai-hero { min-height: auto; }
+
     .ai-hero__content {
         grid-template-columns: 1fr;
-        padding: 60px 30px 0;
-    }
-
-    .ai-hero__right {
-        padding: 40px 0 0;
-    }
-
-    .hero-tooltip {
-        position: relative;
-        top: auto;
-        left: auto;
-        margin: 20px 0;
+        padding: 100px 28px 0;
     }
 
     .ai-hero__headline {
-        font-size: clamp(2.5rem, 9vw, 4.5rem);
+        font-size: clamp(2.4rem, 8vw, 4rem);
+        line-height: 1.0;
+        gap: 10px;
     }
 
+    /* decorative desktop-only tooltip card */
+    .hero-tooltip { display: none; }
+
+    /* paragraph + Explore button — left-aligned stack under the headline */
+    .ai-hero__right {
+        align-items: flex-start;
+        padding: 26px 0 0;
+        gap: 24px;
+        width: 100%;
+    }
+
+    .ai-hero__paragraph {
+        text-align: left;
+        max-width: 520px;
+        font-size: 1rem;
+    }
+
+    .hero-explore {
+        align-self: flex-start;
+        padding: 13px 34px;
+        border: 1px solid rgba(236, 72, 153, .5);
+        border-radius: 50px;
+    }
+    .hero-explore::after { display: none; }
+
+    /* robot image + wave — stacked full width */
     .ai-hero__bottom {
         grid-template-columns: 1fr;
+        padding: 48px 28px 0;
+        height: auto;
+        gap: 18px;
     }
 
-    .ai-hero__robot {
-        height: 220px;
-        border-radius: 12px 12px 0 0;
-    }
+    .ai-hero__robot { height: 340px; border-radius: 16px; }
+    .ai-hero__wave { height: 220px; }
+    .hero-wave-video { border-radius: 16px; }
 
-    .ai-hero__wave {
-        height: 200px;
+    /* rotating play badge overlaps the robot / wave junction, right side */
+    .hero-badge {
+        width: 116px;
+        height: 116px;
+        top: auto;
+        left: auto;
+        right: 22px;
+        bottom: 178px;
     }
+    .hero-badge__ring { width: 100%; height: 100%; }
+    .hero-badge__inner { width: 54px; height: 54px; }
 }
 
 /* ===================================================================
@@ -1969,42 +1999,77 @@ body::before {
         height: 260px;
     }
 
+    /* ---- Hero: tighter single-column stack for phones ---- */
     .ai-hero__content {
-        padding: 50px 20px 0;
+        grid-template-columns: 1fr;
+        padding: 88px 20px 0;
+    }
+
+    .ai-hero__headline {
+        font-size: clamp(2rem, 10.5vw, 3rem);
+        line-height: 1.02;
+        gap: 8px;
     }
 
     .hero-tooltip {
-        position: relative;
-        top: auto;
-        left: auto;
-        margin: 20px auto;
+        display: none;
     }
 
     .ai-hero__right {
-        padding: 20px 0 0;
+        align-items: flex-start;
+        padding: 22px 0 0;
+        gap: 20px;
+        width: 100%;
+    }
+
+    .ai-hero__paragraph {
+        text-align: left;
+        max-width: 100%;
+        font-size: .95rem;
+    }
+
+    .hero-explore {
+        align-self: flex-start;
+        padding: 12px 30px;
     }
 
     .ai-hero__bottom {
         grid-template-columns: 1fr;
+        padding: 40px 20px 0;
+        height: auto;
+        gap: 16px;
     }
 
     .ai-hero__robot {
-        height: 200px;
-        border-radius: 0;
+        height: 300px;
+        border-radius: 16px;
     }
 
     .ai-hero__wave {
-        height: 200px;
+        height: 180px;
+    }
+
+    .hero-wave-video {
+        border-radius: 16px;
     }
 
     .hero-badge {
-        width: 120px;
-        height: 120px;
+        width: 100px;
+        height: 100px;
+        top: auto;
+        left: auto;
+        right: 16px;
+        bottom: 150px;
+    }
+
+    .hero-badge__ring {
+        width: 100%;
+        height: 100%;
     }
 
     .hero-badge__inner {
-        width: 52px;
-        height: 52px;
+        width: 46px;
+        height: 46px;
     }
 
     .axo-feat-grid {
