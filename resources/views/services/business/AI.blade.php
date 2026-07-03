@@ -121,21 +121,6 @@
 
 </section>
 
-{{-- Video modal --}}
-<div id="videoModal" class="video-modal">
-    <div class="video-modal__overlay">
-        <button class="video-modal__overlay-close" id="closeModalOverlay">&#x2715;</button>
-    </div>
-    <div class="video-modal__box">
-        <button class="video-modal__close" id="closeModal">&#x2715;</button>
-        <div class="video-modal__embed">
-            <iframe id="videoFrame" width="100%" height="100%"
-                    src="" frameborder="0" allowfullscreen
-                    allow="autoplay; encrypted-media"></iframe>
-        </div>
-    </div>
-</div>
-
 
 {{-- ═══════════════════════════════════════════════════════════
      2. OUR FEATURES
@@ -340,7 +325,7 @@
     <div class="container" style="max-width:1280px;margin:0 auto;padding:0 24px;position:relative;z-index:2;">
 
         <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;margin-bottom:50px;">
-            <div>
+            <div class="axo-svc-head-left">
                 <div class="feat-eyebrow">
                     <span class="feat-eyebrow__line"></span>
                     <span class="feat-eyebrow__dot"></span>
@@ -362,24 +347,29 @@
         <div class="axo-svc-rows">
             @foreach($services as $svc)
             <div class="axo-svc-row {{ $loop->first ? 'axo-open' : '' }}">
-                {{-- Thumbnail: collapsed to 0 width, slides in on the left only for the active row --}}
+                {{-- Thumbnail: collapsed to 0 width, slides in on the left only for the active row
+                     on desktop; always visible as a card image on tablet/mobile. --}}
                 <div class="axo-svc-thumb">
                     <img src="{{ asset($svc['img']) }}" alt="{{ $svc['title'] }}"
                          onerror="this.parentElement.style.background='linear-gradient(135deg,rgba(124,58,237,.35),rgba(13,11,42,.9))'">
                 </div>
-                <span class="axo-svc-num">[{{ $svc['num'] }}]</span>
-                <div class="axo-svc-info">
-                    <h3>{{ $svc['title'] }}</h3>
-                    <p>{{ $svc['desc'] }}</p>
+                {{-- Everything but the thumbnail — kept in one wrapper so tablet/mobile can
+                     stack it as a single column next to (or below) the image. --}}
+                <div class="axo-svc-body">
+                    <span class="axo-svc-num">[{{ $svc['num'] }}]</span>
+                    <div class="axo-svc-info">
+                        <h3>{{ $svc['title'] }}</h3>
+                        <p>{{ $svc['desc'] }}</p>
+                    </div>
+                    <span class="axo-svc-gap"></span>
+                    <div class="axo-svc-tags">
+                        @foreach($svc['tags'] as $tag)
+                        <span><em>&#x2733;</em>{{ $tag }}</span>
+                        @endforeach
+                    </div>
+                    <span class="axo-svc-gap"></span>
+                    <div class="axo-svc-arrow"><span class="axo-svc-arrow__icon">&#8599;</span></div>
                 </div>
-                <span class="axo-svc-gap"></span>
-                <div class="axo-svc-tags">
-                    @foreach($svc['tags'] as $tag)
-                    <span><em>&#x2733;</em>{{ $tag }}</span>
-                    @endforeach
-                </div>
-                <span class="axo-svc-gap"></span>
-                <div class="axo-svc-arrow"><span class="axo-svc-arrow__icon">&#8599;</span></div>
             </div>
             @endforeach
         </div>
@@ -616,6 +606,25 @@
 {{-- Scroll-to-top --}}
 {{-- <a href="#top" id="scrollTop" class="axo-totop" aria-label="Back to top" style="width:44px;height:44px;border:2px solid rgba(124,58,237,.6);font-size:16px;color:#7C3AED;">↑</a> --}}
 
+</div>
+
+{{-- Video modal — deliberately outside #top.axo-page, which pins itself to
+     z-index:0 (to sit above the .page-lines background). Nesting the modal
+     inside that stacking context would cap it at z-index:0 no matter what
+     z-index the modal itself declares, hiding it behind the nav/floating
+     WhatsApp+chatbot buttons which live outside .axo-page at higher z-index. --}}
+<div id="videoModal" class="video-modal">
+    <div class="video-modal__overlay">
+        <button class="video-modal__overlay-close" id="closeModalOverlay">&#x2715;</button>
+    </div>
+    <div class="video-modal__box">
+        <button class="video-modal__close" id="closeModal">&#x2715;</button>
+        <div class="video-modal__embed">
+            <iframe id="videoFrame" width="100%" height="100%"
+                    src="" frameborder="0" allowfullscreen
+                    allow="autoplay; encrypted-media"></iframe>
+        </div>
+    </div>
 </div>
 @endsection
 

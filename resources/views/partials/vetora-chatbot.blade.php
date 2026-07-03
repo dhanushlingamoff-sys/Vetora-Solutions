@@ -1,5 +1,5 @@
 {{-- Vetora AI chatbot modal (shared by home + service pages) --}}
-    <div class="modal fade" id="VetoraAIModal" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="VetoraAIModal" tabindex="-1" aria-hidden="true" data-lenis-prevent>
         <div class="modal-dialog modal-xl modal-dialog-centered vetora-modal-dialog">
             <div class="modal-content vetora-modal-content">
 

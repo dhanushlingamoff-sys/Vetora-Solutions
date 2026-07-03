@@ -103,7 +103,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade quote-modal" id="quoteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal fade quote-modal" id="quoteModal" tabindex="-1" aria-hidden="true" data-lenis-prevent>
         <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content">
 
