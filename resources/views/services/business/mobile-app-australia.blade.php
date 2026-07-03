@@ -84,7 +84,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-    <link rel="stylesheet" href="{{ asset('Assets/css/mobile-app.css') }}?v=2.9.6">
+    <link rel="stylesheet" href="{{ asset('Assets/css/mobile-app.css') }}?v=2.9.7">
 @endsection
 
 @section('content')
@@ -842,16 +842,18 @@
                 </div>
             </div>
 
-            {{-- Description panel --}}
+            {{-- Description panel
+                 All 6 descriptions are stacked in the same CSS grid cell (see
+                 .wcus__desc-wrap / .wcus__desc in mobile-app.css) so the wrap's
+                 height is always the tallest description, not just the active
+                 one - x-show would unmount the inactive ones and let the wrap
+                 collapse/expand as the active feature changes, jolting every
+                 section below it. --}}
             <div class="wcus__desc-wrap" role="tabpanel" id="wcus-panel" :aria-label="features[active].label">
                 <template x-for="(f, i) in features" :key="i">
                     <p class="wcus__desc"
-                       x-show="active === i"
-                       x-transition:enter-start="opacity-0"
-                       x-transition:enter-end="opacity-1"
-                       x-transition:leave-start="opacity-1"
-                       x-transition:leave-end="opacity-0"
-                       x-transition.duration.350ms
+                       :class="{ 'wcus__desc--active': active === i }"
+                       :aria-hidden="active !== i"
                        x-text="f.desc">
                     </p>
                 </template>

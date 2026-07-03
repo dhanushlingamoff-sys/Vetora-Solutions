@@ -3458,26 +3458,38 @@ html.lenis body {
     }
 }
 
-/* Description */
+/* Description
+   All 6 variants are stacked in the same grid cell (grid-row/grid-column: 1)
+   so the wrap's height is always the tallest one, whichever is active - the
+   inactive ones stay in flow (just invisible), so switching the active
+   feature never resizes .wcus__desc-wrap and never shifts the sections
+   below it. Same technique as .wdm__slides/.wdm__slide further down. */
 .wcus__desc-wrap {
-    min-height: 80px;
+    display: grid;
     max-width: 700px;
     margin: 0 auto 52px;
     padding: 0 20px;
-    position: relative;
 }
 
 .wcus__desc {
+    grid-row: 1;
+    grid-column: 1;
     font-size: 17px;
     line-height: 1.78;
     color: rgba(255, 255, 255, .52);
     margin: 0;
-    position: absolute;
-    inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .35s ease;
+}
+
+.wcus__desc--active {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 /* Pills */
@@ -3556,12 +3568,10 @@ html.lenis body {
     }
 
     .wcus__desc-wrap {
-        min-height: unset;
         margin-top: 24px;
     }
 
     .wcus__desc {
-        position: static;
         font-size: 15px;
     }
 }
