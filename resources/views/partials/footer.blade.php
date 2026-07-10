@@ -106,7 +106,7 @@
 
                             <div class="footer-contact-list">
 
-                                <a href="#" class="footer-contact-item">
+                                <a href="javascript:void();" class="footer-contact-item">
                                     <div class="fci-icon">
                                         <i class="bi bi-geo-alt-fill"></i>
                                     </div>
