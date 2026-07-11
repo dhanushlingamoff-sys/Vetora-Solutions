@@ -276,7 +276,11 @@
     </div>
 
 
-    @include('partials.footer')
+    @hasSection('page-footer')
+        @yield('page-footer')
+    @else
+        @include('partials.footer')
+    @endif
 
     <!-- WhatsApp Floating Button -->
     <a href="https://wa.me/61416819190" class="wa-float" target="_blank">

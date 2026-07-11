@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     /* Scroll Glass Effect */
     window.addEventListener('scroll', function () {
         const header = document.querySelector('.site-header');
+        if (!header) return;
 
         if (window.scrollY > 40) {
             header.classList.add('scrolled');
@@ -14,19 +15,21 @@ document.addEventListener("DOMContentLoaded", function () {
     /* Mobile Menu Toggle */
     const toggleBtn = document.querySelector('.nav-toggle');
     const navMenu = document.querySelector('.nav-menu');
-    const icon = toggleBtn.querySelector('i');
+    const icon = toggleBtn ? toggleBtn.querySelector('i') : null;
 
-    toggleBtn.addEventListener('click', function () {
-        navMenu.classList.toggle('show');
+    if (toggleBtn && navMenu && icon) {
+        toggleBtn.addEventListener('click', function () {
+            navMenu.classList.toggle('show');
 
-        if (navMenu.classList.contains('show')) {
-            icon.classList.remove('bi-list');
-            icon.classList.add('bi-x-lg');
-        } else {
-            icon.classList.remove('bi-x-lg');
-            icon.classList.add('bi-list');
-        }
-    });
+            if (navMenu.classList.contains('show')) {
+                icon.classList.remove('bi-list');
+                icon.classList.add('bi-x-lg');
+            } else {
+                icon.classList.remove('bi-x-lg');
+                icon.classList.add('bi-list');
+            }
+        });
+    }
 
     /* Close on Link Click */
     document.querySelectorAll('.nav-menu a').forEach(link => {

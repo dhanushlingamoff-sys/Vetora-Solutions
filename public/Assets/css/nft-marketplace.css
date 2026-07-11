@@ -1,0 +1,1322 @@
+/* =====================================================================
+   NFT MARKETPLACE PAGE — fully self-contained, all classes/vars prefixed
+   "nftm-" so nothing collides with the site's global stylesheets (which
+   are loaded on every page, including this one).
+   ===================================================================== */
+:root {
+    --nftm-void: #0a0f1e;
+    --nftm-ink: #0f172a;
+    --nftm-slate: #1e293b;
+    --nftm-slate-2: #27354b;
+    --nftm-line: rgba(255, 255, 255, 0.10);
+    --nftm-line-2: rgba(255, 255, 255, 0.18);
+    --nftm-iris: #7b1fa2;
+    --nftm-iris-deep: #5f0a87;
+    --nftm-lilac: #4d8de0;
+    --nftm-aurora: #3dd9c2;
+    --nftm-teal: #00c2a8;
+    --nftm-blue: #2c73d2;
+    --nftm-text: #f1f5f9;
+    --nftm-text-dim: #94a3b8;
+    --nftm-text-mute: #64748b;
+    --nftm-grad: linear-gradient(135deg, #5f0a87 0%, #2c73d2 100%);
+    --nftm-radius: 16px;
+    --nftm-font-display: 'Space Grotesk', sans-serif;
+    --nftm-font-body: 'Inter', sans-serif;
+    --nftm-font-mono: 'Space Mono', monospace;
+}
+
+.nftm-page * {
+    box-sizing: border-box;
+}
+
+.nftm-page {
+    background: var(--nftm-ink);
+    color: var(--nftm-text);
+    font-family: var(--nftm-font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+.nftm-page a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.nftm-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+}
+
+.nftm-eyebrow {
+    font-family: var(--nftm-font-mono);
+    font-size: 12px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--nftm-aurora);
+    display: inline-block;
+}
+
+.nftm-mono {
+    font-family: var(--nftm-font-mono);
+}
+
+.nftm-page h1,
+.nftm-page h2,
+.nftm-page h3 {
+    font-family: var(--nftm-font-display);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -.02em;
+    margin: 0;
+}
+
+.nftm-grad-text {
+    background: var(--nftm-grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nftm-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--nftm-font-display);
+    font-weight: 500;
+    font-size: 15px;
+    padding: 12px 22px;
+    border-radius: 12px;
+    cursor: pointer;
+    border: none;
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease, color .15s ease, border-color .15s ease;
+}
+
+.nftm-btn-primary {
+    background: var(--nftm-grad);
+    color: #ffffff;
+    box-shadow: 0 8px 30px -8px rgba(95, 10, 135, .6);
+}
+
+.nftm-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 40px -8px rgba(44, 115, 210, .65);
+}
+
+.nftm-btn-ghost {
+    background: transparent;
+    color: var(--nftm-text);
+    border: 1px solid var(--nftm-line-2);
+}
+
+.nftm-btn-ghost:hover {
+    border-color: var(--nftm-iris);
+    background: rgba(123, 31, 162, .12);
+}
+
+.nftm-btn-ghost.nftm-connected {
+    border-color: var(--nftm-teal);
+    color: var(--nftm-aurora);
+    background: rgba(0, 194, 168, .10);
+}
+
+.nftm-page section {
+    position: relative;
+}
+
+.nftm-sec-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    margin-bottom: 34px;
+}
+
+.nftm-sec-head h2 {
+    font-size: 34px;
+}
+
+.nftm-sec-head p {
+    color: var(--nftm-text-dim);
+    font-size: 15px;
+    margin-top: 8px;
+    max-width: 420px;
+}
+
+.nftm-see-all {
+    font-family: var(--nftm-font-mono);
+    font-size: 13px;
+    color: var(--nftm-lilac);
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.nftm-see-all:hover {
+    color: var(--nftm-aurora);
+}
+
+.nftm-art {
+    border-radius: 12px;
+    aspect-ratio: 1/1;
+    position: relative;
+    overflow: hidden;
+    background: var(--nftm-slate-2);
+}
+
+.nftm-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .5s ease;
+}
+
+.nftm-nft-card:hover .nftm-art img {
+    transform: scale(1.06);
+}
+
+/* ============ HEADER / NAV ============ */
+/* Floats transparently over the hero at the top of the page — same pattern
+   as the site's own .site-header — and only gains a solid/blurred
+   background once scrolled (.nftm-scrolled, toggled in nft-marketplace.js). */
+.nftm-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1050;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition: background .4s cubic-bezier(.16, 1, .3, 1),
+        border-color .4s ease,
+        backdrop-filter .4s ease,
+        box-shadow .4s ease;
+}
+
+.nftm-header.nftm-scrolled {
+    background: rgba(15, 12, 24, .82);
+    backdrop-filter: blur(14px);
+    border-bottom-color: var(--nftm-line);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, .22);
+}
+
+.nftm-nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    height: 74px;
+}
+
+.nftm-brand {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.nftm-brand img {
+    max-width: 200px;
+    height: 52px;
+    object-fit: contain;
+}
+
+.nftm-nav-links {
+    display: flex;
+    gap: 26px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.nftm-nav-links a {
+    color: var(--nftm-text-dim);
+    transition: color .15s;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font: inherit;
+}
+
+.nftm-nav-links a:hover,
+.nftm-nav-links a.nftm-active {
+    color: var(--nftm-text);
+}
+
+.nftm-nav-search {
+    flex: 1;
+    max-width: 300px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--nftm-slate);
+    border: 1px solid var(--nftm-line);
+    border-radius: 12px;
+    padding: 9px 14px;
+    color: var(--nftm-text-mute);
+    font-size: 14px;
+}
+
+.nftm-nav-search input {
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--nftm-text);
+    font-family: var(--nftm-font-body);
+    font-size: 14px;
+    width: 100%;
+}
+
+.nftm-nav-search input::placeholder {
+    color: var(--nftm-text-mute);
+}
+
+.nftm-nav-actions {
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+}
+
+.nftm-nav-actions .nftm-btn {
+    padding: 10px 18px;
+    font-size: 14px;
+}
+
+/* ============ SEARCH RESULTS DROPDOWN ============
+   position:fixed (not absolute) so it's immune to any ancestor's overflow/
+   stacking context — top/left/width are set inline via JS to match the
+   search input's own screen position (see nft-marketplace.js), so it always
+   renders as a normal dropdown directly under the box. */
+.nftm-search-wrap {
+    position: relative;
+}
+
+.nftm-search-results {
+    position: fixed;
+    background: var(--nftm-slate);
+    border: 1px solid var(--nftm-line-2);
+    border-radius: 12px;
+    box-shadow: 0 20px 50px -10px rgba(0, 0, 0, .6);
+    max-height: 320px;
+    overflow-y: auto;
+    display: none;
+    z-index: 100011;
+}
+
+.nftm-search-results.nftm-show {
+    display: block;
+}
+
+.nftm-search-result {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--nftm-line);
+    font-size: 14px;
+}
+
+.nftm-search-result:last-child {
+    border-bottom: none;
+}
+
+.nftm-search-result:hover {
+    background: var(--nftm-slate-2);
+}
+
+.nftm-search-result img {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.nftm-search-result .nftm-sr-name {
+    font-weight: 600;
+    display: block;
+}
+
+.nftm-search-result .nftm-sr-creator {
+    color: var(--nftm-text-mute);
+    font-size: 12px;
+}
+
+.nftm-search-empty {
+    padding: 16px;
+    text-align: center;
+    color: var(--nftm-text-mute);
+    font-size: 13px;
+}
+
+/* ============ HERO ============ */
+.nftm-hero {
+    /* Extra top clearance since .nftm-header now floats over this section
+       (position:fixed, out of flow) instead of reserving its own space. */
+    padding: 128px 0 72px;
+    overflow: hidden;
+}
+
+.nftm-hero::before {
+    content: "";
+    position: absolute;
+    top: -160px;
+    left: -120px;
+    width: 640px;
+    height: 640px;
+    background: radial-gradient(circle, rgba(95, 10, 135, .45), transparent 62%);
+    filter: blur(30px);
+    z-index: 0;
+}
+
+.nftm-hero::after {
+    content: "";
+    position: absolute;
+    top: -60px;
+    right: -140px;
+    width: 520px;
+    height: 520px;
+    background: radial-gradient(circle, rgba(44, 115, 210, .30), transparent 60%);
+    filter: blur(30px);
+    z-index: 0;
+}
+
+.nftm-hero .nftm-wrap {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 56px;
+    align-items: center;
+}
+
+.nftm-hero h1 {
+    font-size: 64px;
+    font-weight: 700;
+    margin: 20px 0 22px;
+}
+
+.nftm-hero p.nftm-lead {
+    font-size: 18px;
+    color: var(--nftm-text-dim);
+    max-width: 460px;
+    margin-bottom: 32px;
+}
+
+.nftm-hero-cta {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.nftm-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 56px;
+    grid-column: 1/-1;
+}
+
+.nftm-stat {
+    background: var(--nftm-slate);
+    border: 1px solid var(--nftm-line);
+    border-radius: 14px;
+    padding: 20px;
+}
+
+.nftm-stat .nftm-num {
+    font-family: var(--nftm-font-mono);
+    font-weight: 700;
+    font-size: 26px;
+    color: var(--nftm-text);
+}
+
+.nftm-stat .nftm-lbl {
+    font-size: 13px;
+    color: var(--nftm-text-mute);
+    margin-top: 4px;
+}
+
+.nftm-showcase {
+    position: relative;
+}
+
+.nftm-show-card {
+    background: var(--nftm-slate);
+    border: 1px solid var(--nftm-line-2);
+    border-radius: 22px;
+    padding: 16px;
+    box-shadow: 0 30px 80px -30px rgba(44, 115, 210, .5);
+}
+
+.nftm-show-card .nftm-art {
+    aspect-ratio: 4/3;
+}
+
+.nftm-show-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.nftm-show-meta .nftm-who {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nftm-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--nftm-grad);
+    flex-shrink: 0;
+    object-fit: cover;
+}
+
+.nftm-show-meta .nftm-who b {
+    font-family: var(--nftm-font-display);
+    font-size: 15px;
+    font-weight: 600;
+    display: block;
+}
+
+.nftm-show-meta .nftm-who span {
+    font-size: 12px;
+    color: var(--nftm-text-mute);
+}
+
+.nftm-bid-box {
+    text-align: right;
+}
+
+.nftm-bid-box .nftm-k {
+    font-size: 11px;
+    color: var(--nftm-text-mute);
+    text-transform: uppercase;
+    letter-spacing: .1em;
+}
+
+.nftm-bid-box .nftm-v {
+    font-family: var(--nftm-font-mono);
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--nftm-aurora);
+}
+
+.nftm-float-tag {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    background: var(--nftm-void);
+    border: 1px solid var(--nftm-line-2);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-family: var(--nftm-font-mono);
+    font-size: 12px;
+    color: var(--nftm-lilac);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    z-index: 2;
+}
+
+.nftm-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--nftm-teal);
+    box-shadow: 0 0 10px var(--nftm-teal);
+    flex-shrink: 0;
+}
+
+/* ============ shared section padding ============ */
+.nftm-block {
+    padding: 64px 0;
+}
+
+.nftm-block-alt {
+    background: var(--nftm-void);
+}
+
+/* ============ CARD GRIDS ============ */
+.nftm-card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.nftm-nft-card {
+    background: var(--nftm-slate);
+    border: 1px solid var(--nftm-line);
+    border-radius: var(--nftm-radius);
+    padding: 14px;
+    transition: transform .18s ease, border-color .18s ease, opacity .25s ease;
+}
+
+.nftm-nft-card.nftm-hidden {
+    display: none;
+}
+
+.nftm-nft-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--nftm-line-2);
+}
+
+.nftm-nft-card .nftm-art {
+    margin-bottom: 14px;
+}
+
+.nftm-nft-card h3 {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.nftm-nft-card .nftm-creator {
+    font-size: 13px;
+    color: var(--nftm-text-mute);
+    margin-bottom: 14px;
+}
+
+.nftm-card-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--nftm-line);
+    padding-top: 12px;
+}
+
+.nftm-price .nftm-k {
+    font-size: 11px;
+    color: var(--nftm-text-mute);
+    display: block;
+}
+
+.nftm-price .nftm-v {
+    font-family: var(--nftm-font-mono);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--nftm-aurora);
+}
+
+.nftm-likes {
+    font-family: var(--nftm-font-mono);
+    font-size: 13px;
+    color: var(--nftm-text-dim);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 8px;
+    transition: color .15s;
+}
+
+.nftm-likes:hover {
+    color: var(--nftm-lilac);
+}
+
+.nftm-likes.nftm-liked {
+    color: #ff5c8a;
+}
+
+/* ============ LIVE AUCTIONS ============ */
+.nftm-auc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.nftm-auc-card {
+    background: var(--nftm-slate);
+    border: 1px solid var(--nftm-line);
+    border-radius: var(--nftm-radius);
+    padding: 14px;
+    position: relative;
+}
+
+.nftm-auc-card .nftm-art {
+    margin-bottom: 14px;
+}
+
+.nftm-timer {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background: rgba(11, 8, 19, .82);
+    border: 1px solid var(--nftm-line-2);
+    border-radius: 10px;
+    padding: 7px 11px;
+    font-family: var(--nftm-font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--nftm-aurora);
+    letter-spacing: .03em;
+}
+
+.nftm-timer.nftm-ended {
+    color: #ff5c5c;
+}
+
+.nftm-auc-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.nftm-auc-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nftm-bid-btn {
+    font-family: var(--nftm-font-display);
+    font-weight: 500;
+    font-size: 14px;
+    background: rgba(0, 194, 168, .12);
+    border: 1px solid var(--nftm-teal);
+    color: var(--nftm-aurora);
+    padding: 8px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .15s;
+}
+
+.nftm-bid-btn:hover {
+    background: var(--nftm-teal);
+    color: #0a0f1e;
+}
+
+.nftm-bid-btn:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+    background: transparent;
+}
+
+/* ============ TABS ============ */
+.nftm-tabs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.nftm-tab {
+    font-family: var(--nftm-font-mono);
+    font-size: 13px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--nftm-line);
+    background: transparent;
+    color: var(--nftm-text-dim);
+    cursor: pointer;
+    transition: .15s;
+}
+
+.nftm-tab.nftm-on {
+    background: var(--nftm-grad);
+    color: #ffffff;
+    border-color: transparent;
+    font-weight: 700;
+}
+
+.nftm-tab:not(.nftm-on):hover {
+    border-color: var(--nftm-line-2);
+    color: var(--nftm-text);
+}
+
+/* ============ TOP SELLERS / BUYERS ============ */
+.nftm-rank-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.nftm-rank-panel {
+    background: var(--nftm-slate);
+    border: 1px solid var(--nftm-line);
+    border-radius: var(--nftm-radius);
+    padding: 8px;
+}
+
+.nftm-rank-panel .nftm-ph {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px 12px;
+}
+
+.nftm-rank-panel .nftm-ph h3 {
+    font-size: 17px;
+}
+
+.nftm-rank-panel .nftm-ph .nftm-see-all {
+    font-size: 12px;
+}
+
+.nftm-rank-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 11px 16px;
+    border-radius: 12px;
+    transition: background .15s;
+}
+
+.nftm-rank-row:hover {
+    background: var(--nftm-slate-2);
+}
+
+.nftm-rank-row .nftm-no {
+    font-family: var(--nftm-font-mono);
+    font-size: 14px;
+    color: var(--nftm-text-mute);
+    width: 18px;
+}
+
+.nftm-rank-row .nftm-avatar {
+    width: 40px;
+    height: 40px;
+}
+
+.nftm-rank-row .nftm-info b {
+    font-family: var(--nftm-font-display);
+    font-size: 15px;
+    font-weight: 600;
+    display: block;
+}
+
+.nftm-rank-row .nftm-info span {
+    font-family: var(--nftm-font-mono);
+    font-size: 12px;
+    color: var(--nftm-text-mute);
+}
+
+.nftm-rank-row .nftm-vol {
+    margin-left: auto;
+    font-family: var(--nftm-font-mono);
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--nftm-aurora);
+}
+
+/* ============ CATEGORIES ============ */
+.nftm-cat-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+}
+
+.nftm-cat {
+    background: var(--nftm-slate);
+    border: 1px solid var(--nftm-line);
+    border-radius: 14px;
+    padding: 22px 16px;
+    text-align: center;
+    transition: .18s;
+    cursor: pointer;
+}
+
+.nftm-cat:hover {
+    transform: translateY(-3px);
+    border-color: var(--nftm-iris);
+}
+
+.nftm-cat .nftm-ic {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: var(--nftm-grad);
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.nftm-cat b {
+    font-family: var(--nftm-font-display);
+    font-size: 15px;
+    font-weight: 600;
+    display: block;
+}
+
+.nftm-cat span {
+    font-family: var(--nftm-font-mono);
+    font-size: 12px;
+    color: var(--nftm-text-mute);
+}
+
+/* ============ HOW IT WORKS ============ */
+.nftm-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.nftm-step {
+    background: var(--nftm-slate);
+    border: 1px solid var(--nftm-line);
+    border-radius: var(--nftm-radius);
+    padding: 26px 22px;
+    position: relative;
+}
+
+.nftm-step .nftm-n {
+    font-family: var(--nftm-font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--nftm-aurora);
+    letter-spacing: .1em;
+}
+
+.nftm-step .nftm-ic {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: rgba(123, 31, 162, .18);
+    border: 1px solid var(--nftm-line-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin: 16px 0;
+}
+
+.nftm-step h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.nftm-step p {
+    font-size: 14px;
+    color: var(--nftm-text-dim);
+    margin: 0;
+}
+
+/* ============ COLLECTIONS SPOTLIGHT ============ */
+.nftm-coll-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.nftm-coll {
+    background: var(--nftm-slate);
+    border: 1px solid var(--nftm-line);
+    border-radius: var(--nftm-radius);
+    overflow: hidden;
+    transition: .18s;
+}
+
+.nftm-coll:hover {
+    border-color: var(--nftm-line-2);
+    transform: translateY(-4px);
+}
+
+.nftm-coll .nftm-banner {
+    height: 120px;
+    background-size: cover;
+    background-position: center;
+}
+
+.nftm-coll .nftm-body {
+    padding: 0 18px 20px;
+    position: relative;
+}
+
+.nftm-coll .nftm-avatar {
+    width: 56px;
+    height: 56px;
+    border: 4px solid var(--nftm-slate);
+    margin-top: -28px;
+    margin-bottom: 12px;
+}
+
+.nftm-coll .nftm-name {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.nftm-coll .nftm-name b {
+    font-family: var(--nftm-font-display);
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.nftm-coll .nftm-verify {
+    color: var(--nftm-aurora);
+    font-size: 14px;
+}
+
+.nftm-coll .nftm-row {
+    display: flex;
+    gap: 24px;
+    margin-top: 14px;
+}
+
+.nftm-coll .nftm-row .nftm-k {
+    font-size: 11px;
+    color: var(--nftm-text-mute);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+}
+
+.nftm-coll .nftm-row .nftm-v {
+    font-family: var(--nftm-font-mono);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--nftm-text);
+}
+
+/* ============ NEWSLETTER ============ */
+.nftm-cta-band {
+    padding: 72px 0;
+}
+
+.nftm-cta-inner {
+    background: var(--nftm-slate);
+    border: 1px solid var(--nftm-line-2);
+    border-radius: 26px;
+    padding: 56px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.nftm-cta-inner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(95, 10, 135, .35), transparent 60%);
+    z-index: 0;
+}
+
+.nftm-cta-inner>* {
+    position: relative;
+    z-index: 1;
+}
+
+.nftm-cta-inner h2 {
+    font-size: 40px;
+    font-weight: 700;
+    margin: 12px 0 14px;
+}
+
+.nftm-cta-inner p {
+    color: var(--nftm-text-dim);
+    max-width: 440px;
+    margin: 0 auto 30px;
+}
+
+.nftm-sub-form {
+    display: flex;
+    gap: 12px;
+    max-width: 460px;
+    margin: 0 auto;
+}
+
+.nftm-sub-form input {
+    flex: 1;
+    background: var(--nftm-void);
+    border: 1px solid var(--nftm-line-2);
+    border-radius: 12px;
+    padding: 14px 18px;
+    color: var(--nftm-text);
+    font-family: var(--nftm-font-body);
+    font-size: 15px;
+    outline: none;
+}
+
+.nftm-sub-form input::placeholder {
+    color: var(--nftm-text-mute);
+}
+
+.nftm-sub-msg {
+    margin-top: 14px;
+    font-size: 14px;
+    font-family: var(--nftm-font-mono);
+    min-height: 18px;
+}
+
+.nftm-sub-msg.nftm-ok {
+    color: var(--nftm-aurora);
+}
+
+.nftm-sub-msg.nftm-err {
+    color: #ff8080;
+}
+
+.nftm-socials {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 28px;
+}
+
+.nftm-soc {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--nftm-void);
+    border: 1px solid var(--nftm-line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--nftm-text-dim);
+    font-family: var(--nftm-font-mono);
+    font-size: 13px;
+    transition: .15s;
+    cursor: pointer;
+}
+
+.nftm-soc:hover {
+    border-color: var(--nftm-iris);
+    color: var(--nftm-aurora);
+}
+
+/* ============ FOOTER ============ */
+.nftm-footer {
+    background: var(--nftm-void);
+    border-top: 1px solid var(--nftm-line);
+    padding: 56px 0 32px;
+}
+
+.nftm-foot-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.nftm-foot-brand p {
+    color: var(--nftm-text-mute);
+    font-size: 14px;
+    max-width: 280px;
+    margin-top: 14px;
+}
+
+.nftm-foot-col h4 {
+    font-family: var(--nftm-font-display);
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--nftm-text);
+}
+
+.nftm-foot-col a {
+    display: block;
+    color: var(--nftm-text-dim);
+    font-size: 14px;
+    margin-bottom: 10px;
+    transition: color .15s;
+}
+
+.nftm-foot-col a:hover {
+    color: var(--nftm-aurora);
+}
+
+.nftm-foot-bar {
+    border-top: 1px solid var(--nftm-line);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.nftm-foot-bar span {
+    font-family: var(--nftm-font-mono);
+    font-size: 13px;
+    color: var(--nftm-text-mute);
+}
+
+/* ============ CREATE / BID MODALS ============
+   resources.css bumps .modal-backdrop to z-index:99998 for the site's own
+   modals (which are themselves bumped above it) — without a matching bump
+   here, that backdrop would sit above these modals via Bootstrap's default
+   .modal z-index (1055) and swallow every click. */
+.nftm-modal {
+    z-index: 100005;
+}
+
+.nftm-modal .modal-content {
+    background: var(--nftm-slate);
+    color: var(--nftm-text);
+    border: 1px solid var(--nftm-line-2);
+    border-radius: 20px;
+}
+
+.nftm-modal .modal-header,
+.nftm-modal .modal-footer {
+    border-color: var(--nftm-line);
+}
+
+.nftm-modal .btn-close {
+    filter: invert(1) grayscale(1) brightness(2);
+}
+
+.nftm-modal label {
+    font-family: var(--nftm-font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--nftm-text-mute);
+    margin-bottom: 6px;
+    display: block;
+}
+
+.nftm-modal .form-control {
+    background: var(--nftm-void);
+    border: 1px solid var(--nftm-line-2);
+    color: var(--nftm-text);
+}
+
+.nftm-modal .form-control:focus {
+    background: var(--nftm-void);
+    color: var(--nftm-text);
+    border-color: var(--nftm-iris);
+    box-shadow: 0 0 0 .2rem rgba(123, 31, 162, .25);
+}
+
+.nftm-modal-art-preview {
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--nftm-void);
+    border: 1px solid var(--nftm-line-2);
+    margin-bottom: 16px;
+}
+
+.nftm-modal-art-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ============ TOASTS ============ */
+.nftm-toast-stack {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100020;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    pointer-events: none;
+}
+
+.nftm-toast {
+    background: var(--nftm-slate);
+    border: 1px solid var(--nftm-line-2);
+    color: var(--nftm-text);
+    font-size: 14px;
+    padding: 12px 20px;
+    border-radius: 12px;
+    box-shadow: 0 20px 50px -10px rgba(0, 0, 0, .6);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .25s ease, transform .25s ease;
+}
+
+.nftm-toast.nftm-show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.nftm-toast.nftm-ok {
+    border-color: var(--nftm-teal);
+}
+
+.nftm-toast.nftm-warn {
+    border-color: #d9a441;
+}
+
+/* ============ responsive ============ */
+@media(max-width:1100px) {
+    .nftm-cat-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media(max-width:900px) {
+    .nftm-hero .nftm-wrap {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .nftm-hero h1 {
+        font-size: 44px;
+    }
+
+    .nftm-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .nftm-card-grid,
+    .nftm-auc-grid,
+    .nftm-steps,
+    .nftm-coll-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .nftm-cat-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .nftm-rank-cols {
+        grid-template-columns: 1fr;
+    }
+
+    .nftm-nav-links,
+    .nftm-nav-search {
+        display: none;
+    }
+
+    .nftm-foot-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media(max-width:560px) {
+    .nftm-wrap {
+        padding: 0 20px;
+    }
+
+    .nftm-card-grid,
+    .nftm-auc-grid,
+    .nftm-steps,
+    .nftm-coll-grid,
+    .nftm-cat-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .nftm-hero h1 {
+        font-size: 34px;
+    }
+
+    .nftm-sec-head {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nftm-sub-form {
+        flex-direction: column;
+    }
+}

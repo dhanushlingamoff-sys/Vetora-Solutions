@@ -47,6 +47,10 @@ Route::get('/seo-sem-services-melbourne', function () {
     return view('services.digital-marketing.seo-sem');
 });
 
+Route::get('/nft-marketplace-development-services-melbourne', function () {
+    return view('services.blockchain.nft-marketplace');
+});
+
 Route::get('/privacy-policy', fn() => view('privacy-policy'));
 Route::get('/terms-and-conditions', fn() => view('terms-and-conditions'));
 Route::get('/copyrights', fn() => view('copyrights'));

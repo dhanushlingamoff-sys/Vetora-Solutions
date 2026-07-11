@@ -20,12 +20,15 @@
         /* style.css forces html{scroll-behavior:smooth}; that fights Lenis. */
         document.documentElement.style.scrollBehavior = 'auto';
 
-        var lenis = new Lenis({
+        /* A page can request a heavier/lighter feel before this script runs
+           (see the NFT marketplace page's inline <head> snippet) without
+           changing the site-wide default for every other page. */
+        var lenis = new Lenis(Object.assign({
             lerp: 0.12,          /* light, responsive smoothing */
             wheelMultiplier: 1,
             smoothWheel: true,
             syncTouch: false     /* keep native momentum on touch devices */
-        });
+        }, window.__lenisOverrides || {}));
         window.__lenis = lenis;
 
         if (window.gsap && window.ScrollTrigger) {

@@ -39,7 +39,7 @@
                                 Us</a></li>
                         <li class="dropdown">
                             <a href="javascript:void(0);"
-                                class="{{ request()->is('software-development-company-in-melbourne', 'mobile-app-development-company-in-melbourne', 'AI', 'ui-ux-design-services-melbourne', 'website-development-services-melbourne', 'seo-sem-services-melbourne') ? 'active' : '' }}">Services
+                                class="{{ request()->is('software-development-company-in-melbourne', 'mobile-app-development-company-in-melbourne', 'AI', 'ui-ux-design-services-melbourne', 'website-development-services-melbourne', 'seo-sem-services-melbourne', 'nft-marketplace-development-services-melbourne') ? 'active' : '' }}">Services
                                 <i class="bi bi-chevron-down"></i></a>
 
                             <div class="mega-menu">
@@ -111,13 +111,13 @@
 
                                     <div class="mega-column">
                                         <h4>Blockchain</h4>
-                                        <a href="#" class="mega-link">
+                                        <a href="{{ url('/nft-marketplace-development-services-melbourne') }}" class="mega-link">
                                             <span class="mega-icon-wrap mega-icon-tertiary">
-                                                <i class="bi bi-link-45deg"></i>
+                                                <i class="bi bi-gem"></i>
                                             </span>
                                             <span class="mega-link-body">
-                                                <span class="mega-link-title">Blockchain Development</span>
-                                                <span class="mega-link-desc">Secure decentralized solutions</span>
+                                                <span class="mega-link-title">NFT Marketplace Development</span>
+                                                <span class="mega-link-desc">Secure decentralized marketplaces</span>
                                             </span>
                                         </a>
                                     </div>
