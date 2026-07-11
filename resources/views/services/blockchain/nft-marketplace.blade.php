@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('Assets/css/nft-marketplace.css') }}?v=1.1.0">
+    <link rel="stylesheet" href="{{ asset('Assets/css/nft-marketplace.css') }}?v=1.2.0">
     {{-- Heavier, more "premium" smooth-scroll feel for this page only — read
          by scroll-fx.js's Lenis init, which runs later in <body>. Every
          other page is unaffected (window.__lenisOverrides stays undefined). --}}
@@ -137,6 +137,8 @@
                 <a class="nftm-see-all" href="#drops">View all <i class="bi bi-arrow-right"></i></a>
             </div>
 
+            {{-- Spotlight bento: the first item renders as a large 1×2 tile
+                 (.nftm-nft-card--xl), the rest fill the 3-column grid. --}}
             <div class="nftm-card-grid" id="nftmFeaturedGrid">
                 @php
                     $featured = [
@@ -144,11 +146,13 @@
                         ['seed'=>'nftm-f2','name'=>'Deep Field 07','creator'=>'@sol.axis','price'=>'1.90','likes'=>512],
                         ['seed'=>'nftm-f3','name'=>'Prism Bloom','creator'=>'@marrow','price'=>'3.05','likes'=>241],
                         ['seed'=>'nftm-f4','name'=>'Cold Static','creator'=>'@nullspace','price'=>'0.88','likes'=>176],
+                        ['seed'=>'nftm-f5','name'=>'Vapor Índex','creator'=>'@quorra','price'=>'1.42','likes'=>264],
                     ];
                 @endphp
                 @foreach($featured as $item)
-                <div class="nftm-nft-card">
-                    <div class="nftm-art"><img src="https://picsum.photos/seed/{{ $item['seed'] }}/500/500" alt="{{ $item['name'] }}"></div>
+                <div class="nftm-nft-card{{ $loop->first ? ' nftm-nft-card--xl' : '' }}">
+                    @if($loop->first)<span class="nftm-badge">◆ Featured piece</span>@endif
+                    <div class="nftm-art"><img src="https://picsum.photos/seed/{{ $item['seed'] }}/{{ $loop->first ? '640/720' : '500/500' }}" alt="{{ $item['name'] }}"></div>
                     <h3>{{ $item['name'] }}</h3>
                     <div class="nftm-creator">{{ $item['creator'] }}</div>
                     <div class="nftm-card-foot">
@@ -290,30 +294,39 @@
         </div>
     </section>
 
-    {{-- ============ LATEST DROPS ============ --}}
-    <section class="nftm-block">
+    {{-- ============ LATEST DROPS (pinned horizontal scroll) ============ --}}
+    {{-- .nftm-hscroll is upgraded to a pinned, scroll-scrubbed sideways track
+         on desktop by nft-marketplace.js (adds .nftm-pinned); without JS or
+         on mobile it degrades to a normal swipeable overflow-scroll. --}}
+    <section class="nftm-block" id="nftmDropsSection">
         <div class="nftm-wrap">
-            <div class="nftm-sec-head"><div><span class="nftm-eyebrow">Fresh mints</span><h2>Just dropped</h2></div></div>
-            <div class="nftm-card-grid">
-                @php
-                    $drops = [
-                        ['seed'=>'nftm-d1','name'=>'Fold 002','creator'=>'2 min ago · @quorra','price'=>'0.30'],
-                        ['seed'=>'nftm-d2','name'=>'Static Rose','creator'=>'14 min ago · @ivorygrid','price'=>'0.45'],
-                        ['seed'=>'nftm-d3','name'=>'Ultra Bloom','creator'=>'31 min ago · @marrow','price'=>'0.60'],
-                        ['seed'=>'nftm-d4','name'=>'Dune Signal','creator'=>'48 min ago · @deepcache','price'=>'0.25'],
-                    ];
-                @endphp
-                @foreach($drops as $item)
-                <div class="nftm-nft-card">
-                    <div class="nftm-art"><img src="https://picsum.photos/seed/{{ $item['seed'] }}/500/500" alt="{{ $item['name'] }}"></div>
-                    <h3>{{ $item['name'] }}</h3>
-                    <div class="nftm-creator">{{ $item['creator'] }}</div>
-                    <div class="nftm-card-foot">
-                        <div class="nftm-price"><span class="nftm-k">Mint</span><span class="nftm-v">{{ $item['price'] }} Ξ</span></div>
-                        <span class="nftm-likes"><span class="nftm-heart">✦</span> new</span>
+            <div class="nftm-sec-head"><div><span class="nftm-eyebrow">Fresh mints</span><h2>Just dropped</h2><p>Straight off the chain — scroll through the newest pieces minted this hour.</p></div></div>
+        </div>
+        <div class="nftm-hscroll" id="nftmDropsScroll">
+            <div class="nftm-wrap nftm-hscroll-wrap">
+                <div class="nftm-hscroll-track" id="nftmDropsTrack">
+                    @php
+                        $drops = [
+                            ['seed'=>'nftm-d1','name'=>'Fold 002','creator'=>'2 min ago · @quorra','price'=>'0.30'],
+                            ['seed'=>'nftm-d2','name'=>'Static Rose','creator'=>'14 min ago · @ivorygrid','price'=>'0.45'],
+                            ['seed'=>'nftm-d3','name'=>'Ultra Bloom','creator'=>'31 min ago · @marrow','price'=>'0.60'],
+                            ['seed'=>'nftm-d4','name'=>'Dune Signal','creator'=>'48 min ago · @deepcache','price'=>'0.25'],
+                            ['seed'=>'nftm-d5','name'=>'Halo Rift','creator'=>'1 hr ago · @nullspace','price'=>'0.52'],
+                            ['seed'=>'nftm-d6','name'=>'Mono Bloom','creator'=>'1 hr ago · @sol.axis','price'=>'0.38'],
+                        ];
+                    @endphp
+                    @foreach($drops as $item)
+                    <div class="nftm-nft-card">
+                        <div class="nftm-art"><img src="https://picsum.photos/seed/{{ $item['seed'] }}/500/500" alt="{{ $item['name'] }}"></div>
+                        <h3>{{ $item['name'] }}</h3>
+                        <div class="nftm-creator">{{ $item['creator'] }}</div>
+                        <div class="nftm-card-foot">
+                            <div class="nftm-price"><span class="nftm-k">Mint</span><span class="nftm-v">{{ $item['price'] }} Ξ</span></div>
+                            <span class="nftm-likes"><span class="nftm-heart">✦</span> new</span>
+                        </div>
                     </div>
+                    @endforeach
                 </div>
-                @endforeach
             </div>
         </div>
     </section>
@@ -499,5 +512,5 @@
     {{-- layouts.app's trailing inline script ($('.dropdown > a')...) expects
          jQuery to already be loaded, same as every other page on the site. --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="{{ asset('Assets/js/nft-marketplace.js') }}?v=1.1.0"></script>
+    <script src="{{ asset('Assets/js/nft-marketplace.js') }}?v=1.2.0"></script>
 @endsection

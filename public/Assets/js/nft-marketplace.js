@@ -417,7 +417,12 @@
             });
 
             if (featuredGrid) {
-                featuredGrid.insertBefore(card, featuredGrid.firstChild);
+                /* Insert just after the spotlight (xl) tile so the bento's
+                   large lead card stays first; fall back to prepend. */
+                var lead = featuredGrid.querySelector('.nftm-nft-card--xl');
+                if (lead && lead.nextSibling) featuredGrid.insertBefore(card, lead.nextSibling);
+                else if (lead) featuredGrid.appendChild(card);
+                else featuredGrid.insertBefore(card, featuredGrid.firstChild);
                 card.animate([{ opacity: 0, transform: 'translateY(-10px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 350 });
             }
 
@@ -673,5 +678,75 @@
                 btn.style.transform = '';
             });
         });
+    })();
+
+    /* ---- Cinematic scroll: ambient parallax + pinned horizontal drops -- */
+    (function cinematic() {
+        if (REDUCE || !window.gsap || !window.ScrollTrigger) return;
+        gsap.registerPlugin(ScrollTrigger);
+
+        /* Ambient backdrop drifts down slightly as the page scrolls. The orbs
+           run their own CSS keyframe transforms on the child <span>s, so this
+           transform on the container composes cleanly rather than fighting. */
+        var ambient = document.querySelector('.nftm-ambient');
+        if (ambient) {
+            gsap.to(ambient, {
+                yPercent: 14,
+                ease: 'none',
+                scrollTrigger: { trigger: '.nftm-page', start: 'top top', end: 'bottom bottom', scrub: true }
+            });
+        }
+
+        /* Pinned horizontal gallery for "Just dropped": on desktop the section
+           holds in place while the track scrubs sideways; on mobile / reduced
+           motion the CSS falls back to a normal swipeable overflow-scroll. */
+        var scroll = document.getElementById('nftmDropsScroll');
+        var track = document.getElementById('nftmDropsTrack');
+        var pinTween = null;
+
+        function amount() {
+            return Math.max(0, track.scrollWidth - scroll.clientWidth + 48);
+        }
+
+        function buildPin() {
+            /* Tear down any previous instance (resize/orientation change). */
+            if (pinTween) {
+                if (pinTween.scrollTrigger) pinTween.scrollTrigger.kill();
+                pinTween.kill();
+                pinTween = null;
+                gsap.set(track, { clearProps: 'transform' });
+                scroll.classList.remove('nftm-pinned');
+            }
+            var desktop = window.matchMedia('(min-width: 901px)').matches;
+            if (!desktop || amount() <= 0) return;   /* mobile → CSS overflow-scroll */
+
+            scroll.classList.add('nftm-pinned');
+            pinTween = gsap.to(track, {
+                x: function () { return -amount(); },
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: scroll,
+                    start: 'center center',
+                    end: function () { return '+=' + amount(); },
+                    pin: true,
+                    scrub: 0.5,
+                    anticipatePin: 1,
+                    invalidateOnRefresh: true
+                }
+            });
+        }
+
+        if (scroll && track) {
+            buildPin();
+            window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
+            }
+            var rt;
+            window.addEventListener('resize', function () {
+                clearTimeout(rt);
+                rt = setTimeout(buildPin, 200);
+            });
+        }
     })();
 })();
