@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('Assets/css/nft-marketplace.css') }}?v=1.0.0">
+    <link rel="stylesheet" href="{{ asset('Assets/css/nft-marketplace.css') }}?v=1.1.0">
     {{-- Heavier, more "premium" smooth-scroll feel for this page only — read
          by scroll-fx.js's Lenis init, which runs later in <body>. Every
          other page is unaffected (window.__lenisOverrides stays undefined). --}}
@@ -46,6 +46,20 @@
      reveal pass (see its "stand down" check) — this page drives its own
      granular, per-card GSAP scroll animations instead. --}}
 <div class="nftm-page" data-reveal-group>
+
+    {{-- Scroll-progress bar — a thin gradient line at the very top that fills
+         as the page scrolls. Width driven by nft-marketplace.js. --}}
+    <div class="nftm-scroll-progress" aria-hidden="true"><span></span></div>
+
+    {{-- Ambient animated backdrop — drifting aurora orbs + a faint moving grid,
+         fixed behind all content. Pure decoration; disabled under
+         prefers-reduced-motion via CSS. --}}
+    <div class="nftm-ambient" aria-hidden="true">
+        <span class="nftm-orb nftm-orb-1"></span>
+        <span class="nftm-orb nftm-orb-2"></span>
+        <span class="nftm-orb nftm-orb-3"></span>
+        <span class="nftm-grid"></span>
+    </div>
 
     {{-- Search results dropdown — deliberately NOT nested inside .nftm-header,
          which has its own z-index:1050 that would cap this element's z-index
@@ -87,13 +101,29 @@
             </div>
 
             <div class="nftm-stats">
-                <div class="nftm-stat"><div class="nftm-num">128K</div><div class="nftm-lbl">Artworks minted</div></div>
-                <div class="nftm-stat"><div class="nftm-num">42.6K</div><div class="nftm-lbl">Active creators</div></div>
-                <div class="nftm-stat"><div class="nftm-num">9,410</div><div class="nftm-lbl">Collections</div></div>
-                <div class="nftm-stat"><div class="nftm-num">31.2K Ξ</div><div class="nftm-lbl">Volume traded</div></div>
+                <div class="nftm-stat"><div class="nftm-num"><span class="nftm-count" data-target="128" data-suffix="K">0</span></div><div class="nftm-lbl">Artworks minted</div></div>
+                <div class="nftm-stat"><div class="nftm-num"><span class="nftm-count" data-target="42.6" data-decimals="1" data-suffix="K">0</span></div><div class="nftm-lbl">Active creators</div></div>
+                <div class="nftm-stat"><div class="nftm-num"><span class="nftm-count" data-target="9410" data-sep="1">0</span></div><div class="nftm-lbl">Collections</div></div>
+                <div class="nftm-stat"><div class="nftm-num"><span class="nftm-count" data-target="31.2" data-decimals="1" data-suffix="K Ξ">0</span></div><div class="nftm-lbl">Volume traded</div></div>
             </div>
         </div>
     </section>
+
+    {{-- ============ CREATOR MARQUEE ============ --}}
+    {{-- Seamless infinite ticker of creator handles — the track is duplicated
+         so the -50% translate loops without a visible seam. Paused under
+         prefers-reduced-motion. --}}
+    <div class="nftm-marquee" aria-hidden="true">
+        <div class="nftm-marquee-track">
+            @php
+                $tickers = ['@lumenworks','@ivorygrid','@marrow','@sol.axis','@nullspace','@quorra','@deepcache','@zephyr.eth'];
+            @endphp
+            @foreach(array_merge($tickers, $tickers) as $handle)
+                <span class="nftm-tick">{{ $handle }}</span>
+                <span class="nftm-tick-dot">✦</span>
+            @endforeach
+        </div>
+    </div>
 
     {{-- ============ FEATURED ============ --}}
     <section class="nftm-block" id="featured">
@@ -469,5 +499,5 @@
     {{-- layouts.app's trailing inline script ($('.dropdown > a')...) expects
          jQuery to already be loaded, same as every other page on the site. --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="{{ asset('Assets/js/nft-marketplace.js') }}?v=1.0.0"></script>
+    <script src="{{ asset('Assets/js/nft-marketplace.js') }}?v=1.1.0"></script>
 @endsection

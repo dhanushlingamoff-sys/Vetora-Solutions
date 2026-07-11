@@ -1320,3 +1320,357 @@
         flex-direction: column;
     }
 }
+
+/* =====================================================================
+   ★ PREMIUM ANIMATIONS & SCROLL EFFECTS ★
+   Everything below is additive polish — ambient backdrop, scroll progress,
+   count-up stats, creator marquee, 3D pointer tilt + spotlight, gradient
+   hover glow, magnetic CTAs and a shimmering hero headline. All heavy
+   motion is disabled under prefers-reduced-motion at the very bottom.
+   ===================================================================== */
+
+/* Content must sit above the fixed ambient backdrop (z-index:0). We do NOT
+   give .nftm-page its own position/z-index on purpose: making it a stacking
+   context would trap the fixed modals/toasts/search dropdown (z-index 100000+)
+   beneath the header — the same trap the header comments warn about. Instead
+   the ambient (z-index:0) and these sections (z-index:1) simply order against
+   each other inside the shared root stacking context, while the high-z fixed
+   overlays stay above everything. */
+.nftm-page > section,
+.nftm-page > .nftm-cta-band,
+.nftm-marquee {
+    position: relative;
+    z-index: 1;
+}
+
+/* ---- Scroll-progress bar --------------------------------------------- */
+.nftm-scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    z-index: 100030;
+    background: rgba(255, 255, 255, .05);
+    pointer-events: none;
+}
+
+.nftm-scroll-progress span {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--nftm-iris), var(--nftm-blue), var(--nftm-teal));
+    box-shadow: 0 0 12px rgba(61, 217, 194, .6);
+    transition: width .1s linear;
+}
+
+/* ---- Ambient animated backdrop --------------------------------------- */
+.nftm-ambient {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.nftm-ambient .nftm-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: .55;
+    will-change: transform;
+}
+
+.nftm-orb-1 {
+    width: 620px;
+    height: 620px;
+    top: -180px;
+    left: -160px;
+    background: radial-gradient(circle, rgba(95, 10, 135, .55), transparent 65%);
+    animation: nftm-orb-a 26s ease-in-out infinite;
+}
+
+.nftm-orb-2 {
+    width: 560px;
+    height: 560px;
+    top: 32%;
+    right: -180px;
+    background: radial-gradient(circle, rgba(44, 115, 210, .42), transparent 65%);
+    animation: nftm-orb-b 32s ease-in-out infinite;
+}
+
+.nftm-orb-3 {
+    width: 500px;
+    height: 500px;
+    bottom: -160px;
+    left: 30%;
+    background: radial-gradient(circle, rgba(0, 194, 168, .30), transparent 65%);
+    animation: nftm-orb-c 30s ease-in-out infinite;
+}
+
+.nftm-ambient .nftm-grid {
+    position: absolute;
+    inset: -50%;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(circle at 50% 40%, #000 0%, transparent 72%);
+    -webkit-mask-image: radial-gradient(circle at 50% 40%, #000 0%, transparent 72%);
+    animation: nftm-grid-pan 40s linear infinite;
+}
+
+@keyframes nftm-orb-a {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(80px, 60px) scale(1.12); }
+}
+
+@keyframes nftm-orb-b {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(-70px, 50px) scale(1.08); }
+}
+
+@keyframes nftm-orb-c {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(60px, -70px) scale(1.15); }
+}
+
+@keyframes nftm-grid-pan {
+    0%   { transform: translate(0, 0); }
+    100% { transform: translate(56px, 56px); }
+}
+
+/* ---- Shimmering hero headline ---------------------------------------- */
+.nftm-hero .nftm-grad-text {
+    background: linear-gradient(100deg,
+        #7b1fa2 0%, #4d8de0 28%, #3dd9c2 50%, #4d8de0 72%, #7b1fa2 100%);
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: nftm-shine 6s linear infinite;
+}
+
+@keyframes nftm-shine {
+    to { background-position: 220% center; }
+}
+
+/* Live "bidding now" dot — soft pulse ring. */
+.nftm-float-tag .nftm-dot {
+    position: relative;
+}
+
+.nftm-float-tag .nftm-dot::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 1px solid var(--nftm-teal);
+    animation: nftm-ping 1.8s cubic-bezier(0, 0, .2, 1) infinite;
+}
+
+@keyframes nftm-ping {
+    0%   { transform: scale(.6); opacity: .9; }
+    80%, 100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* Gentle float for the hero showcase card + its floating tag. */
+.nftm-showcase .nftm-show-card {
+    animation: nftm-float 7s ease-in-out infinite;
+}
+
+.nftm-showcase .nftm-float-tag {
+    animation: nftm-float 7s ease-in-out infinite reverse;
+}
+
+@keyframes nftm-float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-12px); }
+}
+
+/* ---- Creator marquee ------------------------------------------------- */
+.nftm-marquee {
+    overflow: hidden;
+    border-top: 1px solid var(--nftm-line);
+    border-bottom: 1px solid var(--nftm-line);
+    background: var(--nftm-void);
+    padding: 18px 0;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+.nftm-marquee-track {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    width: max-content;
+    animation: nftm-marquee 32s linear infinite;
+}
+
+.nftm-marquee:hover .nftm-marquee-track {
+    animation-play-state: paused;
+}
+
+.nftm-marquee .nftm-tick {
+    font-family: var(--nftm-font-display);
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: -.01em;
+    color: var(--nftm-text-dim);
+    white-space: nowrap;
+    transition: color .2s;
+}
+
+.nftm-marquee .nftm-tick:hover {
+    color: var(--nftm-text);
+}
+
+.nftm-marquee .nftm-tick-dot {
+    color: var(--nftm-aurora);
+    font-size: 12px;
+    opacity: .7;
+}
+
+@keyframes nftm-marquee {
+    to { transform: translateX(-50%); }
+}
+
+/* ---- 3D pointer tilt + spotlight glow on cards ----------------------- */
+/* Cards read pointer position from --nftm-mx/--nftm-my (0–100%) and a tilt
+   from --nftm-rx/--nftm-ry (deg), both set in nft-marketplace.js. These
+   rules override the earlier plain translateY hovers (later in the file). */
+.nftm-nft-card,
+.nftm-auc-card,
+.nftm-coll {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    transform: perspective(900px)
+        rotateX(var(--nftm-rx, 0deg))
+        rotateY(var(--nftm-ry, 0deg));
+    transform-style: preserve-3d;
+    transition: transform .3s cubic-bezier(.16, 1, .3, 1), border-color .25s ease;
+}
+
+.nftm-nft-card:hover,
+.nftm-auc-card:hover,
+.nftm-coll:hover {
+    transform: perspective(900px)
+        rotateX(var(--nftm-rx, 0deg))
+        rotateY(var(--nftm-ry, 0deg))
+        translateY(-6px);
+    border-color: var(--nftm-line-2);
+}
+
+.nftm-step,
+.nftm-cat {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+}
+
+/* Spotlight follows the cursor within the card. */
+.nftm-nft-card::before,
+.nftm-auc-card::before,
+.nftm-coll::before,
+.nftm-step::before,
+.nftm-cat::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: radial-gradient(340px circle at var(--nftm-mx, 50%) var(--nftm-my, 0%),
+        rgba(123, 31, 162, .22), transparent 60%);
+    opacity: 0;
+    transition: opacity .3s ease;
+    pointer-events: none;
+}
+
+.nftm-nft-card:hover::before,
+.nftm-auc-card:hover::before,
+.nftm-coll:hover::before,
+.nftm-step:hover::before,
+.nftm-cat:hover::before {
+    opacity: 1;
+}
+
+/* Animated gradient border on hover (masked ring). */
+.nftm-nft-card::after,
+.nftm-auc-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, var(--nftm-iris), var(--nftm-blue), var(--nftm-teal));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity .3s ease;
+    pointer-events: none;
+}
+
+.nftm-nft-card:hover::after,
+.nftm-auc-card:hover::after {
+    opacity: .9;
+}
+
+/* Category tiles + steps keep a gentle lift on hover. */
+.nftm-step {
+    transition: transform .25s cubic-bezier(.16, 1, .3, 1), border-color .25s ease;
+}
+
+.nftm-step:hover {
+    transform: translateY(-4px);
+    border-color: var(--nftm-line-2);
+}
+
+/* ---- Magnetic CTA transition smoothing ------------------------------- */
+/* JS sets an inline translate on pointer-move; the transition here makes the
+   spring-back on pointer-leave feel elastic rather than snappy. */
+.nftm-hero-cta .nftm-btn,
+.nftm-cta-band .nftm-btn-primary {
+    transition: transform .35s cubic-bezier(.16, 1, .3, 1),
+        box-shadow .15s ease, background .15s ease;
+    will-change: transform;
+}
+
+/* Nudge the arrow inside the primary hero CTA on hover. */
+.nftm-hero-cta .nftm-btn-primary i {
+    transition: transform .25s ease;
+}
+
+.nftm-hero-cta .nftm-btn-primary:hover i {
+    transform: translateX(4px);
+}
+
+/* Count-up stats sit in a tabular-friendly figure so width doesn't jump. */
+.nftm-stat .nftm-num {
+    font-variant-numeric: tabular-nums;
+}
+
+/* ---- Reduced-motion: strip the heavy stuff -------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    .nftm-orb-1, .nftm-orb-2, .nftm-orb-3,
+    .nftm-ambient .nftm-grid,
+    .nftm-hero .nftm-grad-text,
+    .nftm-showcase .nftm-show-card,
+    .nftm-showcase .nftm-float-tag,
+    .nftm-float-tag .nftm-dot::after,
+    .nftm-marquee-track {
+        animation: none !important;
+    }
+
+    .nftm-nft-card,
+    .nftm-auc-card,
+    .nftm-coll {
+        transform: none !important;
+    }
+
+    .nftm-scroll-progress span {
+        transition: none;
+    }
+}

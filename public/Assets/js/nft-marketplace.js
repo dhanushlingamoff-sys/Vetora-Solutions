@@ -79,7 +79,11 @@
             ScrollTrigger.batch(items, {
                 start: TRIGGER,
                 onEnter: function (batch) {
-                    gsap.to(batch, { opacity: 1, y: 0, duration: .6, ease: 'power2.out', stagger: .08, overwrite: true });
+                    /* clearProps:'transform' hands the element back to CSS once
+                       it's revealed, so the pointer-tilt / hover-lift transforms
+                       (driven by CSS vars) aren't frozen by a leftover inline
+                       translate(0,0). */
+                    gsap.to(batch, { opacity: 1, y: 0, duration: .6, ease: 'power2.out', stagger: .08, overwrite: true, clearProps: 'transform' });
                 }
             });
         });
@@ -93,7 +97,7 @@
             ScrollTrigger.batch(rows, {
                 start: TRIGGER,
                 onEnter: function (batch) {
-                    gsap.to(batch, { opacity: 1, x: 0, duration: .5, ease: 'power2.out', stagger: .06, overwrite: true });
+                    gsap.to(batch, { opacity: 1, x: 0, duration: .5, ease: 'power2.out', stagger: .06, overwrite: true, clearProps: 'transform' });
                 }
             });
         });
@@ -533,4 +537,141 @@
             }
         });
     }
+})();
+
+
+/* =====================================================================
+   PREMIUM MOTION LAYER — scroll progress, count-up stats, 3D pointer
+   tilt + spotlight, and magnetic CTAs. Kept in its own IIFE so it's
+   independent of the interactive/demo logic above. All motion respects
+   prefers-reduced-motion.
+   ===================================================================== */
+(function () {
+    'use strict';
+
+    if (!document.querySelector('.nftm-page')) return;
+    var REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var FINE = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    /* ---- Scroll-progress bar ----------------------------------------- */
+    (function scrollProgress() {
+        var bar = document.querySelector('.nftm-scroll-progress span');
+        if (!bar) return;
+        var ticking = false;
+        function update() {
+            var doc = document.documentElement;
+            var max = doc.scrollHeight - doc.clientHeight;
+            var pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+            bar.style.width = pct + '%';
+            ticking = false;
+        }
+        window.addEventListener('scroll', function () {
+            if (!ticking) { ticking = true; requestAnimationFrame(update); }
+        }, { passive: true });
+        update();
+    })();
+
+    /* ---- Count-up stats ---------------------------------------------- */
+    (function countUp() {
+        var els = document.querySelectorAll('.nftm-count');
+        if (!els.length) return;
+
+        function format(el, value) {
+            var decimals = parseInt(el.getAttribute('data-decimals'), 10) || 0;
+            var out = value.toFixed(decimals);
+            if (el.getAttribute('data-sep')) {
+                var parts = out.split('.');
+                parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                out = parts.join('.');
+            }
+            return (el.getAttribute('data-prefix') || '') + out + (el.getAttribute('data-suffix') || '');
+        }
+
+        function run(el) {
+            if (el.dataset.done) return;
+            el.dataset.done = '1';
+            var target = parseFloat(el.getAttribute('data-target')) || 0;
+            if (REDUCE) { el.textContent = format(el, target); return; }
+            var dur = 1600, start = null;
+            function step(ts) {
+                if (start === null) start = ts;
+                var p = Math.min((ts - start) / dur, 1);
+                var eased = 1 - Math.pow(1 - p, 3);   /* easeOutCubic */
+                el.textContent = format(el, target * eased);
+                if (p < 1) requestAnimationFrame(step);
+                else el.textContent = format(el, target);
+            }
+            requestAnimationFrame(step);
+        }
+
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                    if (e.isIntersecting) { run(e.target); io.unobserve(e.target); }
+                });
+            }, { threshold: 0.4 });
+            els.forEach(function (el) { io.observe(el); });
+
+            /* Fallback: fire any counter already in view on load, so the hero
+               stats never sit at 0 if the observer's initial callback lags. */
+            window.addEventListener('load', function () {
+                els.forEach(function (el) {
+                    var r = el.getBoundingClientRect();
+                    if (r.top < window.innerHeight && r.bottom > 0) run(el);
+                });
+            });
+        } else {
+            els.forEach(run);
+        }
+    })();
+
+    /* ---- 3D pointer tilt + spotlight --------------------------------- */
+    (function tilt() {
+        if (REDUCE || !FINE) return;
+        var TILT_SEL = '.nftm-nft-card, .nftm-auc-card, .nftm-coll, .nftm-step, .nftm-cat';
+        var TILTABLE = /^(nftm-nft-card|nftm-auc-card|nftm-coll)$/;
+
+        document.addEventListener('pointermove', function (e) {
+            var card = e.target.closest ? e.target.closest(TILT_SEL) : null;
+            if (!card) return;
+            var r = card.getBoundingClientRect();
+            var px = (e.clientX - r.left) / r.width;
+            var py = (e.clientY - r.top) / r.height;
+            card.style.setProperty('--nftm-mx', (px * 100).toFixed(1) + '%');
+            card.style.setProperty('--nftm-my', (py * 100).toFixed(1) + '%');
+            if ([].some.call(card.classList, function (c) { return TILTABLE.test(c); })) {
+                card.style.setProperty('--nftm-rx', ((0.5 - py) * 7).toFixed(2) + 'deg');
+                card.style.setProperty('--nftm-ry', ((px - 0.5) * 7).toFixed(2) + 'deg');
+            }
+        }, { passive: true });
+
+        /* Reset tilt when the pointer leaves a card (delegated). */
+        document.addEventListener('pointerout', function (e) {
+            var card = e.target.closest ? e.target.closest(TILT_SEL) : null;
+            if (!card) return;
+            if (card.contains(e.relatedTarget)) return;  /* still inside */
+            card.style.setProperty('--nftm-rx', '0deg');
+            card.style.setProperty('--nftm-ry', '0deg');
+        }, { passive: true });
+    })();
+
+    /* ---- Magnetic CTAs ----------------------------------------------- */
+    (function magnetic() {
+        if (REDUCE || !FINE) return;
+        var STRENGTH = 0.32, MAX = 12;
+        var btns = document.querySelectorAll('.nftm-hero-cta .nftm-btn, .nftm-cta-band .nftm-btn-primary');
+        btns.forEach(function (btn) {
+            btn.addEventListener('pointermove', function (e) {
+                var r = btn.getBoundingClientRect();
+                var x = (e.clientX - (r.left + r.width / 2)) * STRENGTH;
+                var y = (e.clientY - (r.top + r.height / 2)) * STRENGTH;
+                x = Math.max(-MAX, Math.min(MAX, x));
+                y = Math.max(-MAX, Math.min(MAX, y));
+                btn.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)';
+            });
+            btn.addEventListener('pointerleave', function () {
+                btn.style.transform = '';
+            });
+        });
+    })();
 })();
