@@ -51,6 +51,10 @@ Route::get('/nft-marketplace-development-services-melbourne', function () {
     return view('services.blockchain.nft-marketplace');
 });
 
+Route::get('/cryptocurrency-development-services-melbourne', function () {
+    return view('services.blockchain.cryptocurrency');
+});
+
 Route::get('/privacy-policy', fn() => view('privacy-policy'));
 Route::get('/terms-and-conditions', fn() => view('terms-and-conditions'));
 Route::get('/copyrights', fn() => view('copyrights'));

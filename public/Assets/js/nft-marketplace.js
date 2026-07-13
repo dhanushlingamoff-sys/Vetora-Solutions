@@ -21,6 +21,32 @@
     }
 
     /* ---------------------------------------------------------------
+       Mobile nav toggle — collapses links/search/actions into a
+       dropdown panel under the 900px breakpoint.
+    --------------------------------------------------------------- */
+    var navToggle = document.getElementById('nftmNavToggle');
+    var navCollapse = document.getElementById('nftmNavCollapse');
+    if (navToggle && navCollapse) {
+        var navIcon = navToggle.querySelector('i');
+        function closeNav() {
+            navCollapse.classList.remove('nftm-nav-open');
+            navToggle.setAttribute('aria-expanded', 'false');
+            if (navIcon) { navIcon.classList.remove('bi-x-lg'); navIcon.classList.add('bi-list'); }
+        }
+        navToggle.addEventListener('click', function () {
+            var open = navCollapse.classList.toggle('nftm-nav-open');
+            navToggle.setAttribute('aria-expanded', String(open));
+            if (navIcon) {
+                navIcon.classList.toggle('bi-list', !open);
+                navIcon.classList.toggle('bi-x-lg', open);
+            }
+        });
+        navCollapse.querySelectorAll('a, button').forEach(function (el) {
+            el.addEventListener('click', closeNav);
+        });
+    }
+
+    /* ---------------------------------------------------------------
        Scroll animation — GSAP + ScrollTrigger (already loaded globally by
        layouts/app.blade.php, before this file). The page opts out of
        scroll-fx.js's generic whole-section reveal (via data-reveal-group
@@ -417,12 +443,7 @@
             });
 
             if (featuredGrid) {
-                /* Insert just after the spotlight (xl) tile so the bento's
-                   large lead card stays first; fall back to prepend. */
-                var lead = featuredGrid.querySelector('.nftm-nft-card--xl');
-                if (lead && lead.nextSibling) featuredGrid.insertBefore(card, lead.nextSibling);
-                else if (lead) featuredGrid.appendChild(card);
-                else featuredGrid.insertBefore(card, featuredGrid.firstChild);
+                featuredGrid.insertBefore(card, featuredGrid.firstChild);
                 card.animate([{ opacity: 0, transform: 'translateY(-10px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 350 });
             }
 
@@ -557,24 +578,6 @@
     if (!document.querySelector('.nftm-page')) return;
     var REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var FINE = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-
-    /* ---- Scroll-progress bar ----------------------------------------- */
-    (function scrollProgress() {
-        var bar = document.querySelector('.nftm-scroll-progress span');
-        if (!bar) return;
-        var ticking = false;
-        function update() {
-            var doc = document.documentElement;
-            var max = doc.scrollHeight - doc.clientHeight;
-            var pct = max > 0 ? (window.scrollY / max) * 100 : 0;
-            bar.style.width = pct + '%';
-            ticking = false;
-        }
-        window.addEventListener('scroll', function () {
-            if (!ticking) { ticking = true; requestAnimationFrame(update); }
-        }, { passive: true });
-        update();
-    })();
 
     /* ---- Count-up stats ---------------------------------------------- */
     (function countUp() {

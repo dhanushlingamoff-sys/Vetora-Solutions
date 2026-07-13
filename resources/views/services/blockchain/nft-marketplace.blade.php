@@ -21,21 +21,30 @@
                 <img src="{{ asset('Assets/Images/logo-main.png') }}" alt="Vetora Logo">
             </a>
 
-            <nav class="nftm-nav-links">
-                <a href="#featured">Explore</a>
-                <a href="#drops">Drops</a>
-                <a href="#creators">Creators</a>
-                <a href="#activity">Activity</a>
-            </nav>
+            <button type="button" class="nftm-nav-toggle" id="nftmNavToggle" aria-label="Toggle menu" aria-expanded="false">
+                <i class="bi bi-list"></i>
+            </button>
 
-            <div class="nftm-nav-search nftm-search-wrap">
-                <i class="bi bi-search"></i>
-                <input type="text" id="nftmSearchInput" placeholder="Search items, collections, creators" autocomplete="off">
-            </div>
+            {{-- display:contents on desktop so this wrapper doesn't affect the
+                 flex layout; on mobile it becomes the collapsible dropdown
+                 panel toggled by .nftm-nav-toggle (see nft-marketplace.js). --}}
+            <div class="nftm-nav-collapse" id="nftmNavCollapse">
+                <nav class="nftm-nav-links">
+                    <a href="#featured">Explore</a>
+                    <a href="#drops">Drops</a>
+                    <a href="#creators">Creators</a>
+                    <a href="#activity">Activity</a>
+                </nav>
 
-            <div class="nftm-nav-actions">
-                <button type="button" class="nftm-btn nftm-btn-ghost" data-nftm-wallet-btn>Connect wallet</button>
-                <button type="button" class="nftm-btn nftm-btn-primary" data-nftm-create-btn>Create</button>
+                <div class="nftm-nav-search nftm-search-wrap">
+                    <i class="bi bi-search"></i>
+                    <input type="text" id="nftmSearchInput" placeholder="Search items, collections, creators" autocomplete="off">
+                </div>
+
+                <div class="nftm-nav-actions">
+                    <button type="button" class="nftm-btn nftm-btn-ghost" data-nftm-wallet-btn>Connect wallet</button>
+                    <button type="button" class="nftm-btn nftm-btn-primary" data-nftm-create-btn>Create</button>
+                </div>
             </div>
         </div>
     </header>
@@ -49,7 +58,6 @@
 
     {{-- Scroll-progress bar — a thin gradient line at the very top that fills
          as the page scrolls. Width driven by nft-marketplace.js. --}}
-    <div class="nftm-scroll-progress" aria-hidden="true"><span></span></div>
 
     {{-- Ambient animated backdrop — drifting aurora orbs + a faint moving grid,
          fixed behind all content. Pure decoration; disabled under
@@ -137,8 +145,6 @@
                 <a class="nftm-see-all" href="#drops">View all <i class="bi bi-arrow-right"></i></a>
             </div>
 
-            {{-- Spotlight bento: the first item renders as a large 1×2 tile
-                 (.nftm-nft-card--xl), the rest fill the 3-column grid. --}}
             <div class="nftm-card-grid" id="nftmFeaturedGrid">
                 @php
                     $featured = [
@@ -150,9 +156,8 @@
                     ];
                 @endphp
                 @foreach($featured as $item)
-                <div class="nftm-nft-card{{ $loop->first ? ' nftm-nft-card--xl' : '' }}">
-                    @if($loop->first)<span class="nftm-badge">◆ Featured piece</span>@endif
-                    <div class="nftm-art"><img src="https://picsum.photos/seed/{{ $item['seed'] }}/{{ $loop->first ? '640/720' : '500/500' }}" alt="{{ $item['name'] }}"></div>
+                <div class="nftm-nft-card">
+                    <div class="nftm-art"><img src="https://picsum.photos/seed/{{ $item['seed'] }}/500/500" alt="{{ $item['name'] }}"></div>
                     <h3>{{ $item['name'] }}</h3>
                     <div class="nftm-creator">{{ $item['creator'] }}</div>
                     <div class="nftm-card-foot">

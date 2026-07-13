@@ -39,7 +39,7 @@
                                 Us</a></li>
                         <li class="dropdown">
                             <a href="javascript:void(0);"
-                                class="{{ request()->is('software-development-company-in-melbourne', 'mobile-app-development-company-in-melbourne', 'AI', 'ui-ux-design-services-melbourne', 'website-development-services-melbourne', 'seo-sem-services-melbourne', 'nft-marketplace-development-services-melbourne') ? 'active' : '' }}">Services
+                                class="{{ request()->is('software-development-company-in-melbourne', 'mobile-app-development-company-in-melbourne', 'AI', 'ui-ux-design-services-melbourne', 'website-development-services-melbourne', 'seo-sem-services-melbourne', 'nft-marketplace-development-services-melbourne', 'cryptocurrency-development-services-melbourne') ? 'active' : '' }}">Services
                                 <i class="bi bi-chevron-down"></i></a>
 
                             <div class="mega-menu">
@@ -110,7 +110,7 @@
                                     </div>
 
                                     <div class="mega-column">
-                                        <h4>Blockchain</h4>
+                                        <h4>Blockchain Technology</h4>
                                         <a href="{{ url('/nft-marketplace-development-services-melbourne') }}" class="mega-link">
                                             <span class="mega-icon-wrap mega-icon-tertiary">
                                                 <i class="bi bi-gem"></i>
@@ -118,6 +118,33 @@
                                             <span class="mega-link-body">
                                                 <span class="mega-link-title">NFT Marketplace Development</span>
                                                 <span class="mega-link-desc">Secure decentralized marketplaces</span>
+                                            </span>
+                                        </a>
+                                        <a href="{{ url('/cryptocurrency-development-services-melbourne') }}" class="mega-link">
+                                            <span class="mega-icon-wrap mega-icon-tertiary">
+                                                <i class="bi bi-currency-bitcoin"></i>
+                                            </span>
+                                            <span class="mega-link-body">
+                                                <span class="mega-link-title">Cryptocurrency</span>
+                                                <span class="mega-link-desc">Custom coins, tokens &amp; wallets</span>
+                                            </span>
+                                        </a>
+                                        <a href="javascript:void();" class="mega-link">
+                                            <span class="mega-icon-wrap mega-icon-tertiary">
+                                                <i class="bi bi-graph-up-arrow"></i>
+                                            </span>
+                                            <span class="mega-link-body">
+                                                <span class="mega-link-title">ICO Development</span>
+                                                <span class="mega-link-desc">Launch compliant token sales</span>
+                                            </span>
+                                        </a>
+                                        <a href="javascript:void();" class="mega-link">
+                                            <span class="mega-icon-wrap mega-icon-tertiary">
+                                                <i class="bi bi-arrow-left-right"></i>
+                                            </span>
+                                            <span class="mega-link-body">
+                                                <span class="mega-link-title">SPOT &amp; P2P Trading</span>
+                                                <span class="mega-link-desc">Real-time exchange &amp; peer trading</span>
                                             </span>
                                         </a>
                                     </div>
