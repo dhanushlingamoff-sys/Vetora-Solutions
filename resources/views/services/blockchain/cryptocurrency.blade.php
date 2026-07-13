@@ -2,639 +2,333 @@
 
 
 @section('meta')
-    <title>Cryptocurrency Development Services in Melbourne - Vetora Solutions</title>
+    <title>Cryptocurrency Development Services in Melbourne — Vetora Solutions</title>
     <meta name="description"
-        content="Vetora Solutions builds secure, audited cryptocurrency coins, tokens, wallets, exchanges, and DeFi platforms — end-to-end blockchain development for businesses across Melbourne and Australia.">
+        content="Vetora Solutions designs, builds, and audits cryptocurrency coins, tokens, wallets, exchanges, and DeFi platforms — secure, multi-chain blockchain development for businesses across Melbourne and Australia.">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-    <link rel="stylesheet" href="{{ asset('Assets/css/cryptocurrency.css') }}?v=1.0.0">
+    {{-- Dark-theme fonts for this page's immersive design --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('Assets/css/cryptocurrency.css') }}?v=2.0.0">
+@endsection
+
+
+{{-- ================================================================
+     OWN DARK NAV — replaces the site's default header for this page.
+     ================================================================ --}}
+@section('page-header')
+    <script>document.documentElement.classList.add('js')</script>
+    <div id="cx-progress"></div>
+
+    <header class="cx-header" id="cxHeader">
+        <div class="cx-wrap cx-nav">
+            <a href="{{ url('/') }}" class="cx-brand">
+                VETORA <span class="cx-spark">✦</span><small>solutions</small>
+            </a>
+
+            <button type="button" class="cx-nav-toggle" id="cxNavToggle" aria-label="Toggle menu" aria-expanded="false">
+                <i class="bi bi-list"></i>
+            </button>
+
+            <div class="cx-nav-collapse" id="cxNavCollapse">
+                <nav class="cx-nav-links">
+                    <a href="#cx-services">Services</a>
+                    <a href="#cx-process">Process</a>
+                    <a href="#cx-security">Security</a>
+                    <a href="#cx-faq">FAQ</a>
+                </nav>
+                <div class="cx-nav-actions">
+                    <a href="{{ url('/contact-us') }}" class="cx-btn cx-btn-ghost">Let's talk</a>
+                    <a href="#" class="cx-btn cx-btn-primary" data-bs-toggle="modal" data-bs-target="#quoteModal">Get a quote</a>
+                </div>
+            </div>
+        </div>
+    </header>
 @endsection
 
 
 @section('content')
+{{-- data-reveal-group opts this page out of scroll-fx.js's generic whole-section
+     reveal pass — this page runs its own IntersectionObserver reveal instead. --}}
+<div class="cx-root" data-reveal-group>
 
     {{-- ============================================================
          1. HERO
          ============================================================ --}}
-    <section class="cc-hero">
-        <div class="cc-hero-shape cc-shape-1"></div>
-        <div class="cc-hero-shape cc-shape-2"></div>
-        <div class="cc-hero-shape cc-shape-3"></div>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-10">
-                    <span class="cc-hero-eyebrow">
-                        <i class="bi bi-currency-bitcoin"></i>&nbsp; Cryptocurrency Development
-                    </span>
-                    <h1>
-                        Launch a <span class="cc-hero-grad">Secure & Scalable</span><br>
-                        Cryptocurrency Product
-                    </h1>
-                    <p class="cc-hero-desc">
-                        From coins and tokens to wallets, exchanges, and DeFi platforms — we design, build, and audit
-                        blockchain products engineered for security, compliance, and long-term growth.
-                    </p>
-                    <div class="cc-hero-actions">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#quoteModal">
-                            <button class="btn btn-gradiant btn-md">
-                                Get a Free Quote <i class="bi bi-arrow-right"></i>
-                            </button>
-                        </a>
-                        <a href="#cc-process" class="cc-hero-link">
-                            <i class="bi bi-play-circle-fill"></i> See Our Process
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            {{-- Ticker strip — a purely decorative, CSS-driven marquee of major coins,
-                 reinforcing the "cryptocurrency" theme at a glance. --}}
-            <div class="cc-ticker" aria-hidden="true">
-                <div class="cc-ticker-track">
-                    @php
-                        $coins = [
-                            ['sym' => 'BTC', 'name' => 'Bitcoin', 'chg' => '+2.4%', 'up' => true],
-                            ['sym' => 'ETH', 'name' => 'Ethereum', 'chg' => '+1.8%', 'up' => true],
-                            ['sym' => 'BNB', 'name' => 'BNB', 'chg' => '-0.6%', 'up' => false],
-                            ['sym' => 'SOL', 'name' => 'Solana', 'chg' => '+4.1%', 'up' => true],
-                            ['sym' => 'USDT', 'name' => 'Tether', 'chg' => '+0.0%', 'up' => true],
-                            ['sym' => 'MATIC', 'name' => 'Polygon', 'chg' => '-1.2%', 'up' => false],
-                            ['sym' => 'XRP', 'name' => 'Ripple', 'chg' => '+3.0%', 'up' => true],
-                        ];
-                    @endphp
-                    @foreach (array_merge($coins, $coins) as $coin)
-                        <span class="cc-tick">
-                            <b>{{ $coin['sym'] }}</b> {{ $coin['name'] }}
-                            <em class="{{ $coin['up'] ? 'cc-up' : 'cc-down' }}">{{ $coin['chg'] }}</em>
-                        </span>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    {{-- ============================================================
-         2. TRUSTED CLIENTS
-         ============================================================ --}}
-    @include('common.trusted-clients', [
-        'clientsTitle' => 'Trusted by Fintech, Web3 & Blockchain-First Businesses',
-        'clientsDesc' =>
-            'We partner with startups, exchanges, and enterprises to build cryptocurrency products that are secure, audited, and ready to scale.',
-    ])
-
-
-    {{-- ============================================================
-         3. ABOUT / INTRO SPLIT
-         ============================================================ --}}
-    <section class="section cc-about-section">
-        <div class="container">
-            <div class="row g-5">
-
-                <div class="col-lg-6 order-lg-2">
-                    <div class="section-subtitle"><i class="bi bi-info-circle"></i> What We Do</div>
-                    <div class="section-heading mb-3">
-                        <h2 class="section-title">
-                            End-to-End Cryptocurrency<br>
-                            <span>Development You Can Trust</span>
-                        </h2>
-                    </div>
-                    <p class="cc-about-text">
-                        Launching a cryptocurrency product means putting real money and real trust on the line. At
-                        VETORA SOLUTIONS, we engineer coins, tokens, wallets, and exchanges with security and
-                        compliance built in from the first line of code — not bolted on afterwards.
-                    </p>
-                    <p class="cc-about-text">
-                        Our blockchain engineers combine deep protocol expertise with rigorous auditing practices,
-                        delivering cryptocurrency products that hold up under real-world volume, scrutiny, and market
-                        pressure.
-                    </p>
-                    <ul class="cc-check-list">
-                        <li><i class="bi bi-check-circle-fill"></i> Independently audited smart contracts</li>
-                        <li><i class="bi bi-check-circle-fill"></i> Multi-chain support — Ethereum, BSC, Polygon, Solana</li>
-                        <li><i class="bi bi-check-circle-fill"></i> Secure wallet & custody architecture</li>
-                        <li><i class="bi bi-check-circle-fill"></i> Regulatory-aware token structuring</li>
-                        <li><i class="bi bi-check-circle-fill"></i> 24/7 post-launch monitoring & support</li>
-                    </ul>
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#quoteModal" class="btn btn-gradiant btn-md mt-3">
-                        Start Your Project <i class="bi bi-arrow-right"></i>
+    <section class="cx-hero">
+        <div class="cx-wrap">
+            <div>
+                <span class="cx-eyebrow">Cryptocurrency development</span>
+                <h1>Build crypto products with <span class="cx-grad">confidence.</span></h1>
+                <p class="cx-lead">
+                    From coins and tokens to wallets, exchanges, and DeFi platforms — we design, build, and
+                    independently audit blockchain products engineered for security, compliance, and long-term growth.
+                </p>
+                <div class="cx-hero-cta">
+                    <a href="#" class="cx-btn cx-btn-primary" data-bs-toggle="modal" data-bs-target="#quoteModal">
+                        Get a Free Quote →
                     </a>
+                    <a href="#cx-process" class="cx-btn cx-btn-ghost">See Our Process</a>
                 </div>
-
-                <div class="col-lg-6 order-lg-1">
-                    <div class="cc-about-img-wrap">
-                        <img src="{{ asset('Assets/Images/hero-banner.png') }}" alt="Cryptocurrency Development"
-                            class="cc-about-img">
-                    </div>
+                <div class="cx-trust-row">
+                    <div><b>50+</b>Products shipped</div>
+                    <div><b>100%</b>Audited contracts</div>
+                    <div><b>8+</b>Chains supported</div>
                 </div>
+            </div>
 
+            <div class="cx-orb-stage">
+                <div class="cx-live-tag"><span class="cx-live-dot"></span>Secure · always audited</div>
+                <div class="cx-orb-ring"></div>
+                <div class="cx-orb">₿</div>
+                <div class="cx-coin-badge cx-cb1">BTC</div>
+                <div class="cx-coin-badge cx-cb2">ETH</div>
+                <div class="cx-coin-badge cx-cb3">SOL</div>
+                <div class="cx-coin-badge cx-cb4">BNB</div>
+            </div>
+        </div>
+
+        {{-- Decorative coin ticker --}}
+        <div class="cx-ticker">
+            <div class="cx-ticker-track" id="cx-ticker">
+                <span class="cx-tk"><span class="cx-sym">BTC</span><span class="cx-pr">Bitcoin</span><span class="cx-up">▲ 2.4%</span></span>
+                <span class="cx-tk"><span class="cx-sym">ETH</span><span class="cx-pr">Ethereum</span><span class="cx-up">▲ 1.8%</span></span>
+                <span class="cx-tk"><span class="cx-sym">SOL</span><span class="cx-pr">Solana</span><span class="cx-up">▲ 5.1%</span></span>
+                <span class="cx-tk"><span class="cx-sym">BNB</span><span class="cx-pr">BNB Chain</span><span class="cx-down">▼ 0.7%</span></span>
+                <span class="cx-tk"><span class="cx-sym">XRP</span><span class="cx-pr">Ripple</span><span class="cx-up">▲ 3.2%</span></span>
+                <span class="cx-tk"><span class="cx-sym">ADA</span><span class="cx-pr">Cardano</span><span class="cx-down">▼ 1.1%</span></span>
+                <span class="cx-tk"><span class="cx-sym">MATIC</span><span class="cx-pr">Polygon</span><span class="cx-up">▲ 0.9%</span></span>
+                <span class="cx-tk"><span class="cx-sym">DOGE</span><span class="cx-pr">Dogecoin</span><span class="cx-up">▲ 4.6%</span></span>
             </div>
         </div>
     </section>
 
 
     {{-- ============================================================
-         4. SERVICES GRID — NUMBERED CARDS (2-col)
+         TRUSTED BY
          ============================================================ --}}
-    <section class="section cc-services-section">
-        <div class="container">
-
-            <div class="section-heading text-center">
-                <div class="section-subtitle"><i class="bi bi-grid-3x3-gap"></i> Our Services</div>
-                <h2 class="section-title">Comprehensive <span>Cryptocurrency Development Services</span></h2>
-                <p class="section-description">
-                    From a single token to a full trading platform — we deliver end-to-end cryptocurrency
-                    development engineered for security, scale, and compliance.
-                </p>
-            </div>
-
-            <div class="row g-4">
-
-                <div class="col-lg-6 col-md-6">
-                    <div class="cc-svc-card">
-                        <div class="cc-svc-num">01</div>
-                        <div class="cc-svc-icon"><i class="bi bi-coin"></i></div>
-                        <h3>Coin & Token Development</h3>
-                        <p>Custom cryptocurrency coins and tokens built to your tokenomics — from utility tokens to
-                            full standalone blockchains with their own consensus layer.</p>
-                        <div class="cc-svc-tags">
-                            <span>ERC-20</span><span>BEP-20</span><span>SPL</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 col-md-6">
-                    <div class="cc-svc-card">
-                        <div class="cc-svc-num">02</div>
-                        <div class="cc-svc-icon"><i class="bi bi-wallet2"></i></div>
-                        <h3>Crypto Wallet Development</h3>
-                        <p>Non-custodial and custodial wallets with multi-signature security, biometric access, and
-                            support for multiple chains and assets in one interface.</p>
-                        <div class="cc-svc-tags">
-                            <span>Multi-Sig</span><span>Hardware Wallet</span><span>Mobile & Web</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 col-md-6">
-                    <div class="cc-svc-card">
-                        <div class="cc-svc-num">03</div>
-                        <div class="cc-svc-icon"><i class="bi bi-arrow-left-right"></i></div>
-                        <h3>Crypto Exchange Development</h3>
-                        <p>Spot and peer-to-peer trading platforms with real-time order matching, liquidity
-                            management, and enterprise-grade security controls.</p>
-                        <div class="cc-svc-tags">
-                            <span>Spot Trading</span><span>P2P</span><span>Order Matching</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 col-md-6">
-                    <div class="cc-svc-card">
-                        <div class="cc-svc-num">04</div>
-                        <div class="cc-svc-icon"><i class="bi bi-shield-lock"></i></div>
-                        <h3>Smart Contract Development & Auditing</h3>
-                        <p>Gas-optimised, independently audited smart contracts for token logic, staking, vesting,
-                            and DeFi protocols — built to withstand real-world attacks.</p>
-                        <div class="cc-svc-tags">
-                            <span>Solidity</span><span>Rust</span><span>Security Audits</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 col-md-6">
-                    <div class="cc-svc-card">
-                        <div class="cc-svc-num">05</div>
-                        <div class="cc-svc-icon"><i class="bi bi-credit-card-2-front"></i></div>
-                        <h3>Crypto Payment Gateway Integration</h3>
-                        <p>Accept cryptocurrency payments directly on your platform with real-time conversion,
-                            settlement, and fraud-monitoring built in.</p>
-                        <div class="cc-svc-tags">
-                            <span>Checkout SDK</span><span>Auto-Settlement</span><span>Fraud Checks</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 col-md-6">
-                    <div class="cc-svc-card">
-                        <div class="cc-svc-num">06</div>
-                        <div class="cc-svc-icon"><i class="bi bi-graph-up-arrow"></i></div>
-                        <h3>DeFi & Staking Platform Development</h3>
-                        <p>Yield farming, staking pools, and decentralized lending protocols designed with
-                            transparent, auditable smart contract logic.</p>
-                        <div class="cc-svc-tags">
-                            <span>Staking</span><span>Yield Farming</span><span>Lending</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
+    <section class="cx-trusted">
+        <div class="cx-wrap">
+            <span class="cx-lbl">Trusted by fintech, Web3 &amp; blockchain-first businesses</span>
+            <div class="cx-logos"><span>Fintech</span><span>Web3</span><span>DeFi</span><span>Exchanges</span><span>Startups</span></div>
         </div>
     </section>
 
 
     {{-- ============================================================
-         5. ADVANTAGES — 3-COLUMN HIGHLIGHTS
+         2. NETWORKS WE BUILD ON
          ============================================================ --}}
-    <section class="cc-advantages-section">
-        <div class="container">
-            <div class="cc-adv-grid">
-
-                <div class="cc-adv-item">
-                    <div class="cc-adv-icon">
-                        <i class="bi bi-trophy-fill"></i>
-                    </div>
-                    <h4>Proven Blockchain Expertise</h4>
-                    <p>A track record of delivering coins, tokens, wallets, and exchanges for startups and
-                        enterprises across the crypto and fintech space.</p>
+    <section class="cx-sec cx-sec-deep">
+        <div class="cx-wrap">
+            <div class="cx-sec-head">
+                <span class="cx-eyebrow">Multi-chain by default</span>
+                <h2>Networks we build on</h2>
+                <p>We recommend and build on the chain that fits your product — never a one-size-fits-all approach.</p>
+            </div>
+            <div class="cx-card cx-market">
+                <div class="cx-mkt-row cx-mkt-head">
+                    <span>#</span><span>Network</span><span>Type</span><span>Consensus</span><span>Best for</span><span>Adoption</span><span></span>
                 </div>
-
-                <div class="cc-adv-divider"></div>
-
-                <div class="cc-adv-item">
-                    <div class="cc-adv-icon">
-                        <i class="bi bi-shield-check"></i>
-                    </div>
-                    <h4>Security-First Engineering</h4>
-                    <p>Every smart contract and wallet we ship goes through independent auditing and rigorous
-                        testing before it ever touches real funds.</p>
+                <div class="cx-mkt-row">
+                    <span class="cx-mono" style="color:var(--cx-txt-mute)">1</span>
+                    <div class="cx-coin-name"><div class="cx-chip cx-eth">Ξ</div><div><b>Ethereum</b><span>ERC-20</span></div></div>
+                    <span class="cx-mkt-price">Layer 1</span><span class="cx-mkt-chg cx-up">PoS</span><span class="cx-mkt-cap">DeFi &amp; tokens</span>
+                    <svg width="90" height="30" viewBox="0 0 90 30"><polyline fill="none" stroke="#3dd9c2" stroke-width="2" points="0,22 15,18 30,20 45,12 60,14 75,6 90,4"/></svg>
+                    <button class="cx-mkt-trade" data-bs-toggle="modal" data-bs-target="#quoteModal">Build</button>
                 </div>
-
-                <div class="cc-adv-divider"></div>
-
-                <div class="cc-adv-item">
-                    <div class="cc-adv-icon">
-                        <i class="bi bi-diagram-3-fill"></i>
-                    </div>
-                    <h4>Multi-Chain Flexibility</h4>
-                    <p>We build on the chain that fits your product — Ethereum, BSC, Polygon, Solana, or a custom
-                        chain — without locking you in.</p>
+                <div class="cx-mkt-row">
+                    <span class="cx-mono" style="color:var(--cx-txt-mute)">2</span>
+                    <div class="cx-coin-name"><div class="cx-chip cx-bnb">B</div><div><b>BNB Chain</b><span>BEP-20</span></div></div>
+                    <span class="cx-mkt-price">Layer 1</span><span class="cx-mkt-chg cx-up">PoSA</span><span class="cx-mkt-cap">Low-fee apps</span>
+                    <svg width="90" height="30" viewBox="0 0 90 30"><polyline fill="none" stroke="#3dd9c2" stroke-width="2" points="0,20 15,22 30,16 45,18 60,10 75,12 90,7"/></svg>
+                    <button class="cx-mkt-trade" data-bs-toggle="modal" data-bs-target="#quoteModal">Build</button>
                 </div>
-
+                <div class="cx-mkt-row">
+                    <span class="cx-mono" style="color:var(--cx-txt-mute)">3</span>
+                    <div class="cx-coin-name"><div class="cx-chip cx-sol">◎</div><div><b>Solana</b><span>SPL</span></div></div>
+                    <span class="cx-mkt-price">Layer 1</span><span class="cx-mkt-chg cx-up">PoH</span><span class="cx-mkt-cap">High throughput</span>
+                    <svg width="90" height="30" viewBox="0 0 90 30"><polyline fill="none" stroke="#3dd9c2" stroke-width="2" points="0,24 15,20 30,22 45,14 60,10 75,8 90,3"/></svg>
+                    <button class="cx-mkt-trade" data-bs-toggle="modal" data-bs-target="#quoteModal">Build</button>
+                </div>
+                <div class="cx-mkt-row">
+                    <span class="cx-mono" style="color:var(--cx-txt-mute)">4</span>
+                    <div class="cx-coin-name"><div class="cx-chip cx-matic">⬡</div><div><b>Polygon</b><span>PoS / zkEVM</span></div></div>
+                    <span class="cx-mkt-price">Layer 2</span><span class="cx-mkt-chg cx-up">PoS</span><span class="cx-mkt-cap">Scaling &amp; NFTs</span>
+                    <svg width="90" height="30" viewBox="0 0 90 30"><polyline fill="none" stroke="#3dd9c2" stroke-width="2" points="0,22 15,18 30,14 45,16 60,10 75,9 90,5"/></svg>
+                    <button class="cx-mkt-trade" data-bs-toggle="modal" data-bs-target="#quoteModal">Build</button>
+                </div>
+                <div class="cx-mkt-row">
+                    <span class="cx-mono" style="color:var(--cx-txt-mute)">5</span>
+                    <div class="cx-coin-name"><div class="cx-chip cx-btc">₿</div><div><b>Bitcoin</b><span>Ordinals / L2</span></div></div>
+                    <span class="cx-mkt-price">Layer 1</span><span class="cx-mkt-chg cx-up">PoW</span><span class="cx-mkt-cap">Store of value</span>
+                    <svg width="90" height="30" viewBox="0 0 90 30"><polyline fill="none" stroke="#3dd9c2" stroke-width="2" points="0,24 15,22 30,18 45,12 60,14 75,8 90,6"/></svg>
+                    <button class="cx-mkt-trade" data-bs-toggle="modal" data-bs-target="#quoteModal">Build</button>
+                </div>
             </div>
         </div>
     </section>
 
 
     {{-- ============================================================
-         6. INDUSTRIES WE SERVE
+         3. WHY VETORA
          ============================================================ --}}
-    <section class="section cc-industries-section">
-        <div class="container">
-
-            <div class="section-heading text-center">
-                <div class="section-subtitle"><i class="bi bi-building"></i> Industries We Serve</div>
-                <h2 class="section-title">Cryptocurrency Solutions <span>Across Every Sector</span></h2>
-                <p class="section-description">
-                    Our blockchain team has built cryptocurrency products for businesses across a wide range of
-                    industries in Melbourne and around the world.
-                </p>
+    <section class="cx-sec" id="cx-why">
+        <div class="cx-wrap">
+            <div class="cx-sec-head">
+                <span class="cx-eyebrow">Why Vetora</span>
+                <h2>Engineered for real money</h2>
+                <p>We don't just deploy contracts — we build cryptocurrency products that hold up to real funds, real users, and real scrutiny.</p>
             </div>
-
-            <div class="row g-3">
-
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="cc-ind-card">
-                        <div class="cc-ind-icon"><i class="bi bi-bank"></i></div>
-                        <span>Fintech & Banking</span>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="cc-ind-card">
-                        <div class="cc-ind-icon"><i class="bi bi-controller"></i></div>
-                        <span>iGaming & Casinos</span>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="cc-ind-card">
-                        <div class="cc-ind-icon"><i class="bi bi-building"></i></div>
-                        <span>Real Estate Tokenization</span>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="cc-ind-card">
-                        <div class="cc-ind-icon"><i class="bi bi-truck"></i></div>
-                        <span>Supply Chain</span>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="cc-ind-card">
-                        <div class="cc-ind-icon"><i class="bi bi-heart-pulse"></i></div>
-                        <span>Healthcare</span>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="cc-ind-card">
-                        <div class="cc-ind-icon"><i class="bi bi-cart3"></i></div>
-                        <span>E-Commerce & Retail</span>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="cc-ind-card">
-                        <div class="cc-ind-icon"><i class="bi bi-gem"></i></div>
-                        <span>NFT & Web3</span>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="cc-ind-card">
-                        <div class="cc-ind-icon"><i class="bi bi-briefcase"></i></div>
-                        <span>Professional Services</span>
-                    </div>
-                </div>
-
+            <div class="cx-grid-3">
+                <div class="cx-card cx-feat"><div class="cx-ic">🛡️</div><h3>Security-First Engineering</h3><p>Every contract and wallet is stress-tested and independently audited before it ever touches real funds.</p></div>
+                <div class="cx-card cx-feat"><div class="cx-ic">🔗</div><h3>Multi-Chain Expertise</h3><p>Ethereum, BNB Chain, Polygon, Solana, and custom L1/L2 — we pick the chain that fits your product.</p></div>
+                <div class="cx-card cx-feat"><div class="cx-ic">⚡</div><h3>Gas-Optimised Code</h3><p>Lean, well-documented Solidity and Rust that keeps transaction costs low and throughput high.</p></div>
+                <div class="cx-card cx-feat"><div class="cx-ic">🧩</div><h3>End-to-End Delivery</h3><p>Tokenomics, contracts, wallets, exchange integration, and mainnet launch — all under one roof.</p></div>
+                <div class="cx-card cx-feat"><div class="cx-ic">⚖️</div><h3>Regulatory-Aware</h3><p>Token models and architecture designed with evolving compliance requirements in mind.</p></div>
+                <div class="cx-card cx-feat"><div class="cx-ic">🎧</div><h3>24/7 Post-Launch Support</h3><p>Round-the-clock monitoring, incident response, and ongoing development after you go live.</p></div>
             </div>
-
         </div>
     </section>
 
 
     {{-- ============================================================
-         7. WHY CHOOSE US — NUMBERED LIST (2-col)
+         4. CHAINS & TOKENS
          ============================================================ --}}
-    <section class="section cc-why-section">
-        <div class="container">
-
-            <div class="section-heading text-center">
-                <div class="section-subtitle"><i class="bi bi-patch-check"></i> Why Vetora</div>
-                <h2 class="section-title">Why Businesses Choose <span>Our Blockchain Team</span></h2>
-                <p class="section-description">
-                    We don't just deploy contracts — we engineer cryptocurrency products that hold up to real
-                    money, real users, and real scrutiny.
-                </p>
+    <section class="cx-sec cx-sec-deep">
+        <div class="cx-wrap">
+            <div class="cx-sec-head">
+                <span class="cx-eyebrow">Standards we ship</span>
+                <h2>Coins &amp; tokens we build</h2>
+                <p>From utility tokens on existing chains to full standalone blockchains with their own consensus layer.</p>
             </div>
-
-            <div class="row g-4">
-
-                <div class="col-lg-6">
-                    <div class="cc-why-item">
-                        <div class="cc-why-num">01</div>
-                        <div class="cc-why-body">
-                            <h4>Audited, Battle-Tested Code</h4>
-                            <p>Every smart contract is independently audited and stress-tested before it ever
-                                touches real funds — security is never an afterthought.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <div class="cc-why-item">
-                        <div class="cc-why-num">02</div>
-                        <div class="cc-why-body">
-                            <h4>Multi-Chain Expertise</h4>
-                            <p>Ethereum, BSC, Polygon, Solana, and more — we choose the chain that fits your product
-                                instead of forcing a one-size-fits-all approach.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <div class="cc-why-item">
-                        <div class="cc-why-num">03</div>
-                        <div class="cc-why-body">
-                            <h4>Tokenomics to Mainnet, End-to-End</h4>
-                            <p>We own the full lifecycle — token design, smart contracts, wallets, exchange
-                                integration, and mainnet launch — under one roof.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <div class="cc-why-item">
-                        <div class="cc-why-num">04</div>
-                        <div class="cc-why-body">
-                            <h4>Transparent, Milestone-Based Process</h4>
-                            <p>Clear milestones, testnet demos, and regular progress updates — so you always know
-                                exactly where your project stands.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <div class="cc-why-item">
-                        <div class="cc-why-num">05</div>
-                        <div class="cc-why-body">
-                            <h4>Post-Launch Monitoring & Support</h4>
-                            <p>Round-the-clock monitoring, incident response, and ongoing feature development after
-                                your product goes live on mainnet.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <div class="cc-why-item">
-                        <div class="cc-why-num">06</div>
-                        <div class="cc-why-body">
-                            <h4>Regulatory-Aware Architecture</h4>
-                            <p>We structure token models and platform architecture with an eye on evolving
-                                compliance requirements, reducing risk as you scale.</p>
-                        </div>
-                    </div>
-                </div>
-
+            <div class="cx-grid-4">
+                <div class="cx-card cx-coin-card"><div class="cx-top"><div class="cx-chip cx-btc">₿</div><div><b>Bitcoin</b><span>BTC</span></div></div><div class="cx-pr">L2 &amp; Ordinals</div><div class="cx-chg cx-up">Store of value</div></div>
+                <div class="cx-card cx-coin-card"><div class="cx-top"><div class="cx-chip cx-eth">Ξ</div><div><b>Ethereum</b><span>ERC-20</span></div></div><div class="cx-pr">Tokens &amp; DeFi</div><div class="cx-chg cx-up">Most adopted</div></div>
+                <div class="cx-card cx-coin-card"><div class="cx-top"><div class="cx-chip cx-sol">◎</div><div><b>Solana</b><span>SPL</span></div></div><div class="cx-pr">High-speed</div><div class="cx-chg cx-up">Low fees</div></div>
+                <div class="cx-card cx-coin-card"><div class="cx-top"><div class="cx-chip cx-bnb">B</div><div><b>BNB Chain</b><span>BEP-20</span></div></div><div class="cx-pr">Low-cost</div><div class="cx-chg cx-up">EVM-compatible</div></div>
+                <div class="cx-card cx-coin-card"><div class="cx-top"><div class="cx-chip cx-xrp">✕</div><div><b>XRP Ledger</b><span>XRPL</span></div></div><div class="cx-pr">Payments</div><div class="cx-chg cx-up">Fast settlement</div></div>
+                <div class="cx-card cx-coin-card"><div class="cx-top"><div class="cx-chip cx-ada">₳</div><div><b>Cardano</b><span>Plutus</span></div></div><div class="cx-pr">Formal</div><div class="cx-chg cx-up">Peer-reviewed</div></div>
+                <div class="cx-card cx-coin-card"><div class="cx-top"><div class="cx-chip cx-matic">⬡</div><div><b>Polygon</b><span>PoS / zkEVM</span></div></div><div class="cx-pr">Scaling</div><div class="cx-chg cx-up">NFT-ready</div></div>
+                <div class="cx-card cx-coin-card"><div class="cx-top"><div class="cx-chip cx-doge">Ð</div><div><b>Custom L1</b><span>Bespoke</span></div></div><div class="cx-pr">Your chain</div><div class="cx-chg cx-up">Full control</div></div>
             </div>
-
         </div>
     </section>
 
 
     {{-- ============================================================
-         8. DEVELOPMENT PROCESS — VISUAL TIMELINE
+         5. OUR SERVICES (image cards)
          ============================================================ --}}
-    <section class="section cc-process-section" id="cc-process">
-        <div class="container">
-
-            <div class="section-heading text-center">
-                <div class="section-subtitle"><i class="bi bi-arrow-repeat"></i> How We Work</div>
-                <h2 class="section-title">Our <span>Development Process</span></h2>
-                <p class="section-description">
-                    A proven, security-first process that takes your cryptocurrency product from concept to
-                    mainnet — with full transparency at every stage.
-                </p>
+    <section class="cx-sec" id="cx-services">
+        <div class="cx-wrap">
+            <div class="cx-sec-head">
+                <span class="cx-eyebrow">What we build</span>
+                <h2>Our cryptocurrency services</h2>
+                <p>End-to-end development, engineered for security, scale, and compliance — from a single token to a full trading platform.</p>
             </div>
-
-            <div class="cc-timeline">
-
-                <div class="cc-tl-item">
-                    <div class="cc-tl-num">01</div>
-                    <div class="cc-tl-connector"></div>
-                    <div class="cc-tl-card">
-                        <div class="cc-tl-card-left">
-                            <div class="cc-tl-icon"><i class="bi bi-search"></i></div>
-                            <h4>Discovery & Tokenomics</h4>
-                            <p>We define your token model, supply mechanics, use case, and target chain based on
-                                your business goals and regulatory context.</p>
-                            <div class="cc-tl-tags">
-                                <span>Token Design</span>
-                                <span>Supply Mechanics</span>
-                                <span>Chain Selection</span>
-                            </div>
-                        </div>
-                        <div class="cc-tl-card-right">
-                            <img src="{{ asset('Assets/Images/hero-banner.png') }}" alt="Discovery & Tokenomics"
-                                class="cc-tl-img">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cc-tl-item">
-                    <div class="cc-tl-num">02</div>
-                    <div class="cc-tl-connector"></div>
-                    <div class="cc-tl-card">
-                        <div class="cc-tl-card-left">
-                            <div class="cc-tl-icon"><i class="bi bi-diagram-3"></i></div>
-                            <h4>Architecture & Design</h4>
-                            <p>We design the technical blueprint — contract architecture, wallet integration, and
-                                exchange or payment flows mapped out upfront.</p>
-                            <div class="cc-tl-tags">
-                                <span>System Architecture</span>
-                                <span>Wallet Flow</span>
-                                <span>UX Design</span>
-                            </div>
-                        </div>
-                        <div class="cc-tl-card-right">
-                            <img src="{{ asset('Assets/Images/hero-banner.png') }}" alt="Architecture & Design"
-                                class="cc-tl-img">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cc-tl-item">
-                    <div class="cc-tl-num">03</div>
-                    <div class="cc-tl-connector"></div>
-                    <div class="cc-tl-card">
-                        <div class="cc-tl-card-left">
-                            <div class="cc-tl-icon"><i class="bi bi-code-slash"></i></div>
-                            <h4>Smart Contract Development</h4>
-                            <p>Our engineers write gas-optimised, well-documented smart contracts following secure
-                                coding standards and industry best practices.</p>
-                            <div class="cc-tl-tags">
-                                <span>Solidity</span>
-                                <span>Gas Optimisation</span>
-                                <span>Unit Testing</span>
-                            </div>
-                        </div>
-                        <div class="cc-tl-card-right">
-                            <img src="{{ asset('Assets/Images/hero-banner.png') }}" alt="Smart Contract Development"
-                                class="cc-tl-img">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cc-tl-item">
-                    <div class="cc-tl-num">04</div>
-                    <div class="cc-tl-connector"></div>
-                    <div class="cc-tl-card">
-                        <div class="cc-tl-card-left">
-                            <div class="cc-tl-icon"><i class="bi bi-shield-lock"></i></div>
-                            <h4>Security Auditing</h4>
-                            <p>Independent smart contract audits, penetration testing, and vulnerability scanning
-                                before anything is exposed to real funds.</p>
-                            <div class="cc-tl-tags">
-                                <span>Contract Audit</span>
-                                <span>Pen Testing</span>
-                                <span>Vulnerability Scan</span>
-                            </div>
-                        </div>
-                        <div class="cc-tl-card-right">
-                            <img src="{{ asset('Assets/Images/hero-banner.png') }}" alt="Security Auditing"
-                                class="cc-tl-img">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cc-tl-item">
-                    <div class="cc-tl-num">05</div>
-                    <div class="cc-tl-connector"></div>
-                    <div class="cc-tl-card">
-                        <div class="cc-tl-card-left">
-                            <div class="cc-tl-icon"><i class="bi bi-check2-all"></i></div>
-                            <h4>Testnet Deployment</h4>
-                            <p>Full deployment to testnet for real-world simulation, stakeholder review, and final
-                                validation before going live.</p>
-                            <div class="cc-tl-tags">
-                                <span>Testnet</span>
-                                <span>Simulation</span>
-                                <span>Stakeholder Review</span>
-                            </div>
-                        </div>
-                        <div class="cc-tl-card-right">
-                            <img src="{{ asset('Assets/Images/hero-banner.png') }}" alt="Testnet Deployment"
-                                class="cc-tl-img">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cc-tl-item cc-tl-last">
-                    <div class="cc-tl-num">06</div>
-                    <div class="cc-tl-card">
-                        <div class="cc-tl-card-left">
-                            <div class="cc-tl-icon"><i class="bi bi-rocket-takeoff"></i></div>
-                            <h4>Mainnet Launch & Support</h4>
-                            <p>Coordinated mainnet launch followed by round-the-clock monitoring, incident response,
-                                and ongoing development support.</p>
-                            <div class="cc-tl-tags">
-                                <span>Mainnet Launch</span>
-                                <span>24/7 Monitoring</span>
-                                <span>Ongoing Support</span>
-                            </div>
-                        </div>
-                        <div class="cc-tl-card-right">
-                            <img src="{{ asset('Assets/Images/hero-banner.png') }}" alt="Mainnet Launch & Support"
-                                class="cc-tl-img">
-                        </div>
-                    </div>
-                </div>
-
+            <div class="cx-grid-3">
+                <div class="cx-card cx-svc"><div class="cx-thumb"><span class="cx-num">01</span><span class="cx-arrow">↗</span><img src="https://picsum.photos/seed/vetora-coin/600/380" alt="Coin & Token Development"></div><div class="cx-body"><h3>Coin &amp; Token Development</h3><p>Custom coins and tokens built to your tokenomics — from utility tokens to standalone blockchains.</p><div class="cx-tags"><span><b>✳</b> ERC-20</span><span><b>✳</b> BEP-20</span><span><b>✳</b> SPL</span></div></div></div>
+                <div class="cx-card cx-svc"><div class="cx-thumb"><span class="cx-num">02</span><span class="cx-arrow">↗</span><img src="https://picsum.photos/seed/vetora-wallet/600/380" alt="Crypto Wallet Development"></div><div class="cx-body"><h3>Crypto Wallet Development</h3><p>Custodial and non-custodial wallets with multi-sig security, biometrics, and multi-chain support.</p><div class="cx-tags"><span><b>✳</b> Multi-sig</span><span><b>✳</b> Mobile &amp; web</span></div></div></div>
+                <div class="cx-card cx-svc"><div class="cx-thumb"><span class="cx-num">03</span><span class="cx-arrow">↗</span><img src="https://picsum.photos/seed/vetora-exchange/600/380" alt="Crypto Exchange Development"></div><div class="cx-body"><h3>Crypto Exchange Development</h3><p>Spot and P2P trading platforms with real-time order matching and enterprise-grade security.</p><div class="cx-tags"><span><b>✳</b> Spot</span><span><b>✳</b> P2P</span><span><b>✳</b> Matching</span></div></div></div>
+                <div class="cx-card cx-svc"><div class="cx-thumb"><span class="cx-num">04</span><span class="cx-arrow">↗</span><img src="https://picsum.photos/seed/vetora-audit/600/380" alt="Smart Contract Development & Auditing"></div><div class="cx-body"><h3>Smart Contracts &amp; Auditing</h3><p>Gas-optimised, independently audited contracts for token logic, staking, vesting, and DeFi.</p><div class="cx-tags"><span><b>✳</b> Solidity</span><span><b>✳</b> Rust</span><span><b>✳</b> Audits</span></div></div></div>
+                <div class="cx-card cx-svc"><div class="cx-thumb"><span class="cx-num">05</span><span class="cx-arrow">↗</span><img src="https://picsum.photos/seed/vetora-gateway/600/380" alt="Crypto Payment Gateway"></div><div class="cx-body"><h3>Payment Gateway Integration</h3><p>Accept crypto payments with real-time conversion, settlement, and fraud monitoring built in.</p><div class="cx-tags"><span><b>✳</b> Checkout SDK</span><span><b>✳</b> Auto-settle</span></div></div></div>
+                <div class="cx-card cx-svc"><div class="cx-thumb"><span class="cx-num">06</span><span class="cx-arrow">↗</span><img src="https://picsum.photos/seed/vetora-defi/600/380" alt="DeFi & Staking Platforms"></div><div class="cx-body"><h3>DeFi &amp; Staking Platforms</h3><p>Yield farming, staking pools, and lending protocols with transparent, auditable contract logic.</p><div class="cx-tags"><span><b>✳</b> Staking</span><span><b>✳</b> Lending</span></div></div></div>
             </div>
+        </div>
+    </section>
 
+
+    {{-- WORD BAND --}}
+    <div class="cx-wordband"><div class="cx-wordband-track" id="cx-wordband"><span>Coins <b>✦</b> Tokens <b>✦</b> Wallets <b>✦</b> Exchanges <b>✦</b> DeFi <b>✦</b> Audits <b>✦</b> </span></div></div>
+
+
+    {{-- ============================================================
+         6. OUR PROCESS
+         ============================================================ --}}
+    <section class="cx-sec cx-sec-deep" id="cx-process">
+        <div class="cx-wrap">
+            <div class="cx-sec-head">
+                <span class="cx-eyebrow">How we work</span>
+                <h2>From tokenomics to mainnet</h2>
+                <p>A proven, security-first process that takes your product from concept to launch with full transparency.</p>
+            </div>
+            <div class="cx-steps">
+                <div class="cx-card cx-step"><div class="cx-n">1</div><h3>Discovery &amp; Tokenomics</h3><p>We define your token model, supply mechanics, use case, and target chain around your business goals.</p></div>
+                <div class="cx-card cx-step"><div class="cx-n">2</div><h3>Architecture &amp; Build</h3><p>Contract architecture, wallet flows, and gas-optimised code written to secure coding standards.</p></div>
+                <div class="cx-card cx-step"><div class="cx-n">3</div><h3>Audit &amp; Testnet</h3><p>Independent audits, penetration testing, and full testnet deployment before any real funds move.</p></div>
+                <div class="cx-card cx-step"><div class="cx-n">4</div><h3>Launch &amp; Support</h3><p>Coordinated mainnet launch with 24/7 monitoring, incident response, and ongoing development.</p></div>
+            </div>
         </div>
     </section>
 
 
     {{-- ============================================================
-         9. TECH STACK
+         7. SECURITY
          ============================================================ --}}
-    <section class="technologies-section section">
-        <div class="container">
-            <div class="section-heading text-center">
-                <div class="section-subtitle"><i class="bi bi-cpu"></i> Our Stack</div>
-                <h2 class="section-title">Technology & <span>Tools We Use</span></h2>
-                <p class="section-description mx-auto">
-                    We choose blockchain platforms and tooling that are proven, secure, and future-proof — so your
-                    cryptocurrency product is built on a solid foundation.
-                </p>
+    <section class="cx-sec" id="cx-security">
+        <div class="cx-wrap cx-split">
+            <div class="cx-sec-img">
+                <img src="https://picsum.photos/seed/vetora-security/560/700" alt="Blockchain security engineering">
+                <div class="cx-badge"><div class="cx-ic">🛡️</div><div><b>Bank-grade protection</b><span>Independently audited &amp; monitored</span></div></div>
             </div>
-            @include('common.tech-stack')
+            <div>
+                <span class="cx-eyebrow">Security &amp; trust</span>
+                <h2 style="font-size:36px;margin:14px 0 16px">Security built in from line one</h2>
+                <p style="color:var(--cx-txt-dim);margin-bottom:26px">We treat security as the product. Every contract and wallet is safeguarded by the standards trusted by institutions — not bolted on afterwards.</p>
+                <div class="cx-avstack">
+                    <div class="cx-imgs"><img src="https://i.pravatar.cc/84?img=13" alt=""><img src="https://i.pravatar.cc/84?img=5" alt=""><img src="https://i.pravatar.cc/84?img=32" alt=""><span class="cx-more">+50</span></div>
+                    <div class="cx-txt"><b>Trusted by 50+ businesses</b><span>Securing millions in on-chain value</span></div>
+                </div>
+                <div class="cx-sec-list">
+                    <div class="cx-card cx-sec-item"><div class="cx-ck">✓</div><div><b>Independent Contract Audits</b><p>Internal review plus third-party auditing before every mainnet deployment.</p></div></div>
+                    <div class="cx-card cx-sec-item"><div class="cx-ck">✓</div><div><b>Multi-Sig &amp; Cold Custody</b><p>Multi-signature controls and cold-storage-ready architecture for key management.</p></div></div>
+                    <div class="cx-card cx-sec-item"><div class="cx-ck">✓</div><div><b>End-to-End Encryption</b><p>All data encrypted in transit and at rest with AES-256 across every service.</p></div></div>
+                    <div class="cx-card cx-sec-item"><div class="cx-ck">✓</div><div><b>Regulatory-Aware Design</b><p>Token models and platforms structured with compliance in mind from day one.</p></div></div>
+                    <div class="cx-card cx-sec-item"><div class="cx-ck">✓</div><div><b>24/7 Monitoring</b><p>Round-the-clock monitoring and rapid incident response after launch.</p></div></div>
+                </div>
+            </div>
         </div>
     </section>
 
 
     {{-- ============================================================
-         10. CTA SECTION
+         8. DASHBOARD PREVIEW
          ============================================================ --}}
-    <section class="section cc-cta-section">
-        <div class="container">
-            <div class="cc-cta-inner">
-                <div class="cc-cta-orb cc-cta-orb-1"></div>
-                <div class="cc-cta-orb cc-cta-orb-2"></div>
-                <div class="cc-cta-content">
-                    <span class="cc-cta-eyebrow">Ready to Launch?</span>
-                    <h2>Let's Build Your<br><span>Cryptocurrency Product</span></h2>
-                    <p>
-                        Turn your token idea into a secure, audited product ready for real users and real volume.
-                        Our team is ready to start — get in touch today for a free consultation.
-                    </p>
-                    <div class="cc-cta-btns">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#quoteModal" class="cc-btn-white">
-                            Get a Free Quote <i class="bi bi-arrow-right"></i>
-                        </a>
-                        <a href="{{ url('/contact-us') }}" class="cc-btn-ghost">
-                            <i class="bi bi-chat-dots"></i> Let's Talk
-                        </a>
+    <section class="cx-sec cx-sec-deep">
+        <div class="cx-wrap">
+            <div class="cx-sec-head">
+                <span class="cx-eyebrow">Built to institutional standards</span>
+                <h2>Trading desks we build for clients</h2>
+                <p>Live charts, portfolio, and one-click order entry — an example of the exchange dashboards we deliver.</p>
+            </div>
+            <div class="cx-dash">
+                <div class="cx-dash-top">
+                    <div class="cx-dash-pair"><div class="cx-chip cx-btc" style="width:28px;height:28px;font-size:11px">₿</div>BTC / USDT <span class="cx-pr">$67,412.20</span> <span class="cx-up cx-mono" style="font-size:13px">+2.41%</span></div>
+                    <div class="cx-dash-tabs"><span>1H</span><span class="cx-on">4H</span><span>1D</span><span>1W</span></div>
+                </div>
+                <div class="cx-dash-body">
+                    <div class="cx-dash-chart">
+                        <div class="cx-chart-meta"><div><div style="font-size:12px;color:var(--cx-txt-mute)">Last price</div><div class="cx-big">$67,412.20</div></div><div style="text-align:right"><div style="font-size:12px;color:var(--cx-txt-mute)">24h high</div><div class="cx-mono" style="font-weight:700">$68,140</div></div></div>
+                        <svg width="100%" height="200" viewBox="0 0 620 200" preserveAspectRatio="none">
+                            <defs><linearGradient id="cxg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#00c2a8" stop-opacity=".35"/><stop offset="1" stop-color="#00c2a8" stop-opacity="0"/></linearGradient></defs>
+                            <polygon fill="url(#cxg)" points="0,150 40,140 80,155 120,120 160,130 200,95 240,110 280,80 320,90 360,60 400,72 440,45 480,58 520,38 560,50 600,25 620,30 620,200 0,200"/>
+                            <polyline fill="none" stroke="#3dd9c2" stroke-width="2.5" points="0,150 40,140 80,155 120,120 160,130 200,95 240,110 280,80 320,90 360,60 400,72 440,45 480,58 520,38 560,50 600,25 620,30"/>
+                        </svg>
+                    </div>
+                    <div class="cx-dash-side">
+                        <div class="cx-balance"><div class="cx-k">Wallet balance</div><div class="cx-v">$128,940.55</div><div class="cx-sub">▲ $3,204 (2.55%) today</div></div>
+                        <div class="cx-bs-toggle"><button class="cx-buy cx-on">Buy</button><button class="cx-sell">Sell</button></div>
+                        <div class="cx-bs-field"><span>Amount (BTC)</span><b>0.7500</b></div>
+                        <div class="cx-bs-field"><span>Total (USDT)</span><b>50,559.15</b></div>
+                        <button class="cx-btn cx-btn-primary" style="width:100%;justify-content:center">Place Order</button>
+                        <div>
+                            <div style="font-size:12px;color:var(--cx-txt-mute);margin-bottom:10px">Portfolio</div>
+                            <div class="cx-portfolio-row" style="margin-bottom:8px"><span class="cx-chip cx-btc" style="width:22px;height:22px;font-size:9px">₿</span><div class="cx-bar"><i style="width:52%"></i></div><span class="cx-pct">52%</span></div>
+                            <div class="cx-portfolio-row" style="margin-bottom:8px"><span class="cx-chip cx-eth" style="width:22px;height:22px;font-size:9px">Ξ</span><div class="cx-bar"><i style="width:28%"></i></div><span class="cx-pct">28%</span></div>
+                            <div class="cx-portfolio-row"><span class="cx-chip cx-sol" style="width:22px;height:22px;font-size:9px">◎</span><div class="cx-bar"><i style="width:20%"></i></div><span class="cx-pct">20%</span></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -643,245 +337,274 @@
 
 
     {{-- ============================================================
-         11. TESTIMONIALS
+         9. WALLET APPS
          ============================================================ --}}
-    <section class="testimonial-section">
-        <div class="testimonial-blur blur-left"></div>
-        <div class="testimonial-blur blur-right"></div>
-        <div class="container">
-            <div class="section-heading text-center">
-                <div class="section-subtitle">
-                    <i class="bi bi-stars"></i>
-                    CLIENT TESTIMONIALS
+    <section class="cx-sec">
+        <div class="cx-wrap cx-split">
+            <div class="cx-phone">
+                <div class="cx-notch"></div>
+                <div class="cx-p-bal"><div class="cx-k">Total balance</div><div class="cx-v">$128,940.55</div></div>
+                <div style="margin-top:10px">
+                    <div class="cx-p-row"><span class="cx-chip cx-btc">₿</span><b>Bitcoin</b><span class="cx-pr cx-up">+2.4%</span></div>
+                    <div class="cx-p-row"><span class="cx-chip cx-eth">Ξ</span><b>Ethereum</b><span class="cx-pr cx-up">+1.8%</span></div>
+                    <div class="cx-p-row"><span class="cx-chip cx-sol">◎</span><b>Solana</b><span class="cx-pr cx-up">+5.1%</span></div>
+                    <div class="cx-p-row"><span class="cx-chip cx-doge">Ð</span><b>Dogecoin</b><span class="cx-pr cx-up">+4.6%</span></div>
                 </div>
-                <h2 class="section-title">
-                    Trusted by <span>Brands Loved by Clients</span>
-                </h2>
-                <p class="section-description">
-                    We help businesses scale with premium digital solutions, blockchain innovation,
-                    and high-performance applications.
-                </p>
             </div>
-            <div class="trusted-brands">
-                <div class="brand-item"><i class="bi bi-google"></i></div>
-                <div class="brand-item"><i class="bi bi-meta"></i></div>
-                <div class="brand-item"><i class="bi bi-microsoft"></i></div>
-                <div class="brand-item"><i class="bi bi-amazon"></i></div>
-                <div class="brand-item"><i class="bi bi-apple"></i></div>
+            <div>
+                <span class="cx-eyebrow">Wallet apps we build</span>
+                <h2 style="font-size:36px;margin:14px 0 16px">Put a secure wallet in every pocket</h2>
+                <p style="color:var(--cx-txt-dim)">We build full-featured iOS and Android crypto wallets for your users — track, transfer, and stay alerted anywhere, with security at the core.</p>
+                <ul class="cx-app-feats">
+                    <li><span class="cx-tick">✓</span>iOS &amp; Android, built natively</li>
+                    <li><span class="cx-tick">✓</span>Real-time price &amp; transaction alerts</li>
+                    <li><span class="cx-tick">✓</span>Multi-chain portfolio tracking</li>
+                    <li><span class="cx-tick">✓</span>Biometric &amp; hardware-key login</li>
+                </ul>
+                <div class="cx-store-row">
+                    <div class="cx-store-btn"><span style="font-size:22px"></span><div><small>Built for the</small><span class="cx-big">App Store</span></div></div>
+                    <div class="cx-store-btn"><span style="font-size:22px">▶</span><div><small>Built for</small><span class="cx-big">Google Play</span></div></div>
+                </div>
             </div>
-            @include('common.testimonial')
         </div>
     </section>
 
 
     {{-- ============================================================
-         12. FAQ
+         10. STATS
          ============================================================ --}}
-    <section class="section pt-0">
-        <div class="container">
-
-            <div class="section-heading text-center mb-5">
-                <div class="section-subtitle"><i class="bi bi-patch-question"></i> Got Questions?</div>
-                <h2 class="section-title">Frequently <span>Asked Questions</span></h2>
-                <p class="section-description">
-                    Everything you need to know about our cryptocurrency development services.
-                </p>
+    <section class="cx-sec cx-sec-deep">
+        <div class="cx-wrap">
+            <div class="cx-sec-head cx-center"><span class="cx-eyebrow">By the numbers</span><h2>A track record you can trust</h2></div>
+            <div class="cx-stats">
+                <div class="cx-card cx-stat"><div class="cx-num"><span class="cx-count" data-target="50">0</span>+</div><div class="cx-lbl">Products shipped</div></div>
+                <div class="cx-card cx-stat"><div class="cx-num"><span class="cx-count" data-target="8">0</span>+</div><div class="cx-lbl">Chains supported</div></div>
+                <div class="cx-card cx-stat"><div class="cx-num"><span class="cx-count" data-target="100">0</span>%</div><div class="cx-lbl">Contracts audited</div></div>
+                <div class="cx-card cx-stat"><div class="cx-num"><span class="cx-count" data-target="24">0</span>/7</div><div class="cx-lbl">Monitoring &amp; support</div></div>
+                <div class="cx-card cx-stat"><div class="cx-num"><span class="cx-count" data-target="10">0</span>+</div><div class="cx-lbl">Years in software</div></div>
             </div>
-
-            <div class="accordion" id="ccFaqMain">
-                <div class="row g-4">
-
-                    <div class="col-lg-6">
-
-                        <div class="accordion-item custom-accordion">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#ccfaq1">
-                                    1. How long does it take to launch a cryptocurrency?
-                                </button>
-                            </h2>
-                            <div id="ccfaq1" class="accordion-collapse collapse show" data-bs-parent="#ccFaqMain">
-                                <div class="accordion-body">
-                                    Timelines vary by scope. A standard token on an existing chain typically takes
-                                    3–6 weeks, while a full exchange or custom blockchain can take 3–6 months. We
-                                    provide a detailed timeline after our initial discovery call.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item custom-accordion">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" data-bs-toggle="collapse"
-                                    data-bs-target="#ccfaq2">
-                                    2. How much does cryptocurrency development cost?
-                                </button>
-                            </h2>
-                            <div id="ccfaq2" class="accordion-collapse collapse" data-bs-parent="#ccFaqMain">
-                                <div class="accordion-body">
-                                    Cost depends on complexity — a token launch, a wallet, and a full exchange all
-                                    have very different scopes. We provide a transparent, itemised proposal once we
-                                    understand your requirements — no hidden costs.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item custom-accordion">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" data-bs-toggle="collapse"
-                                    data-bs-target="#ccfaq3">
-                                    3. Which blockchains do you build on?
-                                </button>
-                            </h2>
-                            <div id="ccfaq3" class="accordion-collapse collapse" data-bs-parent="#ccFaqMain">
-                                <div class="accordion-body">
-                                    We build on Ethereum, BNB Smart Chain, Polygon, and Solana, and can also design
-                                    a custom Layer 1 or Layer 2 chain if your product requires it. We recommend the
-                                    chain that best fits your use case and budget.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item custom-accordion">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" data-bs-toggle="collapse"
-                                    data-bs-target="#ccfaq4">
-                                    4. Are your smart contracts audited?
-                                </button>
-                            </h2>
-                            <div id="ccfaq4" class="accordion-collapse collapse" data-bs-parent="#ccFaqMain">
-                                <div class="accordion-body">
-                                    Yes. Every smart contract we ship goes through internal review and independent
-                                    third-party auditing before deployment to mainnet — security is never optional
-                                    when real funds are involved.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item custom-accordion">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" data-bs-toggle="collapse"
-                                    data-bs-target="#ccfaq5">
-                                    5. Can you help with an ICO or token sale?
-                                </button>
-                            </h2>
-                            <div id="ccfaq5" class="accordion-collapse collapse" data-bs-parent="#ccFaqMain">
-                                <div class="accordion-body">
-                                    Yes. We support token sale structuring, vesting contracts, and sale-platform
-                                    development, working alongside your legal counsel to align with your target
-                                    jurisdictions.
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-6">
-
-                        <div class="accordion-item custom-accordion">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" data-bs-toggle="collapse"
-                                    data-bs-target="#ccfaq6">
-                                    6. Do you build crypto wallets too?
-                                </button>
-                            </h2>
-                            <div id="ccfaq6" class="accordion-collapse collapse" data-bs-parent="#ccFaqMain">
-                                <div class="accordion-body">
-                                    Yes. We build custodial and non-custodial wallets with multi-signature security,
-                                    biometric access, and support for multiple chains and assets in a single app.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item custom-accordion">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" data-bs-toggle="collapse"
-                                    data-bs-target="#ccfaq7">
-                                    7. Can you build a crypto exchange?
-                                </button>
-                            </h2>
-                            <div id="ccfaq7" class="accordion-collapse collapse" data-bs-parent="#ccFaqMain">
-                                <div class="accordion-body">
-                                    Yes, including spot trading and peer-to-peer exchange platforms with real-time
-                                    order matching, liquidity management, and enterprise-grade security controls.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item custom-accordion">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" data-bs-toggle="collapse"
-                                    data-bs-target="#ccfaq8">
-                                    8. How do you handle regulatory compliance?
-                                </button>
-                            </h2>
-                            <div id="ccfaq8" class="accordion-collapse collapse" data-bs-parent="#ccFaqMain">
-                                <div class="accordion-body">
-                                    We design token models and platform architecture with compliance considerations
-                                    in mind, and recommend working with legal counsel in your target jurisdictions
-                                    throughout the process — we handle the technology, not legal advice.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item custom-accordion">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" data-bs-toggle="collapse"
-                                    data-bs-target="#ccfaq9">
-                                    9. Do you offer ongoing support after launch?
-                                </button>
-                            </h2>
-                            <div id="ccfaq9" class="accordion-collapse collapse" data-bs-parent="#ccFaqMain">
-                                <div class="accordion-body">
-                                    Yes. We offer flexible support packages covering monitoring, incident response,
-                                    security updates, and ongoing feature development after mainnet launch.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item custom-accordion">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" data-bs-toggle="collapse"
-                                    data-bs-target="#ccfaq10">
-                                    10. How do we get started?
-                                </button>
-                            </h2>
-                            <div id="ccfaq10" class="accordion-collapse collapse" data-bs-parent="#ccFaqMain">
-                                <div class="accordion-body">
-                                    Request a free consultation via our quote form or contact page. We'll schedule a
-                                    discovery call to understand your token model and goals, then provide a
-                                    detailed proposal and timeline. Most projects kick off within 1–2 weeks.
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-
         </div>
     </section>
 
+
+    {{-- ============================================================
+         11. ENGAGEMENT TIMELINE
+         ============================================================ --}}
+    <section class="cx-sec">
+        <div class="cx-wrap">
+            <div class="cx-sec-head cx-center"><span class="cx-eyebrow">How an engagement unfolds</span><h2>A typical project timeline</h2></div>
+            <div class="cx-road">
+                <div class="cx-mile cx-done"><div class="cx-dot"></div><div class="cx-q">Week 1</div><h4>Discovery</h4><p>Goals, token model, and chain selection.</p></div>
+                <div class="cx-mile cx-done"><div class="cx-dot"></div><div class="cx-q">Week 2</div><h4>Architecture</h4><p>Technical blueprint &amp; UX mapped out.</p></div>
+                <div class="cx-mile"><div class="cx-dot"></div><div class="cx-q">Week 3–6</div><h4>Development</h4><p>Contracts, wallets, and integrations built.</p></div>
+                <div class="cx-mile"><div class="cx-dot"></div><div class="cx-q">Week 7</div><h4>Audit &amp; Testnet</h4><p>Independent audit and full simulation.</p></div>
+                <div class="cx-mile"><div class="cx-dot"></div><div class="cx-q">Week 8+</div><h4>Launch</h4><p>Mainnet launch &amp; ongoing support.</p></div>
+            </div>
+        </div>
+    </section>
+
+
+    {{-- ============================================================
+         12. TESTIMONIALS
+         ============================================================ --}}
+    <section class="cx-sec cx-sec-deep">
+        <div class="cx-wrap">
+            <div class="cx-sec-head cx-center"><span class="cx-eyebrow">Loved by clients</span><h2>What our clients say</h2></div>
+            <div class="cx-grid-3">
+                <div class="cx-card cx-tst"><div class="cx-stars">★★★★★</div><p>"Vetora shipped our token and staking platform on time and passed audit first try. Security was clearly baked in from the start."</p><div class="cx-who"><div class="cx-av"><img src="https://i.pravatar.cc/96?img=12" alt=""></div><div><b>Marcus Lee</b><span>Founder, DeFi startup</span></div></div></div>
+                <div class="cx-card cx-tst"><div class="cx-stars">★★★★★</div><p>"They handled everything — tokenomics, contracts, wallet, and mainnet launch. The multi-chain expertise saved us months of work."</p><div class="cx-who"><div class="cx-av"><img src="https://i.pravatar.cc/96?img=45" alt=""></div><div><b>Priya Sharma</b><span>CTO, Fintech</span></div></div></div>
+                <div class="cx-card cx-tst"><div class="cx-stars">★★★★★</div><p>"The exchange they built for us handles real volume without breaking a sweat. Post-launch support has been genuinely 24/7."</p><div class="cx-who"><div class="cx-av"><img src="https://i.pravatar.cc/96?img=33" alt=""></div><div><b>Diego Torres</b><span>CEO, Exchange</span></div></div></div>
+            </div>
+        </div>
+    </section>
+
+
+    {{-- ============================================================
+         13. INSIGHTS
+         ============================================================ --}}
+    <section class="cx-sec">
+        <div class="cx-wrap">
+            <div class="cx-sec-head"><span class="cx-eyebrow">Insights</span><h2>Crypto development, explained</h2><p>Guides and engineering thinking to help you launch smarter.</p></div>
+            <div class="cx-grid-3">
+                <a class="cx-card cx-insight"><div class="cx-thumb"><span class="cx-cat">Tokenomics</span><img src="https://picsum.photos/seed/vetora-ins1/600/380" alt=""></div><div class="cx-body"><span class="cx-date">Feb 24, 2026 · 6 min read</span><h3>Designing token supply mechanics that actually hold up</h3></div></a>
+                <a class="cx-card cx-insight"><div class="cx-thumb"><span class="cx-cat">Security</span><img src="https://picsum.photos/seed/vetora-ins2/600/380" alt=""></div><div class="cx-body"><span class="cx-date">Mar 03, 2026 · 4 min read</span><h3>What a smart contract audit really checks for</h3></div></a>
+                <a class="cx-card cx-insight"><div class="cx-thumb"><span class="cx-cat">Chains</span><img src="https://picsum.photos/seed/vetora-ins3/600/380" alt=""></div><div class="cx-body"><span class="cx-date">Mar 11, 2026 · 7 min read</span><h3>Choosing the right blockchain for your product</h3></div></a>
+            </div>
+        </div>
+    </section>
+
+
+    {{-- ============================================================
+         14. FAQ
+         ============================================================ --}}
+    <section class="cx-sec cx-sec-deep" id="cx-faq">
+        <div class="cx-wrap">
+            <div class="cx-sec-head cx-center"><span class="cx-eyebrow">Questions</span><h2>Frequently asked questions</h2></div>
+            <div class="cx-faq-wrap">
+                <details class="cx-faq" open><summary>How long does it take to launch a cryptocurrency?<span class="cx-plus">+</span></summary><div class="cx-ans">A standard token on an existing chain typically takes 3–6 weeks, while a full exchange or custom blockchain can take 3–6 months. We provide a detailed timeline after our discovery call.</div></details>
+                <details class="cx-faq"><summary>How much does cryptocurrency development cost?<span class="cx-plus">+</span></summary><div class="cx-ans">Cost depends on scope — a token launch, a wallet, and a full exchange all differ significantly. We provide a transparent, itemised proposal once we understand your requirements, with no hidden costs.</div></details>
+                <details class="cx-faq"><summary>Which blockchains do you build on?<span class="cx-plus">+</span></summary><div class="cx-ans">Ethereum, BNB Chain, Polygon, and Solana, plus custom Layer 1 or Layer 2 chains if your product needs it. We recommend the chain that best fits your use case and budget.</div></details>
+                <details class="cx-faq"><summary>Are your smart contracts audited?<span class="cx-plus">+</span></summary><div class="cx-ans">Yes. Every contract goes through internal review and independent third-party auditing before mainnet deployment — security is never optional when real funds are involved.</div></details>
+                <details class="cx-faq"><summary>Do you build wallets and exchanges too?<span class="cx-plus">+</span></summary><div class="cx-ans">Yes. We build custodial and non-custodial wallets with multi-sig security, plus spot and P2P exchange platforms with real-time order matching and enterprise-grade controls.</div></details>
+                <details class="cx-faq"><summary>Do you offer ongoing support after launch?<span class="cx-plus">+</span></summary><div class="cx-ans">Yes. We offer flexible packages covering monitoring, incident response, security updates, and ongoing feature development after mainnet launch.</div></details>
+            </div>
+        </div>
+    </section>
+
+
+    {{-- ============================================================
+         15. CTA
+         ============================================================ --}}
+    <section class="cx-cta">
+        <div class="cx-wrap">
+            <div class="cx-cta-inner">
+                <h2>Let's build your cryptocurrency product</h2>
+                <p>Turn your token idea into a secure, audited product ready for real users and real volume. Get in touch today for a free consultation.</p>
+                <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+                    <a href="#" class="cx-btn cx-btn-white" data-bs-toggle="modal" data-bs-target="#quoteModal">Get a Free Quote</a>
+                    <a href="{{ url('/contact-us') }}" class="cx-btn cx-btn-clear">Let's Talk</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+@endsection
+
+
+{{-- ================================================================
+     OWN DARK FOOTER — replaces the site's default footer here.
+     ================================================================ --}}
+@section('page-footer')
+    <footer class="cx-footer">
+        <div class="cx-wrap">
+            <div class="cx-foot-top">
+                <div class="cx-foot-brand">
+                    <div class="cx-brand">VETORA <span class="cx-spark">✦</span><small>solutions</small></div>
+                    <p>Secure, audited cryptocurrency development — coins, tokens, wallets, exchanges, and DeFi, built for businesses across Melbourne and beyond.</p>
+                    <div class="cx-news"><input placeholder="Your email"><button>Subscribe</button></div>
+                </div>
+                <div class="cx-foot-col"><h4>Services</h4><a href="#cx-services">Coins &amp; Tokens</a><a href="#cx-services">Wallets</a><a href="#cx-services">Exchanges</a><a href="#cx-services">Smart Contracts</a><a href="#cx-services">DeFi</a></div>
+                <div class="cx-foot-col"><h4>Company</h4><a href="{{ url('/') }}">Home</a><a href="{{ url('/contact-us') }}">Contact</a><a href="#cx-process">Process</a><a href="#cx-security">Security</a></div>
+                <div class="cx-foot-col"><h4>Resources</h4><a href="#cx-faq">FAQ</a><a href="#cx-why">Why Vetora</a><a href="#">Insights</a></div>
+                <div class="cx-foot-col"><h4>Get started</h4><a href="#" data-bs-toggle="modal" data-bs-target="#quoteModal">Get a Quote</a><a href="{{ url('/contact-us') }}">Talk to us</a></div>
+            </div>
+            <div class="cx-foot-bar">
+                <span>© {{ date('Y') }} Vetora Solutions. All rights reserved.</span>
+                <div class="cx-socials"><a class="cx-soc" href="#">X</a><a class="cx-soc" href="#">in</a><a class="cx-soc" href="#">TG</a><a class="cx-soc" href="#">DS</a><a class="cx-soc" href="#">YT</a></div>
+            </div>
+        </div>
+    </footer>
 @endsection
 
 
 @section('scripts')
+    {{-- jQuery kept for the layout's global dropdown script that runs after this. --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
     <script>
-        $('.modern-testimonial-carousel').owlCarousel({
-            loop: true,
-            margin: 30,
-            nav: false,
-            dots: true,
-            autoplay: true,
-            autoplayTimeout: 3500,
-            autoplayHoverPause: true,
-            smartSpeed: 900,
-            responsive: {
-                0: { items: 1 },
-                768: { items: 2 },
-                1200: { items: 3 }
+        (function () {
+            // duplicate ticker + word-band for a seamless marquee
+            var t = document.getElementById('cx-ticker'); if (t) t.innerHTML += t.innerHTML;
+            var w = document.getElementById('cx-wordband'); if (w) w.innerHTML += w.innerHTML;
+
+            // real coin logos inside chips (progressive enhancement, falls back to glyphs)
+            var coins = ['btc', 'eth', 'sol', 'bnb', 'xrp', 'ada', 'matic', 'doge'];
+            document.querySelectorAll('.cx-chip').forEach(function (ch) {
+                var sym = null;
+                coins.forEach(function (c) { if (ch.classList.contains('cx-' + c)) sym = c; });
+                if (!sym) return;
+                var img = new Image(); img.alt = sym.toUpperCase();
+                img.onload = function () { ch.classList.add('cx-has-logo'); ch.appendChild(img); };
+                img.src = 'https://assets.coincap.io/assets/icons/' + sym + '@2x.png';
+            });
+
+            // buy/sell toggle
+            document.querySelectorAll('.cx-bs-toggle button').forEach(function (b) {
+                b.addEventListener('click', function () {
+                    document.querySelectorAll('.cx-bs-toggle button').forEach(function (x) { x.classList.remove('cx-on'); });
+                    b.classList.add('cx-on');
+                });
+            });
+
+            // dashboard timeframe tabs
+            document.querySelectorAll('.cx-dash-tabs span').forEach(function (s) {
+                s.addEventListener('click', function () {
+                    document.querySelectorAll('.cx-dash-tabs span').forEach(function (x) { x.classList.remove('cx-on'); });
+                    s.classList.add('cx-on');
+                });
+            });
+
+            // mobile nav toggle
+            var navToggle = document.getElementById('cxNavToggle');
+            var navCollapse = document.getElementById('cxNavCollapse');
+            if (navToggle && navCollapse) {
+                navToggle.addEventListener('click', function () {
+                    var open = navCollapse.classList.toggle('cx-show');
+                    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+                });
+                navCollapse.querySelectorAll('a').forEach(function (a) {
+                    a.addEventListener('click', function () { navCollapse.classList.remove('cx-show'); });
+                });
             }
-        });
+
+            var rm = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+            // animated stat counters
+            function animate(el) {
+                var target = parseFloat(el.dataset.target), dec = (target % 1 !== 0) ? 1 : 0, dur = 1400, t0 = null;
+                function step(ts) {
+                    if (!t0) t0 = ts;
+                    var p = Math.min((ts - t0) / dur, 1);
+                    el.textContent = (target * (0.5 - Math.cos(Math.PI * p) / 2)).toFixed(dec);
+                    if (p < 1) requestAnimationFrame(step);
+                }
+                requestAnimationFrame(step);
+            }
+            var countEls = document.querySelectorAll('.cx-count');
+            if (rm) {
+                countEls.forEach(function (el) { el.textContent = el.dataset.target; });
+            } else {
+                var co = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (e) { if (e.isIntersecting) { animate(e.target); co.unobserve(e.target); } });
+                }, { threshold: .5 });
+                countEls.forEach(function (el) { co.observe(el); });
+            }
+
+            // scroll progress bar + sticky header elevate
+            var pb = document.getElementById('cx-progress'), header = document.getElementById('cxHeader');
+            function onScroll() {
+                var h = document.documentElement, st = h.scrollTop || document.body.scrollTop, sh = (h.scrollHeight - h.clientHeight) || 1;
+                if (pb) pb.style.width = (st / sh * 100) + '%';
+                if (header) header.classList.toggle('cx-scrolled', st > 20);
+            }
+            window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+            if (rm) return;
+
+            // staggered entrance delays within grids
+            ['.cx-grid-3 > .cx-card', '.cx-grid-4 > .cx-card', '.cx-steps > .cx-card', '.cx-stats > .cx-card', '.cx-mile', '.cx-split > *'].forEach(function (sel) {
+                document.querySelectorAll(sel).forEach(function (el) {
+                    var p = el.parentNode, i = Array.prototype.indexOf.call(p.children, el);
+                    el.style.transitionDelay = ((i % 4) * 0.09) + 's';
+                });
+            });
+
+            // scroll reveal
+            var sel = '.cx-sec-head,.cx-hero h1,.cx-hero .cx-lead,.cx-hero-cta,.cx-trust-row,.cx-orb-stage,.cx-ticker,.cx-market,.cx-grid-3 > .cx-card,.cx-grid-4 > .cx-card,.cx-steps > .cx-card,.cx-split > *,.cx-dash,.cx-stats > .cx-card,.cx-mile,.cx-faq,.cx-cta-inner,.cx-foot-top,.cx-foot-bar';
+            var io = new IntersectionObserver(function (en) {
+                en.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('cx-in'); io.unobserve(e.target); } });
+            }, { threshold: .1, rootMargin: '0px 0px -6% 0px' });
+            document.querySelectorAll(sel).forEach(function (el) { io.observe(el); });
+
+            // magnetic primary buttons
+            document.querySelectorAll('.cx-btn-primary,.cx-btn-white').forEach(function (b) {
+                b.addEventListener('mousemove', function (e) {
+                    var r = b.getBoundingClientRect();
+                    b.style.transform = 'translate(' + ((e.clientX - r.left - r.width / 2) * 0.2) + 'px,' + ((e.clientY - r.top - r.height / 2) * 0.3 - 2) + 'px)';
+                });
+                b.addEventListener('mouseleave', function () { b.style.transform = ''; });
+            });
+        })();
     </script>
 @endsection
