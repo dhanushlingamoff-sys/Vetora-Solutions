@@ -249,12 +249,14 @@
 
 .nftm-nav-links {
     display: flex;
+    align-items: center;
     gap: 26px;
     font-size: 15px;
     font-weight: 500;
 }
 
-.nftm-nav-links a {
+.nftm-nav-links a,
+.nftm-drop-toggle {
     color: var(--nftm-text-dim);
     transition: color .15s;
     background: none;
@@ -264,7 +266,85 @@
 }
 
 .nftm-nav-links a:hover,
-.nftm-nav-links a.nftm-active {
+.nftm-nav-links a.nftm-active,
+.nftm-drop-toggle:hover,
+.nftm-has-drop.nftm-drop-open>.nftm-drop-toggle {
+    color: var(--nftm-text);
+}
+
+/* ===== nav dropdowns ===== */
+.nftm-has-drop {
+    position: relative;
+}
+
+.nftm-drop-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+}
+
+.nftm-drop-toggle i {
+    font-size: 12px;
+    transition: transform .2s ease;
+}
+
+.nftm-has-drop:hover>.nftm-drop-toggle i,
+.nftm-has-drop.nftm-drop-open>.nftm-drop-toggle i {
+    transform: rotate(180deg);
+}
+
+.nftm-drop {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 30;
+    min-width: 224px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 14px;
+    padding: 10px;
+    border: 1px solid var(--nftm-line);
+    border-radius: 16px;
+    background: rgba(15, 12, 24, .97);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 30px 60px -24px rgba(0, 0, 0, .75);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: opacity .2s ease, transform .2s ease, visibility .2s;
+}
+
+/* invisible bridge across the 14px gap so the panel doesn't close as the
+   pointer travels from the toggle down into it */
+.nftm-drop::before {
+    content: "";
+    position: absolute;
+    top: -14px;
+    left: 0;
+    right: 0;
+    height: 14px;
+}
+
+.nftm-has-drop:hover>.nftm-drop,
+.nftm-has-drop.nftm-drop-open>.nftm-drop {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.nftm-drop a {
+    display: block;
+    padding: 9px 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    white-space: nowrap;
+    transition: background .15s, color .15s;
+}
+
+.nftm-drop a:hover {
+    background: rgba(255, 255, 255, .06);
     color: var(--nftm-text);
 }
 
@@ -1356,7 +1436,51 @@
 
     .nftm-nav-links {
         flex-direction: column;
-        gap: 16px;
+        align-items: stretch;
+        gap: 2px;
+    }
+
+    /* dropdowns flatten into click-accordions inside the mobile panel */
+    .nftm-has-drop {
+        width: 100%;
+    }
+
+    .nftm-drop-toggle,
+    .nftm-nav-links>a {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 11px 0;
+    }
+
+    .nftm-drop {
+        position: static;
+        display: none;
+        min-width: 0;
+        margin: 0 0 6px;
+        padding: 2px 0 6px 14px;
+        border: none;
+        border-left: 1px solid var(--nftm-line);
+        border-radius: 0;
+        background: none;
+        backdrop-filter: none;
+        box-shadow: none;
+        /* neutralise the desktop hover-popover transition */
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        transition: none;
+    }
+
+    .nftm-drop::before {
+        display: none;
+    }
+
+    /* display:none above beats the desktop :hover rule, so touch hover can't open it —
+       only the .nftm-drop-open class (set on click) does */
+    .nftm-has-drop.nftm-drop-open>.nftm-drop {
+        display: flex;
     }
 
     .nftm-nav-search {

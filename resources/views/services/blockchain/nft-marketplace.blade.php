@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('Assets/css/nft-marketplace.css') }}?v=1.2.0">
+    <link rel="stylesheet" href="{{ asset('Assets/css/nft-marketplace.css') }}?v=1.3.0">
     {{-- Heavier, more "premium" smooth-scroll feel for this page only — read
          by scroll-fx.js's Lenis init, which runs later in <body>. Every
          other page is unaffected (window.__lenisOverrides stays undefined). --}}
@@ -29,11 +29,49 @@
                  flex layout; on mobile it becomes the collapsible dropdown
                  panel toggled by .nftm-nav-toggle (see nft-marketplace.js). --}}
             <div class="nftm-nav-collapse" id="nftmNavCollapse">
+                {{-- Each .nftm-has-drop opens on hover at desktop widths and on click
+                     (accordion) inside the mobile panel — see nft-marketplace.js. --}}
                 <nav class="nftm-nav-links">
-                    <a href="#featured">Explore</a>
-                    <a href="#drops">Drops</a>
-                    <a href="#creators">Creators</a>
-                    <a href="#activity">Activity</a>
+                    <div class="nftm-has-drop">
+                        <button type="button" class="nftm-drop-toggle" aria-expanded="false" aria-haspopup="true">
+                            Explore <i class="bi bi-chevron-down"></i>
+                        </button>
+                        <div class="nftm-drop">
+                            <a href="#featured">Featured drops</a>
+                            <a href="#drops">Trending now</a>
+                            <a href="#nftmDropsSection">Just dropped</a>
+                            <a href="#categories">Browse categories</a>
+                        </div>
+                    </div>
+
+                    <div class="nftm-has-drop">
+                        <button type="button" class="nftm-drop-toggle" aria-expanded="false" aria-haspopup="true">
+                            Activity <i class="bi bi-chevron-down"></i>
+                        </button>
+                        <div class="nftm-drop">
+                            <a href="#activity">Live auctions</a>
+                            <a href="#leaderboard">Leaderboard</a>
+                        </div>
+                    </div>
+
+                    {{-- Admin — this is a marketplace demo, so the items hook into the
+                         page's real demo behaviour (wallet, toasts) or jump to the matching
+                         section rather than pointing at pages that don't exist. --}}
+                    <div class="nftm-has-drop">
+                        <button type="button" class="nftm-drop-toggle" aria-expanded="false" aria-haspopup="true">
+                            Admin <i class="bi bi-chevron-down"></i>
+                        </button>
+                        <div class="nftm-drop">
+                            <a href="#leaderboard">Dashboard</a>
+                            <a href="#activity">Live Bids</a>
+                            <a href="#creators">My Collection</a>
+                            <a href="#" data-nftm-wallet-link>My Wallet</a>
+                            <a href="#" data-nftm-demo="Notifications">Notifications</a>
+                            <a href="#" data-nftm-demo="Settings">Settings</a>
+                        </div>
+                    </div>
+
+                    <a class="nftm-nav-link" href="{{ url('/contact-us') }}">Help Center</a>
                 </nav>
 
                 <div class="nftm-nav-search nftm-search-wrap">
@@ -251,7 +289,7 @@
     </section>
 
     {{-- ============ TOP SELLERS & BUYERS ============ --}}
-    <section class="nftm-block nftm-block-alt">
+    <section class="nftm-block nftm-block-alt" id="leaderboard">
         <div class="nftm-wrap">
             <div class="nftm-sec-head"><div><span class="nftm-eyebrow">Leaderboard · last 24h</span><h2>Top sellers & buyers</h2></div></div>
 
@@ -337,7 +375,7 @@
     </section>
 
     {{-- ============ BROWSE BY CATEGORY ============ --}}
-    <section class="nftm-block nftm-block-alt">
+    <section class="nftm-block nftm-block-alt" id="categories">
         <div class="nftm-wrap">
             <div class="nftm-sec-head"><div><span class="nftm-eyebrow">Browse</span><h2>Explore by category</h2></div></div>
             <div class="nftm-cat-grid">
@@ -352,7 +390,7 @@
     </section>
 
     {{-- ============ HOW IT WORKS ============ --}}
-    <section class="nftm-block">
+    <section class="nftm-block" id="how-it-works">
         <div class="nftm-wrap">
             <div class="nftm-sec-head"><div><span class="nftm-eyebrow">Get started</span><h2>How it works</h2><p>Four steps from empty wallet to your first sale.</p></div></div>
             <div class="nftm-steps">
@@ -517,5 +555,5 @@
     {{-- layouts.app's trailing inline script ($('.dropdown > a')...) expects
          jQuery to already be loaded, same as every other page on the site. --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="{{ asset('Assets/js/nft-marketplace.js') }}?v=1.2.0"></script>
+    <script src="{{ asset('Assets/js/nft-marketplace.js') }}?v=1.4.0"></script>
 @endsection

@@ -12,7 +12,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="{{ asset('Assets/css/cryptocurrency.css') }}?v=2.0.0">
+    {{-- Owl Carousel (testimonials) — loaded before the page CSS so our theme overrides win --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+    <link rel="stylesheet" href="{{ asset('Assets/css/cryptocurrency.css') }}?v=2.6.0">
 @endsection
 
 
@@ -21,12 +25,11 @@
      ================================================================ --}}
 @section('page-header')
     <script>document.documentElement.classList.add('js')</script>
-    <div id="cx-progress"></div>
 
     <header class="cx-header" id="cxHeader">
         <div class="cx-wrap cx-nav">
             <a href="{{ url('/') }}" class="cx-brand">
-                VETORA <span class="cx-spark">✦</span><small>solutions</small>
+                <img src="{{ asset('Assets/Images/logo-main.png') }}" alt="Vetora Logo">
             </a>
 
             <button type="button" class="cx-nav-toggle" id="cxNavToggle" aria-label="Toggle menu" aria-expanded="false">
@@ -81,13 +84,70 @@
             </div>
 
             <div class="cx-orb-stage">
-                <div class="cx-live-tag"><span class="cx-live-dot"></span>Secure · always audited</div>
-                <div class="cx-orb-ring"></div>
-                <div class="cx-orb">₿</div>
-                <div class="cx-coin-badge cx-cb1">BTC</div>
-                <div class="cx-coin-badge cx-cb2">ETH</div>
-                <div class="cx-coin-badge cx-cb3">SOL</div>
-                <div class="cx-coin-badge cx-cb4">BNB</div>
+                <svg class="cx-hero-art" viewBox="0 0 520 460" xmlns="http://www.w3.org/2000/svg"
+                     role="img" aria-labelledby="cxArtTitle">
+                    <title id="cxArtTitle">Bitcoin at the centre of a multi-chain network, orbited by Ethereum, Solana and BNB Chain nodes</title>
+
+                    <defs>
+                        <linearGradient id="cxCoreGrad" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#7b1fa2" />
+                            <stop offset="55%" stop-color="#2c73d2" />
+                            <stop offset="100%" stop-color="#1d57a3" />
+                        </linearGradient>
+                        <radialGradient id="cxArtGlow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="#5f0a87" stop-opacity=".55" />
+                            <stop offset="100%" stop-color="#5f0a87" stop-opacity="0" />
+                        </radialGradient>
+                        <linearGradient id="cxEdge" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#00c2a8" stop-opacity="0" />
+                            <stop offset="50%" stop-color="#00c2a8" stop-opacity=".7" />
+                            <stop offset="100%" stop-color="#00c2a8" stop-opacity="0" />
+                        </linearGradient>
+                    </defs>
+
+                    {{-- ambient bloom behind the coin --}}
+                    <circle cx="260" cy="235" r="190" fill="url(#cxArtGlow)" />
+
+                    {{-- network edges: core → each chain node (drawn first so the coin overlaps them) --}}
+                    <g stroke="url(#cxEdge)" stroke-width="1.5" fill="none">
+                        <path d="M260 235 L382 113" />
+                        <path d="M260 235 L401 334" />
+                        <path d="M260 235 L119 334" />
+                        <path d="M260 235 L138 113" />
+                    </g>
+
+                    {{-- orbit rings --}}
+                    <g class="cx-art-ring">
+                        <circle cx="260" cy="235" r="172" fill="none" stroke="rgba(255,255,255,.17)"
+                                stroke-width="1" stroke-dasharray="6 9" />
+                    </g>
+                    <circle cx="260" cy="235" r="132" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="1" />
+
+                    {{-- core coin --}}
+                    <g class="cx-art-core">
+                        <circle cx="260" cy="235" r="96" fill="url(#cxCoreGrad)" />
+                        <circle cx="260" cy="235" r="96" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1.5" />
+                        <text class="cx-art-sym" x="260" y="235" text-anchor="middle" dominant-baseline="central">₿</text>
+                    </g>
+
+                    {{-- chain nodes --}}
+                    <g class="cx-art-node cx-art-n1">
+                        <circle cx="382" cy="113" r="30" fill="#F7931A" />
+                        <text x="382" y="113" text-anchor="middle" dominant-baseline="central" fill="#fff">BTC</text>
+                    </g>
+                    <g class="cx-art-node cx-art-n2">
+                        <circle cx="401" cy="334" r="30" fill="#627EEA" />
+                        <text x="401" y="334" text-anchor="middle" dominant-baseline="central" fill="#fff">ETH</text>
+                    </g>
+                    <g class="cx-art-node cx-art-n3">
+                        <circle cx="119" cy="334" r="30" fill="#14b88a" />
+                        <text x="119" y="334" text-anchor="middle" dominant-baseline="central" fill="#fff">SOL</text>
+                    </g>
+                    <g class="cx-art-node cx-art-n4">
+                        <circle cx="138" cy="113" r="30" fill="#F3BA2F" />
+                        <text x="138" y="113" text-anchor="middle" dominant-baseline="central" fill="#1e2026">BNB</text>
+                    </g>
+                </svg>
             </div>
         </div>
 
@@ -394,11 +454,46 @@
         <div class="cx-wrap">
             <div class="cx-sec-head cx-center"><span class="cx-eyebrow">How an engagement unfolds</span><h2>A typical project timeline</h2></div>
             <div class="cx-road">
-                <div class="cx-mile cx-done"><div class="cx-dot"></div><div class="cx-q">Week 1</div><h4>Discovery</h4><p>Goals, token model, and chain selection.</p></div>
-                <div class="cx-mile cx-done"><div class="cx-dot"></div><div class="cx-q">Week 2</div><h4>Architecture</h4><p>Technical blueprint &amp; UX mapped out.</p></div>
-                <div class="cx-mile"><div class="cx-dot"></div><div class="cx-q">Week 3–6</div><h4>Development</h4><p>Contracts, wallets, and integrations built.</p></div>
-                <div class="cx-mile"><div class="cx-dot"></div><div class="cx-q">Week 7</div><h4>Audit &amp; Testnet</h4><p>Independent audit and full simulation.</p></div>
-                <div class="cx-mile"><div class="cx-dot"></div><div class="cx-q">Week 8+</div><h4>Launch</h4><p>Mainnet launch &amp; ongoing support.</p></div>
+                <div class="cx-mile">
+                    <div class="cx-dot">01</div>
+                    <div class="cx-mile-card">
+                        <div class="cx-q">Week 1</div>
+                        <h4>Discovery</h4>
+                        <p>Goals, token model, and chain selection.</p>
+                    </div>
+                </div>
+                <div class="cx-mile">
+                    <div class="cx-dot">02</div>
+                    <div class="cx-mile-card">
+                        <div class="cx-q">Week 2</div>
+                        <h4>Architecture</h4>
+                        <p>Technical blueprint &amp; UX mapped out.</p>
+                    </div>
+                </div>
+                <div class="cx-mile">
+                    <div class="cx-dot">03</div>
+                    <div class="cx-mile-card">
+                        <div class="cx-q">Week 3–6</div>
+                        <h4>Development</h4>
+                        <p>Contracts, wallets, and integrations built.</p>
+                    </div>
+                </div>
+                <div class="cx-mile">
+                    <div class="cx-dot">04</div>
+                    <div class="cx-mile-card">
+                        <div class="cx-q">Week 7</div>
+                        <h4>Audit &amp; Testnet</h4>
+                        <p>Independent audit and full simulation.</p>
+                    </div>
+                </div>
+                <div class="cx-mile">
+                    <div class="cx-dot">05</div>
+                    <div class="cx-mile-card">
+                        <div class="cx-q">Week 8+</div>
+                        <h4>Launch</h4>
+                        <p>Mainnet launch &amp; ongoing support.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -410,7 +505,7 @@
     <section class="cx-sec cx-sec-deep">
         <div class="cx-wrap">
             <div class="cx-sec-head cx-center"><span class="cx-eyebrow">Loved by clients</span><h2>What our clients say</h2></div>
-            <div class="cx-grid-3">
+            <div class="owl-carousel owl-theme cx-tst-carousel">
                 <div class="cx-card cx-tst"><div class="cx-stars">★★★★★</div><p>"Vetora shipped our token and staking platform on time and passed audit first try. Security was clearly baked in from the start."</p><div class="cx-who"><div class="cx-av"><img src="https://i.pravatar.cc/96?img=12" alt=""></div><div><b>Marcus Lee</b><span>Founder, DeFi startup</span></div></div></div>
                 <div class="cx-card cx-tst"><div class="cx-stars">★★★★★</div><p>"They handled everything — tokenomics, contracts, wallet, and mainnet launch. The multi-chain expertise saved us months of work."</p><div class="cx-who"><div class="cx-av"><img src="https://i.pravatar.cc/96?img=45" alt=""></div><div><b>Priya Sharma</b><span>CTO, Fintech</span></div></div></div>
                 <div class="cx-card cx-tst"><div class="cx-stars">★★★★★</div><p>"The exchange they built for us handles real volume without breaking a sweat. Post-launch support has been genuinely 24/7."</p><div class="cx-who"><div class="cx-av"><img src="https://i.pravatar.cc/96?img=33" alt=""></div><div><b>Diego Torres</b><span>CEO, Exchange</span></div></div></div>
@@ -480,7 +575,9 @@
         <div class="cx-wrap">
             <div class="cx-foot-top">
                 <div class="cx-foot-brand">
-                    <div class="cx-brand">VETORA <span class="cx-spark">✦</span><small>solutions</small></div>
+                    <a href="{{ url('/') }}" class="cx-brand">
+                        <img src="{{ asset('Assets/Images/logo-main.png') }}" alt="Vetora Logo">
+                    </a>
                     <p>Secure, audited cryptocurrency development — coins, tokens, wallets, exchanges, and DeFi, built for businesses across Melbourne and beyond.</p>
                     <div class="cx-news"><input placeholder="Your email"><button>Subscribe</button></div>
                 </div>
@@ -501,6 +598,30 @@
 @section('scripts')
     {{-- jQuery kept for the layout's global dropdown script that runs after this. --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+    <script>
+        // Testimonials carousel. autoplay is disabled when the visitor prefers reduced motion.
+        $(function () {
+            var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            $('.cx-tst-carousel').owlCarousel({
+                loop: true,
+                margin: 20,
+                nav: false,
+                dots: true,
+                autoplay: !calm,
+                autoplayTimeout: 4500,
+                autoplayHoverPause: true,
+                smartSpeed: 900,
+                responsive: {
+                    0:    { items: 1 },
+                    768:  { items: 2 },
+                    1200: { items: 3 }
+                }
+            });
+        });
+    </script>
 
     <script>
         (function () {
@@ -567,15 +688,14 @@
             } else {
                 var co = new IntersectionObserver(function (entries) {
                     entries.forEach(function (e) { if (e.isIntersecting) { animate(e.target); co.unobserve(e.target); } });
-                }, { threshold: .5 });
+                }, { threshold: 0, rootMargin: '0px 0px -30% 0px' });
                 countEls.forEach(function (el) { co.observe(el); });
             }
 
-            // scroll progress bar + sticky header elevate
-            var pb = document.getElementById('cx-progress'), header = document.getElementById('cxHeader');
+            // sticky header elevate
+            var header = document.getElementById('cxHeader');
             function onScroll() {
-                var h = document.documentElement, st = h.scrollTop || document.body.scrollTop, sh = (h.scrollHeight - h.clientHeight) || 1;
-                if (pb) pb.style.width = (st / sh * 100) + '%';
+                var h = document.documentElement, st = h.scrollTop || document.body.scrollTop;
                 if (header) header.classList.toggle('cx-scrolled', st > 20);
             }
             window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
@@ -591,10 +711,13 @@
             });
 
             // scroll reveal
-            var sel = '.cx-sec-head,.cx-hero h1,.cx-hero .cx-lead,.cx-hero-cta,.cx-trust-row,.cx-orb-stage,.cx-ticker,.cx-market,.cx-grid-3 > .cx-card,.cx-grid-4 > .cx-card,.cx-steps > .cx-card,.cx-split > *,.cx-dash,.cx-stats > .cx-card,.cx-mile,.cx-faq,.cx-cta-inner,.cx-foot-top,.cx-foot-bar';
+            // .cx-road has no reveal styles of its own — it only needs .cx-in to draw the timeline rail
+            var sel = '.cx-sec-head,.cx-hero h1,.cx-hero .cx-lead,.cx-hero-cta,.cx-trust-row,.cx-orb-stage,.cx-ticker,.cx-market,.cx-grid-3 > .cx-card,.cx-grid-4 > .cx-card,.cx-steps > .cx-card,.cx-split > *,.cx-dash,.cx-stats > .cx-card,.cx-road,.cx-mile,.cx-faq,.cx-cta-inner,.cx-foot-top,.cx-foot-bar';
+            // -30% bottom margin pulls the trigger line up to 70% of the viewport height, so an
+            // element reveals as soon as its top edge crosses that line.
             var io = new IntersectionObserver(function (en) {
                 en.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('cx-in'); io.unobserve(e.target); } });
-            }, { threshold: .1, rootMargin: '0px 0px -6% 0px' });
+            }, { threshold: 0, rootMargin: '0px 0px -30% 0px' });
             document.querySelectorAll(sel).forEach(function (el) { io.observe(el); });
 
             // magnetic primary buttons

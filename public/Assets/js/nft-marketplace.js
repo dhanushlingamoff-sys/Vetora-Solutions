@@ -26,22 +26,59 @@
     --------------------------------------------------------------- */
     var navToggle = document.getElementById('nftmNavToggle');
     var navCollapse = document.getElementById('nftmNavCollapse');
+    var dropParents = Array.prototype.slice.call(document.querySelectorAll('.nftm-has-drop'));
+
+    function closeDrops(except) {
+        dropParents.forEach(function (p) {
+            if (p === except) return;
+            p.classList.remove('nftm-drop-open');
+            var t = p.querySelector('.nftm-drop-toggle');
+            if (t) t.setAttribute('aria-expanded', 'false');
+        });
+    }
+
+    /* Desktop opens these on :hover (CSS). The click handler is what drives the
+       mobile accordion — and it also gives keyboard/touch users a way in. */
+    dropParents.forEach(function (parent) {
+        var toggle = parent.querySelector('.nftm-drop-toggle');
+        if (!toggle) return;
+        toggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var open = parent.classList.toggle('nftm-drop-open');
+            toggle.setAttribute('aria-expanded', String(open));
+            if (open) closeDrops(parent);
+        });
+    });
+
+    document.addEventListener('click', function () { closeDrops(null); });
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeDrops(null);
+    });
+
     if (navToggle && navCollapse) {
         var navIcon = navToggle.querySelector('i');
         function closeNav() {
             navCollapse.classList.remove('nftm-nav-open');
             navToggle.setAttribute('aria-expanded', 'false');
+            closeDrops(null);
             if (navIcon) { navIcon.classList.remove('bi-x-lg'); navIcon.classList.add('bi-list'); }
         }
-        navToggle.addEventListener('click', function () {
+        navToggle.addEventListener('click', function (e) {
+            e.stopPropagation();
             var open = navCollapse.classList.toggle('nftm-nav-open');
             navToggle.setAttribute('aria-expanded', String(open));
+            if (!open) closeDrops(null);
             if (navIcon) {
                 navIcon.classList.toggle('bi-list', !open);
                 navIcon.classList.toggle('bi-x-lg', open);
             }
         });
+        /* Dropdown toggles are excluded — they open a submenu rather than
+           navigating, so closing the whole panel on their click would make the
+           mobile accordion impossible to use. */
         navCollapse.querySelectorAll('a, button').forEach(function (el) {
+            if (el.classList.contains('nftm-drop-toggle')) return;
             el.addEventListener('click', closeNav);
         });
     }
@@ -236,6 +273,25 @@
         btn.addEventListener('click', toggleWallet);
     });
     renderWalletButtons();
+
+    /* Admin > My Wallet. Deliberately NOT [data-nftm-wallet-btn] — renderWalletButtons()
+       rewrites the label of those, which would rename this menu item to the wallet
+       address. This one keeps its label and just drives the same toggle. */
+    document.querySelectorAll('[data-nftm-wallet-link]').forEach(function (el) {
+        el.addEventListener('click', function (e) {
+            e.preventDefault();
+            toggleWallet();
+        });
+    });
+
+    /* Admin items with no counterpart in the demo (Notifications, Settings) — say so
+       rather than dead-ending on href="#". */
+    document.querySelectorAll('[data-nftm-demo]').forEach(function (el) {
+        el.addEventListener('click', function (e) {
+            e.preventDefault();
+            toast(el.getAttribute('data-nftm-demo') + ' is not wired up in this demo', null);
+        });
+    });
 
     /* ---------------------------------------------------------------
        Nav anchor links — smooth scroll (Lenis doesn't hijack hash

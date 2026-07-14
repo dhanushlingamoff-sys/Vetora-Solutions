@@ -40,15 +40,15 @@ public function submit(Request $request)
     $data = $request->all();
 
     // Send to multiple emails
-    $emails = [
-        'dhanush@trionova.in'
-    ];
     // $emails = [
-    //     'durgadevi.vijayakumar@vetora.au',
-    //     'prakas.balasubramanian@vetora.au',
-    //     'vishnupriya.subramaniam@vetora.au',
-    //     'info@vetora.au'
+    //     'dhanush@trionova.in'
     // ];
+    $emails = [
+        'durgadevi.vijayakumar@vetora.au',
+        'prakas.balasubramanian@vetora.au',
+        'vishnupriya.subramaniam@vetora.au',
+        'info@vetora.au'
+    ];
 
     Mail::to($emails)->send(new ContactFormMail($data));
 
