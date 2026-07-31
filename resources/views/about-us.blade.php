@@ -336,10 +336,10 @@
                              alt="Jaspal Sarai"
                              class="au-team-photo"
                              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                        <div class="au-team-initials" style="display:none">JS</div>
+                        <div class="au-team-initials" style="display:none">PB</div>
                     </div>
-                    <h4 class="au-team-name">Jaspal Sarai</h4>
-                    <p class="au-team-role">Director, CEO</p>
+                    <h4 class="au-team-name">Prakas Balasubramanian</h4>
+                    <p class="au-team-role">COO</p>
                     <div class="au-team-divider"></div>
                     <p class="au-team-bio">
                         Jaspal, the organisation's founder, has over 25 years of expertise creating technological ventures
@@ -365,10 +365,10 @@
                              alt="Amit Dang"
                              class="au-team-photo"
                              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                        <div class="au-team-initials" style="display:none">AD</div>
+                        <div class="au-team-initials" style="display:none">DV</div>
                     </div>
-                    <h4 class="au-team-name">Amit Dang</h4>
-                    <p class="au-team-role">Director, CTO</p>
+                    <h4 class="au-team-name">Durgadevi Vijayakumar</h4>
+                    <p class="au-team-role">CEO</p>
                     <div class="au-team-divider"></div>
                     <p class="au-team-bio">
                         Amit has more than 20 years of experience in IT delivery, infrastructure management, &amp;
@@ -385,7 +385,7 @@
                     </div>
                 </div>
             </div>
-
+ 
             <div class="col-12 col-sm-6 col-lg-4">
                 <div class="au-team-card">
                     <div class="au-team-photo-wrap">
@@ -393,10 +393,10 @@
                              alt="Michael Elford"
                              class="au-team-photo"
                              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                        <div class="au-team-initials" style="display:none">ME</div>
+                        <div class="au-team-initials" style="display:none">VS</div>
                     </div>
-                    <h4 class="au-team-name">Michael Elford</h4>
-                    <p class="au-team-role">General Manager</p>
+                    <h4 class="au-team-name">Vishnupriya Subramaniam</h4>
+                    <p class="au-team-role">Director of Sales and Marketing </p>
                     <div class="au-team-divider"></div>
                     <p class="au-team-bio">
                         With more than 20 years of ICT expertise, Michael has developed a thorough understanding of
