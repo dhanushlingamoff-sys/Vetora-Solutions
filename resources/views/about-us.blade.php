@@ -11,9 +11,7 @@
 
 @section('content')
 
-{{-- ══════════════════════════════════════════════════════════
-     §1  HERO
-══════════════════════════════════════════════════════════ --}}
+    <!-- §1  HERO -->
 <section class="au-hero"
          style="background-image: url('{{ asset('Assets/Images/Contact-us/contact-us-banner.webp') }}')">
     <div class="container">
@@ -50,14 +48,11 @@
 </section>
 
 
-{{-- ══════════════════════════════════════════════════════════
-     §2  ABOUT US — NUMBERED FEATURES + IMAGE GRID
-══════════════════════════════════════════════════════════ --}}
+    <!-- §2  ABOUT US — NUMBERED FEATURES + IMAGE GRID -->
 <section class="section" id="au-about-sec">
     <div class="container">
         <div class="row g-5 align-items-center">
 
-            {{-- Left: text + features --}}
             <div class="col-12 col-lg-6">
 
                 <div class="section-subtitle">
@@ -118,11 +113,9 @@
 
             </div>
 
-            {{-- Right: 2×2 image grid --}}
             <div class="col-12 col-lg-6">
                 <div class="au-img-grid">
 
-                    {{-- Left column: img1 (shorter), img3 (taller) --}}
                     <div class="au-img-col">
                         <img src="{{ asset('Assets/Images/hero-banner.png') }}"
                              alt="Our workspace">
@@ -130,7 +123,6 @@
                              alt="How we help">
                     </div>
 
-                    {{-- Right column: img2 (taller), img4 (shorter) --}}
                     <div class="au-img-col">
                         <img src="{{ asset('Assets/Images/hero-banner.png') }}"
                              alt="Our team collaborating">
@@ -146,9 +138,7 @@
 </section>
 
 
-{{-- ══════════════════════════════════════════════════════════
-     §3  MISSION & VISION
-══════════════════════════════════════════════════════════ --}}
+    <!-- §3  MISSION & VISION -->
 <section class="section au-mv-section">
     <div class="container">
 
@@ -163,7 +153,6 @@
 
         <div class="row g-4">
 
-            {{-- Mission --}}
             <div class="col-12 col-lg-6">
                 <div class="au-mv-card">
                     <img src="{{ asset('Assets/Images/hero-banner.png') }}"
@@ -183,7 +172,6 @@
                 </div>
             </div>
 
-            {{-- Vision --}}
             <div class="col-12 col-lg-6">
                 <div class="au-mv-card">
                     <img src="{{ asset('Assets/Images/hero-banner.png') }}"
@@ -208,9 +196,7 @@
 </section>
 
 
-{{-- ══════════════════════════════════════════════════════════
-     §4  OUR VALUES
-══════════════════════════════════════════════════════════ --}}
+    <!-- §4  OUR VALUES -->
 <section class="section au-values-section">
     <div class="container">
 
@@ -310,9 +296,7 @@
 </section>
 
 
-{{-- ══════════════════════════════════════════════════════════
-     §5  LEADERSHIP TEAM
-══════════════════════════════════════════════════════════ --}}
+    <!-- §5  LEADERSHIP TEAM -->
 <section class="section au-team-section">
     <div class="container">
 
@@ -342,10 +326,7 @@
                     <p class="au-team-role">COO</p>
                     <div class="au-team-divider"></div>
                     <p class="au-team-bio">
-                        Jaspal, the organisation's founder, has over 25 years of expertise creating technological ventures
-                        and expanding into international markets. He has been driving innovative and disruptive solutions
-                        in the fields of financial services, utilities, smart devices and IOT, shared mobility, transport,
-                        retail, health, and small business IT support services.
+                        Prakas Balasubramanian oversees Trionova's day-to-day operations, ensuring seamless execution across projects, client delivery, and business processes. With extensive experience in technology operations and organizational management, he is dedicated to driving operational excellence, improving efficiency, and fostering a culture of innovation and collaboration that supports sustainable business growth.
                     </p>
                     <div class="au-team-socials">
                         <a href="#" class="au-team-social-link" aria-label="LinkedIn">
@@ -371,9 +352,7 @@
                     <p class="au-team-role">CEO</p>
                     <div class="au-team-divider"></div>
                     <p class="au-team-bio">
-                        Amit has more than 20 years of experience in IT delivery, infrastructure management, &amp;
-                        large-scale operations. At Vetora, he helps shape strategy and ensures seamless execution,
-                        balancing innovation with operational excellence.
+                        Durgadevi Vijayakumar leads Trionova with a vision focused on innovation, customer success, and long-term business growth. She is passionate about delivering impactful digital solutions while building strong client relationships and empowering teams to achieve excellence. Her leadership combines strategic thinking with a commitment to quality, helping organizations embrace digital transformation with confidence.
                     </p>
                     <div class="au-team-socials">
                         <a href="#" class="au-team-social-link" aria-label="LinkedIn">
@@ -399,8 +378,7 @@
                     <p class="au-team-role">Director of Sales and Marketing </p>
                     <div class="au-team-divider"></div>
                     <p class="au-team-bio">
-                        With more than 20 years of ICT expertise, Michael has developed a thorough understanding of
-                        both large- and small business IT support services and how to combine them to create value.
+                        Vishnupriya Subramaniam leads the company's sales and marketing initiatives, helping businesses discover innovative technology solutions that drive measurable results. With a customer-centric approach and deep understanding of market trends, she focuses on building lasting client partnerships, expanding brand presence, and delivering strategies that accelerate business growth across diverse industries.
                     </p>
                     <div class="au-team-socials">
                         <a href="#" class="au-team-social-link" aria-label="LinkedIn">
@@ -418,9 +396,7 @@
 </section>
 
 
-{{-- ══════════════════════════════════════════════════════════
-     §6  CTA
-══════════════════════════════════════════════════════════ --}}
+    <!-- §6  CTA -->
 <section class="section au-cta-section"
          style="background-image: url('{{ asset('Assets/Images/Mobile-App/mobile-app-banner.webp') }}')">
     <div class="au-cta-glow"></div>

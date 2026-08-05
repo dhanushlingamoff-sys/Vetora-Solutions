@@ -11,25 +11,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     <link rel="stylesheet" href="{{ asset('Assets/css/ai-services.css') }}?v=1.2.9">
     <style>body, html { background: #0D0B2A !important; }</style>
+    <link rel="stylesheet" href="{{ asset('Assets/css/testimonials.css') }}?v=1.0.0">
 @endsection
 
 @section('content')
 <div id="top" class="axo-page" style="font-family:'Lexend','Livvic',sans-serif;color:#fff;overflow-x:hidden;">
 
-{{-- Animated vertical-line background (light beams travelling down faint lines) --}}
 <div class="page-lines" aria-hidden="true">
     <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
 </div>
 
-{{-- ═══════════════════════════════════════════════════════════
-     1. HERO
-═══════════════════════════════════════════════════════════ --}}
+    <!-- HERO -->
 <section class="ai-hero">
 
-    {{-- Background glow blob --}}
     <div class="ai-hero__glow"></div>
 
-    {{-- Background scrolling text --}}
     <div class="hero-bg-text" aria-hidden="true">
         <div class="hero-bg-text__track">
             <span>AI Services</span><span>machine learning</span>
@@ -38,10 +34,8 @@
         </div>
     </div>
 
-    {{-- Main content grid --}}
     <div class="ai-hero__content">
 
-        {{-- LEFT: Headline --}}
         <div class="ai-hero__left">
             <h1 class="ai-hero__headline">
                 <span class="line-1">INNOVATE WITH</span>
@@ -69,7 +63,6 @@
             </h1>
         </div>
 
-        {{-- CENTER: Tooltip card (absolute positioned) --}}
         <div class="hero-tooltip">
             <img class="hero-tooltip__thumb" src="{{ asset('Assets/Images/hero-banner.png') }}" alt="">
             <div class="hero-tooltip__text">
@@ -78,7 +71,6 @@
             </div>
         </div>
 
-        {{-- RIGHT: paragraph + explore + badge --}}
         <div class="ai-hero__right">
             <p class="ai-hero__paragraph">
                 Without clarity, you send a very garbled message out to the Universe.
@@ -90,7 +82,6 @@
 
     </div>
 
-    {{-- Rotating badge — absolutely positioned over hero --}}
     <div class="hero-badge">
         <div class="hero-badge__inner" id="heroBadgePlay">
             <div class="play-triangle"></div>
@@ -106,7 +97,6 @@
         </svg>
     </div>
 
-    {{-- Bottom: Robot image + Wave canvas --}}
     <div class="ai-hero__bottom">
         <div class="ai-hero__robot">
             <img src="{{ asset('Assets/Images/hero-banner.png') }}" alt="AI Robot VR Headset"
@@ -122,9 +112,7 @@
 </section>
 
 
-{{-- ═══════════════════════════════════════════════════════════
-     2. OUR FEATURES
-═══════════════════════════════════════════════════════════ --}}
+    <!-- OUR FEATURES -->
 <section class="feat-section" id="features">
 
     <div class="feat-header">
@@ -144,7 +132,6 @@
 
     <div class="feat-grid">
 
-        {{-- CARD 1: Collaboration --}}
         <div class="feat-card feat-card--collab feat-reveal" style="transition-delay:0.36s">
             <div class="feat-card__img-zone img-zone--collab">
                 <img src="{{ asset('Assets/Images/hero-banner.png') }}" alt="">
@@ -166,7 +153,6 @@
             </div>
         </div>
 
-        {{-- CARD 2: AI Magic Art --}}
         <div class="feat-card feat-card--magic feat-reveal" style="transition-delay:0.48s">
             <div class="feat-card__img-zone img-zone--collab">
                 <img src="{{ asset('Assets/Images/hero-banner.png') }}" alt="">
@@ -187,7 +173,6 @@
             </div>
         </div>
 
-        {{-- CARD 3: AI Chat Images --}}
         <div class="feat-card feat-card--chat feat-reveal" style="transition-delay:0.60s">
             <div class="feat-card__img-zone img-zone--collab">
                 <img src="{{ asset('Assets/Images/hero-banner.png') }}" alt="">
@@ -209,8 +194,7 @@
             </div>
         </div>
 
-    </div>{{-- end feat-grid --}}
-
+    </div>
     <button class="scroll-top-btn" id="scrollTopBtn"
             onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
@@ -222,15 +206,11 @@
 </section>
 
 
-{{-- ═══════════════════════════════════════════════════════════
-     3. ABOUT
-═══════════════════════════════════════════════════════════ --}}
+    <!-- ABOUT -->
 <section class="about-section" id="about">
 
-    {{-- Decorative background X shape --}}
     <div class="about-bg-deco" aria-hidden="true"></div>
 
-    {{-- ROW 1: Eyebrow + Headline --}}
     <div class="about-top">
 
         <div class="about-top__left about-reveal-left">
@@ -254,10 +234,8 @@
 
     </div>
 
-    {{-- ROW 2: Images + Content --}}
     <div class="about-bottom">
 
-        {{-- Left: Images --}}
         <div class="about-images about-reveal-left">
             <div class="about-hand">
                 <img src="{{ asset('Assets/Images/AI-development/about-us/about-hand.png') }}"
@@ -271,10 +249,8 @@
             </div>
         </div>
 
-        {{-- Right: Content --}}
         <div class="about-content about-reveal-right">
 
-            {{-- Team avatars --}}
             <div class="about-avatars">
                 @foreach(['22','32','44'] as $av)
                 <div class="about-avatar about-avatar--{{ $loop->iteration }}">
@@ -285,18 +261,15 @@
                 <div class="about-avatar about-avatar--plus">+1</div>
             </div>
 
-            {{-- Paragraph --}}
             <p class="about-paragraph">
                 Driven by a passion for innovation, we specialize in
                 delivering intelligent, scalable AI solutions.
             </p>
 
-            {{-- Button with decorative lines --}}
             <div class="about-btn-wrap">
                 <a href="{{ route('contact') }}" class="about-btn">About Company</a>
             </div>
 
-            {{-- Stats --}}
             <div class="about-stats">
                 <div class="about-stat">
                     <div class="about-stat__num">
@@ -317,9 +290,7 @@
 </section>
 
 
-{{-- ═══════════════════════════════════════════════════════════
-     4. OUR SERVICE
-═══════════════════════════════════════════════════════════ --}}
+    <!-- OUR SERVICE -->
 <section class="reveal" style="padding:110px 0;position:relative;overflow:hidden;">
     <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(124,58,237,.10) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;"></div>
     <div class="container" style="max-width:1280px;margin:0 auto;padding:0 24px;position:relative;z-index:2;">
@@ -377,9 +348,7 @@
 </section>
 
 
-{{-- ═══════════════════════════════════════════════════════════
-     5. OUR TECHNOLOGIES
-═══════════════════════════════════════════════════════════ --}}
+    <!-- OUR TECHNOLOGIES -->
 <section class="tech2 reveal">
     <div class="tech2__bg"></div>
     <div class="tech2__wrap">
@@ -400,7 +369,6 @@
             </p>
             <a href="{{ route('contact') }}" class="page-btn">About Company &nbsp;→</a>
 
-            {{-- Physics stage: capsules fall from above, tumble and pile up on scroll-in --}}
             @php
                 $caps = [
                     ['img'=>'Assets/Images/Technologies/Mobile-icons/react.png','name'=>'React'],
@@ -431,15 +399,13 @@
                  onerror="this.style.display='none'">
         </div>
 
-        </div>{{-- /.tech2__inner --}}
-        </div>{{-- /.tech2__card --}}
-    </div>{{-- /.tech2__wrap --}}
+        </div>
+        </div>
+    </div>
 </section>
 
 
-{{-- ═══════════════════════════════════════════════════════════
-     6. OUR PROJECTS
-═══════════════════════════════════════════════════════════ --}}
+    <!-- OUR PROJECTS -->
 <section class="proj2 reveal" style="padding:110px 0;position:relative;overflow:hidden;">
     <div class="container" style="max-width:1280px;margin:0 auto;padding:0 24px;position:relative;z-index:2;">
 
@@ -481,9 +447,7 @@
 </section>
 
 
-{{-- ═══════════════════════════════════════════════════════════
-     8. OUR TESTIMONIALS
-═══════════════════════════════════════════════════════════ --}}
+    <!-- OUR TESTIMONIALS -->
 <section class="tstm reveal" style="padding:110px 0;position:relative;overflow:hidden;">
     <div class="container" style="max-width:1280px;margin:0 auto;padding:0 24px;position:relative;z-index:2;">
 
@@ -552,9 +516,7 @@
 </section>
 
 
-{{-- ═══════════════════════════════════════════════════════════
-     9. OUR BLOG
-═══════════════════════════════════════════════════════════ --}}
+    <!-- OUR BLOG -->
 <section class="blog2 reveal" style="padding:110px 0;position:relative;overflow:hidden;">
     <div class="container" style="max-width:1280px;margin:0 auto;padding:0 24px;position:relative;z-index:2;">
         <div class="blog2__card"
@@ -603,8 +565,6 @@
     </div>
 </section>
 
-{{-- Scroll-to-top --}}
-{{-- <a href="#top" id="scrollTop" class="axo-totop" aria-label="Back to top" style="width:44px;height:44px;border:2px solid rgba(124,58,237,.6);font-size:16px;color:#7C3AED;">↑</a> --}}
 
 </div>
 
@@ -629,14 +589,12 @@
 @endsection
 
 @section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    {{-- GSAP + ScrollTrigger are loaded globally in layouts/app.blade.php --}}
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/countup.js@2.8.0/dist/countUp.umd.js"></script>
     <script src="{{ asset('Assets/js/ai-services.js') }}?v=1.0.8"></script>
 
-    {{-- Matter.js physics for the falling "Our Technologies" capsules --}}
     <script src="https://cdn.jsdelivr.net/npm/matter-js@0.19.0/build/matter.min.js"></script>
     <script src="{{ asset('Assets/js/tech-drop.js') }}?v=1.0.2"></script>
 @endsection

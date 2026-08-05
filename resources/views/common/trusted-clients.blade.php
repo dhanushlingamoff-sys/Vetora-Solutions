@@ -5,7 +5,6 @@
 
 <section class="clients-section section">
 
-    {{-- ── Header + Stats (inside container) ────────────────── --}}
     <div class="container">
 
         <div class="cs-header">
@@ -38,11 +37,9 @@
 
     </div>
 
-    {{-- ── Marquee (full-width, outside container) ─────────── --}}
     <div class="cs-marquee-wrap">
         <div class="cs-marquee-track">
 
-            {{-- Set 1 --}}
             <div class="cs-logo-item"><img src="{{ asset('Assets/Images/Mobile-App/clients-2/abhi.webp') }}" alt="Abhi"></div>
             <div class="cs-logo-item"><img src="{{ asset('Assets/Images/Mobile-App/clients-2/allo.webp') }}" alt="Allo"></div>
             <div class="cs-logo-item"><img src="{{ asset('Assets/Images/Mobile-App/clients-2/allswell.webp') }}" alt="Allswell"></div>
@@ -53,7 +50,6 @@
             <div class="cs-logo-item"><img src="{{ asset('Assets/Images/Mobile-App/clients-2/WFB.webp') }}" alt="WFB"></div>
             <div class="cs-logo-item"><img src="{{ asset('Assets/Images/Mobile-App/clients-2/home.png') }}" alt="Home"></div>
 
-            {{-- Set 2 — duplicate for seamless infinite loop --}}
             <div class="cs-logo-item"><img src="{{ asset('Assets/Images/Mobile-App/clients-2/abhi.webp') }}" alt="Abhi"></div>
             <div class="cs-logo-item"><img src="{{ asset('Assets/Images/Mobile-App/clients-2/allo.webp') }}" alt="Allo"></div>
             <div class="cs-logo-item"><img src="{{ asset('Assets/Images/Mobile-App/clients-2/allswell.webp') }}" alt="Allswell"></div>
@@ -67,7 +63,6 @@
         </div>
     </div>
 
-    {{-- ── Trust Badges (inside container) ────────────────── --}}
     <div class="container">
         <div class="cs-trust-row">
 

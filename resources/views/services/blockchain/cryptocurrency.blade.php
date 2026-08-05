@@ -6,23 +6,17 @@
     <meta name="description"
         content="Vetora Solutions designs, builds, and audits cryptocurrency coins, tokens, wallets, exchanges, and DeFi platforms — secure, multi-chain blockchain development for businesses across Melbourne and Australia.">
 
-    {{-- Dark-theme fonts for this page's immersive design --}}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Grotesk:wght@500;700&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
 
-    {{-- Owl Carousel (testimonials) — loaded before the page CSS so our theme overrides win --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 
     <link rel="stylesheet" href="{{ asset('Assets/css/cryptocurrency.css') }}?v=2.6.0">
+    <link rel="stylesheet" href="{{ asset('Assets/css/testimonials.css') }}?v=1.0.0">
 @endsection
 
 
-{{-- ================================================================
-     OWN DARK NAV — replaces the site's default header for this page.
-     ================================================================ --}}
+    <!-- OWN DARK NAV — replaces the site's default -->
 @section('page-header')
     <script>document.documentElement.classList.add('js')</script>
 
@@ -58,9 +52,7 @@
      reveal pass — this page runs its own IntersectionObserver reveal instead. --}}
 <div class="cx-root" data-reveal-group>
 
-    {{-- ============================================================
-         1. HERO
-         ============================================================ --}}
+    <!-- HERO -->
     <section class="cx-hero">
         <div class="cx-wrap">
             <div>
@@ -105,10 +97,8 @@
                         </linearGradient>
                     </defs>
 
-                    {{-- ambient bloom behind the coin --}}
                     <circle cx="260" cy="235" r="190" fill="url(#cxArtGlow)" />
 
-                    {{-- network edges: core → each chain node (drawn first so the coin overlaps them) --}}
                     <g stroke="url(#cxEdge)" stroke-width="1.5" fill="none">
                         <path d="M260 235 L382 113" />
                         <path d="M260 235 L401 334" />
@@ -116,21 +106,18 @@
                         <path d="M260 235 L138 113" />
                     </g>
 
-                    {{-- orbit rings --}}
                     <g class="cx-art-ring">
                         <circle cx="260" cy="235" r="172" fill="none" stroke="rgba(255,255,255,.17)"
                                 stroke-width="1" stroke-dasharray="6 9" />
                     </g>
                     <circle cx="260" cy="235" r="132" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="1" />
 
-                    {{-- core coin --}}
                     <g class="cx-art-core">
                         <circle cx="260" cy="235" r="96" fill="url(#cxCoreGrad)" />
                         <circle cx="260" cy="235" r="96" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1.5" />
                         <text class="cx-art-sym" x="260" y="235" text-anchor="middle" dominant-baseline="central">₿</text>
                     </g>
 
-                    {{-- chain nodes --}}
                     <g class="cx-art-node cx-art-n1">
                         <circle cx="382" cy="113" r="30" fill="#F7931A" />
                         <text x="382" y="113" text-anchor="middle" dominant-baseline="central" fill="#fff">BTC</text>
@@ -151,7 +138,6 @@
             </div>
         </div>
 
-        {{-- Decorative coin ticker --}}
         <div class="cx-ticker">
             <div class="cx-ticker-track" id="cx-ticker">
                 <span class="cx-tk"><span class="cx-sym">BTC</span><span class="cx-pr">Bitcoin</span><span class="cx-up">▲ 2.4%</span></span>
@@ -167,9 +153,7 @@
     </section>
 
 
-    {{-- ============================================================
-         TRUSTED BY
-         ============================================================ --}}
+    <!-- TRUSTED BY -->
     <section class="cx-trusted">
         <div class="cx-wrap">
             <span class="cx-lbl">Trusted by fintech, Web3 &amp; blockchain-first businesses</span>
@@ -178,9 +162,7 @@
     </section>
 
 
-    {{-- ============================================================
-         2. NETWORKS WE BUILD ON
-         ============================================================ --}}
+    <!-- NETWORKS WE BUILD ON -->
     <section class="cx-sec cx-sec-deep">
         <div class="cx-wrap">
             <div class="cx-sec-head">
@@ -232,9 +214,7 @@
     </section>
 
 
-    {{-- ============================================================
-         3. WHY VETORA
-         ============================================================ --}}
+    <!-- WHY VETORA -->
     <section class="cx-sec" id="cx-why">
         <div class="cx-wrap">
             <div class="cx-sec-head">
@@ -254,9 +234,7 @@
     </section>
 
 
-    {{-- ============================================================
-         4. CHAINS & TOKENS
-         ============================================================ --}}
+    <!-- CHAINS & TOKENS -->
     <section class="cx-sec cx-sec-deep">
         <div class="cx-wrap">
             <div class="cx-sec-head">
@@ -278,9 +256,7 @@
     </section>
 
 
-    {{-- ============================================================
-         5. OUR SERVICES (image cards)
-         ============================================================ --}}
+    <!-- OUR SERVICES (image cards) -->
     <section class="cx-sec" id="cx-services">
         <div class="cx-wrap">
             <div class="cx-sec-head">
@@ -300,13 +276,10 @@
     </section>
 
 
-    {{-- WORD BAND --}}
     <div class="cx-wordband"><div class="cx-wordband-track" id="cx-wordband"><span>Coins <b>✦</b> Tokens <b>✦</b> Wallets <b>✦</b> Exchanges <b>✦</b> DeFi <b>✦</b> Audits <b>✦</b> </span></div></div>
 
 
-    {{-- ============================================================
-         6. OUR PROCESS
-         ============================================================ --}}
+    <!-- OUR PROCESS -->
     <section class="cx-sec cx-sec-deep" id="cx-process">
         <div class="cx-wrap">
             <div class="cx-sec-head">
@@ -324,9 +297,7 @@
     </section>
 
 
-    {{-- ============================================================
-         7. SECURITY
-         ============================================================ --}}
+    <!-- SECURITY -->
     <section class="cx-sec" id="cx-security">
         <div class="cx-wrap cx-split">
             <div class="cx-sec-img">
@@ -353,9 +324,7 @@
     </section>
 
 
-    {{-- ============================================================
-         8. DASHBOARD PREVIEW
-         ============================================================ --}}
+    <!-- DASHBOARD PREVIEW -->
     <section class="cx-sec cx-sec-deep">
         <div class="cx-wrap">
             <div class="cx-sec-head">
@@ -396,9 +365,7 @@
     </section>
 
 
-    {{-- ============================================================
-         9. WALLET APPS
-         ============================================================ --}}
+    <!-- WALLET APPS -->
     <section class="cx-sec">
         <div class="cx-wrap cx-split">
             <div class="cx-phone">
@@ -430,9 +397,7 @@
     </section>
 
 
-    {{-- ============================================================
-         10. STATS
-         ============================================================ --}}
+    <!-- STATS -->
     <section class="cx-sec cx-sec-deep">
         <div class="cx-wrap">
             <div class="cx-sec-head cx-center"><span class="cx-eyebrow">By the numbers</span><h2>A track record you can trust</h2></div>
@@ -447,9 +412,7 @@
     </section>
 
 
-    {{-- ============================================================
-         11. ENGAGEMENT TIMELINE
-         ============================================================ --}}
+    <!-- ENGAGEMENT TIMELINE -->
     <section class="cx-sec">
         <div class="cx-wrap">
             <div class="cx-sec-head cx-center"><span class="cx-eyebrow">How an engagement unfolds</span><h2>A typical project timeline</h2></div>
@@ -499,9 +462,7 @@
     </section>
 
 
-    {{-- ============================================================
-         12. TESTIMONIALS
-         ============================================================ --}}
+    <!-- TESTIMONIALS -->
     <section class="cx-sec cx-sec-deep">
         <div class="cx-wrap">
             <div class="cx-sec-head cx-center"><span class="cx-eyebrow">Loved by clients</span><h2>What our clients say</h2></div>
@@ -514,9 +475,7 @@
     </section>
 
 
-    {{-- ============================================================
-         13. INSIGHTS
-         ============================================================ --}}
+    <!-- INSIGHTS -->
     <section class="cx-sec">
         <div class="cx-wrap">
             <div class="cx-sec-head"><span class="cx-eyebrow">Insights</span><h2>Crypto development, explained</h2><p>Guides and engineering thinking to help you launch smarter.</p></div>
@@ -529,9 +488,7 @@
     </section>
 
 
-    {{-- ============================================================
-         14. FAQ
-         ============================================================ --}}
+    <!-- FAQ -->
     <section class="cx-sec cx-sec-deep" id="cx-faq">
         <div class="cx-wrap">
             <div class="cx-sec-head cx-center"><span class="cx-eyebrow">Questions</span><h2>Frequently asked questions</h2></div>
@@ -547,9 +504,7 @@
     </section>
 
 
-    {{-- ============================================================
-         15. CTA
-         ============================================================ --}}
+    <!-- CTA -->
     <section class="cx-cta">
         <div class="cx-wrap">
             <div class="cx-cta-inner">
@@ -567,9 +522,7 @@
 @endsection
 
 
-{{-- ================================================================
-     OWN DARK FOOTER — replaces the site's default footer here.
-     ================================================================ --}}
+    <!-- OWN DARK -->
 @section('page-footer')
     <footer class="cx-footer">
         <div class="cx-wrap">
@@ -596,7 +549,6 @@
 
 
 @section('scripts')
-    {{-- jQuery kept for the layout's global dropdown script that runs after this. --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 

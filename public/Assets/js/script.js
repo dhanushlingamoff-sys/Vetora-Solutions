@@ -1,16 +1,25 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    /* Scroll Glass Effect */
-    window.addEventListener('scroll', function () {
-        const header = document.querySelector('.site-header');
-        if (!header) return;
+    /* Scroll Glass Effect (rAF Throttled) */
+    var header = document.querySelector('.site-header');
+    var isTicking = false;
 
-        if (window.scrollY > 40) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
+    window.addEventListener('scroll', function () {
+        if (!isTicking) {
+            window.requestAnimationFrame(function () {
+                if (!header) header = document.querySelector('.site-header');
+                if (header) {
+                    if (window.scrollY > 40) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                }
+                isTicking = false;
+            });
+            isTicking = true;
         }
-    });
+    }, { passive: true });
 
     /* Mobile Menu Toggle */
     const toggleBtn = document.querySelector('.nav-toggle');
@@ -82,3 +91,66 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+
+/* ── Global On-Demand Lazy Loader for jQuery + Owl Carousel ── */
+window.loadJQueryOwl = function (callback) {
+    if (window.jQuery && window.jQuery.fn && window.jQuery.fn.owlCarousel) {
+        if (callback) callback(window.jQuery);
+        return;
+    }
+    if (window.__jqOwlLoading) {
+        window.addEventListener('jqOwlReady', function () {
+            if (callback) callback(window.jQuery);
+        }, { once: true });
+        return;
+    }
+    window.__jqOwlLoading = true;
+
+    function loadScript(src, cb) {
+        var s = document.createElement('script');
+        s.src = src;
+        s.async = true;
+        s.onload = cb;
+        document.head.appendChild(s);
+    }
+
+    var jqUrl = 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js';
+    var owlUrl = 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js';
+
+    var bootOwl = function () {
+        loadScript(owlUrl, function () {
+            window.__jqOwlLoading = false;
+            window.dispatchEvent(new CustomEvent('jqOwlReady'));
+            if (callback) callback(window.jQuery);
+        });
+    };
+
+    if (!window.jQuery) {
+        loadScript(jqUrl, bootOwl);
+    } else {
+        bootOwl();
+    }
+};
+
+window.observeAndInitOwl = function (selector, initFn) {
+    var els = document.querySelectorAll(selector);
+    if (!els.length) return;
+
+    if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries, obs) {
+            var isAnyNear = entries.some(function (e) { return e.isIntersecting; });
+            if (isAnyNear) {
+                obs.disconnect();
+                window.loadJQueryOwl(function () {
+                    initFn();
+                });
+            }
+        }, { rootMargin: '400px 0px' });
+
+        els.forEach(function (el) { observer.observe(el); });
+    } else {
+        window.loadJQueryOwl(function () {
+            initFn();
+        });
+    }
+};

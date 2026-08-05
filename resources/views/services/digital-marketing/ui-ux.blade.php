@@ -10,14 +10,12 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     <link rel="stylesheet" href="{{ asset('Assets/css/ui-ux.css') }}?v=1.0.3">
+    <link rel="stylesheet" href="{{ asset('Assets/css/testimonials.css') }}?v=1.0.0">
 @endsection
-
 
 @section('content')
 
-    {{-- ============================================================
-         1. HERO SECTION
-         ============================================================ --}}
+    <!-- HERO -->
     <section class="uiux-hero">
 
         <!-- Background glow orbs -->
@@ -27,7 +25,6 @@
         <!-- ── Floating UI/UX Tool Animations ────────────────────── -->
         <div class="hero-floats" aria-hidden="true">
 
-            {{-- Tool chips (left side) --}}
             <div class="hf-pill hf-figma">
                 <img src="https://cdn.simpleicons.org/figma/F24E1E" alt="Figma" width="18" height="18">
                 <span>Figma</span>
@@ -43,7 +40,6 @@
                 <span>48 Components</span>
             </div> --}}
 
-            {{-- Design Approved notification (top right) --}}
             <div class="hf-notif hf-approved">
                 <div class="hf-notif-icon hf-icon-green">
                     <i class="bi bi-check2-circle"></i>
@@ -54,13 +50,11 @@
                 </div>
             </div>
 
-            {{-- Prototype pill (right middle) --}}
             <div class="hf-pill hf-prototype">
                 <img src="https://www.adobe.com/cc-shared/assets/img/product-icons/svg/express.svg" alt="Adobe XD" width="18" height="18">
                 <span>Adobe XD</span>
             </div>
 
-            {{-- Design progress card (right, lower) --}}
             <div class="hf-progress-card hf-design-progress">
                 <span class="hf-progress-label">Design Completion</span>
                 <div class="hf-progress-bar">
@@ -72,7 +66,6 @@
                 </div>
             </div>
 
-            {{-- Brand Palette card (bottom right) --}}
             <div class="hf-palette-card">
                 <span class="hf-palette-label">Brand Palette</span>
                 <div class="hf-palette-swatches">
@@ -84,13 +77,11 @@
                 </div>
             </div>
 
-            {{-- Zeplin pill (center) --}}
             <div class="hf-cursor-wrap">
                 <img src="https://cdn.simpleicons.org/zeplin/FDBD39" alt="Zeplin" width="20" height="20" class="hf-cursor-icon">
                 <div class="hf-cursor-label">Zeplin</div>
             </div>
 
-            {{-- Sparkle dots --}}
             <div class="hf-sparkle hf-spark-1"></div>
             <div class="hf-sparkle hf-spark-2"></div>
             <div class="hf-sparkle hf-spark-3"></div>
@@ -260,18 +251,14 @@
     </section>
 
 
-    {{-- ============================================================
-         2. TRUSTED CLIENTS
-         ============================================================ --}}
+    <!-- TRUSTED CLIENTS -->
     @include('common.trusted-clients', [
         'clientsTitle' => 'Trusted by Businesses Across Australia',
         'clientsDesc'  => 'We partner with Australian startups, growing businesses, and enterprise organisations to deliver impactful design solutions that elevate brand and user experience.'
     ])
 
 
-    {{-- ============================================================
-         3. ABOUT / WHAT IS UI/UX
-         ============================================================ --}}
+    <!-- ABOUT  WHAT IS UIUX -->
     <section class="section about-app-section" style="background:#f7f9fc;">
         <div class="container">
             <div class="row g-5">
@@ -333,9 +320,7 @@
     </section>
 
 
-    {{-- ============================================================
-         4. UI/UX SERVICES SECTION
-         ============================================================ --}}
+    <!-- UIUX SERVICES -->
     <section class="section">
         <div class="container">
 
@@ -410,9 +395,7 @@
     </section>
 
 
-    {{-- ============================================================
-         5. WHY CHOOSE US — DARK SECTION
-         ============================================================ --}}
+    <!-- WHY CHOOSE US — DARK -->
     <section class="section uiux-why-section">
 
         <!-- Background orbs -->
@@ -547,9 +530,7 @@
     </section>
 
 
-    {{-- ============================================================
-         6. DESIGN PROCESS — TAB SECTION
-         ============================================================ --}}
+    <!-- DESIGN PROCESS — TAB -->
     <section class="section process-section uiux-process-section" id="our-process">
         <div class="container">
 
@@ -739,9 +720,7 @@
     </section>
 
 
-    {{-- ============================================================
-         7. DESIGN OFFERINGS — CUSTOM TABS WITH WORKFLOW VISUALS
-         ============================================================ --}}
+    <!-- DESIGN OFFERINGS — CUSTOM TABS WITH WORKFLOW VISUALS -->
     <section class="section uiux-offerings-section">
         <div class="container">
 
@@ -784,7 +763,7 @@
                 <div class="col-lg-8">
                     <div class="offering-content-area">
 
-                        {{-- ---- WEB ---- --}}
+    <!-- WEB -->
                         <div class="offering-pane active" id="offering-web">
                             <div class="row g-4 align-items-center">
                                 <div class="col-md-6">
@@ -852,7 +831,7 @@
                             </div>
                         </div>
 
-                        {{-- ---- MOBILE ---- --}}
+    <!-- MOBILE -->
                         <div class="offering-pane" id="offering-mobile">
                             <div class="row g-4 align-items-center">
                                 <div class="col-md-6">
@@ -931,7 +910,7 @@
                             </div>
                         </div>
 
-                        {{-- ---- DASHBOARD ---- --}}
+    <!-- DASHBOARD -->
                         <div class="offering-pane" id="offering-dashboard">
                             <div class="row g-4 align-items-center">
                                 <div class="col-md-6">
@@ -999,7 +978,7 @@
                             </div>
                         </div>
 
-                        {{-- ---- E-COMMERCE ---- --}}
+    <!-- ECOMMERCE -->
                         <div class="offering-pane" id="offering-ecommerce">
                             <div class="row g-4 align-items-center">
                                 <div class="col-md-6">
@@ -1042,7 +1021,7 @@
                             </div>
                         </div>
 
-                        {{-- ---- REDESIGN ---- --}}
+    <!-- REDESIGN -->
                         <div class="offering-pane" id="offering-redesign">
                             <div class="row g-4 align-items-center">
                                 <div class="col-md-6">
@@ -1099,7 +1078,7 @@
                             </div>
                         </div>
 
-                        {{-- ---- DESIGN SYSTEM ---- --}}
+    <!-- DESIGN SYSTEM -->
                         <div class="offering-pane" id="offering-design-system">
                             <div class="row g-4 align-items-center">
                                 <div class="col-md-6">
@@ -1170,9 +1149,7 @@
     </section>
 
 
-    {{-- ============================================================
-         8. STATS BANNER
-         ============================================================ --}}
+    <!-- STATS BANNER -->
     {{-- <section class="uiux-stats-banner">
         <div class="container">
             <div class="row align-items-center text-center g-4">
@@ -1214,9 +1191,7 @@
     </section> --}}
 
 
-    {{-- ============================================================
-         9. INDUSTRIES SECTION
-         ============================================================ --}}
+    <!-- INDUSTRIES -->
     <section class="section" style="background:#f7f9fc;">
         <div class="container">
 
@@ -1308,9 +1283,7 @@
     </section>
 
 
-    {{-- ============================================================
-         10. TECH STACK
-         ============================================================ --}}
+    <!-- TECH STACK -->
     <section class="technologies-section section">
         <div class="container">
             <div class="section-heading text-center">
@@ -1326,9 +1299,7 @@
     </section>
 
 
-    {{-- ============================================================
-         11. CTA SECTION
-         ============================================================ --}}
+    <!-- CTA -->
     <section class="section uiux-cta-section">
         <div class="container">
             <div class="uiux-cta-inner">
@@ -1358,9 +1329,7 @@
     </section>
 
 
-    {{-- ============================================================
-         12. TESTIMONIALS
-         ============================================================ --}}
+    <!-- TESTIMONIALS -->
     <section class="testimonial-section">
         <div class="testimonial-blur blur-left"></div>
         <div class="testimonial-blur blur-right"></div>
@@ -1393,9 +1362,7 @@
     </section>
 
 
-    {{-- ============================================================
-         13. FAQ SECTION
-         ============================================================ --}}
+    <!-- FAQ -->
     <section class="section pt-0">
         <div class="container">
 

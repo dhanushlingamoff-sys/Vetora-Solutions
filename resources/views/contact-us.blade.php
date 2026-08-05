@@ -6,9 +6,7 @@
 
 @section('content')
 
-{{-- ══════════════════════════════════════════════════════════
-     § 1  HERO
-══════════════════════════════════════════════════════════ --}}
+    <!-- § 1  HERO -->
 <section class="hero-section"
          style="background-image: url('{{ asset('Assets/Images/Contact-us/contact-us-banner.webp') }}')">
     <div class="container">
@@ -32,9 +30,7 @@
 </section>
 
 
-{{-- ══════════════════════════════════════════════════════════
-     § 2  QUICK CONTACT CARDS
-══════════════════════════════════════════════════════════ --}}
+    <!-- § 2  QUICK CONTACT CARDS -->
 <section class="section">
     <div class="container">
 
@@ -82,9 +78,7 @@
 </section>
 
 
-{{-- ══════════════════════════════════════════════════════════
-     § 3  CONTACT FORM   +   § 4  SERVICES INQUIRY
-══════════════════════════════════════════════════════════ --}}
+    <!-- § 3  CONTACT FORM -->
 <section class="ct-split-sec" id="ct-form-sec">
     <div class="container">
 
@@ -103,7 +97,6 @@
 
         <div class="row g-5 align-items-start">
 
-            {{-- § 4  Services Inquiry (left) --}}
             <div class="col-12 col-lg-5">
                 <div class="ct-svc-panel">
                     <p class="section-subtitle" style="display:inline-flex;margin-bottom:14px;">
@@ -141,7 +134,6 @@
                 </div>
             </div>
 
-            {{-- § 3  Contact Form (right) --}}
             <div class="col-12 col-lg-7">
                 <div class="ct-form-card">
                     <div class="ct-form-head">
@@ -163,9 +155,7 @@
 </section>
 
 
-{{-- ══════════════════════════════════════════════════════════
-     § 5  OFFICE LOCATION
-══════════════════════════════════════════════════════════ --}}
+    <!-- § 5  OFFICE LOCATION -->
 <section class="section" id="ct-offices-sec">
     <div class="container">
 
@@ -182,14 +172,12 @@
 
         <div class="row g-4 align-items-center">
 
-            {{-- Left — Image --}}
             <div class="col-12 col-lg-6">
                 <div class="ct-office-img-wrap">
                     <img src="{{ asset('Assets/Images/Contact-us/contact-address.webp') }}" alt="Vetora Office Melbourne" class="ct-office-img">
                 </div>
             </div>
 
-            {{-- Right — Office Card --}}
             <div class="col-12 col-lg-6">
                 <div class="ct-ocard feat">
                     <span class="ct-obadge b-t">
@@ -212,9 +200,7 @@
 </section>
 
 
-{{-- ══════════════════════════════════════════════════════════
-     § 6  BUSINESS HOURS
-══════════════════════════════════════════════════════════ --}}
+    <!-- § 6  BUSINESS HOURS -->
 <section class="section">
     <div class="container">
 
@@ -269,7 +255,7 @@
 <script>
 (function () {
 
-    /* ─── § 4  Service chip multi-select ─── */
+    <!-- § 4  Service chip multiselect -->
     var chips   = document.querySelectorAll('#ctChips .ct-chip');
     var prev    = document.getElementById('ctPrev');
     var prevTxt = document.getElementById('ctPrevTxt');
@@ -297,7 +283,7 @@
         });
     });
 
-    /* ─── § 6  Business hours Open / Closed (AEST) ─── */
+    <!-- § 6  Business hours Open  Closed (AEST) -->
     var badge    = document.getElementById('ctStatus');
     var badgeTxt = document.getElementById('ctStatusTxt');
 
@@ -323,7 +309,7 @@
     refreshHours();
     setInterval(refreshHours, 60000);
 
-    /* ─── Smooth scroll for anchor links ─── */
+    <!-- Smooth scroll for anchor links -->
     document.querySelectorAll('a[href^="#ct-"]').forEach(function (a) {
         a.addEventListener('click', function (e) {
             var target = document.querySelector(this.getAttribute('href'));

@@ -1,4 +1,3 @@
-{{-- Vetora AI chatbot modal (shared by home + service pages) --}}
     <div class="modal fade" id="VetoraAIModal" tabindex="-1" aria-hidden="true" data-lenis-prevent>
         <div class="modal-dialog modal-xl modal-dialog-centered vetora-modal-dialog">
             <div class="modal-content vetora-modal-content">
@@ -27,7 +26,7 @@
                 <div class="modal-body vetora-modal-body p-0">
                     <div class="vetora-grid">
 
-                        <!-- ===== LEFT: Identity ===== -->
+<!-- !  LEFT: Identity -->
                         <div class="vetora-col vetora-col-left">
 
                             <div class="vetora-avatar-container">
@@ -75,7 +74,7 @@
 
                         </div>
 
-                        <!-- ===== CENTER: Chat ===== -->
+<!-- !  CENTER: Chat -->
                         <div class="vetora-col vetora-col-center">
 
                             <div class="vetora-chat-header">
@@ -189,7 +188,7 @@
 
                         </div>
 
-                        <!-- ===== RIGHT: Controls ===== -->
+<!-- !  RIGHT: Controls -->
                         <div class="vetora-col vetora-col-right">
 
                             <!-- Language -->

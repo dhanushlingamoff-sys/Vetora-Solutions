@@ -6,8 +6,9 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="{{ asset('Assets/css/tech-stack.css') }}?v=1.0.0">
+    <link rel="stylesheet" href="{{ asset('Assets/css/testimonials.css') }}?v=1.0.0">
 @endsection
-
 
 @section('content')
     <!-- Hero Section Start -->
@@ -16,7 +17,6 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-title-wraper">
-                    {{-- <h1>Mobile App Development Company in Melbourne </h1> --}}
                     <h1>Mobile App Development Company</h1>
                 </div>
                 {{-- <p>
@@ -133,7 +133,6 @@
             <!-- Heading -->
             <div class="section-heading text-center">
                 <div class="section-subtitle"><i class="bi bi-grid-3x3-gap"></i> Our Services</div>
-                {{-- <h2 class="section-title">End-to-End Mobile App Development Services in Melbourne </h2> --}}
                 {{-- <p class="section-description">
                     As a leading software development company in Melbourne, VETORA SOLUTIONS offers complete mobile app
                     development services tailored for Australian businesses across multiple industries.
@@ -546,9 +545,7 @@
 
         <div class="container">
 
-            <!-- =========================================
-                                                                                                                                                                                                                 SECTION HEADER
-                                                                                                                                                                                                            ========================================== -->
+
 
 
             <div class="section-heading text-center">
@@ -570,9 +567,7 @@
 
             </div>
 
-            <!-- =========================================
-                                                                                                                                                                                                                 TRUSTED BRANDS
-                                                                                                                                                                                                            ========================================== -->
+
 
             <div class="trusted-brands">
 

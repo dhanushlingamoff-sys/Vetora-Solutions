@@ -15,6 +15,7 @@
        mobile-app page used to), reuse it instead of creating a second one. */
     function initLenis() {
         if (REDUCE || !window.Lenis) return;
+        if (window.innerWidth < 992) return; /* Native touch scrolling is 60 FPS on mobile */
         if (window.__lenis) return;                 /* already running */
 
         /* style.css forces html{scroll-behavior:smooth}; that fights Lenis. */

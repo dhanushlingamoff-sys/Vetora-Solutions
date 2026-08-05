@@ -5,8 +5,9 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="{{ asset('Assets/css/tech-stack.css') }}?v=1.0.0">
+    <link rel="stylesheet" href="{{ asset('Assets/css/testimonials.css') }}?v=1.0.0">
 @endsection
-
 
 @section('content')
     <!-- Hero Section Start -->
@@ -15,10 +16,8 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-title-wraper">
-                    {{-- <h1>Software Development Company in Melbourne</h1> --}}
                     <h1>Software Development Company</h1>
                 </div>
-                {{-- <p>Melbourne and Australia</p> --}}
 
                 <p>
                     At VETORA SOLUTIONS, we help businesses across glob transform innovative ideas into scalable, secure,
@@ -176,7 +175,6 @@
             <!-- Heading -->
             <div class="section-heading text-center">
                 <div class="section-subtitle"><i class="bi bi-grid-3x3-gap"></i> Our Services</div>
-                {{-- <h2 class="section-title">Software Development Services in Melbourne</h2> --}}
 
                 <h2 class="section-title">Software Development <span>Services</span></h2>
 
@@ -497,7 +495,6 @@
             <!-- Heading -->
             <div class="section-heading text-center">
                 <div class="section-subtitle"><i class="bi bi-building"></i> Industries We Serve</div>
-                {{-- <h2 class="section-title">Industry-Focused Software Solutions Across Australia</h2> --}}
                 <h2 class="section-title">Industry-Focused <span>Software Solutions</span></h2>
 
                 <p class="section-description" style="max-width: 100%;">
@@ -712,9 +709,7 @@
 
         <div class="container">
 
-            <!-- =========================================
-                                                                                                                                                                                                                         SECTION HEADER
-                                                                                                                                                                                                                    ========================================== -->
+
 
 
             <div class="section-heading text-center">
@@ -736,9 +731,7 @@
 
             </div>
 
-            <!-- =========================================
-                                                                                                                                                                                                                         TRUSTED BRANDS
-                                                                                                                                                                                                                    ========================================== -->
+
 
             <div class="trusted-brands">
 

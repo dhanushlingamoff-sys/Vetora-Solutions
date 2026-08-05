@@ -1,0 +1,25 @@
+/* =========================================================
+   CRITICAL WEB DEVELOPMENT CSS — ABOVE-THE-FOLD HERO
+========================================================= */
+
+.wd-hero {
+    position: relative;
+    padding: 150px 0 90px;
+    background: linear-gradient(135deg, #09090e 0%, #17153a 100%);
+    color: #fff;
+    min-height: 75vh;
+}
+
+.wd-hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 20px;
+}
+
+.wd-hero-sub {
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 600px;
+    margin-bottom: 30px;
+}

@@ -3,9 +3,7 @@
 @section('meta')
     <title>Vetora Vault — NFT Marketplace Development by Vetora Solutions</title>
     <meta name="description" content="Vetora Vault is a live example of the NFT marketplaces we build — minting, auctions, bidding, wallet connection, and creator tools, all running as an interactive demo.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Grotesk:wght@500;700&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('Assets/css/nft-marketplace.css') }}?v=1.3.0">
     {{-- Heavier, more "premium" smooth-scroll feel for this page only — read
          by scroll-fx.js's Lenis init, which runs later in <body>. Every
@@ -13,7 +11,6 @@
     <script>window.__lenisOverrides = { lerp: 0.07 };</script>
 @endsection
 
-{{-- Own themed nav — replaces the site's default header for this page only --}}
 @section('page-header')
     <header class="nftm-header nftm-page">
         <div class="nftm-wrap nftm-nav">
@@ -116,7 +113,7 @@
          under the search box regardless of where it lives in the DOM. --}}
     <div class="nftm-search-results" id="nftmSearchResults"></div>
 
-    {{-- ============ HERO ============ --}}
+    <!-- HERO -->
     <section class="nftm-hero">
         <div class="nftm-wrap">
             <div>
@@ -155,7 +152,7 @@
         </div>
     </section>
 
-    {{-- ============ CREATOR MARQUEE ============ --}}
+    <!-- CREATOR MARQUEE -->
     {{-- Seamless infinite ticker of creator handles — the track is duplicated
          so the -50% translate loops without a visible seam. Paused under
          prefers-reduced-motion. --}}
@@ -171,7 +168,7 @@
         </div>
     </div>
 
-    {{-- ============ FEATURED ============ --}}
+    <!-- FEATURED -->
     <section class="nftm-block" id="featured">
         <div class="nftm-wrap">
             <div class="nftm-sec-head">
@@ -210,7 +207,7 @@
         </div>
     </section>
 
-    {{-- ============ LIVE AUCTIONS ============ --}}
+    <!-- LIVE AUCTIONS -->
     <section class="nftm-block nftm-block-alt" id="activity">
         <div class="nftm-wrap">
             <div class="nftm-sec-head">
@@ -245,7 +242,7 @@
         </div>
     </section>
 
-    {{-- ============ TRENDING (tabs) ============ --}}
+    <!-- TRENDING (tabs) -->
     <section class="nftm-block" id="drops">
         <div class="nftm-wrap">
             <div class="nftm-sec-head">
@@ -288,7 +285,7 @@
         </div>
     </section>
 
-    {{-- ============ TOP SELLERS & BUYERS ============ --}}
+    <!-- TOP SELLERS & BUYERS -->
     <section class="nftm-block nftm-block-alt" id="leaderboard">
         <div class="nftm-wrap">
             <div class="nftm-sec-head"><div><span class="nftm-eyebrow">Leaderboard · last 24h</span><h2>Top sellers & buyers</h2></div></div>
@@ -337,7 +334,7 @@
         </div>
     </section>
 
-    {{-- ============ LATEST DROPS (pinned horizontal scroll) ============ --}}
+    <!-- LATEST DROPS (pinned horizontal scroll) -->
     {{-- .nftm-hscroll is upgraded to a pinned, scroll-scrubbed sideways track
          on desktop by nft-marketplace.js (adds .nftm-pinned); without JS or
          on mobile it degrades to a normal swipeable overflow-scroll. --}}
@@ -374,7 +371,7 @@
         </div>
     </section>
 
-    {{-- ============ BROWSE BY CATEGORY ============ --}}
+    <!-- BROWSE BY CATEGORY -->
     <section class="nftm-block nftm-block-alt" id="categories">
         <div class="nftm-wrap">
             <div class="nftm-sec-head"><div><span class="nftm-eyebrow">Browse</span><h2>Explore by category</h2></div></div>
@@ -389,7 +386,7 @@
         </div>
     </section>
 
-    {{-- ============ HOW IT WORKS ============ --}}
+    <!-- HOW IT WORKS -->
     <section class="nftm-block" id="how-it-works">
         <div class="nftm-wrap">
             <div class="nftm-sec-head"><div><span class="nftm-eyebrow">Get started</span><h2>How it works</h2><p>Four steps from empty wallet to your first sale.</p></div></div>
@@ -402,7 +399,7 @@
         </div>
     </section>
 
-    {{-- ============ COLLECTIONS SPOTLIGHT ============ --}}
+    <!-- COLLECTIONS SPOTLIGHT -->
     <section class="nftm-block nftm-block-alt" id="creators">
         <div class="nftm-wrap">
             <div class="nftm-sec-head"><div><span class="nftm-eyebrow">Spotlight</span><h2>Notable collections</h2></div></div>
@@ -432,7 +429,7 @@
         </div>
     </section>
 
-    {{-- ============ NEWSLETTER ============ --}}
+    <!-- NEWSLETTER -->
     <section class="nftm-cta-band">
         <div class="nftm-wrap">
             <div class="nftm-cta-inner">
@@ -453,7 +450,7 @@
         </div>
     </section>
 
-    {{-- ============ CREATE NFT MODAL ============ --}}
+    <!-- CREATE NFT -->
     <div class="modal fade nftm-modal" id="nftmCreateModal" tabindex="-1" aria-hidden="true" data-lenis-prevent>
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -484,7 +481,7 @@
         </div>
     </div>
 
-    {{-- ============ PLACE BID MODAL ============ --}}
+    <!-- PLACE BID -->
     <div class="modal fade nftm-modal" id="nftmBidModal" tabindex="-1" aria-hidden="true" data-lenis-prevent>
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -510,7 +507,6 @@
 </div>
 @endsection
 
-{{-- Own themed footer — replaces the site's default footer for this page only --}}
 @section('page-footer')
     <footer class="nftm-footer nftm-page">
         <div class="nftm-wrap">

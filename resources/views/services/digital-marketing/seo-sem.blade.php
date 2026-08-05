@@ -11,14 +11,12 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     <link rel="stylesheet" href="{{ asset('Assets/css/web-development.css') }}?v=1.0.3">
     <link rel="stylesheet" href="{{ asset('Assets/css/seo-sem.css') }}?v=1.0.3">
+    <link rel="stylesheet" href="{{ asset('Assets/css/testimonials.css') }}?v=1.0.0">
 @endsection
-
 
 @section('content')
 
-    {{-- ============================================================
-         1. HERO
-         ============================================================ --}}
+    <!-- HERO -->
     <section class="wd-hero">
         <div class="wd-hero-shape wd-shape-1"></div>
         <div class="wd-hero-shape wd-shape-2"></div>
@@ -55,18 +53,14 @@
     </section>
 
 
-    {{-- ============================================================
-         2. TRUSTED CLIENTS
-         ============================================================ --}}
+    <!-- TRUSTED CLIENTS -->
     @include('common.trusted-clients', [
         'clientsTitle' => 'Trusted by Businesses Across Australia',
         'clientsDesc'  => 'We help Australian startups, SMEs, and enterprise brands grow their digital presence through proven SEO and SEM strategies that deliver measurable results.'
     ])
 
 
-    {{-- ============================================================
-         3. INTRO A — image left, text right
-         ============================================================ --}}
+    <!-- INTRO A — image left, text right -->
     <section class="section seo-intro-a">
         <div class="container">
             <div class="row align-items-center g-5">
@@ -105,9 +99,7 @@
     </section>
 
 
-    {{-- ============================================================
-         4. WHY PARTNER — full-width centered + stats
-         ============================================================ --}}
+    <!-- WHY PARTNER — fullwidth centered + stats -->
     <section class="seo-why-partner">
         <div class="container">
             <div class="seo-wp-inner">
@@ -152,9 +144,7 @@
     </section>
 
 
-    {{-- ============================================================
-         5. INTRO B — text left, image right
-         ============================================================ --}}
+    <!-- INTRO B — text left, image right -->
     <section class="section seo-intro-b">
         <div class="container">
             <div class="row align-items-center g-5">
@@ -194,9 +184,7 @@
     </section>
 
 
-    {{-- ============================================================
-         6. SERVICES GRID — 4-col icon cards
-         ============================================================ --}}
+    <!-- SERVICES GRID — 4col icon cards -->
     <section class="section seo-services-grid">
         <div class="container">
 
@@ -289,9 +277,7 @@
     </section>
 
 
-    {{-- ============================================================
-         7. WHY CHOOSE US — 2-col: text left, bullet list right
-         ============================================================ --}}
+    <!-- WHY CHOOSE US — 2col: text left, bullet list right -->
     <section class="section seo-why-section">
         <div class="container">
             <div class="row align-items-center g-5">
@@ -371,9 +357,7 @@
     </section>
 
 
-    {{-- ============================================================
-         8. INDUSTRIES
-         ============================================================ --}}
+    <!-- INDUSTRIES -->
     <section class="section seo-industries-section">
         <div class="container">
 
@@ -441,9 +425,7 @@
     </section>
 
 
-    {{-- ============================================================
-         9. ROADMAP — numbered steps, 2-col list
-         ============================================================ --}}
+    <!-- ROADMAP — numbered steps, 2col list -->
     <section class="section seo-roadmap-section" id="seo-roadmap">
         <div class="container">
 
@@ -552,9 +534,7 @@
     </section>
 
 
-    {{-- ============================================================
-         10. TECH STACK
-         ============================================================ --}}
+    <!-- TECH STACK -->
     <section class="technologies-section section">
         <div class="container">
             <div class="section-heading text-center">
@@ -570,9 +550,7 @@
     </section>
 
 
-    {{-- ============================================================
-         11. CTA
-         ============================================================ --}}
+    <!-- CTA -->
     <section class="section seo-cta-section">
         <div class="container">
             <div class="seo-cta-inner">
@@ -599,9 +577,7 @@
     </section>
 
 
-    {{-- ============================================================
-         12. TESTIMONIALS
-         ============================================================ --}}
+    <!-- TESTIMONIALS -->
     <section class="testimonial-section">
         <div class="testimonial-blur blur-left"></div>
         <div class="testimonial-blur blur-right"></div>
@@ -628,9 +604,7 @@
     </section>
 
 
-    {{-- ============================================================
-         13. FAQ
-         ============================================================ --}}
+    <!-- FAQ -->
     <section class="section pt-0">
         <div class="container">
 

@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 @section('meta')
     <title>Website Development Services in Melbourne - Vetora Solutions</title>
     <meta name="description"
@@ -10,14 +9,12 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     <link rel="stylesheet" href="{{ asset('Assets/css/web-development.css') }}?v=1.0.3">
+    <link rel="stylesheet" href="{{ asset('Assets/css/testimonials.css') }}?v=1.0.0">
 @endsection
-
 
 @section('content')
 
-    {{-- ============================================================
-         1. HERO
-         ============================================================ --}}
+    <!-- HERO -->
     <section class="wd-hero">
         <div class="wd-hero-shape wd-shape-1"></div>
         <div class="wd-hero-shape wd-shape-2"></div>
@@ -69,18 +66,14 @@
     </section>
 
 
-    {{-- ============================================================
-         2. TRUSTED CLIENTS
-         ============================================================ --}}
+    <!-- TRUSTED CLIENTS -->
     @include('common.trusted-clients', [
         'clientsTitle' => 'Trusted by Businesses Across Australia',
         'clientsDesc'  => 'We partner with Australian startups, SMEs, and enterprise organisations to build high-performance websites and web applications that drive real results.'
     ])
 
 
-    {{-- ============================================================
-         3. ABOUT / INTRO SPLIT
-         ============================================================ --}}
+    <!-- ABOUT  INTRO SPLIT -->
     <section class="section wd-about-section">
         <div class="container">
             <div class="row g-5">
@@ -128,9 +121,7 @@
     </section>
 
 
-    {{-- ============================================================
-         4. SERVICES GRID — NUMBERED CARDS (2-col)
-         ============================================================ --}}
+    <!-- SERVICES GRID — NUMBERED CARDS (2col) -->
     <section class="section wd-services-section">
         <div class="container">
 
@@ -229,9 +220,7 @@
     </section>
 
 
-    {{-- ============================================================
-         5. ADVANTAGES — 3-COLUMN HIGHLIGHTS
-         ============================================================ --}}
+    <!-- ADVANTAGES — 3COLUMN HIGHLIGHTS -->
     <section class="wd-advantages-section">
         <div class="container">
             <div class="wd-adv-grid">
@@ -272,9 +261,7 @@
     </section>
 
 
-    {{-- ============================================================
-         6. INDUSTRIES WE SERVE
-         ============================================================ --}}
+    <!-- INDUSTRIES WE SERVE -->
     <section class="section wd-industries-section">
         <div class="container">
 
@@ -344,9 +331,7 @@
     </section>
 
 
-    {{-- ============================================================
-         7. WHY CHOOSE US — NUMBERED LIST (2-col)
-         ============================================================ --}}
+    <!-- WHY CHOOSE US — NUMBERED LIST (2col) -->
     <section class="section wd-why-section">
         <div class="container">
 
@@ -433,9 +418,7 @@
     </section>
 
 
-    {{-- ============================================================
-         8. DEVELOPMENT PROCESS — VISUAL TIMELINE
-         ============================================================ --}}
+    <!-- DEVELOPMENT PROCESS — VISUAL TIMELINE -->
     <section class="section wd-process-section" id="wd-process">
         <div class="container">
 
@@ -593,9 +576,7 @@
     </section>
 
 
-    {{-- ============================================================
-         9. TECH STACK
-         ============================================================ --}}
+    <!-- TECH STACK -->
     <section class="technologies-section section">
         <div class="container">
             <div class="section-heading text-center">
@@ -611,9 +592,7 @@
     </section>
 
 
-    {{-- ============================================================
-         10. CTA SECTION
-         ============================================================ --}}
+    <!-- CTA -->
     <section class="section wd-cta-section">
         <div class="container">
             <div class="wd-cta-inner">
@@ -640,9 +619,7 @@
     </section>
 
 
-    {{-- ============================================================
-         11. TESTIMONIALS
-         ============================================================ --}}
+    <!-- TESTIMONIALS -->
     <section class="testimonial-section">
         <div class="testimonial-blur blur-left"></div>
         <div class="testimonial-blur blur-right"></div>
@@ -672,9 +649,7 @@
     </section>
 
 
-    {{-- ============================================================
-         12. FAQ
-         ============================================================ --}}
+    <!-- FAQ -->
     <section class="section pt-0">
         <div class="container">
 

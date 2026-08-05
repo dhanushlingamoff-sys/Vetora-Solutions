@@ -7,9 +7,7 @@
 
 @section('content')
 
-    {{-- =========================================================
-         Hero
-    ========================================================= --}}
+    <!-- Hero -->
     <section class="legal-hero" style="background-image: url('{{ asset('Assets/Images/privacy-policy.png') }}')">
         <div class="container">
             <div class="row align-items-center">
@@ -39,7 +37,6 @@
         </div>
     </section>
 
-    {{-- Tab Navigation --}}
     <div class="legal-tab-bar">
         <div class="container">
             <nav class="legal-tab-nav">
@@ -56,14 +53,11 @@
         </div>
     </div>
 
-    {{-- =========================================================
-         Document
-    ========================================================= --}}
+    <!-- Document -->
     <section class="legal-section">
         <div class="container">
             <div class="row g-4">
 
-                {{-- TOC Sidebar --}}
                 <div class="col-12 col-lg-3">
                     <nav class="legal-toc">
                         <p class="legal-toc-heading">On This Page</p>
@@ -79,7 +73,6 @@
                     </nav>
                 </div>
 
-                {{-- Document Body --}}
                 <div class="col-12 col-lg-9">
                     <div class="legal-card">
 
@@ -188,13 +181,13 @@
                                     wherever applicable.
                                 </p>
 
-                            </div>{{-- /.legal-body --}}
+                            </div>
 
-                    </div>{{-- /.legal-card --}}
-                </div>{{-- /.col --}}
+                    </div>
+                </div>
 
-            </div>{{-- /.row --}}
-        </div>{{-- /.container --}}
+            </div>
+        </div>
     </section>
 
 @endsection

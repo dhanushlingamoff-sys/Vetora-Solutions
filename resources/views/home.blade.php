@@ -7,15 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 
 
-    <!-- GOOGLE FONTS -->
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;600&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('Assets/css/tech-stack.css') }}?v=1.0.0">
+    <link rel="stylesheet" href="{{ asset('Assets/css/testimonials.css') }}?v=1.0.0">
 @endsection
 
 @section('content')
@@ -156,9 +149,7 @@
 
 
 
-    <!-- =========================================
-                                                                                                                                                                                                                             COLLABORATION / MEETING SECTION
-                                                                                                                                                                                                                        ========================================= -->
+
 
     <section class="meeting-section section">
 
@@ -240,9 +231,7 @@
 
             <div class="tab-content" id="meetingTabsContent">
 
-                <!-- ======================================
-                                                                                                                                                                                                                     MEETING TAB
-                                                                                                                                                                                                                ======================================= -->
+
 
                 <div class="tab-pane fade show active" id="meetings" role="tabpanel">
 
@@ -372,9 +361,7 @@
 
                 </div>
 
-                <!-- ======================================
-                                                                                                                                                                                                                     CHAT TAB
-                                                                                                                                                                                                                ======================================= -->
+
 
                 <div class="tab-pane fade" id="chat" role="tabpanel">
 
@@ -661,9 +648,7 @@
 
                 </div>
 
-                <!-- ======================================
-                                                                                                                                                                                                                     ACTIVITY TAB
-                                                                                                                                                                                                                ======================================= -->
+
 
                 <div class="tab-pane fade" id="activity" role="tabpanel">
 
@@ -851,9 +836,7 @@
 
 
 
-    <!-- =========================================
-                                                                                                                                                                                 PREMIUM AI BOT SECTION
-                                                                                                                                                                            ========================================= -->
+
 
     <section class="section ai-bot-section">
 
@@ -1043,9 +1026,7 @@
     </section>
 
 
-    <!-- =========================================
-                                                                                                                                                                                                                         PREMIUM PORTFOLIO SECTION
-                                                                                                                                                                                                                    ========================================= -->
+
 
     <section class="portfolio-section section">
 
@@ -1055,9 +1036,7 @@
 
         <div class="container">
 
-            <!-- =====================================
-                                                                                                                                                                                                                SECTION HEADER
-                                                                                                                                                                                                    ====================================== -->
+
 
             <div class="section-heading text-center">
 
@@ -1078,9 +1057,7 @@
 
             </div>
 
-            <!-- =====================================
-                                                                                                                                                                                                                                 FILTER TABS
-                                                                                                                                                                                                                            ====================================== -->
+
 
             <ul class="nav nav-pills portfolio-tabs justify-content-center" id="portfolioTabs" role="tablist">
 
@@ -1116,15 +1093,11 @@
 
             </ul>
 
-            <!-- =====================================
-                                                                                                                                                                                                                                 TAB CONTENT
-                                                                                                                                                                                                                            ====================================== -->
+
 
             <div class="tab-content portfolio-tab-content">
 
-                <!-- =====================================
-                                                                                                                                                                                                                                     FEATURED PROJECTS
-                                                                                                                                                                                                                                ====================================== -->
+
 
                 <div class="tab-pane fade show active" id="featured">
 
@@ -1226,9 +1199,7 @@
 
                 </div>
 
-                <!-- =====================================
-                                                                                                                                                                                                                                     CASE STUDIES
-                                                                                                                                                                                                                                ====================================== -->
+
 
                 <div class="tab-pane fade" id="caseStudies">
 
@@ -1355,9 +1326,7 @@
 
                 </div>
 
-                <!-- =====================================
-                                                                                                                                                                                                                                     WEBSITE PREVIEWS
-                                                                                                                                                                                                                                ====================================== -->
+
 
                 <div class="tab-pane fade" id="websites">
 
@@ -1395,9 +1364,7 @@
 
                 </div>
 
-                <!-- =====================================
-                                                                                                                                                                                                                                     BRANDING
-                                                                                                                                                                                                                                ====================================== -->
+
 
                 <div class="tab-pane fade" id="branding">
 
@@ -1479,9 +1446,7 @@
 
                 </div>
 
-                <!-- =====================================
-                                 PRICING
-                            ====================================== -->
+
 
                 <div class="tab-pane fade" id="pricing">
 
@@ -1574,9 +1539,7 @@
     </section>
 
 
-    <!-- =========================================
-                                                                                                                                                                                                                PREMIUM TRENDS SECTION
-                                                                                                                                                                                                                ========================================= -->
+
 
     <section class="trends-section section">
 
@@ -1586,9 +1549,7 @@
 
         <div class="container">
 
-            <!-- =====================================
-                                                                                                                                                                                                                             SECTION HEADER
-                                                                                                                                                                                                            ====================================== -->
+
 
 
             <div class="section-heading text-center">
@@ -1611,9 +1572,7 @@
 
             </div>
 
-            <!-- =====================================
-                                                                                                                                                                                                                             FEATURED TREND CARD
-                                                                                                                                                                                                                        ====================================== -->
+
 
             <div class="featured-trend-card">
 
@@ -1681,9 +1640,7 @@
 
             </div>
 
-            <!-- =====================================
-                                                                                                                                                                                                                             TABS
-                                                                                                                                                                                                                        ====================================== -->
+
 
             <ul class="nav nav-pills trends-tabs justify-content-center" id="trendsTabs" role="tablist">
 
@@ -1713,15 +1670,11 @@
 
             </ul>
 
-            <!-- =====================================
-                                                                                                                                                                                                                             TAB CONTENT
-                                                                                                                                                                                                                        ====================================== -->
+
 
             <div class="tab-content trends-tab-content">
 
-                <!-- =====================================
-                                                                                                                                                                                                                                 AI TRENDS
-                                                                                                                                                                                                                            ====================================== -->
+
 
                 <div class="tab-pane fade show active" id="aiTrends">
 
@@ -1833,9 +1786,7 @@
 
                 </div>
 
-                <!-- =====================================
-                                                                                                                                                                                                                                 TECH ARTICLES
-                                                                                                                                                                                                                            ====================================== -->
+
 
                 <div class="tab-pane fade" id="techArticles">
 
@@ -1914,9 +1865,7 @@
 
                 </div>
 
-                <!-- =====================================
-                                                                                                                                                                                                                                 INDUSTRY INSIGHTS
-                                                                                                                                                                                                                            ====================================== -->
+
 
                 <div class="tab-pane fade" id="industryInsights">
 
@@ -1946,9 +1895,7 @@
 
                 </div>
 
-                <!-- =====================================
-                                                                                                                                                                                                                                 BUSINESS GROWTH
-                                                                                                                                                                                                                            ====================================== -->
+
 
                 <div class="tab-pane fade" id="businessGrowth">
 
@@ -2000,9 +1947,7 @@
 
         <div class="container">
 
-            <!-- =========================================
-                                                                                                                                                                                                                     SECTION HEADER
-                                                                                                                                                                                                                ========================================== -->
+
 
 
             <div class="section-heading text-center">
@@ -2025,9 +1970,7 @@
 
             </div>
 
-            <!-- =========================================
-                                                                                                                                                                                                                     TRUSTED BRANDS
-                                                                                                                                                                                                                ========================================== -->
+
 
             <div class="trusted-brands">
 
@@ -2065,13 +2008,10 @@
     <!-- Testimonial -->
 
 
-    {{-- Vetora AI chatbot modal + launcher now render site-wide from layouts/app.blade.php --}}
 
 
 
-    <!-- =========================================
-                                 NEXT MOVE SECTION
-                            ========================================= -->
+
 
     <section class="nm-section">
 
@@ -2155,9 +2095,7 @@
 
 
     <script>
-        /* =========================================================
-                       CHAT CHANNEL SWITCHER
-                    ========================================================= */
+    <!-- CHAT CHANNEL SWITCHER -->
         (function() {
             var channelData = {
                 'ai-product-team': {
@@ -2279,9 +2217,7 @@
     </script>
 
     <script>
-        /* =========================================================
-                       CASE STUDIES FILTER
-                    ========================================================= */
+    <!-- CASE STUDIES FILTER -->
         document.querySelectorAll('.cs-filter-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 document.querySelectorAll('.cs-filter-btn').forEach(b => b.classList.remove('active'));
@@ -2299,9 +2235,7 @@
     </script>
 
     <script>
-        /* =========================================================
-                   TYPING EFFECT
-                ========================================================= */
+    <!-- TYPING EFFECT -->
 
         document.querySelectorAll(".typing-effect").forEach((el) => {
 
@@ -2326,9 +2260,7 @@
             type();
         });
 
-        /* =========================================================
-           VOICE REACTION
-        ========================================================= */
+    <!-- VOICE REACTION -->
 
         const micBtn = document.querySelector(".mic-btn");
 
@@ -2346,15 +2278,11 @@
 
 
     <script>
-        /* =========================================
-                           FIELD
-                        ========================================= */
+    <!-- FIELD -->
 
         const nmField = document.getElementById('nmField');
 
-        /* =========================================
-           IMAGES
-        ========================================= */
+    <!-- IMAGES -->
 
         const nmImages = [
 
@@ -2372,9 +2300,7 @@
             'https://picsum.photos/id/110/400/500'
         ];
 
-        /* =========================================
-           VARIABLES
-        ========================================= */
+    <!-- VARIABLES -->
 
         const nmCards = [];
 
@@ -2386,9 +2312,7 @@
 
         const NM_TOTAL = nmImages.length;
 
-        /* =========================================
-           CREATE CARDS
-        ========================================= */
+    <!-- CREATE CARDS -->
 
         nmImages.forEach((src, i) => {
 
@@ -2429,9 +2353,7 @@
 
         });
 
-        /* =========================================
-           POINTER PARALLAX
-        ========================================= */
+    <!-- POINTER PARALLAX -->
 
         let nmTargetX = 0;
         let nmTargetY = 0;
@@ -2448,9 +2370,7 @@
                 (e.clientY / window.innerHeight - 0.5) * 2;
         });
 
-        /* =========================================
-           SCROLL ROTATION
-        ========================================= */
+    <!-- SCROLL ROTATION -->
 
         let nmAngle = 0;
 
@@ -2477,9 +2397,7 @@
 
         nmReadScroll();
 
-        /* =========================================
-           ANIMATION LOOP
-        ========================================= */
+    <!-- ANIMATION LOOP -->
 
         function nmAnimate() {
 

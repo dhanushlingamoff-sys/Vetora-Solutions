@@ -1,0 +1,29 @@
+/* =========================================================
+   CRITICAL AI CSS — ABOVE-THE-FOLD HERO
+========================================================= */
+
+.ai-hero {
+    position: relative;
+    padding: 160px 0 100px;
+    background: #0D0B2A;
+    color: #fff;
+    min-height: 80vh;
+    overflow: hidden;
+}
+
+.ai-hero__title {
+    font-size: 3.25rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.ai-hero__sub {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.75);
+    max-width: 620px;
+    margin-bottom: 36px;
+}
